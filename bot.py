@@ -1,7 +1,15 @@
 import discord
 from discord.ext import commands
 
+import json
+
+discord_token = None
+with open('./config.json', 'r') as f:
+    data = json.load(f)
+    discord_token = data["token"]
+
 import random
+
 
 dottie = commands.Bot(command_prefix = "d.")
 
@@ -36,4 +44,4 @@ async def _8ball(ctx, *, question):
                  "Ay, ask me later, I'm busy with my 10 hour tunez!"]
     await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
     
-# dottie.run("The token goes here, I'm keeping it hidden due to publicity")
+dottie.run(discord_token)
