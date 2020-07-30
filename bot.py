@@ -12,6 +12,7 @@ with open("./config.json", "r") as f:
 import tracemalloc
 tracemalloc.start()
 
+import os
 import asyncio
 import random
 
@@ -31,6 +32,23 @@ async def on_ready():
     print("```Successfully loaded and ready to go!```")
 
 
+@dottie.command()
+async def load(ctx, extension):
+    dottie.load_extension(f"cogs.{extension}")
+    await ctx.send("```Successfully returned access to the extension.```")
+
+@dottie.command()
+async def unload(ctx, extension):
+    dottie.unload_extension(f"cogs.{extension}")
+    await ctx.send("```Successfully removed the extension until further notice.```")
+
+@dottie.command()
+async def reload(ctx, extension):
+    dottie.unload_extension(f"cogs.{extension}")
+    dottie.load_extension(f"cogs.{extension}")
+    await ctx.send("```Successfully reloaded all extensions.```")
+
+
 @dottie.event
 async def on_member_join(member):
     print(f"```{member} has joined the test server.```")
@@ -40,10 +58,11 @@ async def on_member_remove(member):
     print(f"```{member} has left the test server.```")
 
 
+
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
     try:
-         await ctx.send("Hello! 👋")
+         await ctx.send("Hello! :wave:")
     except:
         print(traceback.format_exc())
 
@@ -135,5 +154,9 @@ async def unban(ctx, *, member):
                 print(traceback.format())
             return
 
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py"):
+        dottie.load_extension(f"cogs.{filename[:-3]}")
 
 dottie.run(discord_token)
+
