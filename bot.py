@@ -114,11 +114,11 @@ async def kick(ctx, member : discord.Member, *, reasons=None):
     try:
         if ctx.message.author.guild_permissions.administrator:
             await member.kick(reason=reasons)
-            await ctx.send(f"{member.name}#{member.discriminator} has be *yeet* right out the server! :lock:")
+            await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
         # v Debug this some time
         else:
             try:
-                await ctx.send(f"{member.name}#{member.discriminator} has be *yeet* right out the server! :lock:")
+                await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
             except Exception as e:
                 print("You don't have permissions to use that command, you lil' delinquent!")
     except:
