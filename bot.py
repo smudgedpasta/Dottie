@@ -58,7 +58,6 @@ async def on_member_remove(member):
     print(f"```{member} has left the test server.```")
 
 
-
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
     try:
@@ -108,35 +107,23 @@ async def purge(ctx, amount=1):
     except:
         print(traceback.format())
 
-@dottie.command()
+@dottie.command(pass_context=True)
+@has_permissions(administrator=True)
 async def kick(ctx, member : discord.Member, *, reasons=None):
     try:
-        await member.kick(reason=reasons)
+        if ctx.message.author.guild_permissions.administrator:
+            await member.kick(reason=reasons)
+            await ctx.send(f"{member.name}#{member.discriminator} has be *yeet* right out the server! :lock:")
+        else:
+            await ctx.send("You don't have the permissions to use that, you lil' delinquent!")
     except:
-        print(traceback.format())  
-
-# v This is a mess 🙃
-
-# @dottie.command(pass_context=True)
-# @has_permissions(administrator=True)
-# async def kick(ctx, member : discord.Member, *, reasons=None):
-#     if ctx.message.author.server_permissions.administrator:
-#         try:
-#             await member.kick(reason=reasons)
-#         except:
-#             print(traceback.format())
-#     else:
-#         ctx.message.author.server_permissions.administrator:
-#         try:
-#             await ctx.send("You don't have the permissions to use that, you lil' delinquent!")
-#          except:
-#              print(traceback.format())
+            print(traceback.format())
 
 @dottie.command()
 async def ban(ctx, member: discord.Member, *, reasons=None):
     try:
         await member.ban(reason=reasons)
-        await ctx.send(f"Good riddance, {member.name}#{member.discriminator}! :lock:")
+        await ctx.send(f"Good riddance, {member.name}#{member.discriminator}! :closed_lock_with_key:")
     except:
         print(traceback.format())
 
@@ -159,4 +146,3 @@ for filename in os.listdir("./cogs"):
         dottie.load_extension(f"cogs.{filename[:-3]}")
 
 dottie.run(discord_token)
-
