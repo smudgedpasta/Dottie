@@ -42,6 +42,7 @@ async def unload(ctx, extension):
     dottie.unload_extension(f"cogs.{extension}")
     await ctx.send("```Successfully removed the extension until further notice.```")
 
+# v Debug this
 @dottie.command()
 async def reload(ctx, extension):
     dottie.unload_extension(f"cogs.{extension}")
@@ -114,10 +115,14 @@ async def kick(ctx, member : discord.Member, *, reasons=None):
         if ctx.message.author.guild_permissions.administrator:
             await member.kick(reason=reasons)
             await ctx.send(f"{member.name}#{member.discriminator} has be *yeet* right out the server! :lock:")
+        # v Debug this some time
         else:
-            await ctx.send("You don't have the permissions to use that, you lil' delinquent!")
+            try:
+                await ctx.send(f"{member.name}#{member.discriminator} has be *yeet* right out the server! :lock:")
+            except Exception as e:
+                print("You don't have permissions to use that command, you lil' delinquent!")
     except:
-            print(traceback.format())
+        print(traceback.format())
 
 @dottie.command()
 async def ban(ctx, member: discord.Member, *, reasons=None):
