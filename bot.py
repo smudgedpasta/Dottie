@@ -36,7 +36,7 @@ async def on_member_remove(member):
     print(f"```{member} has left the test server.```")
 
 
-@dottie.command(aliases=["Hi", "Hello", "hi", "HI", "HELLO", "hElLo", "HeLlO", "hI", "hElLO"])
+@dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
     await ctx.send("Hello! 👋")
 
