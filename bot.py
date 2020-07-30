@@ -8,6 +8,9 @@ with open("./config.json", "r") as f:
     data = json.load(f)
     discord_token = data["token"]
 
+import tracemalloc
+tracemalloc.start()
+
 import asyncio
 import random
 
@@ -75,6 +78,15 @@ async def credits(ctx):
         await ctx.send(embed=embed)
     except:
         print(traceback.format_exc())
+        
+@dottie.command()
+async def purge(ctx, amount=1):
+    try:
+        await ctx.channel.purge(limit=amount+1)
+        if amount == 0:
+            await ctx.send("How am I meant to purge 0 messages, silly?")
+    except:
+        print(traceback.format())
 
 
 dottie.run(discord_token)
