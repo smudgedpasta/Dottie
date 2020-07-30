@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands import Bot, has_permissions, CheckFailure
 
 import json
 
@@ -78,7 +79,7 @@ async def credits(ctx):
         await ctx.send(embed=embed)
     except:
         print(traceback.format_exc())
-        
+
 @dottie.command()
 async def purge(ctx, amount=1):
     try:
@@ -87,6 +88,52 @@ async def purge(ctx, amount=1):
             await ctx.send("How am I meant to purge 0 messages, silly?")
     except:
         print(traceback.format())
+
+@dottie.command()
+async def kick(ctx, member : discord.Member, *, reasons=None):
+    try:
+        await member.kick(reason=reasons)
+    except:
+        print(traceback.format())  
+
+# v This is a mess 🙃
+
+# @dottie.command(pass_context=True)
+# @has_permissions(administrator=True)
+# async def kick(ctx, member : discord.Member, *, reasons=None):
+#     if ctx.message.author.server_permissions.administrator:
+#         try:
+#             await member.kick(reason=reasons)
+#         except:
+#             print(traceback.format())
+#     else:
+#         ctx.message.author.server_permissions.administrator:
+#         try:
+#             await ctx.send("You don't have the permissions to use that, you lil' delinquent!")
+#          except:
+#              print(traceback.format())
+
+@dottie.command()
+async def ban(ctx, member: discord.Member, *, reasons=None):
+    try:
+        await member.ban(reason=reasons)
+        await ctx.send(f"Good riddance, {member.name}#{member.discriminator}! :lock:")
+    except:
+        print(traceback.format())
+
+@dottie.command()
+async def unban(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split("#")
+    for ban_entry in banned_users:
+        user = ban_entry.user
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
+            try:
+                await ctx.guild.unban(user)
+                await ctx.send(f"Granted access back to the server for {user.name}#{user.discriminator}. :unlock:")
+            except:
+                print(traceback.format())
+            return
 
 
 dottie.run(discord_token)
