@@ -38,7 +38,10 @@ async def on_member_remove(member):
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
-    await ctx.send("Hello! 👋")
+    try:
+         await ctx.send("Hello! 👋")
+    except:
+        print(traceback.format_exc())
 
 @dottie.command()
 async def ping(ctx):
@@ -53,7 +56,10 @@ async def _8ball(ctx, *, question):
                  "Heheh, I'd like to see you try.",
                  "I didn't quite catch that...",
                  "Ay, ask me later, I'm busy with my 10 hour tunez!"]
-    await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+    try:
+        await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+    except:
+        print(traceback.format_exc())
 
 @dottie.command()
 async def credits(ctx):
@@ -65,7 +71,10 @@ async def credits(ctx):
                  icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_image(
     url="https://cdn.discordapp.com/attachments/738007255970087014/738345655012950036/dottie_ref.png")
-    await ctx.send(embed=embed)
+    try:
+        await ctx.send(embed=embed)
+    except:
+        print(traceback.format_exc())
 
 
 dottie.run(discord_token)
