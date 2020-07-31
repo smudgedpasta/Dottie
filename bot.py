@@ -10,7 +10,6 @@ with open("./config.json", "r") as f:
     discord_token = data["token"]
 
 import traceback
-
 import os
 import asyncio
 import random
