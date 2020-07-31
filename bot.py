@@ -69,8 +69,8 @@ async def on_member_remove(member):
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
-         await ctx.send("Hello! :wave:")
-
+         await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
+        
 
 @dottie.command()
 async def ping(ctx):
