@@ -106,6 +106,7 @@ async def credits(ctx):
    
 
 @dottie.command()
+@has_permissions(administrator=True)
 async def purge(ctx, amount=1):
     await ctx.channel.purge(limit=amount+1)
     if amount == 0:
@@ -120,12 +121,14 @@ async def kick(ctx, member : discord.Member, *, reasons=None):
         
 
 @dottie.command()
+@has_permissions(administrator=True)
 async def ban(ctx, member: discord.Member, *, reasons=None):
     await member.ban(reason=reasons)
     await ctx.send(f"Good riddance, {member.name}#{member.discriminator}! :closed_lock_with_key:")
    
 
 @dottie.command()
+@has_permissions(administrator=True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split("#")
