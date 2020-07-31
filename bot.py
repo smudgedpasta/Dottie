@@ -191,6 +191,16 @@ async def on_member_join(member):
 @dottie.event
 async def on_member_remove(member):
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
+    
+    
+@dottie.command()
+async def help(ctx):
+    embed = discord.Embed(colour=discord.Colour(16711680))
+    embed.description = """:warning: **Help command is on the way!**\n
+    If you would like to know how what I can do, ping <@530781444742578188> or take a peak at my source code over on GitHub, which a link is hidden in my very username at the top of this embed!\n
+    Sorry for any inconvenience!"""
+    embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    await ctx.send(embed=embed)
 
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
