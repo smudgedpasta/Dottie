@@ -19,6 +19,8 @@ with open("./config.json", "r") as f:
 
 dottie = commands.Bot(command_prefix="d.")
 
+dottie.remove_command("help")
+
 
 def print(*args, sep=" ", end="\n"):
     eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
