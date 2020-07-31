@@ -243,6 +243,7 @@ async def credits(ctx):
 @has_permissions(administrator=True)
 async def purge(ctx, amount=1):
     await ctx.channel.purge(limit=amount+1)
+    await ctx.send(f"Swept away {amount} messages!")
     if amount == 0:
         await ctx.send("How am I meant to purge 0 messages, silly?")
 
