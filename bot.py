@@ -48,6 +48,16 @@ async def reload(ctx, extension):
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```Successfully reloaded all extensions.```")
+    
+    
+@dottie.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CheckFailure):
+        await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
+        
+    raise error
 
 
 @dottie.event
