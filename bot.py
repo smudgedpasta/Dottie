@@ -9,8 +9,7 @@ with open("./config.json", "r") as f:
     data = json.load(f)
     discord_token = data["token"]
 
-import tracemalloc
-tracemalloc.start()
+import traceback
 
 import os
 import asyncio
@@ -29,56 +28,57 @@ def print(*args, sep=" ", end="\n"):
 async def on_ready():
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     # globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(738003426218213389)
-    print("```Successfully loaded and ready to go!```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
 @dottie.command()
 async def load(ctx, extension):
     dottie.load_extension(f"cogs.{extension}")
-    await ctx.send("```Successfully returned access to the extension.```")
+    await ctx.send("```ini\n[Successfully returned access to the extension.]```")
 
 @dottie.command()
 async def unload(ctx, extension):
     dottie.unload_extension(f"cogs.{extension}")
-    await ctx.send("```Successfully removed the extension until further notice.```")
+    await ctx.send("```css\n[Successfully removed the extension until further notice.]```")
 
 # v Debug this
 @dottie.command()
 async def reload(ctx, extension):
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
-    await ctx.send("```Successfully reloaded all extensions.```")
-    
-    
+    await ctx.send("```fix\n[Successfully reloaded all extensions.]```")
+
+
 @dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
-        
-    raise error
+    try:
+        raise error
+    except:
+        print("```py\n" + traceback.format_exc() + "```")
 
 
 @dottie.event
 async def on_member_join(member):
-    print(f"```{member} has joined the test server.```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has joined the test server.]```")
 
 @dottie.event
 async def on_member_remove(member):
-    print(f"```{member} has left the test server.```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
 
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
-    try:
          await ctx.send("Hello! :wave:")
-    except:
-        print(traceback.format_exc())
+
 
 @dottie.command()
 async def ping(ctx):
     await ctx.send(f"Ping! I pong back your ping latency was {round(dottie.latency * 1000)}ms.")
+
 
 @dottie.command(aliases = ["8ball", "AskDottie", "ask"])
 async def _8ball(ctx, *, question):
@@ -89,10 +89,8 @@ async def _8ball(ctx, *, question):
                  "Heheh, I'd like to see you try.",
                  "I didn't quite catch that...",
                  "Ay, ask me later, I'm busy with my 10 hour tunez!"]
-    try:
-        await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
-    except:
-        print(traceback.format_exc())
+    await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+    
 
 @dottie.command()
 async def credits(ctx):
@@ -104,43 +102,28 @@ async def credits(ctx):
                  icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_image(
     url="https://cdn.discordapp.com/attachments/738007255970087014/738345655012950036/dottie_ref.png")
-    try:
-        await ctx.send(embed=embed)
-    except:
-        print(traceback.format_exc())
+    await ctx.send(embed=embed)
+   
 
 @dottie.command()
 async def purge(ctx, amount=1):
-    try:
-        await ctx.channel.purge(limit=amount+1)
-        if amount == 0:
-            await ctx.send("How am I meant to purge 0 messages, silly?")
-    except:
-        print(traceback.format())
+    await ctx.channel.purge(limit=amount+1)
+    if amount == 0:
+        await ctx.send("How am I meant to purge 0 messages, silly?")
+
 
 @dottie.command(pass_context=True)
 @has_permissions(administrator=True)
 async def kick(ctx, member : discord.Member, *, reasons=None):
-    try:
-        if ctx.message.author.guild_permissions.administrator:
-            await member.kick(reason=reasons)
-            await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
-        # v Debug this some time
-        else:
-            try:
-                await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
-            except Exception as e:
-                print("You don't have permissions to use that command, you lil' delinquent!")
-    except:
-        print(traceback.format())
+    await member.kick(reason=reasons)
+    await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
+        
 
 @dottie.command()
 async def ban(ctx, member: discord.Member, *, reasons=None):
-    try:
-        await member.ban(reason=reasons)
-        await ctx.send(f"Good riddance, {member.name}#{member.discriminator}! :closed_lock_with_key:")
-    except:
-        print(traceback.format())
+    await member.ban(reason=reasons)
+    await ctx.send(f"Good riddance, {member.name}#{member.discriminator}! :closed_lock_with_key:")
+   
 
 @dottie.command()
 async def unban(ctx, *, member):
@@ -149,12 +132,10 @@ async def unban(ctx, *, member):
     for ban_entry in banned_users:
         user = ban_entry.user
         if (user.name, user.discriminator) == (member_name, member_discriminator):
-            try:
-                await ctx.guild.unban(user)
-                await ctx.send(f"Granted access back to the server for {user.name}#{user.discriminator}. :unlock:")
-            except:
-                print(traceback.format())
+            await ctx.guild.unban(user)
+            await ctx.send(f"Granted access back to the server for {user.name}#{user.discriminator}. :unlock:")
             return
+
 
 for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
