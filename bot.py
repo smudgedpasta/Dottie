@@ -272,10 +272,10 @@ async def unban(ctx, *, member):
             await ctx.send(f"Granted access back to the server for {user.name}#{user.discriminator}. :unlock:")
             return
 
-
-for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        dottie.load_extension(f"cogs.{filename[:-3]}")
+        
+# for filename in os.listdir("./cogs"):
+#     if filename.endswith(".py"):
+#         dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
 dottie.run(discord_token)
