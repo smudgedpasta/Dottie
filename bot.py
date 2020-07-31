@@ -198,7 +198,7 @@ async def hello(ctx):
 
 @dottie.command()
 async def ping(ctx):
-    await ctx.send(f"Ping! I pong back your ping latency was {round(dottie.latency * 1000)}ms.")
+    await ctx.send(f"```json\n\"Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.\"```")
 
 
 @dottie.command(aliases=["8ball", "ask"])
