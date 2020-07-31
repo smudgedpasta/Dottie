@@ -183,14 +183,12 @@ async def on_command_error(ctx, error):
 
 @dottie.event
 async def on_member_join(member):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
-                                ) + f"\n[{member} has joined the test server.]```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has joined the test server.]```")
 
 
 @dottie.event
 async def on_member_remove(member):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
-                                ) + f"\n[{member} has left the test server.]```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
 
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
