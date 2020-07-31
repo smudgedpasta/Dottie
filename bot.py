@@ -21,13 +21,11 @@ dottie = commands.Bot(command_prefix="d.")
 
 def print(*args, sep=" ", end="\n"):
     asyncio.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
-    # asyncio.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i) for i in args) + end))
 
 
 @dottie.event
 async def on_ready():
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
-    # globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(738003426218213389)
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
