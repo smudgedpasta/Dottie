@@ -29,21 +29,26 @@ async def on_ready():
 
 
 @dottie.command()
-async def load(ctx, extension):
+async def load(ctx, extension=None):
+    if extension is None:
+        await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```ini\n[Successfully returned access to the extension.]```")
 
 @dottie.command()
-async def unload(ctx, extension):
+async def unload(ctx, extension=None):
+    if extension is None:
+        await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
     dottie.unload_extension(f"cogs.{extension}")
     await ctx.send("```css\n[Successfully removed the extension until further notice.]```")
 
-# v Debug this
 @dottie.command()
-async def reload(ctx, extension):
+async def reload(ctx, extension=None):
+    if extension is None:
+        await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
-    await ctx.send("```fix\n[Successfully reloaded all extensions.]```")
+    await ctx.send("```fix\n[Successfully refreshed the extension.]```")
 
 
 @dottie.event
