@@ -1,3 +1,10 @@
+import concurrent.futures
+import inspect
+import time
+import random
+import asyncio
+import os
+import traceback
 import discord
 from discord.ext import commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
@@ -9,17 +16,118 @@ with open("./config.json", "r") as f:
     data = json.load(f)
     discord_token = data["token"]
 
-import traceback
-import os
-import asyncio
-import random
-
 
 dottie = commands.Bot(command_prefix="d.")
 
 
 def print(*args, sep=" ", end="\n"):
-    asyncio.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
+    asyncio.create_task(LOG_CHANNEL.send(str(sep).join(str(i)for i in args) + end))
+    # eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i)for i in args) + end))
+
+
+# LISTENER = None
+
+
+# def input(*args, **kwargs):
+#     global LISTENER
+#     print(*args, **kwargs)
+#     LISTENER = dottie
+#     t = time.time()
+#     while LISTENER is dottie and time.time() - t < 86400:
+#         time.sleep(0.2)
+#     return LISTENER
+
+
+# eloop = asyncio.new_event_loop()
+# __setloop__ = lambda: asyncio.set_event_loop(eloop)
+# athreads = concurrent.futures.ThreadPoolExecutor(max_workers=16, initializer=__setloop__)	
+# __setloop__()
+
+
+# def wrap_future(fut, loop=None):
+#     if loop is None:
+#         try:
+#             loop = asyncio.get_event_loop()
+#         except RuntimeError:
+#             loop = eloop
+#     new_fut = loop.create_future()
+
+#     def on_done(*void):
+#         try:
+#             result = fut.result()
+#         except Exception as ex:
+#             loop.call_soon_threadsafe(new_fut.set_exception, ex)
+#         else:
+#             loop.call_soon_threadsafe(new_fut.set_result, result)
+
+#     fut.add_done_callback(on_done)
+#     return new_fut
+	
+# create_future = lambda func, *args, loop=None, **kwargs: wrap_future(athreads.submit(func, *args, **kwargs), loop=loop)
+
+
+# awaitable = lambda obj: hasattr(obj, "__await__") or issubclass(type(obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
+
+
+# async def forceCoro(obj, *args, **kwargs):
+#     if asyncio.iscoroutinefunction(obj):
+#         obj = obj(*args, **kwargs)
+#     elif callable(obj):
+#         if asyncio.iscoroutinefunction(obj.__call__):
+#             obj = obj.__call__(*args, **kwargs)
+#         else:
+#             obj = await create_future(obj, *args, **kwargs)
+#     while awaitable(obj):
+#         obj = await obj
+#     return obj
+
+
+# TERMINALS = [727087981285998593]
+# OWNERS = [530781444742578188]
+
+
+# GLOBALS = globals()
+# glob = dict(GLOBALS)
+# async def procFunc(proc, channel):
+# 	if "\n" not in proc:
+# 		if proc.startswith("await "):
+# 			proc = proc[6:]
+# 	try:
+# 		code = await create_future(compile, proc, "<terminal>", "eval", optimize=2)
+# 	except SyntaxError:
+# 		code = await create_future(compile, proc, "<terminal>", "exec", optimize=2)
+# 	output = await forceCoro(eval, code, glob)
+# 	if output is not None:
+# 		glob["_"] = output 
+# 	return output
+
+
+# @dottie.event
+# async def on_message(message):
+#     global LISTENER
+#     await dottie.process_commands(message)
+#     channel = message.channel
+#     if channel.id in TERMINALS:
+#         if message.author.id in OWNERS:
+#             proc = message.content.strip()
+#             if proc:
+#                 if proc.startswith("//") or proc.startswith("||") or proc.startswith("\\") or proc.startswith("#"):
+#                     return
+#                 if proc.startswith("`") and proc.endswith("`"):
+#                     proc = proc.strip("`")
+#                 if not proc:
+#                     return
+#                 if LISTENER is dottie:
+#                     LISTENER = proc
+#                     return
+#                 if not proc:
+#                     return
+#                 output = None
+#                 try:
+#                     output = await procFunc(proc, channel)
+#                     await channel.send("```\n" + str(output)[:1993] + "```")
+#                 except:
+#                     await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
 
 
 @dottie.event
@@ -74,8 +182,8 @@ async def on_member_remove(member):
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
-         await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
-        
+    await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
+
 
 @dottie.command()
 async def ping(ctx):
