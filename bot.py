@@ -141,8 +141,7 @@ async def on_message(message):
 async def on_ready():
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["eloop"] = asyncio.get_event_loop()
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
-                                ) + "\n[Successfully loaded and ready to go!]```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
 @dottie.command()
