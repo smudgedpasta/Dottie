@@ -1,0 +1,57 @@
+***COMMANDS LIST***
+
+
+
+_MODERATION_
+
+- purge
+Command is to be used by ADMINISTRATORS only. Specify how many messages you want deleted and Dottie will clear them, NOT counting
+your message for the command. Input 0 or under and Dottie will return "How am I meant to purge {amount} messages, silly?"
+
+- kick
+Speaks for itself, the command kicks people from the server. Type anything after the command on the same message and it will be treated
+as the reason to show up in the audit log. Command works either by mentioning the user or simply typing their Discord username.
+
+- ban
+Similarly to kick, ban bans a user from the server either by mentioning them or typing their Discord username. There are no time inputs
+as of now, but you can specify a reason the same way as kick and the command will delete all recent messages by the user.
+
+- unban
+Unban works by typing the user you want to unban by Discord username and discriminator. For example: d.unban Dottie#7157
+
+
+
+_GENERAL_
+
+- help
+Dottie will send a less detailed command list in an embed with all their aliases.
+
+- ping
+This is more a command that I need but I wont restrict it. It simply returns Dottie's ping latency towards the message.
+
+- credits
+(I might change this to the server join message) but this command essentially just sends an embed crediting the people who've
+contributed to the bot. It also supplies a full reference sheet of what Dottie looks like, which was drawn by Just Jay.
+
+
+
+_FUN_
+
+- hello (aliases: any variant of "hi" or "hello" will be parsed. For example: d.HeLLo, d.HI)
+Dottie will simply say hello back, stating your nickname in the server and waving at you.
+
+- AskDottie (aliases: 8ball, ask. For example: d.ask, d.8ball).
+Ask Dottie any question and she will repeat your enquiry and return a random answer.
+
+
+
+_OWNER ONLY_
+
+- load
+Enables a previously disabled cog/category.
+
+-unload
+Disables a previously enabled cog/category.
+
+- reload
+Resfreshes specified cog/category.
