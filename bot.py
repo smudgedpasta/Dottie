@@ -146,6 +146,19 @@ async def on_ready():
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
+    
+@dottie.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CheckFailure):
+        await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
+    try:
+        raise error
+    except:
+        print("```py\n" + traceback.format_exc() + "```")
+
+
 @dottie.command()
 async def load(ctx, extension=None):
     if extension is None:
@@ -169,14 +182,6 @@ async def reload(ctx, extension=None):
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```fix\n[Successfully refreshed the extension.]```")
-
-
-@dottie.event
-async def on_command_error(ctx, error):
-    if isinstance(error, CheckFailure):
-        await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
     try:
         raise error
     except:
