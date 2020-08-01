@@ -141,7 +141,7 @@ async def on_message(message):
 
 @dottie.event
 async def on_ready():
-    await dottie.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie", status=discord.Status.do_not_disturb))
+    await dottie.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
