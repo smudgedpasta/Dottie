@@ -6,7 +6,7 @@ import asyncio
 import os
 import traceback
 import discord
-from discord.ext import commands
+from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 
 import json
@@ -18,6 +18,10 @@ with open("./config.json", "r") as f:
 
 
 dottie = commands.Bot(command_prefix="d.")
+
+def is_owner(ctx):
+  return ctx.message.author.id in [530781444742578188]
+
 
 dottie.remove_command("help")
 
@@ -44,7 +48,9 @@ def __setloop__(): return asyncio.set_event_loop(eloop)
 
 
 athreads = concurrent.futures.ThreadPoolExecutor(
-    max_workers=16, initializer=__setloop__)
+    max_workers=16,
+    initializer=__setloop__,
+)
 __setloop__()
 
 
@@ -146,7 +152,7 @@ async def on_ready():
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
-    
+
 @dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
@@ -160,6 +166,7 @@ async def on_command_error(ctx, error):
 
 
 @dottie.command()
+@commands.check(is_owner)
 async def load(ctx, extension=None):
     if extension is None:
         await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
@@ -168,6 +175,7 @@ async def load(ctx, extension=None):
 
 
 @dottie.command()
+@commands.check(is_owner)
 async def unload(ctx, extension=None):
     if extension is None:
         await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
@@ -176,16 +184,13 @@ async def unload(ctx, extension=None):
 
 
 @dottie.command()
+@commands.check(is_owner)
 async def reload(ctx, extension=None):
     if extension is None:
         await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```fix\n[Successfully refreshed the extension.]```")
-    try:
-        raise error
-    except:
-        print("```py\n" + traceback.format_exc() + "```")
 
 
 @dottie.event
@@ -196,8 +201,8 @@ async def on_member_join(member):
 @dottie.event
 async def on_member_remove(member):
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
-    
-    
+
+
 @dottie.command()
 async def help(ctx):
     embed = discord.Embed(colour=discord.Colour(16711680))
@@ -208,6 +213,15 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
+@dottie.command(aliases=["beta_help"], pass_context=True)
+@commands.check(is_owner)
+async def help_beta(ctx):
+    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed.set_author(name="Help")
+    embed.add_field(name="Hello", value="**Aliases:**\n*Any* varient of typing \"hi\" or \"hello\"", inline=False)
+    await ctx.send(embed=embed)
+
+
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
 async def hello(ctx):
     await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
@@ -215,8 +229,8 @@ async def hello(ctx):
 
 @dottie.command()
 async def ping(ctx):
-    await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
-    
+    await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```") 
+
 
 @dottie.command(aliases=["8ball", "ask"])
 async def AskDottie(ctx, *, question):
@@ -279,7 +293,7 @@ async def unban(ctx, *, member):
             await ctx.send(f"Granted access back to the server for {user.name}#{user.discriminator}. :unlock:")
             return
 
-        
+
 # for filename in os.listdir("./cogs"):
 #     if filename.endswith(".py"):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
