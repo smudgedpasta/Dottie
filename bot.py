@@ -21,8 +21,11 @@ with open("./config.json", "r") as f:
 dottie = commands.Bot(command_prefix="d.")
 
 
+TERMINALS = [727087981285998593, 738007255970087014]
+OWNERS = [530781444742578188, 201548633244565504]
+
 def is_owner(ctx):
-  return ctx.message.author.id in [530781444742578188, 201548633244565504]
+  return ctx.message.author.id in OWNERS
 
 
 dottie.remove_command("help")
@@ -95,10 +98,6 @@ async def forceCoro(obj, *args, **kwargs):
     while awaitable(obj):
         obj = await obj
     return obj
-
-
-TERMINALS = [727087981285998593, 738007255970087014]
-OWNERS = [530781444742578188, 201548633244565504]
 
 
 GLOBALS = globals()
