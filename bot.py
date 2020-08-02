@@ -273,7 +273,7 @@ async def credits(ctx):
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = """Hi! I'm Dottie, a test project by <@530781444742578188>.\n
     Special thanks to <@201548633244565504> and <@245890903133257730> for help with code here and there!\n
-    Another special thanks to <@550429134401044490> for designing me, giving me my name and making my icon! :white_heart:"""
+    Another special thanks to <@550429134401044490> for designing me and giving me my name! :white_heart:"""
     embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_image(
