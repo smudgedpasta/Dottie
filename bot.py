@@ -259,7 +259,8 @@ async def credits(ctx):
 async def purge(ctx, amount=1):
     await ctx.channel.purge(limit=amount+1)
     await ctx.send(f"Swept away {amount} messages!")
-    if amount < 1:
+    # if amount < 1:
+    if amount == 0:
         await ctx.send(f"How am I meant to purge {amount} messages, silly?".format(amount))
 
         
