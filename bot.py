@@ -123,33 +123,41 @@ async def on_message(message):
     global LISTENER
     ctx = await dottie.get_context(message)
     await dottie.invoke(ctx)
-    channel = message.channel
-    if channel.id in TERMINALS:
-        if message.author.id in OWNERS:
-            proc = message.content.strip()
-            if proc:
-                if proc.startswith("//") or proc.startswith("||") or proc.startswith("\\") or proc.startswith("#"):
-                    return
-                if proc.startswith("`") and proc.endswith("`"):
-                    proc = proc.strip("`")
-                if not proc:
-                    return
-                if LISTENER is dottie:
-                    LISTENER = proc
-                    return
-                if not proc:
-                    return
-                output = None
-                try:
-                    output = await procFunc(proc, channel)
-                    await channel.send("```\n" + str(output)[:1993] + "```")
-                except:
-                    await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
+    if ctx.command is not None:
+        global LAST_COMMAND_TIMESTAMP
+        if LAST_COMMAND_TIMESTAMP > time.time():
+            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+            LAST_COMMAND_TIMESTAMP = time.time()
+    else:
+        channel = message.channel
+        if channel.id in TERMINALS:
+            if message.author.id in OWNERS:
+                proc = message.content.strip()
+                if proc:
+                    if proc.startswith("//") or proc.startswith("||") or proc.startswith("\\") or proc.startswith("#"):
+                        return
+                    if proc.startswith("`") and proc.endswith("`"):
+                        proc = proc.strip("`")
+                    if not proc:
+                        return
+                    if LISTENER is dottie:
+                        LISTENER = proc
+                        return
+                    if not proc:
+                        return
+                    output = None
+                    try:
+                        output = await procFunc(proc, channel)
+                        await channel.send("```\n" + str(output)[:1993] + "```")
+                    except:
+                        await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
+
+eloop.create_task(infinite_loop())
 
 
 @dottie.event
 async def on_ready():
-    await dottie.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+    await dottie.change_presence(status=discord.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
