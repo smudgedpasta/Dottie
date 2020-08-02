@@ -257,13 +257,12 @@ async def credits(ctx):
 @dottie.command()
 @has_permissions(administrator=True)
 async def purge(ctx, amount=1):
-    if amount < 1:
-      await ctx.send(f"How am I meant to purge {amount} messages, silly?".format(amount))
-      return
     await ctx.channel.purge(limit=amount+1)
     await ctx.send(f"Swept away {amount} messages!")
+    if amount < 1:
+        await ctx.send(f"How am I meant to purge {amount} messages, silly?".format(amount))
 
-
+        
 @dottie.command(pass_context=True)
 @has_permissions(administrator=True)
 async def kick(ctx, member: discord.Member, *, reasons=None):
