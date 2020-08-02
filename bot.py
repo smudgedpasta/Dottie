@@ -209,7 +209,7 @@ async def help(ctx):
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
     **:crossed_swords: __MODERATION__ :crossed_swords:**\n
-    ***purge***\n*Clears inputted message count, not counting the command message.*\n***kick***\n*Kicks a user from the server, either by mentioning or stating their username.*\n***ban***\n*Bans a user the same was as* ***kick.***\n***unban***\n*Unbans a user by typing their username and discriminator. (Example: Dottie#7157)*\n
+    ***purge***\n*Clears inputted message count, not counting the command message.*\n***kick***\n*Kicks a user from the server, either by mentioning or stating their username.*\n***ban***\n*Bans a user the same way as* ***kick.***\n***unban***\n*Unbans a user by typing their username and discriminator. (Example: Dottie#7157)*\n
     **:white_heart: __GENERAL__ :white_heart:**\n
     ***help***\n*Legends say you've found this command already.* :eyes:\n***ping***\n*Returns my ping latency.*\n***credits***\n*Gives credit to those who contributed to me, as well as a ref of what I look like!*\n
     **:french_bread: __FUN__ :french_bread:**\n
