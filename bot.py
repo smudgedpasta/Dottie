@@ -21,18 +21,16 @@ with open("./config.json", "r") as f:
 dottie = commands.Bot(command_prefix="d.")
 
 
-TERMINALS = [727087981285998593, 738007255970087014]
-OWNERS = [530781444742578188, 201548633244565504]
-
 def is_owner(ctx):
-  return ctx.message.author.id in OWNERS
+  return ctx.message.author.id in [530781444742578188, 201548633244565504]
 
 
 dottie.remove_command("help")
 
 
 def print(*args, sep=" ", end="\n"):
-    eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
+    eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i)
+                                                     for i in args) + end))
 
 
 LISTENER = None
@@ -100,6 +98,10 @@ async def forceCoro(obj, *args, **kwargs):
     return obj
 
 
+TERMINALS = [727087981285998593, 738007255970087014]
+OWNERS = [530781444742578188, 201548633244565504]
+
+
 GLOBALS = globals()
 glob = dict(GLOBALS)
 
@@ -116,6 +118,18 @@ async def procFunc(proc, channel):
     if output is not None:
         glob["_"] = output
     return output
+
+
+LAST_COMMAND_TIMESTAMP = inf
+
+
+async def infinite_loop():
+    global LAST_COMMAND_TIMESTAMP
+    while LAST_COMMAND_TIMESTAMP > -inf:
+        if time.time() - LAST_COMMAND_TIMESTAMP > 10:
+            await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+            LAST_COMMAND_TIMESTAMP = inf
+        await asyncio.sleep(0.5)
 
 
 @dottie.event
@@ -157,10 +171,11 @@ eloop.create_task(infinite_loop())
 
 @dottie.event
 async def on_ready():
-    await dottie.change_presence(status=discord.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+    await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["eloop"] = asyncio.get_event_loop()
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+                                ) + "\n[Successfully loaded and ready to go!]```")
 
 
 @dottie.event
@@ -210,12 +225,14 @@ async def reload(ctx, extension=None):
 
 @dottie.event
 async def on_member_join(member):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has joined the test server.]```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+                                ) + f"\n[{member} has joined the test server.]```")
 
 
 @dottie.event
 async def on_member_remove(member):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+                                ) + f"\n[{member} has left the test server.]```")
 
 
 @dottie.command()
@@ -229,7 +246,8 @@ async def help(ctx):
     **:french_bread: __FUN__ :french_bread:**\n
     ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n
     If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
-    embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
+                     icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
 
 
@@ -240,32 +258,51 @@ async def hello(ctx):
 
 @dottie.command()
 async def ping(ctx):
-    await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```") 
+    await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
 
 
 @dottie.command(aliases=["8ball", "ask"], question=None)
 async def AskDottie(ctx, *, question):
     responses = [
-                 "Heck yeah!",
-                 "Of course!",
-                 "I think so!",
-                 "Meh, sounds alright.",
-                 "I suppose so...",
-                 "Hmm, maybe?",
-                 "Eh?",
-                 "Probably not...",
-                 "Try it and find out!",
-                 "Heheh, I'd like to see you try.",
-                 "I didn't quite catch that...",
-                 "Ay, ask me later, I'm busy with my 10 hour tunez!\n\nhttps://cdn.discordapp.com/attachments/739023774405492836/739433348157538344/TUNEZ.gif",
-                 "Today's AskDottie is sponsored by **Raid Shadow Legends**, one of the BIGGEST mobile role-playing games of 2019 and it's totally free!\n\n*Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the non-existent description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey!*\n\nGood luck and I'll see you there!",
-                 "Side note but did you know that according to all known laws of aviation, there is no way that a bee should be able to fly...?\nIts wings are too small to get its fat little body off the ground...\nThe bee, of course, flies anyway... Because bees don't care what humans think are impossible.\n\nThat's more interesting then what you was going to ask, right?"
-                 ]
+        "Heck yeah!",
+        "Of course!",
+        "I think so!",
+        "Meh, sounds alright.",
+        "I suppose so...",
+        "Hmm, maybe?",
+        "Eh?",
+        "Probably not...",
+        "Try it and find out!",
+        "Heheh, I'd like to see you try.",
+        "I didn't quite catch that...",
+        "Ay, ask me later, I'm busy with my 10 hour tunez!\n\nhttps://cdn.discordapp.com/attachments/739023774405492836/739433348157538344/TUNEZ.gif",
+        "Today's AskDottie is sponsored by **Raid Shadow Legends**, one of the BIGGEST mobile role-playing games of 2019 and it's totally free!\n\n*Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the non-existent description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey!*\n\nGood luck and I'll see you there!",
+        "Side note but did you know that according to all known laws of aviation, there is no way that a bee should be able to fly...?\nIts wings are too small to get its fat little body off the ground...\nThe bee, of course, flies anyway... Because bees don't care what humans think are impossible.\n\nThat's more interesting then what you was going to ask, right?"
+    ]
     await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+
 
 @dottie.command(aliases=["dab"])
 async def ab(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
+
+
+# @dottie.command()
+# async def photo(ctx):
+#     if ctx.channel.is_nsfw():
+#         await ctx.send("Test")
+#     else:
+#         await ctx.send("Sorry, some results aren't so pleasant! Try using this command in an **nsfw channel**!")
+
+@dottie.command()
+@commands.check(is_owner)
+async def photo_beta(ctx):
+    embed = discord.Embed(colour=discord.Colour(8259923))
+    embed.description = ":warning: **GORE WARNING!**\n\nCan't get it up if a girl's breathing."
+    embed.set_image(
+        url="https://cdn.discordapp.com/attachments/739023774405492836/739509257992667206/SPOILER_Dottie_1.png")
+    embed.set_footer(text="Art by Just Jay")
+    await ctx.send(embed=embed)
 
 
 @dottie.command()
