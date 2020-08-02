@@ -213,7 +213,7 @@ async def help(ctx):
     **:white_heart: __GENERAL__ :white_heart:**\n
     ***help***\n*Legends say you've found this command already.* :eyes:\n***ping***\n*Returns my ping latency.*\n***credits***\n*Gives credit to those who contributed to me, as well as a ref of what I look like!*\n
     **:french_bread: __FUN__ :french_bread:**\n
-    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie##***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n
+    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n
     If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
