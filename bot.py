@@ -121,7 +121,8 @@ async def procFunc(proc, channel):
 @dottie.event
 async def on_message(message):
     global LISTENER
-    await dottie.process_commands(message)
+    ctx = await dottie.get_context(message)
+    await dottie.invoke(ctx)
     channel = message.channel
     if channel.id in TERMINALS:
         if message.author.id in OWNERS:
