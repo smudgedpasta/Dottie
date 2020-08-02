@@ -40,8 +40,11 @@ _FUN_
 - hello (aliases: any variant of "hi" or "hello" will be parsed. For example: d.HeLLo, d.HI)
 Dottie will simply say hello back, stating your nickname in the server and waving at you.
 
-- AskDottie (aliases: 8ball, ask. For example: d.ask, d.8ball).
+- AskDottie (aliases: 8ball, ask. For example: d.ask, d.8ball)
 Ask Dottie any question and she will repeat your enquiry and return a random answer.
+
+- ab (aliases: dab)
+Sends a dog dabbing gif.
 
 
 
