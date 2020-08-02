@@ -211,10 +211,6 @@ async def on_member_remove(member):
 
 @dottie.command()
 async def help(ctx):
-    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-        if '"hepl"' in str(error):
-            await ctx.send("Did you mean \"help\"?")
-            return
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
     **:crossed_swords: __MODERATION__ :crossed_swords:**\n
@@ -222,7 +218,7 @@ async def help(ctx):
     **:white_heart: __GENERAL__ :white_heart:**\n
     ***help***\n*Legends say you've found this command already.* :eyes:\n***ping***\n*Returns my ping latency.*\n***credits***\n*Gives credit to those who contributed to me, as well as a ref of what I look like!*\n
     **:french_bread: __FUN__ :french_bread:**\n
-    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n
+    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n
     If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
