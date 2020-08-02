@@ -258,7 +258,7 @@ async def AskDottie(ctx, *, question):
                  ]
     await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
 
-@dottie.command()
+@dottie.command(aliases="dab")
 async def ab(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
 
