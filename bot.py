@@ -1,4 +1,3 @@
-from math import *
 import concurrent.futures
 import inspect
 import time
@@ -9,6 +8,7 @@ import traceback
 import discord
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
+from math import *
 
 import json
 
