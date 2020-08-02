@@ -203,22 +203,19 @@ async def on_member_remove(member):
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
 
 
-@dottie.command()
-async def help(ctx):
-    embed = discord.Embed(colour=discord.Colour(16711680))
-    embed.description = """:warning: **Help command is on the way!**\n
-    If you would like to know how what I can do, ping <@530781444742578188> or take a peak at my source code over on GitHub, which a link is hidden in my very username at the top of this embed!\n
-    Sorry for any inconvenience!"""
-    embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
-    await ctx.send(embed=embed)
-
-
 @dottie.command(aliases=["beta_help"], pass_context=True)
 @commands.check(is_owner)
-async def help_beta(ctx):
+async def help(ctx):
     embed = discord.Embed(colour=discord.Colour(15277667))
-    embed.set_author(name="Help")
-    embed.add_field(name="Hello", value="**Aliases:**\n*Any* varient of typing \"hi\" or \"hello\"", inline=False)
+    embed.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
+    **:crossed_swords: __MODERATION__ :crossed_swords:**\n
+    ***purge***\n*Clears inputted message count, not counting the command message.*\n***kick***\n*Kicks a user from the server, either by mentioning or stating their username.*\n***ban***\n*Bans a user the same was as* ***kick.***\n***unban***\n*Unbans a user by typing their username and discriminator. (Example: Dottie#7157)*\n
+    **:white_heart: __GENERAL__ :white_heart:**\n
+    ***help***\n*Legends say you've found this command already.* :eyes:\n***ping***\n*Returns my ping latency.*\n***credits***\n*Gives credit to those who contributed to me, as well as a ref of what I look like!*\n
+    **:french_bread: __FUN__ :french_bread:**\n
+    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie##***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n
+    If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
+    embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
 
 
