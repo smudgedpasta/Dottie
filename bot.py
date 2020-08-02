@@ -21,7 +21,7 @@ dottie = commands.Bot(command_prefix="d.")
 
 
 def is_owner(ctx):
-  return ctx.message.author.id in [530781444742578188]
+  return ctx.message.author.id in [530781444742578188, 201548633244565504]
 
 
 dottie.remove_command("help")
@@ -97,7 +97,7 @@ async def forceCoro(obj, *args, **kwargs):
 
 
 TERMINALS = [727087981285998593, 738007255970087014]
-OWNERS = [530781444742578188]
+OWNERS = [530781444742578188, 201548633244565504]
 
 
 GLOBALS = globals()
@@ -159,7 +159,10 @@ async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
+        if '"hepl"' in str(error):
+            await ctx.send("Did you mean \"help\"?")
+        else:
+            await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     try:
@@ -206,9 +209,12 @@ async def on_member_remove(member):
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
 
 
-@dottie.command(aliases=["beta_help"], pass_context=True)
-@commands.check(is_owner)
+@dottie.command()
 async def help(ctx):
+    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
+        if '"hepl"' in str(error):
+            await ctx.send("Did you mean \"help\"?")
+            return
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
     **:crossed_swords: __MODERATION__ :crossed_swords:**\n
@@ -234,14 +240,27 @@ async def ping(ctx):
 
 @dottie.command(aliases=["8ball", "ask"], question=None)
 async def AskDottie(ctx, *, question):
-    responses = ["Heck yeah!",
+    responses = [
+                 "Heck yeah!",
+                 "Of course!",
+                 "I think so!",
+                 "Meh, sounds alright.",
+                 "I suppose so...",
                  "Hmm, maybe?",
+                 "Eh?",
                  "Probably not...",
                  "Try it and find out!",
                  "Heheh, I'd like to see you try.",
                  "I didn't quite catch that...",
-                 "Ay, ask me later, I'm busy with my 10 hour tunez!"]
+                 "Ay, ask me later, I'm busy with my 10 hour tunez!\n\nhttps://cdn.discordapp.com/attachments/739023774405492836/739433348157538344/TUNEZ.gif",
+                 "Today's AskDottie is sponsored by **Raid Shadow Legends**, one of the BIGGEST mobile role-playing games of 2019 and it's totally free!\n\n*Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the non-existent description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey!*\n\nGood luck and I'll see you there!",
+                 "Side note but did you know that according to all known laws of aviation, there is no way that a bee should be able to fly...?\nIts wings are too small to get its fat little body off the ground...\nThe bee, of course, flies anyway... Because bees don't care what humans think are impossible.\n\nThat's more interesting then what you was going to ask, right?"
+                 ]
     await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+
+@dottie.command()
+async def ab(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
 
 
 @dottie.command()
