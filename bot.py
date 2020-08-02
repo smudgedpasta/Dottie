@@ -19,6 +19,7 @@ with open("./config.json", "r") as f:
 
 dottie = commands.Bot(command_prefix="d.")
 
+
 def is_owner(ctx):
   return ctx.message.author.id in [530781444742578188]
 
@@ -159,6 +160,8 @@ async def on_command_error(ctx, error):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     try:
         raise error
     except:
@@ -229,7 +232,7 @@ async def ping(ctx):
     await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```") 
 
 
-@dottie.command(aliases=["8ball", "ask"])
+@dottie.command(aliases=["8ball", "ask"], question=None)
 async def AskDottie(ctx, *, question):
     responses = ["Heck yeah!",
                  "Hmm, maybe?",
@@ -263,7 +266,7 @@ async def purge(ctx, amount=1):
     if amount == 0:
         await ctx.send(f"How am I meant to purge {amount} messages, silly?".format(amount))
 
-        
+
 @dottie.command(pass_context=True)
 @has_permissions(administrator=True)
 async def kick(ctx, member: discord.Member, *, reasons=None):
