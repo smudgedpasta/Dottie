@@ -9,9 +9,8 @@ import discord
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 from math import *
-
-
 import json
+
 discord_token = None
 with open("./config.json", "r") as f:
     data = json.load(f)
@@ -191,7 +190,6 @@ async def on_command_error(ctx, error):
         raise error
     except:
         print("```py\n" + traceback.format_exc() + "```")
-
 
 
 @dottie.event
