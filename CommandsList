@@ -46,6 +46,9 @@ Ask Dottie any question and she will repeat your enquiry and return a random ans
 - ab (aliases: dab)
 Sends a dog dabbing gif.
 
+- faker
+If you have a role named either "Dottie" or "dottie", she will call you out on a challange.
+
 
 
 _OWNER ONLY_
