@@ -349,6 +349,16 @@ async def reload(ctx, extension=None):
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```fix\n[Successfully refreshed the extension.]```")
+    
+    
+@dottie.command()
+@commands.check(is_owner)
+async def shutdown(ctx):
+    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+                                ) + "\n[Cancelling all scheduled events and logging out...]```")
+    await ctx.send("```css\n[❗ Shutting down...]```")
+    await asyncio.sleep(0.5)
+    await ctx.bot.logout()
 
 
 @dottie.command()
