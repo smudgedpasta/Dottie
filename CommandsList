@@ -61,3 +61,6 @@ Disables a previously enabled cog/category.
 
 - reload
 Resfreshes specified cog/category.
+
+- shutdown
+Shuts the bot down.
