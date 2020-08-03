@@ -260,12 +260,6 @@ async def help(ctx):
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
-
-
-@dottie.command(aliases=["get_your_butt_in_here"], pass_context=True)
-async def join(ctx):
-    channel = ctx.message.author.voice.channel
-    await channel.connect()   
     
     
 @dottie.command()
@@ -329,6 +323,20 @@ async def faker(ctx):
 #             await user.send("I see you there with a nickname of me... *There can only be one!* :crossed_swords:")
 #         if n.lower().count("dottie")
 #             await user.send("I see you there with a nickname of me... *There can only be one!* :crossed_swords:")
+
+
+@dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
+async def connect(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    await ctx.send("Cozy vc you got here! 😊")
+
+
+@dottie.command(aliases=["go_naughty_step", "leave"], pass_context=True)
+async def disconnect(ctx):
+    server = ctx.message.guild.voice_client
+    await server.disconnect()
+    await ctx.send("Aw, guess its time to leave... 😔")
 
 
 @dottie.command()
