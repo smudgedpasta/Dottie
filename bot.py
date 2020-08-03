@@ -186,6 +186,8 @@ async def on_command_error(ctx, error):
             await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
+    if isinstance(error, commands.CommandInvokeError):
+        await ctx.send("Hey, I can't find you! You need to be in a voice channel first!")
     try:
         raise error
     except:
@@ -260,6 +262,12 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
+@dottie.command(aliases=["get_your_butt_in_here"], pass_context=True)
+async def join(ctx):
+    channel = ctx.message.author.voice.channel
+    await channel.connect()   
+    
+    
 @dottie.command()
 async def ping(ctx):
     await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
