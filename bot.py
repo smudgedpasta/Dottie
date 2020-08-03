@@ -256,6 +256,8 @@ async def help(ctx):
     ***help***\n*Legends say you've found this command already.* :eyes:\n***ping***\n*Returns my ping latency.*\n***credits***\n*Gives credit to those who contributed to me, as well as a ref of what I look like!*\n
     **:french_bread: __FUN__ :french_bread:**\n
     ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n***faker***\n*If someone uses this with a role of my name, I will call you out!*\n
+    **:headphones: __VOICE__ :headphones:**\n
+    ***connect***\n**Aliases: get_your_butt_in_here, join**\n*Connects me to the voice channel you're in!*\n***disconnect***\n**Aliases: go_naughty_step, leave**\n*Disconnects me from the voice channel I was in!*\n
     If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
