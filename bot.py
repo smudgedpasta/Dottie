@@ -331,6 +331,8 @@ async def faker(ctx):
 async def connect(ctx):
     channel = ctx.message.author.voice.channel
     await channel.connect()
+    await ctx.send("```ini\n[Successfully joined the Voice Channel!]```")
+    response = await dottie.wait_for("message", check=lambda message: message.channel == ctx.channel)
     await ctx.send("Cozy vc you got here! 😊")
 
 
@@ -338,7 +340,9 @@ async def connect(ctx):
 async def disconnect(ctx):
     server = ctx.message.guild.voice_client
     await server.disconnect()
-    await ctx.send("Aw, guess its time to leave... 😔")
+    await ctx.send("```ini\n[Successfully disconnected from the Voice Channel...]```")
+    response = await dottie.wait_for("message", check=lambda message: message.channel == ctx.channel)
+    await ctx.send("Did I have to leave the call? 🥺")
 
 
 @dottie.command()
