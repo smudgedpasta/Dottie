@@ -51,6 +51,16 @@ If you have a role named either "Dottie" or "dottie", she will call you out on a
 
 
 
+_VOICE_
+
+- connect (aliases: join, get_your_butt_in_here)
+Connects the bot to a voice channel. Note that the only way to get her to join is if you're in the channel already.
+
+- disconnect (aliases: leave, go_naughty_step)
+Disconnects the bot from the voice channel it was in. You don't have to be in the channel to perform the command.
+
+
+
 _OWNER ONLY_
 
 - load
