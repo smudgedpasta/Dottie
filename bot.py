@@ -244,7 +244,7 @@ async def help(ctx):
     **:white_heart: __GENERAL__ :white_heart:**\n
     ***help***\n*Legends say you've found this command already.* :eyes:\n***ping***\n*Returns my ping latency.*\n***credits***\n*Gives credit to those who contributed to me, as well as a ref of what I look like!*\n
     **:french_bread: __FUN__ :french_bread:**\n
-    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n
+    ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n***faker***\n*If someone uses this with a role of my name, I will call you out!*\n
     If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
@@ -286,7 +286,12 @@ async def AskDottie(ctx, *, question):
 async def ab(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
 
-
+@dottie.command()
+@commands.has_any_role("Dottie", "dottie")
+async def faker(ctx):
+    await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
+    
+    
 # @dottie.command()
 # async def photo(ctx):
 #     if ctx.channel.is_nsfw():
