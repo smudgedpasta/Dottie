@@ -5,10 +5,11 @@ import random
 import asyncio
 import os
 import traceback
+from math import *
+import youtube_dl
 import discord
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
-from math import *
 import json
 
 discord_token = None
@@ -17,7 +18,7 @@ with open("./config.json", "r") as f:
     discord_token = data["token"]
 
 
-dottie = commands.Bot(command_prefix="d.")
+dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
 
 
 def is_owner(ctx):
@@ -30,6 +31,7 @@ def print(*args, sep=" ", end="\n"):
     eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i)
                                                        for i in args) + end))
 
+players = {}
 
 LISTENER = None
 
@@ -174,6 +176,8 @@ async def on_ready():
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
     globals()["eloop"] = asyncio.get_event_loop()
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
+                                ) + "\n[Logged in as user {0} (ID = {0.id})]```".format(dottie.user))
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + "\n[Successfully loaded and ready to go!]```")
 
@@ -320,28 +324,20 @@ async def ab(ctx):
 @commands.has_any_role("Dottie", "dottie")
 async def faker(ctx):
     await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
-# async def on_member_update(before, after):
-#     n = nick
-#     if n:
-#         if n.upper().count("Dottie"):
-#             user = dottie.get_user()
-#             await user.send("I see you there with a nickname of me... *There can only be one!* :crossed_swords:")
-#         if n.lower().count("dottie")
-#             await user.send("I see you there with a nickname of me... *There can only be one!* :crossed_swords:")
 
 
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
 async def connect(ctx):
     channel = ctx.message.author.voice.channel
     await channel.connect()
-    await ctx.send("ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]")
+    await ctx.send("```ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]```")
 
 
 @dottie.command(aliases=["go_naughty_step", "leave"], pass_context=True)
 async def disconnect(ctx):
     server = ctx.message.guild.voice_client
     await server.disconnect()
-    await ctx.send("ini\n[Successfully disconnected from the Voice Channel... Sad that it is time to go... 😔]")
+    await ctx.send("```ini\n[Successfully disconnected from the Voice Channel... Sad that it is time to go... 😔]```")
 
 
 @dottie.command(aliases=["espacito", "Despacito"])
@@ -393,6 +389,9 @@ async def shutdown(ctx):
     await ctx.bot.logout()
 
 
+# 🔻 UNFINISHED COMMANDS/EVENTS 🔻
+
+
 @dottie.command()
 @commands.check(is_owner)
 async def nsfw_test(ctx):
@@ -437,6 +436,14 @@ async def input_test(ctx):
     if response.content.lower() != "4":
         print("```Unsuccess.```")
         await ctx.send("That's not right.")
+
+
+# @dottie.command(aliases=["p"], pass_context=True)
+# async def play(ctx, url):
+#     voice_client = dottie.voice_client_in(ctx.message.server)
+#     player = await voice_client.create_ytdl_player(url)
+#     players[server.id] = player
+#     player.start()
 
 
 # for filename in os.listdir("./cogs"):
