@@ -213,6 +213,7 @@ async def on_member_remove(member):
                                 ) + f"\n[{member} has left the test server.]```")
 
 
+
 dottie.remove_command("help")
 
 
@@ -444,6 +445,14 @@ async def input_test(ctx):
 #     player = await voice_client.create_ytdl_player(url)
 #     players[server.id] = player
 #     player.start()
+
+
+# @dottie.event
+# async def on_guild_join(guild):
+#     for channel in guild.text_channels:
+#         if channel.permissions_for(guild.me).send_messages:
+#             await channel.send(":3")
+#         break
 
 
 # for filename in os.listdir("./cogs"):
