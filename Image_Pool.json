@@ -1,22 +1,7 @@
 [
     {
-        "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739509257992667206/SPOILER_Dottie_1.png",
-        "desc" : ":warning: **GORE WARNING!**\n\nCan't get it up if a girl's breathing.",
-        "artist" : "Art by Just Jay"
-    },
-    {
         "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739506310017449994/Dottie_2.png",
         "desc" : "But that's only a story.",
-        "artist" : "Art by Just Jay"
-    },
-    {
-        "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739509433960366190/SPOILER_Dottie_3.gif",
-        "desc" : ":warning: **SEIZURE WARNING!**\n\nI can't tell if I'm insane or *really* craving candy!",
-        "artist" : "Art by Just Jay"
-    },
-    {
-        "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739509260043419648/SPOILER_Dottie_4.jpg",
-        "desc" : ":warning: **GORE WARNING!**\n\nLike removing the broken parts of a broken machine.",
         "artist" : "Art by Just Jay"
     },
     {
@@ -30,11 +15,6 @@
         "artist" : "Art by Just Jay"
     },
     {
-        "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739509267706544190/SPOILER_Dottie_7.png",
-        "desc" : ":warning: **MILDLY SUGGESTIVE CONTENT!**\n\nDreary...",
-        "artist" : "Art by Just Jay"
-    },
-    {
         "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739506321296064562/Dottie_8.png",
         "desc" : "A free spirit!",
         "artist" : "Art by Just Jay"
@@ -43,11 +23,6 @@
         "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739506322826985582/Dottie_9.png",
         "desc" : "I know I look fierce, but don't worry, hollapinos are what's on my mind!",
         "artist" :"Art by Just Jay"
-    },
-    {
-        "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739509266494259310/SPOILER_Dottie_10.png",
-        "desc" : "I guess I can't deny I have a bit of inner carnivore...",
-        "artist" : "Art by Just Jay"
     },
     {
         "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739506472991588392/Dottie_11.PNG",
@@ -77,6 +52,11 @@
     {
         "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739550780578594867/Dottie_16.png",
         "desc" : "Where did I go wrong? I lost a friend... Somewhere along in the bitterness.",
+        "artist" :"Art by smudgedpasta"
+    },
+    {
+        "img" : "https://cdn.discordapp.com/attachments/683233571405561876/740280047696347206/Dottie_1.PNG",
+        "desc" : "My icon!",
         "artist" :"Art by smudgedpasta"
     }
 ]
