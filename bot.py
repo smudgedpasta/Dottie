@@ -174,7 +174,7 @@ async def on_ready():
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
     globals()["eloop"] = asyncio.get_event_loop()
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + "\n[Successfully loaded and ready to go!]```")
 
 
@@ -199,13 +199,13 @@ async def on_command_error(ctx, error):
 
 @dottie.event
 async def on_member_join(member):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + f"\n[{member} has joined the test server.]```")
 
 
 @dottie.event
 async def on_member_remove(member):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + f"\n[{member} has left the test server.]```")
 
 
@@ -260,8 +260,8 @@ async def help(ctx):
     **:french_bread: __FUN__ :french_bread:**\n
     ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n***faker***\n*If someone uses this with a role of my name, I will call you out!*\n
     **:headphones: __VOICE__ :headphones:**\n
-    ***connect***\n**Aliases: get_your_butt_in_here, join**\n*Connects me to the voice channel you're in!*\n***disconnect***\n**Aliases: go_naughty_step, leave**\n*Disconnects me from the voice channel I was in!*\n
-    If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
+    ***connect***\n**Aliases: get_your_butt_in_here, join**\n*Connects me to the voice channel you're in!*\n***disconnect***\n**Aliases: go_naughty_step, leave**\n*Disconnects me from the voice channel I was in!*\n***despacito***\n*Plays a totally normal version of Despacito!*\n
+    FOR A MORE DETAILED COMMAND LIST, VIEW THE LINK HIDDEN IN THE "**HELP LIST**" TITLE! If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
@@ -349,6 +349,13 @@ async def disconnect(ctx):
 
 
 @dottie.command()
+async def despacito(ctx):
+    for vc in dottie.voice_clients:
+        if vc.guild == ctx.guild:
+            vc.play(discord.FFmpegOpusAudio("music/Normal_Despacito.ogg"))
+
+
+@dottie.command()
 @commands.check(is_owner)
 async def load(ctx, extension=None):
     if extension is None:
@@ -379,9 +386,11 @@ async def reload(ctx, extension=None):
 @dottie.command()
 @commands.check(is_owner)
 async def shutdown(ctx):
-    print("```" + random.choice(["", "ini", "asciidoc", "fix"]
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + "\n[Cancelling all scheduled events and logging out...]```")
     await ctx.send("```css\n[❗ Shutting down...]```")
+    for vc in dottie.voice_clients:
+        await vc.disconnect(force=True)
     await asyncio.sleep(0.5)
     await ctx.bot.logout()
 
