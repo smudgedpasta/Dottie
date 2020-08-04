@@ -27,6 +27,8 @@ def is_owner(ctx):
 def print(*args, sep=" ", end="\n"):
     eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i)
                                                      for i in args) + end))
+    eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i)
+                                                       for i in args) + end))
 
 
 LISTENER = None
@@ -94,7 +96,7 @@ async def forceCoro(obj, *args, **kwargs):
     return obj
 
 
-TERMINALS = [727087981285998593, 738007255970087014]
+TERMINALS = [727087981285998593, 738007255970087014, 740134310044237884]
 OWNERS = [530781444742578188, 201548633244565504]
 
 
@@ -170,6 +172,7 @@ eloop.create_task(infinite_loop())
 async def on_ready():
     await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
+    globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["", "ini", "asciidoc", "fix"]
                                 ) + "\n[Successfully loaded and ready to go!]```")
@@ -262,8 +265,8 @@ async def help(ctx):
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     await ctx.send(embed=embed)
-    
-    
+
+
 @dottie.command()
 async def ping(ctx):
     await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
@@ -371,8 +374,8 @@ async def reload(ctx, extension=None):
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```fix\n[Successfully refreshed the extension.]```")
-    
-    
+
+
 @dottie.command()
 @commands.check(is_owner)
 async def shutdown(ctx):
