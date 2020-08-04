@@ -59,6 +59,9 @@ Connects the bot to a voice channel. Note that the only way to get her to join i
 - disconnect (aliases: leave, go_naughty_step)
 Disconnects the bot from the voice channel it was in. You don't have to be in the channel to perform the command.
 
+- despacito
+Headphone warning, this plays a bass boosted version of Despacito. Note that it may cut out randomly as an issue with ffmpeg.
+
 
 
 _OWNER ONLY_
