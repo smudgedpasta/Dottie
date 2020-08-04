@@ -260,7 +260,7 @@ async def help(ctx):
     **:french_bread: __FUN__ :french_bread:**\n
     ***hello***\n**Aliases: Any variant of "hello" or "hi"**\n*I will greet you back!*\n***AskDottie***\n**Aliases: ask, 8ball**\n*Ask me anything, I'll give a random answer!*\n***ab***\n**Aliases: dab**\n*ab will spell out d.ab with my prefix, so I'll dab!*\n***faker***\n*If someone uses this with a role of my name, I will call you out!*\n
     **:headphones: __VOICE__ :headphones:**\n
-    ***connect***\n**Aliases: get_your_butt_in_here, join**\n*Connects me to the voice channel you're in!*\n***disconnect***\n**Aliases: go_naughty_step, leave**\n*Disconnects me from the voice channel I was in!*\n***despacito***\n*Plays a totally normal version of Despacito!*\n
+    ***connect***\n**Aliases: get_your_butt_in_here, join**\n*Connects me to the voice channel you're in!*\n***disconnect***\n**Aliases: go_naughty_step, leave**\n*Disconnects me from the voice channel I was in!*\n***despacito***\n**Aliases: espacito, Despacito**\n*Plays a totally normal version of Despacito!*\n
     FOR A MORE DETAILED COMMAND LIST, VIEW THE LINK HIDDEN IN THE "**HELP LIST**" TITLE! If you find any bugs or have any enquires, be sure to let my creator, <@530781444742578188>, know!"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
@@ -334,25 +334,23 @@ async def faker(ctx):
 async def connect(ctx):
     channel = ctx.message.author.voice.channel
     await channel.connect()
-    await ctx.send("```ini\n[Successfully joined the Voice Channel!]```")
-    response = await dottie.wait_for("message", check=lambda message: message.channel == ctx.channel)
-    await ctx.send("Cozy vc you got here! 😊")
+    await ctx.send("ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]")
 
 
 @dottie.command(aliases=["go_naughty_step", "leave"], pass_context=True)
 async def disconnect(ctx):
     server = ctx.message.guild.voice_client
     await server.disconnect()
-    await ctx.send("```ini\n[Successfully disconnected from the Voice Channel...]```")
-    response = await dottie.wait_for("message", check=lambda message: message.channel == ctx.channel)
-    await ctx.send("Did I have to leave the call? 🥺")
+    await ctx.send("ini\n[Successfully disconnected from the Voice Channel... Sad that it is time to go... 😔]")
 
 
-@dottie.command()
+@dottie.command(aliases=["espacito", "Despacito"])
 async def despacito(ctx):
-    for vc in dottie.voice_clients:
-        if vc.guild == ctx.guild:
-            vc.play(discord.FFmpegOpusAudio("music/Normal_Despacito.ogg"))
+  for vc in dottie.voice_clients:
+    if vc.guild == ctx.guild:
+        vc.play(discord.FFmpegOpusAudio("music/Normal_Despacito.ogg"))
+        return
+  await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one and use `d.connect` first!")
 
 
 @dottie.command()
