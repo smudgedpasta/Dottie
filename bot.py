@@ -29,7 +29,7 @@ def print(*args, sep=" ", end="\n"):
     eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i)
                                                      for i in args) + end))
     eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i)
-                                                       for i in args) + end))
+                                                     for i in args) + end))
 
 players = {}
 
