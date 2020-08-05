@@ -29,10 +29,6 @@ Dottie will send a less detailed command list in an embed with all their aliases
 - ping
 This is more a command that I need but I wont restrict it. It simply returns Dottie's ping latency.
 
-- credits
-(I might change this to the server join message) but this command essentially just sends an embed crediting the people who've
-contributed to the bot. It also supplies a full reference sheet of what Dottie looks like, which was drawn by Just Jay.
-
 
 
 _FUN_
