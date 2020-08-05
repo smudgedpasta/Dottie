@@ -213,6 +213,33 @@ async def on_member_remove(member):
                                 ) + f"\n[{member} has left the test server.]```")
 
 
+@dottie.event
+async def on_guild_join(guild):
+    target_channel = None
+
+    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed.description = """Hi! I'm Dottie, a test project by <@530781444742578188>- with the help of <@201548633244565504> and <@245890903133257730> of course! :white_heart:\n
+For a list of my commands, use the classic command of `d.help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/blob/master/CommandsList. You can find my source code over there too if you're interested!\n
+Thanks for inviting me! 😊"""
+    embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie",
+                     icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    embed.set_image(
+        url="https://cdn.discordapp.com/attachments/703579929840844891/740522679697932349/Dottie.gif")
+
+    for channel in ["bots", "dottie", "general", "text", "convo", "chat"]:
+        target_channel = discord.utils.get(guild.text_channels, name=channel)
+        if target_channel and target_channel.permissions_for(guild.me).send_messages:
+            break
+
+    if not target_channel:
+        for channel in guild.text_channels:
+            if channel.permissions_for(guild.me).send_messages:
+                target_channel = channel
+                break
+
+    if target_channel:
+        await target_channel.send(embed=embed)
+
 
 dottie.remove_command("help")
 
@@ -270,6 +297,7 @@ async def help(ctx):
                      icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
     await ctx.send(embed=embed)
+
 
 @dottie.command()
 async def ping(ctx):
@@ -444,14 +472,6 @@ async def input_test(ctx):
 #     player = await voice_client.create_ytdl_player(url)
 #     players[server.id] = player
 #     player.start()
-
-
-# @dottie.event
-# async def on_guild_join(guild):
-#     for channel in guild.text_channels:
-#         if channel.permissions_for(guild.me).send_messages:
-#             await channel.send(":3")
-#         break
 
 
 # for filename in os.listdir("./cogs"):
