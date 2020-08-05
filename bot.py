@@ -288,7 +288,7 @@ async def help(ctx):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***purge***\n*```Clears inputted message count, not counting the command message.```*\n***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n***credits***\n*```Gives credit to those who contributed to me, as well as a ref of what I look like!```*\n
+***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n
 **:headphones: __VOICE__ :headphones:**\n
@@ -302,19 +302,6 @@ async def help(ctx):
 @dottie.command()
 async def ping(ctx):
     await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
-
-
-@dottie.command()
-async def credits(ctx):
-    embed = discord.Embed(colour=discord.Colour(15277667))
-    embed.description = """Hi! I'm Dottie, a test project by <@530781444742578188>.\n
-    Special thanks to <@201548633244565504> and <@245890903133257730> for help with code here and there!\n
-    Another special thanks to <@550429134401044490> for designing me and giving me my name! :white_heart:"""
-    embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie",
-                     icon_url=dottie.user.avatar_url_as(format="png", size=4096))
-    embed.set_image(
-        url="https://cdn.discordapp.com/attachments/738007255970087014/738345655012950036/dottie_ref.png")
-    await ctx.send(embed=embed)
 
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
