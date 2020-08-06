@@ -140,7 +140,7 @@ async def on_message(message):
     if ctx.command is not None:
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
-            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
             LAST_COMMAND_TIMESTAMP = time.time()
     else:
         channel = message.channel
@@ -172,7 +172,7 @@ eloop.create_task(infinite_loop())
 
 @dottie.event
 async def on_ready():
-    await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+    await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
     globals()["eloop"] = asyncio.get_event_loop()
