@@ -140,7 +140,7 @@ async def on_message(message):
     if ctx.command is not None:
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
-            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="I have been summoned! 👀"))
+            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="whoever summoned me! 👀"))
             LAST_COMMAND_TIMESTAMP = time.time()
     else:
         channel = message.channel
