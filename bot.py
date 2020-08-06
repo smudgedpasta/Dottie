@@ -127,7 +127,7 @@ async def infinite_loop():
     global LAST_COMMAND_TIMESTAMP
     while LAST_COMMAND_TIMESTAMP > -inf:
         if time.time() - LAST_COMMAND_TIMESTAMP > 10:
-            await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/smudgedpasta/Dottie"))
+            await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
             LAST_COMMAND_TIMESTAMP = inf
         await asyncio.sleep(0.5)
 
