@@ -126,7 +126,7 @@ LAST_COMMAND_TIMESTAMP = inf
 async def infinite_loop():
     global LAST_COMMAND_TIMESTAMP
     while LAST_COMMAND_TIMESTAMP > -inf:
-        if time.time() - LAST_COMMAND_TIMESTAMP > 10:
+        if time.time() - LAST_COMMAND_TIMESTAMP > 20:
             await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
             LAST_COMMAND_TIMESTAMP = inf
         await asyncio.sleep(0.5)
@@ -140,7 +140,7 @@ async def on_message(message):
     if ctx.command is not None:
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
-            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
+            await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="I have been summoned! 👀"))
             LAST_COMMAND_TIMESTAMP = time.time()
     else:
         channel = message.channel
