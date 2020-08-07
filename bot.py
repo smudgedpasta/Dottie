@@ -181,7 +181,6 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + "\n[Successfully loaded and ready to go!]```")
 
-
 @dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
@@ -290,7 +289,7 @@ async def help(ctx):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n
+***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*"""
     embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
@@ -340,6 +339,35 @@ async def ab(ctx):
 @commands.has_any_role("Dottie", "dottie")
 async def faker(ctx):
     await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
+
+
+@dottie.command()
+async def photo(ctx):
+    Image_Pool = None
+    with open("Image_Pool.json", "r") as f:
+        Image_Pool = json.load(f)
+        random_image = random.choice(Image_Pool)
+        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed.description = random_image["desc"]
+        embed.set_image(url=random_image["img"])
+        embed.set_footer(text=random_image["artist"])
+        await ctx.send(embed=embed)
+
+
+@dottie.command()
+async def nsfw_photo(ctx):
+    NSFW_Image_Pool = None
+    with open("NSFW_Image_Pool.json", "r") as f:
+        NSFW_Image_Pool = json.load(f)
+        random_image = random.choice(NSFW_Image_Pool)
+        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed.description = random_image["desc"]
+        embed.set_image(url=random_image["img"])
+        embed.set_footer(text=random_image["artist"])
+        if ctx.channel.is_nsfw():
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send("Woah, be careful, this command pulls graphic imagery! Try again in an **nsfw channel**!")
 
 
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
@@ -409,26 +437,6 @@ async def shutdown(ctx):
 # 🔻 UNFINISHED COMMANDS/EVENTS 🔻
 
 
-@dottie.command()
-@commands.check(is_owner)
-async def nsfw_test(ctx):
-    if ctx.channel.is_nsfw():
-        await ctx.send("Test.")
-    else:
-        await ctx.send("Try using this command in an **nsfw channel**.")
-
-
-@dottie.command()
-@commands.check(is_owner)
-async def photo_beta(ctx):
-    embed = discord.Embed(colour=discord.Colour(8259923))
-    embed.description = ":warning: **GORE WARNING!**\n\nCan't get it up if a girl's breathing."
-    embed.set_image(
-        url="https://cdn.discordapp.com/attachments/739023774405492836/739509257992667206/SPOILER_Dottie_1.png")
-    embed.set_footer(text="Art by Just Jay")
-    await ctx.send(embed=embed)
-
-
 # @dottie.event
 # # @commands.guild_only()
 # async def on_member_update(before, after):
@@ -453,14 +461,6 @@ async def input_test(ctx):
     if response.content.lower() != "4":
         print("```Unsuccess.```")
         await ctx.send("That's not right.")
-
-
-# @dottie.command(aliases=["p"], pass_context=True)
-# async def play(ctx, url):
-#     voice_client = dottie.voice_client_in(ctx.message.server)
-#     player = await voice_client.create_ytdl_player(url)
-#     players[server.id] = player
-#     player.start()
 
 
 # for filename in os.listdir("./cogs"):
