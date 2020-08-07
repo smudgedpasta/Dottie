@@ -20,11 +20,6 @@
         "artist" : "Art by Just Jay"
     },
     {
-        "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739506322826985582/Dottie_9.png",
-        "desc" : "I know I look fierce, but don't worry, hollapinos are what's on my mind!",
-        "artist" :"Art by Just Jay"
-    },
-    {
         "img" : "https://cdn.discordapp.com/attachments/739023774405492836/739506472991588392/Dottie_11.PNG",
         "desc" : "Why do I still feel so lost? Why do I still seem out of place? Everyone's out of focus... Everything blurry looks the same...",
         "artist" : "Art by smudgedpasta"
@@ -57,6 +52,11 @@
     {
         "img" : "https://cdn.discordapp.com/attachments/683233571405561876/740280047696347206/Dottie_1.PNG",
         "desc" : "My icon!",
-        "artist" :"Art by smudgedpasta"
+        "artist" : "Art by smudgedpasta"
+    },
+    {
+        "img" : "https://media.discordapp.net/attachments/741239023258959892/741284684935331900/image0.png",
+        "desc" : "Am I insane? I think I'm just REALLY WANT THAT CANDY!",
+        "artist" : "Art by Just Jay"
     }
 ]
