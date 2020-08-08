@@ -370,7 +370,7 @@ async def nsfw_photo(ctx):
             await ctx.send("Woah, be careful, this command pulls graphic imagery! Try again in an **nsfw channel**!")
 
 
-@dottie.command()
+@dottie.command(aliases=["quiz"])
 async def numberguess(ctx):
     await ctx.send("I am thinking of a number between 1 and 100... Can you guess what it is?")
     answer = random.randint(1, 100)
@@ -382,7 +382,7 @@ async def numberguess(ctx):
             await ctx.send(f"Bingo! This took you {i + 1} attempts! You now get a cheesecake. 🧀🍰")
             return
         elif i >= attempts - 1:
-            await ctx.send("Sorry, you ran out of chances! Try again any time!")
+            await ctx.send("🛑 Sorry, you ran out of chances! Try again any time!")
             return
         elif number > answer:
             await ctx.send("Your guess was too high! Try again!")
