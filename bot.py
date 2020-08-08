@@ -370,6 +370,26 @@ async def nsfw_photo(ctx):
             await ctx.send("Woah, be careful, this command pulls graphic imagery! Try again in an **nsfw channel**!")
 
 
+@dottie.command()
+async def numberguess(ctx):
+    await ctx.send("I am thinking of a number between 1 and 100... Can you guess what it is?")
+    answer = random.randint(1, 100)
+    attempts = 10
+    for i in range(attempts):
+        response = await dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        number = int(response.content)
+        if number == answer:
+            await ctx.send(f"Bingo! This took you {i + 1} attempts! You now get a cheesecake. 🧀🍰")
+            return
+        elif i >= attempts - 1:
+            await ctx.send("Sorry, you ran out of chances! Try again any time!")
+            return
+        elif number > answer:
+            await ctx.send("Your guess was too high! Try again!")
+        elif number < answer:
+            await ctx.send("Your guess was too low! Try again!")
+
+
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
 async def connect(ctx):
     channel = ctx.message.author.voice.channel
@@ -448,19 +468,6 @@ async def shutdown(ctx):
 #                 await Bot.get_user.send("I see you there with a nickname of me... *There can only be one!* :crossed_swords:")
 #             else:
 #                 await after.edit(nick="NOT Dottie! ⚔️")
-
-
-@dottie.command()
-@commands.check(is_owner)
-async def input_test(ctx):
-    await ctx.send("Test. Type 4.")
-    response = await dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
-    if response.content.lower() == "4":
-        print("```Success.```")
-        await ctx.send("That's right.")
-    if response.content.lower() != "4":
-        print("```Unsuccess.```")
-        await ctx.send("That's not right.")
 
 
 # for filename in os.listdir("./cogs"):
