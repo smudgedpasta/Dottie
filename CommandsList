@@ -54,6 +54,10 @@ Pulls a random image of Dottie from a pool of graphic images, along with a capti
 - numberguess (aliases: quiz)
 Dottie will ask you to guess a number between 1 and 100, and hint at you if you're two low or high until you get it right. You have 10 chances.
 
+- speak (aliases: say)
+Dottie will repeat whatever is said by the user issuing the command. She will also delete that parent message issuing the command. Logging bots
+will still pick up on this, however. Note that images cannot be sent through the command, but URL's can.
+
 
 
 _VOICE_
