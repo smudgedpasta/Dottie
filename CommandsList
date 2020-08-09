@@ -29,6 +29,10 @@ Dottie will send a less detailed command list in an embed with all their aliases
 - ping
 This is more a command that I need but I wont restrict it. It simply returns Dottie's ping latency towards the message.
 
+- profile (aliases: info, userinfo, stats, userstats)
+Views a profile containing various stats about the user. You can use the command without mentioning anyone to view your own, or view other's
+by either @ mentioning them, typing out their server nickname or typing out their Discord username.
+
 
 
 _FUN_
