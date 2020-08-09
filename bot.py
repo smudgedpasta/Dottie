@@ -297,7 +297,7 @@ async def ping(ctx):
 
 
 @dottie.command(aliases=["userinfo", "stats", "userstats"])
-async def info(ctx, member: discord.Member = None):
+async def info(ctx, *, member: discord.Member = None):
     member = ctx.author if not member else member
     Roles = [role for role in member.roles]
 
