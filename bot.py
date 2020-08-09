@@ -385,9 +385,9 @@ async def numberguess(ctx):
             await ctx.send("🛑 Sorry, you ran out of chances! Try again any time!")
             return
         elif number > answer:
-            await ctx.send("Your guess was too high! Try again!")
+            await ctx.send("Your guess was **too high**! Try again!")
         elif number < answer:
-            await ctx.send("Your guess was too low! Try again!")
+            await ctx.send("Your guess was **too low**! Try again!")
 
 
 @dottie.command(aliases=["say"], speach=None)
