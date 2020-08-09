@@ -460,25 +460,13 @@ async def shutdown(ctx):
     await ctx.bot.logout()
 
 
+dottie.run(discord_token)
+
+
 # 🔻 UNFINISHED COMMANDS/EVENTS 🔻
-
-
-# @dottie.event
-# # @commands.guild_only()
-# async def on_member_update(before, after):
-#     n = after.nick
-#     if n:
-#         if n.lower().count("Dottie") > 0:
-#             prev = before.nick
-#             if prev:
-#                 await Bot.get_user.send("I see you there with a nickname of me... *There can only be one!* :crossed_swords:")
-#             else:
-#                 await after.edit(nick="NOT Dottie! ⚔️")
 
 
 # for filename in os.listdir("./cogs"):
 #     if filename.endswith(".py"):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
-
-
 dottie.run(discord_token)
