@@ -181,6 +181,7 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + "\n[Successfully loaded and ready to go!]```")
 
+    
 @dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
