@@ -138,6 +138,10 @@ async def on_message(message):
     ctx = await dottie.get_context(message)
     await dottie.invoke(ctx)
     if ctx.command is not None:
+        user = message.author
+        cmd = message.content
+        print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]
+                                     ) + f"\n[{user} has run the following command: {cmd}]```")
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
             await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="whoever summoned me! 👀"))
