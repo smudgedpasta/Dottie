@@ -185,7 +185,7 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
                                 ) + "\n[Successfully loaded and ready to go!]```")
 
-    
+
 @dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
@@ -306,6 +306,36 @@ async def help(ctx):
 @dottie.command()
 async def ping(ctx):
     await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
+
+
+@dottie.command(aliases=["userinfo", "stats", "userstats"])
+async def info(ctx, member: discord.Member = None):
+    member = ctx.author if not member else member
+    Roles = [role for role in member.roles]
+
+    embed = discord.Embed(colour=discord.Colour(
+        15277667), timestamp=ctx.message.created_at)
+    embed.set_author(name=f"Snap! Let's see your info, {member}! 👀")
+    embed.set_thumbnail(url=member.avatar_url)
+    embed.set_footer(icon_url=ctx.author.avatar_url,
+                     text=f"Command run by {ctx.author}")
+
+    embed.description = "```ini\n🤍 Here they like to call you [" + \
+        member.display_name + "], what a nice nickname! 🤍```"
+
+    embed.add_field(name="Too lazy for developer mode? Here's the ID:",
+                    value=str(member.id) + " ✌️")
+    embed.add_field(name="You fell into Discord addiction on",
+                    value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name="You stumbled into this server on",
+                    value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join(
+        [role.mention for role in Roles]))
+    embed.add_field(name="... With your highest rank being:",
+                    value=member.top_role.mention)
+    embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
+
+    await ctx.send(embed=embed)
 
 
 @dottie.command(aliases=["hi", "HI", "Hi", "hI"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
@@ -465,12 +495,11 @@ async def shutdown(ctx):
     await ctx.bot.logout()
 
 
-dottie.run(discord_token)
-
-
 # 🔻 UNFINISHED COMMANDS/EVENTS 🔻
 
 
 # for filename in os.listdir("./cogs"):
 #     if filename.endswith(".py"):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
+
+dottie.run(discord_token)
