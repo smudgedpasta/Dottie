@@ -281,7 +281,7 @@ async def help(ctx):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***purge***\n*```Clears inputted message count, not counting the command message.```*\n***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n
+***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a mentioned user!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:headphones: __VOICE__ :headphones:**\n
@@ -296,8 +296,8 @@ async def ping(ctx):
     await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
 
 
-@dottie.command(aliases=["userinfo", "stats", "userstats"])
-async def info(ctx, *, member: discord.Member = None):
+@dottie.command(aliases=["userinfo", "info", "stats", "userstats"])
+async def profile(ctx, *, member: discord.Member = None):
     member = ctx.author if not member else member
     Roles = [role for role in member.roles]
 
@@ -311,10 +311,11 @@ async def info(ctx, *, member: discord.Member = None):
 
     embed.add_field(name="Too lazy for developer mode? Here's the ID:", value=str(member.id) + " ✌️")
     embed.add_field(name="You fell into Discord addiction on", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
     embed.add_field(name="You stumbled into this server on", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
     embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
     embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
-    embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
+    # embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
 
     await ctx.send(embed=embed)
 
