@@ -26,10 +26,8 @@ def is_owner(ctx):
 
 
 def print(*args, sep=" ", end="\n"):
-    eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i)
-                                                     for i in args) + end))
-    eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i)
-                                                     for i in args) + end))
+    eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
+    eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i) for i in args) + end))
 
 players = {}
 
@@ -52,8 +50,7 @@ def __setloop__(): return asyncio.set_event_loop(eloop)
 
 athreads = concurrent.futures.ThreadPoolExecutor(
     max_workers=16,
-    initializer=__setloop__,
-)
+    initializer=__setloop__,)
 __setloop__()
 
 
@@ -81,8 +78,7 @@ create_future = lambda func, * \
     args, loop=None, **kwargs: wrap_future(athreads.submit(func, *args, **kwargs), loop=loop)
 
 
-def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(
-    obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
+def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
 
 
 async def forceCoro(obj, *args, **kwargs):
@@ -140,8 +136,7 @@ async def on_message(message):
     if ctx.command is not None:
         user = message.author.name
         cmd = message.content
-        print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]
-                                     ) + f"\n{user} has run the following command: [{cmd}]```")
+        print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n{user} has run the following command: [{cmd}]```")
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
             await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="whoever summoned me! 👀"))
@@ -180,10 +175,8 @@ async def on_ready():
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
     globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
     globals()["eloop"] = asyncio.get_event_loop()
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
-                                ) + "\n[Logged in as user {0} (ID = {0.id})]```".format(dottie.user))
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
-                                ) + "\n[Successfully loaded and ready to go!]```")
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Logged in as user {0} (ID = {0.id})]```".format(dottie.user))
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
 @dottie.event
@@ -207,14 +200,12 @@ async def on_command_error(ctx, error):
 
 @dottie.event
 async def on_member_join(member):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
-                                ) + f"\n[{member} has joined the test server.]```")
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member} has joined the test server.]```")
 
 
 @dottie.event
 async def on_member_remove(member):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
-                                ) + f"\n[{member} has left the test server.]```")
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
 
 
 @dottie.event
@@ -225,10 +216,8 @@ async def on_guild_join(guild):
     embed.description = """Hi! I'm Dottie, a test project by <@530781444742578188>- with the help of <@201548633244565504> and <@245890903133257730> of course! :white_heart:\n
 For a list of my commands, use the classic command of `d.help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/blob/master/CommandsList. You can find my source code over there too if you're interested!\n
 Thanks for inviting me! 😊"""
-    embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie",
-                     icon_url=dottie.user.avatar_url_as(format="png", size=4096))
-    embed.set_image(
-        url="https://cdn.discordapp.com/attachments/703579929840844891/740522679697932349/Dottie.gif")
+    embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    embed.set_image(url="https://cdn.discordapp.com/attachments/703579929840844891/740522679697932349/Dottie.gif")
 
     for channel in ["bots", "dottie", "general", "text", "convo", "chat"]:
         target_channel = discord.utils.get(guild.text_channels, name=channel)
@@ -297,8 +286,7 @@ async def help(ctx):
 ***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*"""
-    embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList",
-                     icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
     await ctx.send(embed=embed)
 
@@ -313,26 +301,19 @@ async def info(ctx, member: discord.Member = None):
     member = ctx.author if not member else member
     Roles = [role for role in member.roles]
 
-    embed = discord.Embed(colour=discord.Colour(
-        15277667), timestamp=ctx.message.created_at)
+    embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.set_author(name=f"Snap! Let's see your info, {member}! 👀")
     embed.set_thumbnail(url=member.avatar_url)
-    embed.set_footer(icon_url=ctx.author.avatar_url,
-                     text=f"Command run by {ctx.author}")
+    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Command run by {ctx.author}")
 
     embed.description = "```ini\n🤍 Here they like to call you [" + \
         member.display_name + "], what a nice nickname! 🤍```"
 
-    embed.add_field(name="Too lazy for developer mode? Here's the ID:",
-                    value=str(member.id) + " ✌️")
-    embed.add_field(name="You fell into Discord addiction on",
-                    value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
-    embed.add_field(name="You stumbled into this server on",
-                    value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
-    embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join(
-        [role.mention for role in Roles]))
-    embed.add_field(name="... With your highest rank being:",
-                    value=member.top_role.mention)
+    embed.add_field(name="Too lazy for developer mode? Here's the ID:", value=str(member.id) + " ✌️")
+    embed.add_field(name="You fell into Discord addiction on", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name="You stumbled into this server on", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
+    embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
     embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
 
     await ctx.send(embed=embed)
@@ -486,8 +467,7 @@ async def reload(ctx, extension=None):
 @dottie.command()
 @commands.check(is_owner)
 async def shutdown(ctx):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]
-                                ) + "\n[Cancelling all scheduled events and logging out...]```")
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Cancelling all scheduled events and logging out...]```")
     await ctx.send("```css\n[❗ Shutting down...]```")
     for vc in dottie.voice_clients:
         await vc.disconnect(force=True)
