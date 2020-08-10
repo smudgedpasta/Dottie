@@ -320,7 +320,6 @@ async def profile(ctx, *, member: discord.Member = None):
     embed.add_field(name="You stumbled into this server on", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
     embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
     embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
-    # embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
 
     await ctx.send(embed=embed)
 
