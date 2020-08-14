@@ -21,9 +21,6 @@ with open("./config.json", "r") as f:
 dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
 
 
-# messages = 0
-
-
 def is_owner(ctx):
   return ctx.message.author.id in [530781444742578188, 201548633244565504]
 
@@ -31,6 +28,9 @@ def is_owner(ctx):
 def print(*args, sep=" ", end="\n"):
     eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
     eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i) for i in args) + end))
+
+
+messages = 0
 
 players = {}
 
@@ -133,15 +133,15 @@ async def infinite_loop():
 
 @dottie.event
 async def on_message(message):
-    global LISTENER
+    global messages
+    messages += 1
     ctx = await dottie.get_context(message)
     await dottie.invoke(ctx)
     if ctx.command is not None:
         user = message.author.name
         cmd = message.content
         print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n{user} has run the following command: [{cmd}]```")
-        # global messages
-        # messages += 1
+        global LISTENER
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
             await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="whoever summoned me! 👀"))
@@ -483,20 +483,24 @@ async def shutdown(ctx):
 # 🔻 UNFINISHED COMMANDS/EVENTS 🔻
 
 
-# async def serverstats_update():
-#     await dottie.wait_until_ready()
-#     global message
-#     while not dottie.is_closed():
-#         try:
-#             with open("serverstats.txt", "a") as f:
-#                 f.write(f"Time since last interval: {int(time.time())}, Messages sent within time span: {message}\n\n")
-#             message = 0
-#             await asyncio.sleep(5)
-#         except Exception as e:
-#             print(e)
-#             await asyncio.sleep(5)
-
-# dottie.loop.create_task(serverstats_update)
+async def serverstats_update():
+    await dottie.wait_until_ready()
+    global message
+    while not dottie.is_closed():
+        try:
+            with open("serverstats.txt", "a") as f:
+                f.write(f"Time since last interval: {int(time.time())}, Messages sent within time span: {message}\n\n")
+            if not asyncio.iscoroutinefunction(serverstats_update):
+                serverstats_update = asyncio.coroutine(serverstats_update)
+            message = 0
+            await asyncio.sleep(5)
+        except Exception as e:
+            print(e)
+            await asyncio.sleep(5)
+        
+asyncio.coroutine(serverstats_update)()
+            
+dottie.loop.create_task(serverstats_update)
 
 
 # for filename in os.listdir("./cogs"):
