@@ -190,8 +190,7 @@ async def serverstats_update():
     while not dottie.is_closed():
         try:
             with open("serverstats", "a") as f:
-                f.write(
-                    f"Time since last interval: {int(time.time())}, Messages sent within time span: {messages}\n\n")
+                f.write(f"Time since last interval: {int(time.time())}, Messages sent within time span: {messages}\n\n")
             messages = 0
             await asyncio.sleep(3600)
         except Exception as e:
