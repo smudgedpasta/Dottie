@@ -184,6 +184,23 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
+async def serverstats_update():
+    await dottie.wait_until_ready()
+    global messages
+    while not dottie.is_closed():
+        try:
+            with open("serverstats", "a") as f:
+                f.write(
+                    f"Time since last interval: {int(time.time())}, Messages sent within time span: {messages}\n\n")
+            messages = 0
+            await asyncio.sleep(3600)
+        except Exception as e:
+            print(e)
+            await asyncio.sleep(3600)
+
+dottie.loop.create_task(serverstats_update())
+
+
 @dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
@@ -481,26 +498,6 @@ async def shutdown(ctx):
 
 
 # 🔻 UNFINISHED COMMANDS/EVENTS 🔻
-
-
-async def serverstats_update():
-    await dottie.wait_until_ready()
-    global message
-    while not dottie.is_closed():
-        try:
-            with open("serverstats.txt", "a") as f:
-                f.write(f"Time since last interval: {int(time.time())}, Messages sent within time span: {message}\n\n")
-            if not asyncio.iscoroutinefunction(serverstats_update):
-                serverstats_update = asyncio.coroutine(serverstats_update)
-            message = 0
-            await asyncio.sleep(5)
-        except Exception as e:
-            print(e)
-            await asyncio.sleep(5)
-        
-asyncio.coroutine(serverstats_update)()
-            
-dottie.loop.create_task(serverstats_update)
 
 
 # for filename in os.listdir("./cogs"):
