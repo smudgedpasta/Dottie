@@ -190,7 +190,7 @@ async def serverstats_update():
     while not dottie.is_closed():
         try:
             with open("serverstats", "a") as f:
-                f.write(f"Time since last interval: {int(time.time())}, Messages sent within time span: {messages}\n\n")
+                f.write(f"Time taken for task: {int(time.time())}, Messages sent within last hour: {messages}\n\n")
             messages = 0
             await asyncio.sleep(3600)
         except Exception as e:
@@ -502,6 +502,19 @@ async def shutdown(ctx):
 # for filename in os.listdir("./cogs"):
 #     if filename.endswith(".py"):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
+
+
+dottie.loop.create_task(save_levelDatabase())
+
+with open("leveldata.json", "r") as f:
+    levelDatabase = json.load(f)
+
+@dottie.event
+async def user_levels():
+    await dottie.wait_until_ready
+    while not dottie.is_closed():
+        with open("leveldata.json", "w") as f:
+            json.dump(levelDatabase, f, indent=2)
 
 
 dottie.run(discord_token)
