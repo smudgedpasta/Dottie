@@ -1,6 +1,7 @@
 import concurrent.futures
 import inspect
 import time
+import datetime
 import random
 import asyncio
 import os
@@ -190,7 +191,7 @@ async def serverstats_update():
     while not dottie.is_closed():
         try:
             with open("serverstats", "a") as f:
-                f.write(f"Time taken for task: {int(time.time())}, Messages sent within last hour: {messages}\n\n")
+                f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, Messages sent within 60m interval: {messages}\n\n".format())
             messages = 0
             await asyncio.sleep(3600)
         except Exception as e:
@@ -320,7 +321,7 @@ async def ping(ctx):
 @dottie.command(aliases=["userinfo", "info", "stats", "userstats"])
 async def profile(ctx, *, member: discord.Member = None):
     member = ctx.author if not member else member
-    Roles = [role for role in member.roles]
+    Roles = member.roles[1:]
 
     embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.set_author(name=f"Snap! Let's see your info, {member}! 👀")
@@ -504,17 +505,17 @@ async def shutdown(ctx):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
-dottie.loop.create_task(save_levelDatabase())
+# dottie.loop.create_task(save_levelDatabase())
 
-with open("leveldata.json", "r") as f:
-    levelDatabase = json.load(f)
+# with open("leveldata.json", "r") as f:
+#     levelDatabase = json.load(f)
 
-@dottie.event
-async def user_levels():
-    await dottie.wait_until_ready
-    while not dottie.is_closed():
-        with open("leveldata.json", "w") as f:
-            json.dump(levelDatabase, f, indent=2)
+# @dottie.event
+# async def user_levels():
+#     await dottie.wait_until_ready
+#     while not dottie.is_closed():
+#         with open("leveldata.json", "w") as f:
+#             json.dump(levelDatabase, f, indent=2)
 
 
 dottie.run(discord_token)
