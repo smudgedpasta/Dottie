@@ -330,6 +330,7 @@ async def ping(ctx):
 async def profile(ctx, *, member: discord.Member = None):
     member = ctx.author if not member else member
     Roles = member.roles[1:]
+
     embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.set_author(name=f"Snap! Let's see your info, {member}! 👀")
     embed.set_thumbnail(url=member.avatar_url)
@@ -343,8 +344,8 @@ async def profile(ctx, *, member: discord.Member = None):
     embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
     embed.add_field(name="You stumbled into this server on", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
     if len(Roles) == 0:
-        embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute.", value=" ")
-        embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value=" ")
+        embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute.", value="\u200b")
+        embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value="\u200b")
     else:
         embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
         embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
