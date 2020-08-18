@@ -5,6 +5,7 @@ import datetime
 import random
 import asyncio
 import os
+import multiprocessing
 import traceback
 from math import *
 import youtube_dl
@@ -323,7 +324,10 @@ async def help(ctx):
 
 @dottie.command()
 async def ping(ctx):
-    await ctx.send(f"```Ping! I pong back my ping latency was {round(dottie.latency * 1000)}ms.```")
+    await ctx.send(f"""*```css\n{{Ping! I pong back all this nice techy info. 🍺}}\n 
+Current CPU usage is: [{multiprocessing.cpu_count()}%]
+Ping latency is: [{round(dottie.latency * 1000)}ms]
+```*""")
 
 
 @dottie.command(aliases=["userinfo", "info", "stats", "userstats"])
