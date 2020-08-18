@@ -194,20 +194,20 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
-async def serverstats_update():
-    await dottie.wait_until_ready()
-    global messages
-    while not dottie.is_closed():
-        try:
-            with open("serverstats", "a") as f:
-                f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, Messages sent within 60m interval: {messages}\n\n".format())
-            messages = 0
-            await asyncio.sleep(3600)
-        except Exception as e:
-            print(e)
-            await asyncio.sleep(3600)
+# async def serverstats_update():
+#     await dottie.wait_until_ready()
+#     global messages
+#     while not dottie.is_closed():
+#         try:
+#             with open("serverstats", "a") as f:
+#                 f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, Messages sent within 60m interval: {messages}\n\n".format())
+#             messages = 0
+#             await asyncio.sleep(3600)
+#         except Exception as e:
+#             print(e)
+#             await asyncio.sleep(3600)
 
-dottie.loop.create_task(serverstats_update())
+# dottie.loop.create_task(serverstats_update())
 
 
 @dottie.event
