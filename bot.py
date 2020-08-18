@@ -142,6 +142,14 @@ async def on_message(message):
         user = message.author.name
         cmd = message.content
         print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n{user} has run the following command: [{cmd}]```")
+        # if message.author == dottie.bot.user:
+        #     return
+        # author_id = str(message.author.id)
+        # if not author_id in levelDatabase:
+        #     users[author_id] = {}
+        #     users[author_id]["level"] = 1
+        #     users[author_id]["exp"] = 0
+        # users[author_id]["exp"] += 1
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
@@ -335,8 +343,20 @@ async def profile(ctx, *, member: discord.Member = None):
     embed.add_field(name="You fell into Discord addiction on", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
     embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
     embed.add_field(name="You stumbled into this server on", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
-    embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
-    embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
+    # if Roles is None:
+    #     try:
+    #         embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute.")
+    #         embed.add_field(name="... Your highest rank being nothing, obviously. 😔")
+    # else:
+    #     embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
+    #     embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
+    try:
+        embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
+        embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
+    except:
+        if isinstance(commands.errors.CommandInvokeError):
+            embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute.", value=" ")
+            embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value=" ")
 
     await ctx.send(embed=embed)
 
@@ -432,6 +452,22 @@ async def numberguess(ctx):
 async def speak(ctx, *, speach):
     await ctx.message.delete()
     await ctx.send(f"{speach}")
+
+
+@dottie.command()
+async def pyramid(ctx):
+    await ctx.send(":desert: Y'know what I'm in the mood for? Building a pyramid! How tall should it be?")
+    message = await dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+    size = (int(message.content))
+    if size >= 51:
+        await ctx.send("Yeah no, let's not go *too* spammy! :sweat_drops:")
+    elif size <= -1:
+        await ctx.send("Oi, quit try'na break the universe, I can't exactly dig underground on Discord! :upside_down:")
+    elif size == 0:
+        await ctx.send("Uh, okay, guess I'll go build elsewhere... :pensive:")
+    else:
+        for i in range(size):
+            await ctx.send(" " * (size-i-1) + " *" * (i+1))
 
 
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
