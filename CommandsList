@@ -62,6 +62,10 @@ Dottie will ask you to guess a number between 1 and 100, and hint at you if you'
 Dottie will repeat whatever is said by the user issuing the command. She will also delete that parent message issuing the command. Logging bots
 will still pick up on this, however. Note that images cannot be sent through the command, but URL's can.
 
+- pyramid
+Dottie will ask you how tall her pyramid will be, and stack orange blocks accordingly. You can supply her any number ranging from 1-25, and will
+refuse anything higher or lower.
+
 
 
 _VOICE_
