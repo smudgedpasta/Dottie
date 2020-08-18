@@ -221,7 +221,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     if isinstance(error, commands.CommandInvokeError):
-        await ctx.send("Hey, I can't find you! You need to be in a voice channel first!")
+        await ctx.send("```fix\n⚠️ Unexpected error! Either use this command with a required argument, or report this as a bug to smudgedpasta.```")
     try:
         raise error
     except:
@@ -472,9 +472,13 @@ async def pyramid(ctx):
 
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
 async def connect(ctx):
-    channel = ctx.message.author.voice.channel
-    await channel.connect()
-    await ctx.send("```ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]```")
+    try:
+        channel = ctx.message.author.voice.channel
+        await channel.connect()
+        await ctx.send("```ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]```")
+    except:
+        await ctx.send("Hey, I can't find you! You need to be in a voice channel first!")
+
 
 
 @dottie.command(aliases=["go_naughty_step", "leave"], pass_context=True)
