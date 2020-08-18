@@ -340,14 +340,14 @@ async def profile(ctx, *, member: discord.Member = None):
         member.display_name + "], what a nice nickname! 🤍```"
 
     embed.add_field(name="Too lazy for developer mode? Here's the ID:", value=str(member.id) + " ✌️")
-    embed.add_field(name="You fell into Discord addiction on", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name="You fell into Discord addiction on:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
     embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
-    embed.add_field(name="You stumbled into this server on", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
+    embed.add_field(name="You stumbled into this server on:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
     if len(Roles) == 0:
-        embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute.", value="\u200b")
+        embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute...", value="\u200b")
         embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value="\u200b")
     else:
-        embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles ⚔️", value=" ".join([role.mention for role in Roles]))
+        embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles! ⚔️", value=" ".join([role.mention for role in Roles]))
         embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
 
     await ctx.send(embed=embed)
