@@ -336,7 +336,7 @@ async def profile(ctx, *, member: discord.Member = None):
     Roles = member.roles[1:]
 
     embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-    embed.set_author(name=f"Snap! Let's see your info, {member}! 👀")
+    embed.set_author(name=f"Snap! Let's see your info, {member.name}! 👀")
     embed.set_thumbnail(url=member.avatar_url)
     embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Command run by {ctx.author}")
 
@@ -359,15 +359,16 @@ async def profile(ctx, *, member: discord.Member = None):
 
 @dottie.command(aliases=["icon"])
 async def avatar(ctx, member: discord.Member = None):
-    member = ctx.author.name if not member else member
-    embed=discord.Embed(colour=discord.Colour(15277667))
-    if member == ctx.author:
-        embed.set_image(url=ctx.author.avatar_url)
-    else:
+    try:
+        member = ctx.author.name if not member else member
+        embed=discord.Embed(colour=discord.Colour(15277667))
         embed.set_image(url=member.avatar_url)
-    embed.set_footer(text=f"{member.name}'s wonderful icon picture! 👍")
-    # if member.icon_url == None:
-    #     await ctx.send("Ay, do you think the default Discord icon counts? That's a bit bland, now isn't it?")
+        embed.set_footer(text=f"{member.name}'s wonderful icon picture! 👍")
+        # if member.icon_url == None:
+        #     await ctx.send("Ay, do you think the default Discord icon counts? That's a bit bland, now isn't it?")
+    except:
+        embed.description("Yo! This command is not yet able to work without typing the user's **username** or **nickname**, **@ mentioning** them or **with the default Discord avatar(s)**!")
+
     await ctx.send(embed=embed)
 
 
