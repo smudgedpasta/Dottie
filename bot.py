@@ -359,16 +359,13 @@ async def profile(ctx, *, member: discord.Member = None):
 
 @dottie.command(aliases=["icon"])
 async def avatar(ctx, member: discord.Member = None):
-    try:
-        member = ctx.author.name if not member else member
-        embed=discord.Embed(colour=discord.Colour(15277667))
+    member = ctx.author if not member else member
+    embed = discord.Embed(colour=discord.Colour(15277667))
+    if member.avatar_url == None:
+        embed.description = "Ay, do you think the default Discord icon counts? That's a bit bland, now isn't it?"
+    else:
         embed.set_image(url=member.avatar_url)
         embed.set_footer(text=f"{member.name}'s wonderful icon picture! 👍")
-        # if member.icon_url == None:
-        #     await ctx.send("Ay, do you think the default Discord icon counts? That's a bit bland, now isn't it?")
-    except:
-        embed.description("Yo! This command is not yet able to work without typing the user's **username** or **nickname**, **@ mentioning** them or **with the default Discord avatar(s)**!")
-
     await ctx.send(embed=embed)
 
 
