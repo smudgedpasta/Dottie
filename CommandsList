@@ -33,6 +33,10 @@ This is more a command that I need but I wont restrict it. It simply returns Dot
 Views a profile containing various stats about the user. You can use the command without mentioning anyone to view your own, or view other's
 by either @ mentioning them, typing out their server nickname or typing out their Discord username.
 
+- avatar (aliases: icon)
+Sends the avatar of a user. If used on its own, it returns the author's. If used while typing a server members nickname or @ mentioning
+them, it will send theirs.
+
 
 
 _FUN_
