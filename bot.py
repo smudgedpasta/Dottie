@@ -348,17 +348,21 @@ async def help(ctx):
     await message.add_reaction("🔺")
     await message.add_reaction("🔻")
 
-    i = 0
-    while True:
-        react = await dottie.wait_for("reaction_add", check=lambda reaction, user: reaction.message.id == message.id and user.id == ctx.author.id)
-        emoji = str(react[0])
-        if emoji == "🔺" and i > 0:
-            i -= 1
-            await message.edit(embed=pages[i])
-        if emoji == "🔻" and i < len(pages) - 1:
-            i += 1
-            await message.edit(embed=pages[i])
-         
+    def check(reaction, user): return reaction.message.id == message.id and user.id == ctx.author.id
+    async def page_reaction_listener(page, event_type="add"):
+        while True:
+            react = await dottie.wait_for(f"reaction_{event_type}", check=check)
+            emoji = str(react[0])
+            if emoji == "🔺" and page[0] > 0:
+                page[0] -= 1
+                await message.edit(embed=pages[page[0]])
+            if emoji == "🔻" and page[0] < len(pages) - 1:
+                page[0] += 1
+                await message.edit(embed=pages[page[0]])
+    page = [0]
+    eloop.create_task(page_reaction_listener(page, "add"))
+    eloop.create_task(page_reaction_listener(page, "remove"))
+
 
 @dottie.command()
 async def ping(ctx):
