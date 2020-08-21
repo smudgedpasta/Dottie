@@ -327,7 +327,7 @@ async def help(ctx):
     page2.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     page2.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
-    page3 = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+    page3 = discord.Embed(colour=discord.Colour(15277667))
     page3.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ``` ```\n
