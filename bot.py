@@ -441,9 +441,13 @@ async def ab(ctx):
 
 
 @dottie.command(pass_context=True)
-@commands.has_any_role("Dottie", "dottie")
-async def faker(ctx):
-    await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
+@commands.check(is_owner)
+async def faker_beta(ctx):
+    member = ctx.author
+    if "Dottie" in [role.name for role in member.roles]:
+        await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
+    else:
+        await ctx.send("Hmm, you don't seem to be mimicking me by our roles... For now. I have my eye on you. :eye:")
 
 
 @dottie.command()
