@@ -307,8 +307,14 @@ async def unban(ctx, *, member):
 
 @dottie.command()
 async def help(ctx):
-    embed = discord.Embed(colour=discord.Colour(15277667))
-    embed.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
+    page1 = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+    page1.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    page1.description = "*I think I need heeelp, I'm drowning in myseeelf* 🎵"
+    page1.set_image(url="https://cdn.discordapp.com/attachments/683233571405561876/746281046231875594/image0.png")
+    page1.set_footer(icon_url=ctx.author.avatar_url, text="Click the reactions to scroll through the pages!")
+
+    page2 = discord.Embed(colour=discord.Colour(15277667))
+    page2.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***purge***\n*```Clears inputted message count, not counting the command message.```*\n***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
@@ -317,10 +323,27 @@ async def help(ctx):
 ***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*"""
-    embed.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
-    embed.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
-    await ctx.send(embed=embed)
+    page2.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+    page2.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
+    pages = [page1, page2]
+
+    message = await ctx.send(embed=page1)
+
+    await message.add_reaction("🔺")
+    await message.add_reaction("🔻")
+
+    i = 0
+    while True:
+        react = await dottie.wait_for("reaction_add", check=lambda reaction, user: reaction.message.id == message.id and user.id == ctx.author.id)
+        emoji = str(react[0])
+        if emoji == "🔺" and i > 0:
+            i -= 1
+            await message.edit(embed=pages[i])
+        if emoji == "🔻" and i < len(pages) - 1:
+            i += 1
+            await message.edit(embed=pages[i])
+         
 
 @dottie.command()
 async def ping(ctx):
