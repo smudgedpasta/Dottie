@@ -216,7 +216,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
-        if "hepl" in str(error):
+        if str(error).split("\"")[1] in ["hepl", "hepk", "hlep", "hekp", "pleh"]:
             await ctx.send("Did you mean \"help\"?")
         else:
             await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
