@@ -135,22 +135,28 @@ async def infinite_loop():
 
 @dottie.event
 async def on_message(message):
+    # idk lol x1
+
+    # with open("leveldata.json", "r") as f:
+    #     leveldata = json.load(f)
+    #     await data_update(leveldata, message.author, message.server)
+    #     exp = random.randint(1, 9)
+    #     await exp_add(leveldata, message.author, message.server)
+    #     await exp_lvlUp(leveldata, message.author, message.channel, message.server)
+    # with open("leveldata.json", "w"):
+    #     json.dump(leveldata, f)
+    # await dottie.process_commands(message)
+
     global messages
     messages += 1
     ctx = await dottie.get_context(message)
     await dottie.invoke(ctx)
+
     if ctx.command is not None:
         user = message.author.name
         cmd = message.content
         print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n{user} has run the following command: [{cmd}]```")
-        # if message.author == dottie.bot.user:
-        #     return
-        # author_id = str(message.author.id)
-        # if not author_id in levelDatabase:
-        #     users[author_id] = {}
-        #     users[author_id]["level"] = 1
-        #     users[author_id]["exp"] = 0
-        # users[author_id]["exp"] += 1
+
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
@@ -207,6 +213,27 @@ async def serverstats_update():
             await asyncio.sleep(3600)
 
 dottie.loop.create_task(serverstats_update())
+
+# idk lol x2 electric boogaloo
+
+# async def data_update(leveldata, user, server):
+#     if not user + "|" + guild in leveldata:
+#         leveldata[user + "|" + guild] = {}
+#         leveldata[user + "|" + guild] = ["Exp:"] = 0
+#         leveldata[user + "|" + guild] = ["Lvl:"] = 1
+#         leveldata[user + "|" + guild] = ["LastMessage_exp:"] = 0
+
+# async def exp_update(leveldata, user, server):
+#     leveldata[user.name + "|" + server.name]["Exp:"] += exp
+#     return
+
+# async def lvl_update(leveldata, user, guild):
+#     Exp = leveldata[user + "|" + guild]["Exp:"]
+#     lvl_beginning = leveldata[user + "|" + guild]["Lvl:"]
+#     lvl_finish = int(Exp ** (1/4))
+#     if lvl_beginning < lvl_finish:
+#         await ctx.send(channel, f":billed_cap: What? {user.display_name.upper()} is evolving! They're now level {lvl_finish}!")
+#         leveldata[user + "|" + guild]["Lvl:"] = lvl_finish
 
 
 @dottie.event
@@ -319,7 +346,7 @@ async def help(ctx):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a mentioned user!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```If someone uses this with a role of my name, I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n
+***hello***\n**```fix\nAliases: Any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*
 """
@@ -602,19 +629,6 @@ async def shutdown(ctx):
 # for filename in os.listdir("./cogs"):
 #     if filename.endswith(".py"):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
-
-
-# dottie.loop.create_task(save_levelDatabase())
-
-# with open("leveldata.json", "r") as f:
-#     levelDatabase = json.load(f)
-
-# @dottie.event
-# async def user_levels():
-#     await dottie.wait_until_ready
-#     while not dottie.is_closed():
-#         with open("leveldata.json", "w") as f:
-#             json.dump(levelDatabase, f, indent=2)
 
 
 dottie.run(discord_token)

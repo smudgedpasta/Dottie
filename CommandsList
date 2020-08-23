@@ -51,7 +51,7 @@ Ask Dottie any question and she will repeat your enquiry and return a random ans
 Sends a dog dabbing gif.
 
 - faker
-If you have a role named either "Dottie" or "dottie", she will call you out on a challange.
+If you have a role, username or nickname which is spelt under any variant of "dottie", she will challengingly call you out.
 
 - photo
 Pulls a random embedded image of Dottie, with a caption and a credit to the artist.
