@@ -194,7 +194,6 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
-#This is still broken aaaa
 async def serverstats_update():
     await dottie.wait_until_ready()
     global messages
