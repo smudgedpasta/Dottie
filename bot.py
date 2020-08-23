@@ -442,16 +442,6 @@ async def ab(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
 
 
-@dottie.command(pass_context=True)
-@commands.check(is_owner)
-async def faker_beta(ctx):
-    member = ctx.author
-    if "Dottie" in [role.name for role in member.roles]:
-        await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
-    else:
-        await ctx.send("Hmm, you don't seem to be mimicking me by our roles... For now. I have my eye on you. :eye:")
-
-
 @dottie.command()
 async def photo(ctx):
     Image_Pool = None
@@ -609,6 +599,28 @@ async def shutdown(ctx):
 #     while not dottie.is_closed():
 #         with open("leveldata.json", "w") as f:
 #             json.dump(levelDatabase, f, indent=2)
+
+
+# @dottie.command(pass_context=True)
+# @commands.check(is_owner)
+# async def faker(ctx):
+#     member = ctx.author
+#     if "Dottie" in [role.name for role in member.roles]:
+#         await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
+#     else:
+#         await ctx.send("Hmm, you don't seem to be mimicking me by our **roles...** For now. I have my eye on you. :eye:")
+
+
+@dottie.command()
+@commands.check(is_owner)
+async def faker(ctx):
+    member = ctx.author
+    for role in member.roles:
+        if role.name in ["Dottie", "dottie"]:
+            await ctx.send("What, you think I wouldn't notice you have a role of my name? *There can only be one!* :crossed_swords:")
+            break
+    else:
+        await ctx.send("Hmm, you don't seem to be mimicking me by our **roles...** For now. I have my eye on you. :eye:")
 
 
 dottie.run(discord_token)
