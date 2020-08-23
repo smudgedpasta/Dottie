@@ -5,7 +5,7 @@ import datetime
 import random
 import asyncio
 import os
-import multiprocessing
+import psutil
 import traceback
 from math import *
 import youtube_dl
@@ -194,6 +194,7 @@ async def on_ready():
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
 
 
+#This is still broken aaaa
 async def serverstats_update():
     await dottie.wait_until_ready()
     global messages
@@ -366,8 +367,10 @@ async def help(ctx):
 
 @dottie.command()
 async def ping(ctx):
+    TaskManager2 = psutil.Process()
     await ctx.send(f"""*```css\n{{Ping! I pong back all this nice techy info. 🍺}}\n 
-Current CPU usage is: [{multiprocessing.cpu_count()}%]
+Current CPU usage is: [{TaskManager2.cpu_percent() / psutil.cpu_count()}%]
+Current memory usage is: [{round(TaskManager2.memory_percent(), 2)}%]
 Ping latency is: [{round(dottie.latency * 1000)}ms]
 ```*""")
 
