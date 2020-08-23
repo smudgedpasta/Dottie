@@ -180,7 +180,6 @@ async def on_message(message):
                     except:
                         await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
 
-
 eloop.create_task(infinite_loop())
 
 
@@ -446,13 +445,13 @@ async def ab(ctx):
 async def faker(ctx):
     member = ctx.author
     for role in member.roles:
-        if role.name in ["Dottie", "dottie"]:
+        if role.name in ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("dottie")) for z in range(1, 70)]:
             await ctx.send("What, you think I wouldn't notice you have a **role** of my name? *There can only be one!* :crossed_swords:")
             break
-        if member.nick in ["Dottie", "dottie"]:
+        if member.nick in ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("dottie")) for z in range(1, 70)]:
             await ctx.send("What, you think I wouldn't notice you have a **nickname** of my name? *There can only be one!* :crossed_swords:")
             break
-        elif member.name in ["Dottie", "dottie"]:
+        elif member.name in ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("dottie")) for z in range(1, 70)]:
             await ctx.send("What, you think I wouldn't notice you have a **username** of my name? *There can only be one!* :crossed_swords:")
             break
     else:
