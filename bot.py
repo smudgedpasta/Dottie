@@ -137,15 +137,17 @@ async def infinite_loop():
 async def on_message(message):
     # idk lol x1
 
-    # with open("leveldata.json", "r") as f:
-    #     leveldata = json.load(f)
-    #     await data_update(leveldata, message.author, message.server)
-    #     exp = random.randint(1, 9)
-    #     await exp_add(leveldata, message.author, message.server)
-    #     await exp_lvlUp(leveldata, message.author, message.channel, message.server)
-    # with open("leveldata.json", "w"):
-    #     json.dump(leveldata, f)
-    # await dottie.process_commands(message)
+    with open("leveldata.json", "r") as f:
+        leveldata = json.load(f)
+        await data_update(leveldata, message.author, message.guild)
+        exp = random.randint(1, 9)
+        await exp_add(leveldata, message.author, message.guild)
+        await exp_lvlUp(leveldata, message.author, message.channel, message.guild)
+        leveldata.close()
+    with open("leveldata.json", "w"):
+        json.dump(leveldata, f)
+        await dottie.process_commands(message)
+        leveldata.close()
 
     global messages
     messages += 1
@@ -216,24 +218,24 @@ dottie.loop.create_task(serverstats_update())
 
 # idk lol x2 electric boogaloo
 
-# async def data_update(leveldata, user, server):
-#     if not user + "|" + guild in leveldata:
-#         leveldata[user + "|" + guild] = {}
-#         leveldata[user + "|" + guild] = ["Exp:"] = 0
-#         leveldata[user + "|" + guild] = ["Lvl:"] = 1
-#         leveldata[user + "|" + guild] = ["LastMessage_exp:"] = 0
+# async def data_update(leveldata, user, guild):
+#     if not user + "|" + guild.name in leveldata:
+#         leveldata[user + "|" + guild.name] = {}
+#         leveldata[user + "|" + guild.name] = ["Exp:"] = [0]
+#         leveldata[user + "|" + guild.name] = ["Lvl:"] = [1]
+#         leveldata[user + "|" + guild.name] = ["LastMessage_exp:"] = [0]
 
 # async def exp_update(leveldata, user, server):
-#     leveldata[user.name + "|" + server.name]["Exp:"] += exp
+#     leveldata[user + "|" + server.name]["Exp:"] += [exp]
 #     return
 
 # async def lvl_update(leveldata, user, guild):
-#     Exp = leveldata[user + "|" + guild]["Exp:"]
+#     Exp = leveldata[user + "|" + guild.name]["Exp:"]
 #     lvl_beginning = leveldata[user + "|" + guild]["Lvl:"]
 #     lvl_finish = int(Exp ** (1/4))
 #     if lvl_beginning < lvl_finish:
 #         await ctx.send(channel, f":billed_cap: What? {user.display_name.upper()} is evolving! They're now level {lvl_finish}!")
-#         leveldata[user + "|" + guild]["Lvl:"] = lvl_finish
+#         leveldata[user + "|" + guild.name]["Lvl:"] = [lvl_finish]
 
 
 @dottie.event
