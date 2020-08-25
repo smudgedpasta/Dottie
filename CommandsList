@@ -41,7 +41,7 @@ them, it will send theirs.
 
 _FUN_
 
-- hello (aliases: any variant of "hi" or "hello" will be parsed. For example: d.HeLLo, d.HI)
+- hello (aliases: "hemlo", "henlo", "hoi", or any variant of "hi" or "hello" will be parsed. For example: d.HeLLo, d.HI)
 Dottie will simply say hello back, stating your nickname in the server and waving at you.
 
 - AskDottie (aliases: 8ball, ask. For example: d.ask, d.8ball)
