@@ -203,18 +203,20 @@ async def serverstats_update():
 dottie.loop.create_task(serverstats_update())
 
 
-async def leveldata_update():
+# Why is this such a mess I don't know at all aaaaaaaaaaaaaaaa
+async def leveldata_update(member, guild):
     await dottie.wait_until_ready()
-    leveldata = None
+    member.level = 0
+    member.exp = 0
+    exp = random.randint(1, 9)
     global messages
     while not dottie.is_closed():
         try:
             with open("leveldata", "w") as f:
                 await leveldata_update(leveldata, message.author, message.guild)
-                exp = random.randint(1, 9)
                 await exp.add(leveldata, message.author, message.guild)
                 await exp.lvlUp(leveldata, message.author, message.channel, message.guild)
-            leveldata.close()
+            f.close()
         except Exception as e:
             print(e)
 
