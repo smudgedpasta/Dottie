@@ -203,22 +203,12 @@ async def serverstats_update():
 dottie.loop.create_task(serverstats_update())
 
 
-# Why is this such a mess I don't know at all aaaaaaaaaaaaaaaa
 async def leveldata_update(member, guild):
-    await dottie.wait_until_ready()
-    member.level = 0
-    member.exp = 0
-    exp = random.randint(1, 9)
-    global messages
-    while not dottie.is_closed():
-        try:
-            with open("leveldata", "w") as f:
-                await leveldata_update(leveldata, message.author, message.guild)
-                await exp.add(leveldata, message.author, message.guild)
-                await exp.lvlUp(leveldata, message.author, message.channel, message.guild)
-            f.close()
-        except Exception as e:
-            print(e)
+    with open("leveldata.json", "w") as f:
+        f.write(str(leveldata))
+
+    with open("leveldata.json", "r") as f:
+        data = eval(f.read())
 
 
 @dottie.event
@@ -548,6 +538,16 @@ async def pyramid(ctx):
             await ctx.send(" " * (size-i-1) + " 🟧" * (i+1))
 
 
+@dottie.command(input=None)
+async def rate(ctx, *, input):
+    random.seed(input)
+    rate = random.randint(1, 10)
+    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed.description = f"**{input}**, hmm? I rate that a **{rate}/10!** " + random.choice(["✨", "🤍", "😏", "😊"])
+    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Rate requested by {ctx.author.display_name}")
+    await ctx.send(embed=embed)
+
+
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
 async def connect(ctx):
     try:
@@ -556,7 +556,6 @@ async def connect(ctx):
         await ctx.send("```ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]```")
     except:
         await ctx.send("Hey, I can't find you! You need to be in a voice channel first!")
-
 
 
 @dottie.command(aliases=["go_naughty_step", "leave"], pass_context=True)
