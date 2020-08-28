@@ -390,7 +390,7 @@ async def profile(ctx, *, member: discord.Member = None):
     embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.set_author(name=f"Snap! Let's see your info, {member.name}! 👀")
     embed.set_thumbnail(url=member.avatar_url)
-    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Command run by {ctx.author}")
+    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Command run by {ctx.author.display_name}")
 
     embed.description = "```ini\n🤍 Here they like to call you [" + member.display_name + "], what a nice nickname! 🤍```"
 
