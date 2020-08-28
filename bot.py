@@ -79,8 +79,7 @@ def wrap_future(fut, loop=None):
     return new_fut
 
 
-create_future = lambda func, * \
-    args, loop=None, **kwargs: wrap_future(athreads.submit(func, *args, **kwargs), loop=loop)
+create_future = lambda func, * args, loop=None, **kwargs: wrap_future(athreads.submit(func, *args, **kwargs), loop=loop)
 
 
 def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
@@ -203,12 +202,12 @@ async def serverstats_update():
 dottie.loop.create_task(serverstats_update())
 
 
-async def leveldata_update(member, guild):
-    with open("leveldata.json", "w") as f:
-        f.write(str(leveldata))
+# async def leveldata_update(member, guild):
+#     with open("leveldata.json", "w") as f:
+#         f.write(str(leveldata))
 
-    with open("leveldata.json", "r") as f:
-        data = eval(f.read())
+#     with open("leveldata.json", "r") as f:
+#         data = eval(f.read())
 
 
 @dottie.event
@@ -393,8 +392,7 @@ async def profile(ctx, *, member: discord.Member = None):
     embed.set_thumbnail(url=member.avatar_url)
     embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Command run by {ctx.author}")
 
-    embed.description = "```ini\n🤍 Here they like to call you [" + \
-        member.display_name + "], what a nice nickname! 🤍```"
+    embed.description = "```ini\n🤍 Here they like to call you [" + member.display_name + "], what a nice nickname! 🤍```"
 
     embed.add_field(name="Too lazy for developer mode? Here's the ID:", value=str(member.id) + " ✌️")
     embed.add_field(name="You fell into Discord addiction on:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
@@ -542,9 +540,9 @@ async def pyramid(ctx):
 async def rate(ctx, *, input):
     random.seed(input)
     rate = random.randint(1, 10)
-    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.description = f"**{input}**, hmm? I rate that a **{rate}/10!** " + random.choice(["✨", "🤍", "😏", "😊"])
-    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Rate requested by {ctx.author.display_name}")
+    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"{ctx.author.display_name}")
     await ctx.send(embed=embed)
 
 
