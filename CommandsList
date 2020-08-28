@@ -70,6 +70,9 @@ will still pick up on this, however. Note that images cannot be sent through the
 Dottie will ask you how tall her pyramid will be, and stack orange blocks accordingly. You can supply her any number ranging from 1-25, and will
 refuse anything higher or lower.
 
+- rate
+Dottie will take your input (from a sentence to a mentioned user) and give it a random, fixed rating.
+
 
 
 _VOICE_

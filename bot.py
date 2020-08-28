@@ -342,7 +342,7 @@ async def help(ctx):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-``` ```\n
+***rate***\n*```Give me anything and I'll give it a rating!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ``` ```\n
 """
