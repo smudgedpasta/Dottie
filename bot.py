@@ -279,11 +279,14 @@ def ignore_case(s):
 @dottie.command()
 @has_permissions(administrator=True)
 async def purge(ctx, amount=1):
-    if amount > 0:
+    if amount == 1:
         await ctx.channel.purge(limit=amount+1)
-        await ctx.send(f"Swept away {amount} messages! :broom:")
-    if amount < 1:
-        await ctx.send(f"How am I meant to purge {amount} messages, silly?".format(amount))
+        await ctx.send(f":broom: swept away **1** message!")
+    elif amount > 0:
+        await ctx.channel.purge(limit=amount+1)
+        await ctx.send(f":broom: Swept away **{amount}** messages!")
+    elif amount < 1:
+        await ctx.send(f"How am I meant to purge **{amount}** messages, silly?".format(amount))
 
 
 @dottie.command(pass_context=True)
