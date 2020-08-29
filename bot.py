@@ -193,6 +193,10 @@ async def serverstats_update():
         try:
             with open("serverstats", "a") as f:
                 f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT | Messages sent within 60m interval: {messages}\n\n".format())
+                globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
+                globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
+                globals()["eloop"] = asyncio.get_event_loop()
+                print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
             messages = 0
             await asyncio.sleep(3600)
         except Exception as e:
