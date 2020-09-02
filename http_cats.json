@@ -1,0 +1,121 @@
+[
+    {
+        "name" : "100",
+        "img" : "https://http.cat/100",
+        "author" : "https://http.cat/",
+        "description" : "Ah, you want to **100 continue**?"
+    },
+    {
+        "img" : "https://http.cat/101",
+        "author" : "https://http.cat/",
+        "description" : "Oi, haven't you heard? We're **101 switching protocols**! Get with the server, dummy."
+    },
+    {
+        "name" : "200",
+        "img" : "https://http.cat/200",
+        "author" : "https://http.cat/",
+        "description" : "*Saitama's voice echoes in the distance...* **200 OK**."
+    },
+    {
+        "name" : "201",
+        "img" : "https://http.cat/201",
+        "author" : "https://http.cat/",
+        "description" : "Ah yes, this fine result has been **201 created**!"
+    },
+    {
+        "name" : "202",
+        "img" : "https://http.cat/202",
+        "author" : "https://http.cat/",
+        "description" : "Your request for this command? **202 accepted**! But bare with me now I gotta process- Oh wait."
+    },
+    {
+        "name" : "204",
+        "img" : "https://http.cat/204",
+        "author" : "https://http.cat/",
+        "description" : "Would you look at that, the command was fulfilled successfully but sorry! **204 no content** to be found here folks."
+    },
+    {
+        "name" : "206",
+        "img" : "https://http.cat/206",
+        "author" : "https://http.cat/",
+        "description" : "Ah, see I have the data for this here command, so at least that's **206 partial content**..."
+    },
+    {
+        "name" : "207",
+        "img" : "https://http.cat/207",
+        "author" : "https://http.cat/",
+        "description" : "Oh blimey, I have **207 multi-statuses**, how much are ya' try'na do here?!"
+    },
+    {
+        "name" : "300",
+        "img" : "https://http.cat/300",
+        "author" : "https://http.cat/",
+        "description" : "Looks like you got **300 multiple choices**, you should chill out like a cat!"
+    },
+    {
+        "name" : "301",
+        "img" : "https://http.cat/301",
+        "author" : "https://http.cat/",
+        "description" : "Whoops, sorry, looks like we've **301 moved permanently** from Discord to Trillian!"
+    },
+    {
+        "name" : "302",
+        "img" : "https://http.cat/302",
+        "author" : "https://http.cat/",
+        "description" : "Have you **302 found** this response? Perhaps we've moved."
+    },
+    {
+        "name" : "303",
+        "img" : "https://http.cat/303",
+        "author" : "https://http.cat/",
+        "description" : "I think you was meant to **303 see other** cat images here!"
+    },
+    {
+        "name" : "304",
+        "img" : "https://http.cat/304",
+        "author" : "https://http.cat/",
+        "description" : "Hey, hey, no need to retransit this response, it is **304 not modified**!"
+    },
+    {
+        "name" : "305",
+        "img" : "https://http.cat/305",
+        "author" : "https://http.cat/",
+        "description" : "This ain't available here, you gotta' **305 use proxy**!"
+    },
+    {
+        "name" : "307",
+        "img" : "https://http.cat/307",
+        "author" : "https://http.cat/",
+        "description" : "Sorry, we've **307 temporarily moved** over to Trillian, because @everyone knows its better than Discord!"
+    },
+    {
+        "name" : "400",
+        "img" : "https://http.cat/400",
+        "author" : "https://http.cat/",
+        "description" : "Bad! How could you possibly **400 bad request** this command!"
+    },
+    {
+        "name" : "401",
+        "img" : "https://http.cat/401",
+        "author" : "https://http.cat/",
+        "description" : "Look at you, try'na use this command with **401 unautharized** access. Tsk!"
+    },
+    {
+        "name" : "402",
+        "img" : "https://http.cat/402",
+        "author" : "https://http.cat/",
+        "description" : "Its over fella's, this command is now **402 payment required**, hand over all your Pokédollars!"
+    },
+    {
+        "name" : "403",
+        "img" : "https://http.cat/403",
+        "author" : "https://http.cat/",
+        "description" : "Nope! This result is **403 forbidden**!"
+    },
+    {
+        "name" : "404",
+        "img" : "https://http.cat/404",
+        "author" : "https://http.cat/",
+        "description" : 
+    }
+]
