@@ -1,156 +1,206 @@
 [
     {
         "name" : "100",
-        "img" : "https://http.cat/100",
+        "image" : "https://http.cat/100",
         "description" : "```css\nAh, you want to [100 continue]?```"
     },
     {
-        "img" : "https://http.cat/101",
+        "image" : "https://http.cat/101",
         "description" : "```css\nOi, haven't you heard? We're [101 switching protocols]! Get with the server, dummy.```"
     },
     {
         "name" : "200",
-        "img" : "https://http.cat/200",
+        "image" : "https://http.cat/200",
         "description" : "```css\nSaitama's voice echoes in the distance... This command is [200 OK].```"
     },
     {
         "name" : "201",
-        "img" : "https://http.cat/201",
+        "image" : "https://http.cat/201",
         "description" : "```css\nAh yes, this fine result has been [201 created]!```"
     },
     {
         "name" : "202",
-        "img" : "https://http.cat/202",
+        "image" : "https://http.cat/202",
         "description" : "```css\nYour request for this command? [202 accepted]! But bare with me now I gotta process- Oh wait.```"
     },
     {
         "name" : "204",
-        "img" : "https://http.cat/204",
+        "image" : "https://http.cat/204",
         "description" : "```css\nWould you look at that, the command was fulfilled successfully but sorry! [204 no content] to be found here folks.```"
     },
     {
         "name" : "206",
-        "img" : "https://http.cat/206",
+        "image" : "https://http.cat/206",
         "description" : "```css\nAh, see I have the data for this here command, so at least that's [206 partial content]...```"
     },
     {
         "name" : "207",
-        "img" : "https://http.cat/207",
+        "image" : "https://http.cat/207",
         "description" : "```css\nOh blimey, I have [207 multi-statuses], how much are ya' try'na do here?!```"
     },
     {
         "name" : "300",
-        "img" : "https://http.cat/300",
+        "image" : "https://http.cat/300",
         "description" : "```css\nLooks like you got **300 multiple choices**, you should chill out like a cat!```"
     },
     {
         "name" : "301",
-        "img" : "https://http.cat/301",
+        "image" : "https://http.cat/301",
         "description" : "```css\nWhoops, sorry, looks like we've [301 moved permanently] from Discord to Trillian!```"
     },
     {
         "name" : "302",
-        "img" : "https://http.cat/302",
+        "image" : "https://http.cat/302",
         "description" : "```css\nHave you [302 found] this response? Perhaps we've moved.```"
     },
     {
         "name" : "303",
-        "img" : "https://http.cat/303",
+        "image" : "https://http.cat/303",
         "description" : "```css\nI think you was meant to [303 see other] cat images here!```"
     },
     {
         "name" : "304",
-        "img" : "https://http.cat/304",
+        "image" : "https://http.cat/304",
         "description" : "```css\nHey, hey, no need to retransit this response, it is [304 not modified]!```"
     },
     {
         "name" : "305",
-        "img" : "https://http.cat/305",
+        "image" : "https://http.cat/305",
         "description" : "```css\nThis ain't available here, you gotta' [305 use proxy]!```"
     },
     {
         "name" : "307",
-        "img" : "https://http.cat/307",
+        "image" : "https://http.cat/307",
         "description" : "```css\nSorry, we've [307 temporarily moved] over to Trillian, because @everyone knows its better than Discord!```"
     },
     {
         "name" : "400",
-        "img" : "https://http.cat/400",
+        "image" : "https://http.cat/400",
         "description" : "```css\nBad! How could you possibly [400 bad request] this command?!```"
     },
     {
         "name" : "401",
-        "img" : "https://http.cat/401",
+        "image" : "https://http.cat/401",
         "description" : "```css\nLook at you, try'na use this command with [401 unautharized] access. Tsk!```"
     },
     {
         "name" : "402",
-        "img" : "https://http.cat/402",
+        "image" : "https://http.cat/402",
         "description" : "```css\nIts over fella's, this command is now [402 payment required], hand over all your Pokédollars!```"
     },
     {
         "name" : "403",
-        "img" : "https://http.cat/403",
+        "image" : "https://http.cat/403",
         "description" : "```css\nNope! This result is [403 forbidden]!```"
     },
     {
         "name" : "404",
-        "img" : "https://http.cat/404",
+        "image" : "https://http.cat/404",
         "description" : "```css\n[404 not found], move along folks, nothing to see here.```"
     },
     {
         "name" : "405",
-        "img" : "https://http.cat/405",
+        "image" : "https://http.cat/405",
         "description" : "```css\nOkay, what are you trying to do here? Clearly that is [405 method not allowed]!```"
     },
     {
         "name" : "406",
-        "img" : "https://http.cat/406",
+        "image" : "https://http.cat/406",
         "description" : "```css\nClearly that is [406 no acceptable] here, what are you try'na do by running this command-```"
     },
     {
         "name" : "408",
-        "img" : "https://http.cat/408",
+        "image" : "https://http.cat/408",
         "description" : "```css\nYou're exhausting me here, I need a [408 request timeout]...```"
     },
     {
         "name" : "409",
-        "img" : "https://http.cat/409",
+        "image" : "https://http.cat/409",
         "description" : "```css\nWhy you try'na cause [409 conflict] up in here, this command isn't what we expected from you!```"
     },
     {
         "name" : "410",
-        "img" : "https://http.cat/410",
+        "image" : "https://http.cat/410",
         "description" : "```css\n[410 gone]. Just gone.```"
     },
     {
         "name" : "411",
-        "img" : "https://http.cat/411",
+        "image" : "https://http.cat/411",
         "description" : "```css\nAh, [411 length requires], almost reminds me of a familar... \"Hm? Is tHeRe sOmEtHiNg yOu'd lIkE To sAy, Or aM I MeAnT To iNtErPrEt sPaCe? SpEaK Up, I DoN'T BiTe!\"```"
     },
     {
         "name" : "412",
-        "img" : "https://http.cat/412",
+        "image" : "https://http.cat/412",
         "description" : "```css\nError[412 precondition failed], we deny your resources for a response!```"
     },
     {
         "name" : "413",
-        "img" : "https://http.cat/413",
+        "image" : "https://http.cat/413",
         "description" : "```css\nAh sorry, you was expecting a response but [413 request entity too large], you'll have to try later.```"
     },
     {
         "name" : "414",
-        "img" : "https://http.cat/414",
+        "image" : "https://http.cat/414",
         "description" : "```css\nOkay, out of all the commads you could'a run, you chose to go for the one that's [414 request-URL too long]!```"
     },
     {
         "name" : "415",
-        "img" : "https://http.cat/415",
+        "image" : "https://http.cat/415",
         "description" : "```css\nYou expected an image? That as a [415 unsupported image type], here we only do cats!```"
     },
     {
         "name" : "416",
-        "img" : "https://http.cat/416",
-        "description" : 
+        "image" : "https://http.cat/416",
+        "description" : "```css\nYou really do confuse me, y'know? This is [416 range not satisfiable], this command just doesn't make sense!```"
+    },
+    {
+        "name" : "417",
+        "image" : "https://http.cat/417",
+        "description" : "```css\nDottie.exe has left the chat, much like her creator's internet connection on a regular basis...```"
+    },
+    {
+        "name" : "418",
+        "image" : "https://http.cat/418",
+        "description" : "```☕```"
+    },
+    {
+        "name" : "420",
+        "image" : "https://http.cat/420",
+        "description" : "```css\nTwitter says you've got to [enhance your calm] and relax with these commands! 🕊️```"
+    },
+    {
+        "name" : "421",
+        "image" : "https://http.cat/421",
+        "description" : "```css\nI literally have no response to give you, was using this command a [421 misdirected request]?```"
+    },
+    {
+        "name" : "422",
+        "image" : "https://http.cat/422",
+        "description" : "```css\nOkay, I understand what you're saying with this command, but I'm afraid my response is a [422 unprocessable entity].```"
+    },
+    {
+        "name" : "423",
+        "image" : "https://http.cat/423",
+        "description" : "```css\nAy, you're [423 locked] from using this command, get out'a here!```"
+    },
+    {
+        "name" : "424",
+        "image" : "https://http.cat/424",
+        "description" : "```css\nThe last command you've run has failed you, because now we're at a [424 failed dependancy].```"
+    },
+    {
+        "name" : "425",
+        "image" : "https://http.cat/425",
+        "description" : "```css\nHey hey, it's [425 too early] for this command, now look at this [425 unordered collection] you've made!```"
+    },
+    {
+        "name" : "426",
+        "image" : "https://http.cat/426",
+        "description" : "```css\nYou poor outdated soul, it looks like a [426 upgrade required]. Why not take a look-see if Discord needs updating?```"
+    },
+    {
+        "name" : "429",
+        "image" : "https://http.cat/429",
+        "description" : "```css\nOh gosh this command contains [429 too many requests], chill out with the variables, will ya'?```"
     }
 ]
