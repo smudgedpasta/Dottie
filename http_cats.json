@@ -202,5 +202,90 @@
         "name" : "429",
         "image" : "https://http.cat/429",
         "description" : "```css\nOh gosh this command contains [429 too many requests], chill out with the variables, will ya'?```"
+    },
+    {
+        "name" : "431",
+        "image" : "https://http.cat/431",
+        "description" : "```css\nTalk about being big-headed, the [431 request header fields too large] in this command!```"
+    },
+    {
+        "name" : "444",
+        "image" : "https://http.cat/444",
+        "description" : "```css\nHmm, looks like your [404 connection closed without response], you'll get a [444 no response] out of that!```"
+    },
+    {
+        "name" : "450",
+        "image" : "https://http.cat/450",
+        "description" : "```css\nJust what do you think you're doing?! This command is [450 blocked by Windows parental controls]! You're grounded!```"
+    },
+    {
+        "name" : "451",
+        "image" : "https://http.cat/451",
+        "description" : "```css\nWhat are you hoping for from running this command, an anime piracy website? W-Well your access is [451 unavailable for legal reasons]!```"
+    },
+    {
+        "name" : "499",
+        "image" : "https://http.cat/499",
+        "description" : "```css\nOh client, have you forgotten already? [499 client closed request], you closed the request for this respose already!```"
+    },
+    {
+        "name" : "500",
+        "image" : "https://http.cat/500",
+        "description" : "```css\nWhoops, sorry! Your command didn't go through as there was a [500 internal server error], you can blame my creator for this.```"
+    },
+    {
+        "name" : "501",
+        "image" : "https://http.cat/501",
+        "description" : "```css\nYou're a bit ahead of your game! This command is [501 not implemented] yet!```"
+    },
+    {
+        "name" : "502",
+        "image" : "https://http.cat/502",
+        "description" : "```css\nOkay, why are you trying to reach the response to this command like this? [502 bad gateway]!```"
+    },
+    {
+        "name" : "503",
+        "image" : "https://http.cat/503",
+        "description" : "```css\nSorry, [503 service unavailable], I'm not quite ready to handle this command yet!```"
+    },
+    {
+        "name" : "504",
+        "image" : "https://http.cat/504",
+        "description" : "```css\nYeah this command couldn't reach a response in time, still a bit buggy, we've landed with a [504 gateway timeout].```"
+    },
+    {
+        "name" : "506",
+        "image" : "https://http.cat/506",
+        "description" : "```css\nWe only want you to have the best variant of all we have to offer, so therefore you can get a [506 variant also negotiates]!```"
+    },
+    {
+        "name" : "507",
+        "image" : "https://http.cat/507",
+        "description" : "```css\nWelp, looks like you have [507 insufficient storage] to get a response from us! Maybe free up some space first?```"
+    },
+    {
+        "name" : "508",
+        "image" : "https://http.cat/508",
+        "description" : "```css\nWhat are you trying to do, run a while loop without any break? There's a [508 loop detected]!```"
+    },
+    {
+        "name" : "509",
+        "image" : "https://http.cat/509",
+        "description" : "```css\nThink you might need to check how far away from your WiFi router you are before trying to run this command!```"
+    },
+    {
+        "name" : "510",
+        "image" : "https://http.cat/510",
+        "description" : "```css\nHmm, are you trying to describe some sort of an extension with this command? Sorry, but that's a [510 not extended], we don't quite support that!```"
+    },
+    {
+        "name" : "511",
+        "image" : "https://http.cat/511",
+        "description" : "```css\nHold it! You can't just run this command all willy-nilly, [511 network authentication required] first!```"
+    },
+    {
+        "name" : "599",
+        "image" : "https://http.cat/599",
+        "description" : "```css\nOh crud, the WiFi died, now we're faced with a [599 network connection timeout error]! \"OsErRoR: [WiNeRrOr 121] ThE SeMaPhOrE TiMeOuT PeRiOd hAs eXpIrEd.\"```"
     }
-]
+] 
