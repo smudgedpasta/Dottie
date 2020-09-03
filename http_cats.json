@@ -41,7 +41,7 @@
     {
         "name" : "300",
         "image" : "https://http.cat/300",
-        "description" : "```css\nLooks like you got **300 multiple choices**, you should chill out like a cat!```"
+        "description" : "```css\nLooks like you got [300 multiple choices], you should chill out like a cat!```"
     },
     {
         "name" : "301",
@@ -81,7 +81,7 @@
     {
         "name" : "401",
         "image" : "https://http.cat/401",
-        "description" : "```css\nLook at you, try'na use this command with [401 unautharized] access. Tsk!```"
+        "description" : "```css\nLook at you, try'na use this command with [401 unauthorized] access. Tsk!```"
     },
     {
         "name" : "402",
