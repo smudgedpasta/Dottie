@@ -469,6 +469,10 @@ async def AskDottie(ctx, *, question):
         await ctx.send(f"||So you asked... {question[2:-2]}? {random.choice(responses)}||")
     elif question.startswith("__") or question.endswith("__"):
         await ctx.send(f"__So you asked... {question[2:-2]}? {random.choice(responses)}__")
+    elif question.startswith("`") or question.endswith("`"):
+        await ctx.send(f"`So you asked... {question[1:-1]}? {random.choice(responses)}`")
+    elif question.startswith("```") or question.endswith("```"):
+        await ctx.send(f"```So you asked... {question[3:-3]}? {random.choice(responses)}```")
     else:
         await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
 
