@@ -449,12 +449,28 @@ async def AskDottie(ctx, *, question):
     ]
 
     question = question.strip("?")
+
     question = question.replace("you", "I")
     question = question.replace("your", "my")
     question = question.replace("are", "am")
     question = question.replace("yourself", "myself")
-    
-    await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+    question = question.replace("I", "you")
+    question = question.replace("am", "are")
+
+    if question.startswith("~~") or question.endswith("~~"):
+        await ctx.send(f"~~So you asked... {question[2:-2]}? {random.choice(responses)}~~")
+    elif question.startswith("*") or question.endswith("*"):
+        await ctx.send(f"*So you asked... {question[2:-2]}? {random.choice(responses)}*")
+    elif question.startswith("**") or question.endswith("**"):
+        await ctx.send(f"**So you asked... {question[2:-2]}? {random.choice(responses)}**")
+    elif question.startswith("***") or question.endswith("***"):
+        await ctx.send(f"***So you asked... {question[2:-2]}? {random.choice(responses)}***")
+    elif question.startswith("||") or question.endswith("||"):
+        await ctx.send(f"||So you asked... {question[2:-2]}? {random.choice(responses)}||")
+    elif question.startswith("__") or question.endswith("__"):
+        await ctx.send(f"__So you asked... {question[2:-2]}? {random.choice(responses)}__")
+    else:
+        await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
 
 
 @dottie.command(aliases=["dab"])
