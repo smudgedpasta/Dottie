@@ -131,7 +131,7 @@
     {
         "name" : "412",
         "image" : "https://http.cat/412",
-        "description" : "```css\nError[412 precondition failed], we deny your resources for a response!```"
+        "description" : "```css\nError [412 precondition failed], we deny your resources for a response!```"
     },
     {
         "name" : "413",
