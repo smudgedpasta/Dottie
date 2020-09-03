@@ -667,4 +667,9 @@ async def shutdown(ctx):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
+@dottie.command()
+async def test(ctx, pass_context=True):
+    await ctx.send("<:plus:688316007093370910>")
+
+
 dottie.run(discord_token)
