@@ -447,7 +447,13 @@ async def AskDottie(ctx, *, question):
         "Ay, ask me later, I'm busy with my 10 hour tunez! :headphones:",
         "Today's AskDottie is sponsored by **Raid Shadow Legends**, one of the BIGGEST mobile role-playing games of 2019 and it's totally free!\n\n*Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the non-existent description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey!*\n\nGood luck and I'll see you there!"
     ]
+
     question = question.strip("?")
+    question = question.replace("you", "I")
+    question = question.replace("your", "my")
+    question = question.replace("are", "am")
+    question = question.replace("yourself", "myself")
+    
     await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
 
 
