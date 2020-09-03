@@ -628,4 +628,18 @@ async def shutdown(ctx):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
+@dottie.command(aliases=["http_cats", "http"])
+async def cats(ctx):
+    http_cats = None
+    with open("http_cats.json", "r", encoding="utf-8") as f:
+        http_cats = json.load(f)
+        cat_response = random.choice(http_cats)
+        embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
+        embed = discord.Embed(colour=discord.Colour(embed_colours))
+        embed.set_author(name="https://http.cat/", url="https://http.cat/", icon_url=ctx.author.avatar_url_as(format="png", size=4096))
+        embed.description = cat_response["description"]
+        embed.set_image(url=cat_response["image"])
+        await ctx.send(embed=embed)
+
+
 dottie.run(discord_token)
