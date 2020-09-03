@@ -350,7 +350,7 @@ async def help(ctx):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***rate***\n*```Give me anything and I'll give it a rating!```*\n
+***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a random http status code with a funny cat picture and caption!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ``` ```\n
 """
@@ -554,6 +554,20 @@ async def rate(ctx, *, input):
     await ctx.send(embed=embed)
 
 
+@dottie.command(aliases=["cats", "http"])
+async def http_cats(ctx):
+    http_cats = None
+    with open("http_cats.json", "r", encoding="utf-8") as f:
+        http_cats = json.load(f)
+        cat_response = random.choice(http_cats)
+        embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
+        embed = discord.Embed(colour=discord.Colour(embed_colours))
+        embed.set_author(name="https://http.cat/", url="https://http.cat/", icon_url=ctx.author.avatar_url_as(format="png", size=4096))
+        embed.description = cat_response["description"]
+        embed.set_image(url=cat_response["image"])
+        await ctx.send(embed=embed)
+
+
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
 async def connect(ctx):
     try:
@@ -626,20 +640,6 @@ async def shutdown(ctx):
 # for filename in os.listdir("./cogs"):
 #     if filename.endswith(".py"):
 #         dottie.load_extension(f"cogs.{filename[:-3]}")
-
-
-@dottie.command(aliases=["http_cats", "http"])
-async def cats(ctx):
-    http_cats = None
-    with open("http_cats.json", "r", encoding="utf-8") as f:
-        http_cats = json.load(f)
-        cat_response = random.choice(http_cats)
-        embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
-        embed = discord.Embed(colour=discord.Colour(embed_colours))
-        embed.set_author(name="https://http.cat/", url="https://http.cat/", icon_url=ctx.author.avatar_url_as(format="png", size=4096))
-        embed.description = cat_response["description"]
-        embed.set_image(url=cat_response["image"])
-        await ctx.send(embed=embed)
 
 
 dottie.run(discord_token)
