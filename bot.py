@@ -329,7 +329,7 @@ async def help(ctx):
     page1.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     page1.description = "*I think I need heeelp, I'm drowning in myseeelf* 🎵"
     page1.set_image(url="https://cdn.discordapp.com/attachments/683233571405561876/746281046231875594/image0.png")
-    page1.set_footer(icon_url=ctx.author.avatar_url, text="Click the reactions to scroll through the pages!")
+    page1.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text="Click the reactions to scroll through the pages!")
 
     page2 = discord.Embed(colour=discord.Colour(15277667))
     page2.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
@@ -399,8 +399,8 @@ async def profile(ctx, *, member: discord.Member = None):
 
     embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.set_author(name=f"Snap! Let's see your info, {member.name}! 👀")
-    embed.set_thumbnail(url=member.avatar_url)
-    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Command run by {ctx.author.display_name}")
+    embed.set_thumbnail(url=member.avatar_url_as(format="png", size=4096))
+    embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Command run by {ctx.author.display_name}")
 
     embed.description = "```ini\n🤍 Here they like to call you [" + member.display_name + "], what a nice nickname! 🤍```"
 
@@ -422,7 +422,7 @@ async def profile(ctx, *, member: discord.Member = None):
 async def avatar(ctx, member: discord.Member = None):
     member = ctx.author if not member else member
     embed = discord.Embed(colour=discord.Colour(15277667))
-    embed.set_image(url=member.avatar_url)
+    embed.set_image(url=member.avatar_url_as(format="png", size=4096))
     embed.set_footer(text=f"{member.name}'s wonderful icon picture! 👍")
     await ctx.send(embed=embed)
 
@@ -575,7 +575,7 @@ async def rate(ctx, *, input):
     rate = random.randint(0, 10)
     embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
     embed.description = f"**{input}**, hmm? I rate that a **{rate}/10**! " + random.choice(["✨", "🤍", "😏", "😊"])
-    embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Requested by {ctx.author.display_name}")
+    embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Requested by {ctx.author.display_name}")
     await ctx.send(embed=embed)
 
 
