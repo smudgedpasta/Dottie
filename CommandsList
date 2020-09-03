@@ -73,6 +73,9 @@ refuse anything higher or lower.
 - rate
 Dottie will take your input (from a sentence to a mentioned user) and give it a random, fixed rating.
 
+- http_cats (aliases: cats, http)
+Sends a random image from the https://http.cat/ website with a custom description.
+
 
 
 _VOICE_
