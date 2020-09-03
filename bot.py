@@ -460,11 +460,11 @@ async def AskDottie(ctx, *, question):
     if question.startswith("~~") or question.endswith("~~"):
         await ctx.send(f"~~So you asked... {question[2:-2]}? {random.choice(responses)}~~")
     elif question.startswith("*") or question.endswith("*"):
-        await ctx.send(f"*So you asked... {question[2:-2]}? {random.choice(responses)}*")
+        await ctx.send(f"*So you asked... {question[1:-1]}? {random.choice(responses)}*")
     elif question.startswith("**") or question.endswith("**"):
         await ctx.send(f"**So you asked... {question[2:-2]}? {random.choice(responses)}**")
     elif question.startswith("***") or question.endswith("***"):
-        await ctx.send(f"***So you asked... {question[2:-2]}? {random.choice(responses)}***")
+        await ctx.send(f"***So you asked... {question[3:-3]}? {random.choice(responses)}***")
     elif question.startswith("||") or question.endswith("||"):
         await ctx.send(f"||So you asked... {question[2:-2]}? {random.choice(responses)}||")
     elif question.startswith("__") or question.endswith("__"):
@@ -665,4 +665,3 @@ async def shutdown(ctx):
 
 
 dottie.run(discord_token)
-
