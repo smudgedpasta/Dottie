@@ -99,7 +99,7 @@ async def forceCoro(obj, *args, **kwargs):
     return obj
 
 
-TERMINALS = [727087981285998593, 740134310044237884]
+TERMINALS = [727087981285998593, 751518107922858075]
 OWNERS = [530781444742578188, 201548633244565504]
 
 
@@ -181,7 +181,7 @@ eloop.create_task(infinite_loop())
 async def on_ready():
     await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
     globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
-    globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
+    globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(751517870009352192)
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Logged in as user {0} (ID = {0.id})]```".format(dottie.user))
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
@@ -195,7 +195,7 @@ async def serverstats_update():
             with open("serverstats", "a") as f:
                 f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT | Messages sent within 60m interval: {messages}\n\n".format())
                 globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
-                globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(739982586054705194)
+                globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(751517870009352192)
                 globals()["eloop"] = asyncio.get_event_loop()
                 print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
             messages = 0
