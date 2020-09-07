@@ -106,7 +106,7 @@
     {
         "name" : "406",
         "image" : "https://http.cat/406",
-        "description" : "```css\nClearly that is [406 no acceptable] here, what are you try'na do by running this command-```"
+        "description" : "```css\nClearly that is [406 not acceptable] here, what are you try'na do by running this command-```"
     },
     {
         "name" : "408",
