@@ -144,9 +144,9 @@ async def on_message(message):
         user = message.author.name
         cmd = message.content
         if message.author.guild is None:
-            print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
+            print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
         else:
-            print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
+            print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
 
     if message.author.guild is None:
         user_dm = message.author.name
@@ -209,7 +209,7 @@ async def serverstats_update():
                 globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
                 globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(751517870009352192)
                 globals()["eloop"] = asyncio.get_event_loop()
-                print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
+                print(f"```" + random.choice(["css", "ini"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
             messages = 0
             await asyncio.sleep(3600)
         except Exception as e:
