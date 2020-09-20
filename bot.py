@@ -514,7 +514,7 @@ async def photo(ctx):
 @dottie.command()
 async def nsfw_photo(ctx):
     NSFW_Image_Pool = None
-    with open("NSFW_Image_Pool.json", "r") as f:
+    with open("bot/NSFW_Image_Pool.json", "r") as f:
         NSFW_Image_Pool = json.load(f)
         random_image = random.choice(NSFW_Image_Pool)
         embed = discord.Embed(colour=discord.Colour(15277667))
@@ -582,7 +582,7 @@ async def rate(ctx, *, input):
 @dottie.command(aliases=["cats", "http"])
 async def http_cats(ctx):
     http_cats = None
-    with open("http_cats.json", "r", encoding="utf-8") as f:
+    with open("bot/http_cats.json", "r", encoding="utf-8") as f:
         http_cats = json.load(f)
         cat_response = random.choice(http_cats)
         embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
