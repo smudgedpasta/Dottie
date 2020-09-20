@@ -142,8 +142,9 @@ async def on_message(message):
 
     if ctx.command is not None:
         user = message.author.name
+        loc = message.author.guild
         cmd = message.content
-        print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n{user} has run the following command: [{cmd}]```")
+        print(f"```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{user}] has run the following command: [{cmd}] in [{loc}]```")
 
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
@@ -238,12 +239,12 @@ async def on_command_error(ctx, error):
 
 @dottie.event
 async def on_member_join(member):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member} has joined the test server.]```")
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member}] has joined [{member.guild}]```")
 
 
 @dottie.event
 async def on_member_remove(member):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member} has left the test server.]```")
+    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member}] has left [{member.guild}]```")
 
 
 @dottie.event
