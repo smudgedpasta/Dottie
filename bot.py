@@ -614,7 +614,7 @@ async def disconnect(ctx):
 async def despacito(ctx):
   for vc in dottie.voice_clients:
     if vc.guild == ctx.guild:
-        vc.play(discord.FFmpegOpusAudio("music/Normal_Despacito.ogg"))
+        vc.play(discord.FFmpegOpusAudio("assets/music/Normal_Despacito.ogg"))
         await ctx.send("***```css\n🥁 Embrace my [DESPACITO!]```***")
         return
   await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one and use `d.connect` first!")
