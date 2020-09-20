@@ -501,7 +501,7 @@ async def faker(ctx):
 @dottie.command()
 async def photo(ctx):
     Image_Pool = None
-    with open("Image_Pool.json", "r") as f:
+    with open("bot/Image_Pool.json", "r") as f:
         Image_Pool = json.load(f)
         random_image = random.choice(Image_Pool)
         embed = discord.Embed(colour=discord.Colour(15277667))
