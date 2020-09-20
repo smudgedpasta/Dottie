@@ -16,7 +16,7 @@ from discord.ext.commands import Bot, has_permissions, CheckFailure
 import json
 
 discord_token = None
-with open("./config.json", "r") as f:
+with open("config.json", "r") as f:
     data = json.load(f)
     discord_token = data["token"]
 
@@ -208,10 +208,10 @@ dottie.loop.create_task(serverstats_update())
 
 
 # async def leveldata_update(member, guild):
-#     with open("leveldata.json", "w") as f:
+#     with open("bot/leveldata.json", "w") as f:
 #         f.write(str(leveldata))
 
-#     with open("leveldata.json", "r") as f:
+#     with open("bot/leveldata.json", "r") as f:
 #         data = eval(f.read())
 
 
