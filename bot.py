@@ -54,6 +54,9 @@ eloop = asyncio.get_event_loop()
 def __setloop__(): return asyncio.set_event_loop(eloop)
 
 
+dottie.eloop = eloop
+
+
 athreads = concurrent.futures.ThreadPoolExecutor(
     max_workers=16,
     initializer=__setloop__,)
