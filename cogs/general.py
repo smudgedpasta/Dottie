@@ -3,6 +3,8 @@ from discord.ext import tasks, commands
 import psutil
 import asyncio
 
+TaskManager2 = psutil.Process()
+
 
 class GENERAL(commands.Cog):
     def __init__(self, dottie):
@@ -71,7 +73,6 @@ class GENERAL(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx):
-        TaskManager2 = psutil.Process()
         await ctx.send(f"""*```css\n{{Ping! I pong back all this nice techy info. 🍺}}\n 
 Current CPU usage is: [{TaskManager2.cpu_percent() / psutil.cpu_count()}%]
 Current memory usage is: [{round(TaskManager2.memory_percent(), 2)}%]

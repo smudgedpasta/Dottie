@@ -1,19 +1,54 @@
-import concurrent.futures
-import inspect
-import time
-import datetime
-import random
-import requests
-import asyncio
-import os
-import psutil
-import traceback
+import contextlib, concurrent.futures
+
+# A context manager that enables concurrent imports.
+class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
+
+    def __init__(self, glob=None):
+        self.glob = glob
+        self.exc = concurrent.futures.ThreadPoolExecutor(max_workers=12)
+        self.out = {}
+
+    def __enter__(self):
+        return self
+
+    def __import__(self, *modules):
+        for module in modules:
+            self.out[module] = self.exc.submit(__import__, module)
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+        if exc_type and exc_value:
+            raise exc_value
+    
+    def close(self):
+        for k in tuple(self.out):
+            self.out[k] = self.out[k].result()
+        glob = self.glob if self.glob is not None else globals()
+        glob.update(self.out)
+        self.exc.shutdown(True)
+
+with MultiThreadedImporter() as importer:
+    importer.__import__(
+        "inspect",
+        "time",
+        "datetime",
+        "random",
+        "requests",
+        "asyncio",
+        "os",
+        "psutil",
+        "traceback",
+        "math",
+        "youtube_dl",
+        "discord",
+        "discord.ext", 
+        "json",
+    )
+
 from math import *
-import youtube_dl
-import discord
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
-import json
+
 
 discord_token = None
 with open("config.json", "r") as f:
@@ -24,13 +59,10 @@ with open("config.json", "r") as f:
 dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
 
 
+OWNERS = [530781444742578188, 201548633244565504]
+
 def is_owner(ctx):
-  return ctx.message.author.id in [530781444742578188, 201548633244565504]
-
-
-def print(*args, sep=" ", end="\n"):
-    eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
-    eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i) for i in args) + end))
+  return ctx.message.author.id in OWNERS
 
 
 messages = 0
@@ -53,6 +85,9 @@ def input(*args, **kwargs):
 eloop = asyncio.get_event_loop()
 def __setloop__(): return asyncio.set_event_loop(eloop)
 
+def print(*args, sep=" ", end="\n"):
+    eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
+    eloop.create_task(LOG_CHANNEL_2.send(str(sep).join(str(i) for i in args) + end))
 
 dottie.eloop = eloop
 
@@ -62,6 +97,11 @@ athreads = concurrent.futures.ThreadPoolExecutor(
     initializer=__setloop__,)
 __setloop__()
 
+
+def get_event_loop():
+    with suppress(RuntimeError):
+        return asyncio.get_event_loop()
+    return eloop
 
 def wrap_future(fut, loop=None):
     if loop is None:
@@ -83,27 +123,49 @@ def wrap_future(fut, loop=None):
     return new_fut
 
 
-create_future = lambda func, * args, loop=None, **kwargs: wrap_future(athreads.submit(func, *args, **kwargs), loop=loop)
-
-
 def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
 
 
-async def forceCoro(obj, *args, **kwargs):
+# Runs a function call in a parallel thread, returning a future object waiting on the output.
+def create_future_ex(func, *args, timeout=None, **kwargs):
+    fut = athreads.submit(func, *args, **kwargs)
+    if timeout is not None:
+        fut = athreads.submit(fut.result, timeout=timeout)
+    return fut
+
+# Forces the operation to be a coroutine regardless of whether it is or not. Regular functions are executed in the thread pool.
+async def _create_future(obj, *args, loop, timeout, **kwargs):
     if asyncio.iscoroutinefunction(obj):
         obj = obj(*args, **kwargs)
     elif callable(obj):
-        if asyncio.iscoroutinefunction(obj.__call__):
+        if asyncio.iscoroutinefunction(obj.__call__) or not is_main_thread():
             obj = obj.__call__(*args, **kwargs)
         else:
-            obj = await create_future(obj, *args, **kwargs)
+            obj = await wrap_future(create_future_ex(obj, *args, timeout=timeout, **kwargs), loop=loop)
     while awaitable(obj):
-        obj = await obj
+        if timeout is not None:
+            obj = await asyncio.wait_for(obj, timeout=timeout)
+        else:
+            obj = await obj
     return obj
+
+# High level future asyncio creation function that takes both sync and async functions, as well as coroutines directly.
+def create_future(obj, *args, loop=None, timeout=None, priority=False, **kwargs):
+    if loop is None:
+        loop = get_event_loop()
+    fut = _create_future(obj, *args, loop=loop, timeout=timeout, priority=priority, **kwargs)
+    return create_task(fut, loop=loop)
+
+# Creates an asyncio Task object from an awaitable object.
+def create_task(fut, *args, loop=None, **kwargs):
+    if loop is None:
+        loop = get_event_loop()
+    return asyncio.ensure_future(fut, *args, loop=loop, **kwargs)
+
+is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 
 TERMINALS = [727087981285998593, 751518107922858075]
-OWNERS = [530781444742578188, 201548633244565504]
 
 
 GLOBALS = globals()
@@ -114,11 +176,27 @@ async def procFunc(proc, channel):
     if "\n" not in proc:
         if proc.startswith("await "):
             proc = proc[6:]
+    code = None
     try:
         code = await create_future(compile, proc, "<terminal>", "eval", optimize=2)
     except SyntaxError:
-        code = await create_future(compile, proc, "<terminal>", "exec", optimize=2)
-    output = await forceCoro(eval, code, glob)
+        pass
+    if code is None:
+        try:
+            code = await create_future(compile, proc, "<terminal>", "exec", optimize=2)
+        except SyntaxError:
+            pass
+    if code is None:
+        _ = glob.get("_")
+        func = "async def _():\n\tlocals().update(globals())\n"
+        func += "\n".join("\t" + line for line in proc.split("\n"))
+        func += "\n\tglobals().update(locals())"
+        code2 = await create_future(compile, func, "<terminal>", "exec", optimize=2, priority=True)
+        await create_future(eval, code2, glob, priority=True)
+        output = await glob["_"]()
+        glob["_"] = _
+    if code is not None:
+        output = await create_future(eval, code, glob)
     if output is not None:
         glob["_"] = output
     return output
@@ -199,8 +277,8 @@ eloop.create_task(infinite_loop())
 @dottie.event
 async def on_ready():
     await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
-    globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
-    globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(751517870009352192)
+    globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
+    globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
     globals()["eloop"] = asyncio.get_event_loop()
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Logged in as user {0} (ID = {0.id})]```".format(dottie.user))
     print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
@@ -213,15 +291,14 @@ async def serverstats_update():
         try:
             with open("serverstats", "a") as f:
                 f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT | Messages sent within 60m interval: {messages}\n\n".format())
-                globals()["LOG_CHANNEL"] = await dottie.fetch_channel(738320254375165962)
-                globals()["LOG_CHANNEL_2"] = await dottie.fetch_channel(751517870009352192)
+                globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
+                globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
                 globals()["eloop"] = asyncio.get_event_loop()
                 print(f"```" + random.choice(["css", "ini"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
             messages = 0
-            await asyncio.sleep(3600)
         except Exception as e:
             print(e)
-            await asyncio.sleep(3600)
+        await asyncio.sleep(3600)
 
 dottie.loop.create_task(serverstats_update())
 
