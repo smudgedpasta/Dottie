@@ -143,19 +143,19 @@ async def on_message(message):
     if ctx.command is not None:
         user = message.author.name
         cmd = message.content
-        if message.author.guild is None:
+        if getattr(message.author, "guild", None) is None:
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
         else:
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
 
-    if message.author.guild is None:
+    if getattr(message.author, "guild", None) is None:
         user_dm = message.author.name
         embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
         embed.set_author(name=f"Incoming DM from {user_dm}!")
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
         embed.description = f"{message.content}"
-        await ctx.send(await dottie.fetch_channel(738320254375165962), embed=embed)
-        await ctx.send(await dottie.fetch_channel(738320254375165962), embed=embed)
+        await dottie.get_channel(738320254375165962).send(embed=embed)
+        await dottie.get_channel(751517870009352192).send(embed=embed)
 
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
