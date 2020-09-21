@@ -443,9 +443,9 @@ async def avatar(ctx, member: discord.Member = None):
     await ctx.send(embed=embed)
 
 
-@dottie.command(aliases=["hi", "HI", "Hi", "hI", "hemlo", "henlo", "hoi"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
-async def hello(ctx):
-    await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
+# @dottie.command(aliases=["hi", "HI", "Hi", "hI", "hemlo", "henlo", "hoi"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
+# async def hello(ctx):
+#     await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
 
 
 @dottie.command(aliases=["8ball", "ask"], question=None)
@@ -678,9 +678,9 @@ async def shutdown(ctx):
 # 🔻 UNFINISHED COMMANDS/EVENTS 🔻
 
 
-# for filename in os.listdir("./cogs"):
-#     if filename.endswith(".py"):
-#         dottie.load_extension(f"cogs.{filename[:-3]}")
+for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
 # @dottie.command()
