@@ -111,15 +111,13 @@ class FUN(commands.Cog):
                 await ctx.send("Woah, be careful, this command pulls graphic imagery! Try again in an **nsfw channel**!")
 
 
-    # NEEDS DEBUGGING 🔻
     @commands.command(aliases=["quiz"])
     async def numberguess(self, ctx):
-        # await ctx.send("I am thinking of a number between 1 and 100... Can you guess what it is?")
-        await ctx.send("```fix\n🖐️ Sorry! This command is currently unavailable.```")
+        await ctx.send("I am thinking of a number between 1 and 100... Can you guess what it is?")
         answer = random.randint(1, 100)
         attempts = 10
         for i in range(attempts):
-            response = await dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+            response = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
             number = int(response.content)
             if number == answer:
                 await ctx.send(f"Bingo! This took you {i + 1} attempts! You now get a cheesecake. 🧀🍰")
@@ -139,12 +137,10 @@ class FUN(commands.Cog):
         await ctx.send(f"{speach}")
 
 
-    # NEEDS DEBUGGING 🔻
     @commands.command()
     async def pyramid(self, ctx):
-        # await ctx.send(":desert: Y'know what I'm in the mood for? Building a pyramid! How tall should it be?")
-        await ctx.send("```fix\n🖐️ Sorry! This command is currently unavailable.```")
-        message = await dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        await ctx.send(":desert: Y'know what I'm in the mood for? Building a pyramid! How tall should it be?")
+        message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
         size = (int(message.content))
         if size >= 26:
             await ctx.send("Yeah no, let's not go *too* spammy! :sweat_drops:")
