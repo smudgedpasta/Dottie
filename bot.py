@@ -144,8 +144,10 @@ async def on_message(message):
         user = message.author.name
         cmd = message.content
         if getattr(message.author, "guild", None) is None:
+            cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
         else:
+            cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
 
     if getattr(message.author, "guild", None) is None and message.author != dottie.user:
@@ -471,20 +473,20 @@ async def AskDottie(ctx, *, question):
 
     if question.startswith("~~") or question.endswith("~~"):
         await ctx.send(f"~~So you asked... {question[2:-2]}? {random.choice(responses)}~~")
-    elif question.startswith("*") or question.endswith("*"):
-        await ctx.send(f"*So you asked... {question[1:-1]}? {random.choice(responses)}*")
-    elif question.startswith("**") or question.endswith("**"):
-        await ctx.send(f"**So you asked... {question[2:-2]}? {random.choice(responses)}**")
     elif question.startswith("***") or question.endswith("***"):
         await ctx.send(f"***So you asked... {question[3:-3]}? {random.choice(responses)}***")
+    elif question.startswith("**") or question.endswith("**"):
+        await ctx.send(f"**So you asked... {question[2:-2]}? {random.choice(responses)}**")
+    elif question.startswith("*") or question.endswith("*"):
+        await ctx.send(f"*So you asked... {question[1:-1]}? {random.choice(responses)}*")
     elif question.startswith("||") or question.endswith("||"):
         await ctx.send(f"||So you asked... {question[2:-2]}? {random.choice(responses)}||")
     elif question.startswith("__") or question.endswith("__"):
         await ctx.send(f"__So you asked... {question[2:-2]}? {random.choice(responses)}__")
-    elif question.startswith("`") or question.endswith("`"):
-        await ctx.send(f"`So you asked... {question[1:-1]}? {random.choice(responses)}`")
     elif question.startswith("```") or question.endswith("```"):
         await ctx.send(f"```So you asked... {question[3:-3]}? {random.choice(responses)}```")
+    elif question.startswith("`") or question.endswith("`"):
+        await ctx.send(f"`So you asked... {question[1:-1]}? {random.choice(responses)}`")
     else:
         await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
 
