@@ -339,51 +339,6 @@ async def unban(ctx, *, member):
             return
 
 
-# @dottie.command()
-# async def ping(ctx):
-#     TaskManager2 = psutil.Process()
-#     await ctx.send(f"""*```css\n{{Ping! I pong back all this nice techy info. 🍺}}\n 
-# Current CPU usage is: [{TaskManager2.cpu_percent() / psutil.cpu_count()}%]
-# Current memory usage is: [{round(TaskManager2.memory_percent(), 2)}%]
-# Ping latency is: [{round(dottie.latency * 1000)}ms]
-# ```*""")
-
-
-@dottie.command(aliases=["userinfo", "info", "stats", "userstats"])
-async def profile(ctx, *, member: discord.Member = None):
-    member = ctx.author if not member else member
-    Roles = member.roles[1:]
-
-    embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-    embed.set_author(name=f"Snap! Let's see your info, {member.name}! 👀")
-    embed.set_thumbnail(url=member.avatar_url_as(format="png", size=4096))
-    embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Command run by {ctx.author.display_name}")
-
-    embed.description = "```ini\n🤍 Here they like to call you [" + member.display_name + "], what a nice nickname! 🤍```"
-
-    embed.add_field(name="Too lazy for developer mode? Here's the ID:", value=str(member.id) + " ✌️")
-    embed.add_field(name="You fell into Discord addiction on:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
-    embed.add_field(name="CAPTCHA TEST, are you a robot?", value=member.bot)
-    embed.add_field(name="You stumbled into this server on:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p GMT"))
-    if len(Roles) == 0:
-        embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute...", value="\u200b")
-        embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value="\u200b")
-    else:
-        embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles! ⚔️", value=" ".join([role.mention for role in Roles]))
-        embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
-
-    await ctx.send(embed=embed)
-
-
-@dottie.command(aliases=["icon"])
-async def avatar(ctx, member: discord.Member = None):
-    member = ctx.author if not member else member
-    embed = discord.Embed(colour=discord.Colour(15277667))
-    embed.set_image(url=member.avatar_url_as(format="png", size=4096))
-    embed.set_footer(text=f"{member.name}'s wonderful icon picture! 👍")
-    await ctx.send(embed=embed)
-
-
 @dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
 async def connect(ctx):
     try:
