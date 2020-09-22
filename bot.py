@@ -330,6 +330,9 @@ Thanks for inviting me! 😊"""
         await target_channel.send(embed=embed)
 
 
+dottie.remove_command("help")
+
+
 def ignore_case(s):
     out = set()
     for z in range(1 << len(s)):
