@@ -1,6 +1,5 @@
 import contextlib, concurrent.futures
 
-# A context manager that enables concurrent imports.
 class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
 
     def __init__(self, glob=None):
@@ -128,14 +127,13 @@ def wrap_future(fut, loop=None):
 def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
 
 
-# Runs a function call in a parallel thread, returning a future object waiting on the output.
 def create_future_ex(func, *args, timeout=None, **kwargs):
     fut = athreads.submit(func, *args, **kwargs)
     if timeout is not None:
         fut = athreads.submit(fut.result, timeout=timeout)
     return fut
 
-# Forces the operation to be a coroutine regardless of whether it is or not. Regular functions are executed in the thread pool.
+
 async def _create_future(obj, *args, loop, timeout, **kwargs):
     if asyncio.iscoroutinefunction(obj):
         obj = obj(*args, **kwargs)
@@ -151,14 +149,14 @@ async def _create_future(obj, *args, loop, timeout, **kwargs):
             obj = await obj
     return obj
 
-# High level future asyncio creation function that takes both sync and async functions, as well as coroutines directly.
+
 def create_future(obj, *args, loop=None, timeout=None, **kwargs):
     if loop is None:
         loop = get_event_loop()
     fut = _create_future(obj, *args, loop=loop, timeout=timeout, **kwargs)
     return create_task(fut, loop=loop)
 
-# Creates an asyncio Task object from an awaitable object.
+
 def create_task(fut, *args, loop=None, **kwargs):
     if loop is None:
         loop = get_event_loop()
