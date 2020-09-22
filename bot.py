@@ -1,53 +1,4 @@
-import contextlib, concurrent.futures
-
-class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
-
-    def __init__(self, glob=None):
-        self.glob = glob
-        self.exc = concurrent.futures.ThreadPoolExecutor(max_workers=12)
-        self.out = {}
-
-    def __enter__(self):
-        return self
-
-    def __import__(self, *modules):
-        for module in modules:
-            self.out[module] = self.exc.submit(__import__, module)
-    
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-        if exc_type and exc_value:
-            raise exc_value
-    
-    def close(self):
-        for k in tuple(self.out):
-            self.out[k] = self.out[k].result()
-        glob = self.glob if self.glob is not None else globals()
-        glob.update(self.out)
-        self.exc.shutdown(True)
-
-with MultiThreadedImporter() as importer:
-    importer.__import__(
-        "inspect",
-        "time",
-        "datetime",
-        "random",
-        "requests",
-        "asyncio",
-        "os",
-        "psutil",
-        "traceback",
-        "math",
-        "youtube_dl",
-        "discord",
-        "discord.ext", 
-        "json",
-        "threading",
-    )
-
-from math import *
-from discord.ext import tasks, commands
-from discord.ext.commands import Bot, has_permissions, CheckFailure
+from modules import *
 
 
 discord_token = None
@@ -165,7 +116,7 @@ def create_task(fut, *args, loop=None, **kwargs):
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 
-TERMINALS = [727087981285998593, 751518107922858075]
+TERMINALS = [757848291181461574]
 
 
 GLOBALS = globals()
@@ -459,6 +410,7 @@ async def despacito(ctx):
 async def load(ctx, extension=None):
     if extension is None:
         await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
+        return
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```ini\n[Successfully returned access to the extension.]```")
 
@@ -468,6 +420,7 @@ async def load(ctx, extension=None):
 async def unload(ctx, extension=None):
     if extension is None:
         await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
+        return
     dottie.unload_extension(f"cogs.{extension}")
     await ctx.send("```css\n[Successfully removed the extension until further notice.]```")
 
@@ -477,6 +430,7 @@ async def unload(ctx, extension=None):
 async def reload(ctx, extension=None):
     if extension is None:
         await ctx.send("```css\n⚠️[Specify the extension.]⚠️```")
+        return
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send("```fix\n[Successfully refreshed the extension.]```")

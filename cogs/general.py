@@ -1,7 +1,4 @@
-import discord
-from discord.ext import tasks, commands
-import psutil
-import asyncio
+from modules import *
 
 TaskManager2 = psutil.Process()
 TaskManager2.cpu_percent()

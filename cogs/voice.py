@@ -1,5 +1,4 @@
-import discord
-from discord.ext import tasks, commands
+from modules import *
 
 
 class VOICE(commands.Cog):

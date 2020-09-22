@@ -1,7 +1,4 @@
-import discord
-from discord.ext import tasks, commands
-import random
-import json
+from modules import *
 
 
 class FUN(commands.Cog):
