@@ -291,7 +291,7 @@ async def on_command_error(ctx, error):
     try:
         raise error
     except:
-        print("```py\n" + traceback.format_exc() + "```")
+        print("```py\n" + traceback.format_exc()[:1991] + "```")
 
 
 @dottie.event
