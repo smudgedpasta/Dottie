@@ -34,9 +34,7 @@ def input(*args, **kwargs):
 
 
 eloop = asyncio.get_event_loop()
-
-def __setloop__():
-    return asyncio.set_event_loop(eloop)
+def __setloop__(): return asyncio.set_event_loop(eloop)
 
 def print(*args, sep=" ", end="\n"):
     eloop.create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
@@ -47,8 +45,7 @@ dottie.eloop = eloop
 
 athreads = concurrent.futures.ThreadPoolExecutor(
     max_workers=16,
-    initializer=__setloop__,
-)
+    initializer=__setloop__,)
 __setloop__()
 
 
@@ -169,7 +166,7 @@ async def procFunc(proc, channel):
 LAST_COMMAND_TIMESTAMP = inf
 
 
-async def status_loop():
+async def infinite_loop():
     global LAST_COMMAND_TIMESTAMP
     while LAST_COMMAND_TIMESTAMP > -inf:
         if time.time() - LAST_COMMAND_TIMESTAMP > 20:
@@ -188,14 +185,14 @@ async def on_message(message):
     if ctx.command is not None:
         user = message.author.name
         cmd = message.content
-        if getattr(message.channel, "guild", None) is None:
+        if getattr(message.author, "guild", None) is None:
             cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
         else:
             cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
 
-    elif getattr(message.channel, "guild", None) is None and message.author != dottie.user:
+    if getattr(message.channel, "guild", None) is None and message.author != dottie.user:
         if ctx.command is None:
             user_dm = message.author
             embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
@@ -235,7 +232,7 @@ async def on_message(message):
                     except:
                         await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
 
-eloop.create_task(status_loop())
+eloop.create_task(infinite_loop())
 
 
 @dottie.event
@@ -291,7 +288,7 @@ async def on_command_error(ctx, error):
     try:
         raise error
     except:
-        print("```py\n" + traceback.format_exc()[:1991] + "```")
+        print("```py\n" + traceback.format_exc() + "```")
 
 
 @dottie.event
@@ -412,50 +409,51 @@ async def despacito(ctx):
 @commands.check(is_owner)
 async def load(ctx, extension=None):
     if extension is None:
-        for file in os.listdir("cogs"):
-            cog = ".".join(file.split(".")[:-1])
-            ext = "cogs." + cog
-            await create_future(dottie.load_extension, ext)
-        await ctx.send("```css\n[Successfully returned access to all extensions]```.")
+        dottie.load_extension("cogs.moderation")
+        dottie.load_extension("cogs.general")
+        dottie.load_extension("cogs.fun")
+        dottie.load_extension("cogs.voice")
+        dottie.load_extension("cogs.owner")
+        await ctx.send("```fix\n[Successfully returned acces to all extensions.]```")
         return
-    await create_future(dottie.load_extension, f"cogs.{extension}")
-    await ctx.send("```ini\n[Successfully returned access to the extension.]```")
+    dottie.load_extension(f"cogs.{extension}")
+    await ctx.send(f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```")
 
 
 @dottie.command()
 @commands.check(is_owner)
 async def unload(ctx, extension=None):
     if extension is None:
-        for file in os.listdir("cogs"):
-            cog = ".".join(file.split(".")[:-1])
-            ext = "cogs." + cog
-            try:
-                await create_future(dottie.unload_extension, ext)
-            except discord.ext.commands.ExtensionNotLoaded:
-                pass
-        await ctx.send("```css\n[Successfully removed all extensions until further notice.]```.")
+        dottie.unload_extension("cogs.moderation")
+        dottie.unload_extension("cogs.general")
+        dottie.unload_extension("cogs.fun")
+        dottie.unload_extension("cogs.voice")
+        dottie.unload_extension("cogs.owner")
+        await ctx.send("```fix\n[Successfully removed all extensions until further notice.]```")
         return
-    await create_future(dottie.unload_extension, f"cogs.{extension}")
-    await ctx.send("```css\n[Successfully removed the extension until further notice.]```")
+    dottie.unload_extension(f"cogs.{extension}")
+    await ctx.send(f"```asciidoc\n[Successfully removed category \"{extension.upper()}\" until further notice.]```")
 
 
 @dottie.command()
 @commands.check(is_owner)
 async def reload(ctx, extension=None):
     if extension is None:
-        for file in os.listdir("cogs"):
-            cog = ".".join(file.split(".")[:-1])
-            ext = "cogs." + cog
-            try:
-                await create_future(dottie.unload_extension, ext)
-            except discord.ext.commands.ExtensionNotLoaded:
-                pass
-            await create_future(dottie.load_extension, ext)
-        await ctx.send("```css\n[Successfully reloaded all extensions]```.")
+        dottie.unload_extension("cogs.moderation")
+        dottie.load_extension("cogs.moderation")
+        dottie.unload_extension("cogs.general")
+        dottie.load_extension("cogs.general")
+        dottie.unload_extension("cogs.fun")
+        dottie.load_extension("cogs.fun")
+        dottie.unload_extension("cogs.voice")
+        dottie.load_extension("cogs.voice")
+        dottie.unload_extension("cogs.owner")
+        dottie.load_extension("cogs.owner")
+        await ctx.send("```fix\n[Successfully refreshed all extensions.]```")
         return
-    await create_future(dottie.unload_extension, f"cogs.{extension}")
-    await create_future(dottie.load_extension, f"cogs.{extension}")
-    await ctx.send("```fix\n[Successfully refreshed the extension.]```")
+    dottie.unload_extension(f"cogs.{extension}")
+    dottie.load_extension(f"cogs.{extension}")
+    await ctx.send(f"```fix\n[Successfully refreshed \"{extension.upper()}\".]```")
 
 
 @dottie.command()
@@ -469,18 +467,9 @@ async def shutdown(ctx):
     await ctx.bot.logout()
 
 
-# 🔻 UNFINISHED COMMANDS/EVENTS 🔻
-
-
 for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        # (create_future_ex will load all of them in parallel threads, possibly making this faster)
-        create_future_ex(dottie.load_extension, f"cogs.{filename[:-3]}")
-
-
-# @dottie.command()
-# async def test(ctx, pass_context=True):
-#     await ctx.send("<:plus:688316007093370910>")
+        if filename.endswith(".py"):
+            dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
 dottie.run(discord_token)
