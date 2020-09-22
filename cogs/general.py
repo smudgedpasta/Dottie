@@ -4,6 +4,7 @@ import psutil
 import asyncio
 
 TaskManager2 = psutil.Process()
+TaskManager2.cpu_percent()
 
 
 class GENERAL(commands.Cog):

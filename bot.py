@@ -99,9 +99,10 @@ __setloop__()
 
 
 def get_event_loop():
-    with suppress(RuntimeError):
+    try:
         return asyncio.get_event_loop()
-    return eloop
+    except RuntimeError:
+        return eloop
 
 def wrap_future(fut, loop=None):
     if loop is None:
@@ -170,9 +171,19 @@ TERMINALS = [727087981285998593, 751518107922858075]
 
 GLOBALS = globals()
 glob = dict(GLOBALS)
+MESSAGES = {}
 
 
 async def procFunc(proc, channel):
+    MESSAGES.update({m.id: m for m in dottie._connection._messages})
+    while len(MESSAGES) > 1048576:
+        MESSAGES.pop(next(iter(MESSAGES)))
+    glob["messages"] = MESSAGES
+    glob["guilds"] = dottie._connection._guilds
+    glob["users"] = dottie._connection._users
+    glob["emojis"] = dottie._connection._emojis
+    glob["channels"] = {c.id: c for g in dottie.guilds for c in g.channels}
+    glob["roles"] = {r.id: r for g in dottie.guilds for r in g.roles}
     if "\n" not in proc:
         if proc.startswith("await "):
             proc = proc[6:]
