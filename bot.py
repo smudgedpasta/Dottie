@@ -43,6 +43,7 @@ with MultiThreadedImporter() as importer:
         "discord",
         "discord.ext", 
         "json",
+        "threading",
     )
 
 from math import *
