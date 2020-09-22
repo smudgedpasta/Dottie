@@ -152,10 +152,10 @@ async def _create_future(obj, *args, loop, timeout, **kwargs):
     return obj
 
 # High level future asyncio creation function that takes both sync and async functions, as well as coroutines directly.
-def create_future(obj, *args, loop=None, timeout=None, priority=False, **kwargs):
+def create_future(obj, *args, loop=None, timeout=None, **kwargs):
     if loop is None:
         loop = get_event_loop()
-    fut = _create_future(obj, *args, loop=loop, timeout=timeout, priority=priority, **kwargs)
+    fut = _create_future(obj, *args, loop=loop, timeout=timeout, **kwargs)
     return create_task(fut, loop=loop)
 
 # Creates an asyncio Task object from an awaitable object.
@@ -203,8 +203,8 @@ async def procFunc(proc, channel):
         func = "async def _():\n\tlocals().update(globals())\n"
         func += "\n".join("\t" + line for line in proc.split("\n"))
         func += "\n\tglobals().update(locals())"
-        code2 = await create_future(compile, func, "<terminal>", "exec", optimize=2, priority=True)
-        await create_future(eval, code2, glob, priority=True)
+        code2 = await create_future(compile, func, "<terminal>", "exec", optimize=2)
+        await create_future(eval, code2, glob)
         output = await glob["_"]()
         glob["_"] = _
     if code is not None:
