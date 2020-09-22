@@ -4,9 +4,6 @@ import random
 import json
 
 
-dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
-
-
 class FUN(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
