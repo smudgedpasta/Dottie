@@ -116,7 +116,7 @@ def create_task(fut, *args, loop=None, **kwargs):
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 
-TERMINALS = [757848291181461574]
+TERMINALS = [727087981285998593, 751518107922858075]
 
 
 GLOBALS = globals()
