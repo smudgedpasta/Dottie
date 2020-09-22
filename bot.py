@@ -299,12 +299,10 @@ async def serverstats_update():
     global messages
     while not dottie.is_closed():
         try:
-            with open("serverstats", "a") as f:
-                f.write(f"Time at log interval: {datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT | Messages sent within 60m interval: {messages}\n\n".format())
-                globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
-                globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
-                globals()["eloop"] = asyncio.get_event_loop()
-                print(f"```" + random.choice(["css", "ini"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
+            globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
+            globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
+            globals()["eloop"] = asyncio.get_event_loop()
+            print(f"```" + random.choice(["css", "ini"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
             messages = 0
         except Exception as e:
             print(e)
