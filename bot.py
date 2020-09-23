@@ -9,6 +9,8 @@ with open("config.json", "r") as f:
 
 dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
 
+dottie.remove_command("help")
+
 
 OWNERS = [530781444742578188, 201548633244565504]
 
@@ -325,9 +327,6 @@ Thanks for inviting me! 😊"""
 
     if target_channel:
         await target_channel.send(embed=embed)
-
-
-dottie.remove_command("help")
 
 
 @dottie.command()
