@@ -273,6 +273,14 @@ dottie.loop.create_task(serverstats_update())
 
 
 @dottie.event
+async def SmudgeCallout(ctx, message):
+    Smudge = [530781444742578188, 668064931345596439]
+    global messages
+    if message.endswith("#") and message.author in Smudge:
+        await ctx.send("Smudge Keyboard Moment <a:moment" + ":750685242553139321>")
+
+
+@dottie.event
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
