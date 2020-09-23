@@ -378,33 +378,6 @@ async def unban(ctx, *, member):
             return
 
 
-@dottie.command(aliases=["get_your_butt_in_here", "join"], pass_context=True)
-async def connect(ctx):
-    try:
-        channel = ctx.message.author.voice.channel
-        await channel.connect()
-        await ctx.send("```ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]```")
-    except:
-        await ctx.send("Hey, I can't find you! You need to be in a voice channel first!")
-
-
-@dottie.command(aliases=["go_naughty_step", "leave"], pass_context=True)
-async def disconnect(ctx):
-    server = ctx.message.guild.voice_client
-    await server.disconnect()
-    await ctx.send("```ini\n[Successfully disconnected from the Voice Channel... Sad that it is time to go... 😔]```")
-
-
-@dottie.command(aliases=["espacito", "Despacito"])
-async def despacito(ctx):
-  for vc in dottie.voice_clients:
-    if vc.guild == ctx.guild:
-        vc.play(discord.FFmpegOpusAudio("assets/music/Normal_Despacito.ogg"))
-        await ctx.send("***```css\n🥁 Embrace my [DESPACITO!]```***")
-        return
-  await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one and use `d.connect` first!")
-
-
 @dottie.command()
 @commands.check(is_owner)
 async def load(ctx, extension=None):
