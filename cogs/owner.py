@@ -16,5 +16,16 @@ class OWNER(commands.Cog):
         await ctx.send("```json\n\"🎉 COGS ARE OPERATIONAL. 🎉\"```")
 
 
+    @commands.command()
+    @commands.check(is_owner)
+    async def shutdown(self, ctx):
+        print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Cancelling all scheduled events and logging out...]```")
+        await ctx.send("```css\n[❗ Shutting down...]```")
+        for vc in self.dottie.voice_clients:
+            await vc.disconnect(force=True)
+        await asyncio.sleep(0.5)
+        await ctx.bot.logout()
+
+
 def setup(dottie):
     dottie.add_cog(OWNER(dottie))

@@ -456,17 +456,6 @@ async def reload(ctx, extension=None):
     await ctx.send(f"```fix\n[Successfully refreshed \"{extension.upper()}\".]```")
 
 
-@dottie.command()
-@commands.check(is_owner)
-async def shutdown(ctx):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Cancelling all scheduled events and logging out...]```")
-    await ctx.send("```css\n[❗ Shutting down...]```")
-    for vc in dottie.voice_clients:
-        await vc.disconnect(force=True)
-    await asyncio.sleep(0.5)
-    await ctx.bot.logout()
-
-
 for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             dottie.load_extension(f"cogs.{filename[:-3]}")
