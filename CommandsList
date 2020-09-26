@@ -76,6 +76,9 @@ Dottie will take your input (from a sentence to a mentioned user) and give it a 
 - http_cats (aliases: cats, http)
 Sends a random image from the https://http.cat/ website with a custom description.
 
+- dog (aliases: og, doggo, puppo)
+Sends a random image from the https://dog.ceo/api/breeds/image/random website.
+
 
 
 _VOICE_

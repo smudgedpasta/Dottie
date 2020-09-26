@@ -171,7 +171,7 @@ class FUN(commands.Cog):
             await ctx.send(embed=embed)
 
 
-    @commands.command(aliases=["doggo", "puppo"])
+    @commands.command(aliases=["og", "doggo", "puppo"])
     async def dog(self, ctx):
         r = requests.get("https://dog.ceo/api/breeds/image/random")
         data = r.json()
