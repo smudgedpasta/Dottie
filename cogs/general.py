@@ -71,11 +71,20 @@ class GENERAL(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx):
-        await ctx.send(f"""*```css\n{{Ping! I pong back all this nice techy info. 🍺}}\n 
-Current CPU usage is: [{TaskManager2.cpu_percent() / psutil.cpu_count()}%]
-Current memory usage is: [{round(TaskManager2.memory_percent(), 2)}%]
-Ping latency is: [{round(self.dottie.latency * 1000)}ms]
-```*""")
+        TechyInfo = {
+            "CPU": f"[{TaskManager2.cpu_percent() / psutil.cpu_count()}%]",
+            "Memory": f"[{round(TaskManager2.memory_percent(), 2)}%]",
+            "Ping": f"[{round(self.dottie.latency * 1000)}ms]"
+        }
+        
+        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        embed.description = "*```fix\nPing! I pong back all this nice techy info. 🍺```*"
+        embed.add_field(name="CPU Usage", value=str(TechyInfo["CPU"]))
+        embed.add_field(name="Memory Usage", value=str(TechyInfo["Memory"]))
+        embed.add_field(name="Ping Latency", value=str(["Ping"]))
+
+        await ctx.send(embed=embed)
     
 
     @commands.command(aliases=["userinfo", "info", "stats", "userstats"])
