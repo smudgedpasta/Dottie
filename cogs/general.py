@@ -79,10 +79,10 @@ class GENERAL(commands.Cog):
         
         embed = discord.Embed(colour=discord.Colour(15277667))
         embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-        embed.description = "*```fix\nPing! I pong back all this nice techy info. 🍺```*"
-        embed.add_field(name="CPU Usage", value=str(TechyInfo["CPU"]))
-        embed.add_field(name="Memory Usage", value=str(TechyInfo["Memory"]))
-        embed.add_field(name="Ping Latency", value=str(["Ping"]))
+        embed.description = "*```asciidoc\n[Ping! I pong back all this nice techy info. 🍺]```*"
+        embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
+        embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
+        embed.add_field(name="Ping Latency", value="```ini\n"+ str(["Ping"]) + "```")
 
         await ctx.send(embed=embed)
     
