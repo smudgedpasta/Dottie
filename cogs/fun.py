@@ -170,6 +170,16 @@ class FUN(commands.Cog):
             embed.set_image(url=cat_response["image"])
             await ctx.send(embed=embed)
 
+    @commands.command(aliases=["doggo", "puppo"])
+    async def dog(self, ctx):
+        r = requests.get("https://dog.ceo/api/breeds/image/random")
+        data = r.json()
+        embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
+        embed = discord.Embed(colour=discord.Colour(embed_colours))
+        embed.set_image(url=r(data))
+        embed.description = random.choice(["Bärk!", "Börk!", "🐶", "🐕"])
+        await ctx.send(embed=embed)
+
 
 def setup(dottie):
     dottie.add_cog(FUN(dottie))

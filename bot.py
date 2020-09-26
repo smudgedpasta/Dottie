@@ -385,7 +385,7 @@ async def reload(ctx, extension=None):
         return
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
-    await ctx.send(f"```fix\n[Successfully refreshed \"{extension.upper()}\".]```")
+    await ctx.send(f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```")
 
 
 for filename in os.listdir("./cogs"):
