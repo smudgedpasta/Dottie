@@ -175,9 +175,6 @@ class FUN(commands.Cog):
     async def dog(self, ctx):
         r = requests.get("https://dog.ceo/api/breeds/image/random")
         data = r.json()
-        if data["status"] != "success":
-            await ctx.send("dog.ceo fucked up")
-            return
         embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
         embed = discord.Embed(colour=discord.Colour(embed_colours))
         embed.set_image(url=data["message"])
