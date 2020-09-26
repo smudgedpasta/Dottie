@@ -184,6 +184,10 @@ async def on_message(message):
     ctx = await dottie.get_context(message)
     await dottie.invoke(ctx)
 
+    Smudge = [530781444742578188, 668064931345596439]
+    if message.author.id in Smudge and message.content.endswith("#"):
+        await ctx.send("Smudge Keyboard Moment <a:moment" + ":750685242553139321>")
+
     if ctx.command is not None:
         user = message.author.name
         cmd = message.content
@@ -233,7 +237,7 @@ async def on_message(message):
                         await channel.send("```\n" + str(output)[:1993] + "```")
                     except:
                         await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
-
+      
 eloop.create_task(infinite_loop())
 
 
@@ -270,14 +274,6 @@ dottie.loop.create_task(serverstats_update())
 
 #     with open("bot/leveldata.json", "r") as f:
 #         data = eval(f.read())
-
-
-@dottie.event
-async def SmudgeCallout(ctx, message):
-    Smudge = [530781444742578188, 668064931345596439]
-    global messages
-    if message.endswith("#") and message.author in Smudge:
-        await ctx.send("Smudge Keyboard Moment <a:moment" + ":750685242553139321>")
 
 
 @dottie.event
