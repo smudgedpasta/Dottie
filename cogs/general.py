@@ -82,7 +82,7 @@ class GENERAL(commands.Cog):
         embed.description = "*```asciidoc\n[Ping! I pong back all this nice techy info. 🍺]```*"
         embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
         embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
-        embed.add_field(name="Ping Latency", value="```ini\n"+ str(["Ping"]) + "```")
+        embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
 
         await ctx.send(embed=embed)
     
