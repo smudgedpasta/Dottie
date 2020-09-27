@@ -1,7 +1,20 @@
 from modules import *
 
 TaskManager2 = psutil.Process()
-TaskManager2.cpu_percent()
+
+def get_cpu_percent():
+    futs = [create_future_ex(child.cpu_percent) for child in TaskManager2.children(True)]
+    cpu = TaskManager2.cpu_percent()
+    cpu += sum(fut.result() for fut in futs)
+    return cpu
+
+def get_memory_percent():
+    futs = [create_future_ex(child.memory_percent) for child in TaskManager2.children(True)]
+    cpu = TaskManager2.memory_percent()
+    cpu += sum(fut.result() for fut in futs)
+    return cpu
+
+get_cpu_percent()
 
 
 class GENERAL(commands.Cog):
@@ -65,15 +78,17 @@ class GENERAL(commands.Cog):
                     page[0] += 1
                     await message.edit(embed=pages[page[0]])
         page = [0]
-        self.dottie.eloop.create_task(page_reaction_listener(page, "add"))
-        self.dottie.eloop.create_task(page_reaction_listener(page, "remove"))
+        create_task(page_reaction_listener(page, "add"))
+        create_task(page_reaction_listener(page, "remove"))
 
 
     @commands.command()
     async def ping(self, ctx):
+        cpu = await create_future(get_cpu_percent)
+        memory = await create_future(get_memory_percent)
         TechyInfo = {
-            "CPU": f"[{TaskManager2.cpu_percent() / psutil.cpu_count()}%]",
-            "Memory": f"[{round(TaskManager2.memory_percent(), 2)}%]",
+            "CPU": f"[{cpu / psutil.cpu_count()}%]",
+            "Memory": f"[{round(memory, 2)}%]",
             "Ping": f"[{round(self.dottie.latency * 1000)}ms]"
         }
         
