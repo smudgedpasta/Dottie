@@ -285,6 +285,8 @@ async def on_command_error(ctx, error):
             await ctx.send("Did you mean \"help\"?")
         elif str(error).split("\"")[1] in ["cars"]:
             await ctx.send("Did you mean \"cats\"?")
+        elif str(error).split("\"")[1] in ["pign"]:
+            await ctx.send("Did you mean \"ping\"? ~~I hate to break it to you but I'm not a Minecraft Piglin...~~")
         else:
             await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
     if isinstance(error, commands.MissingRequiredArgument):
