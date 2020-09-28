@@ -10,6 +10,7 @@ class VOICE(commands.Cog):
     async def connect(self, ctx):
         try:
             channel = ctx.message.author.voice.channel
+            # Checks if the message author is in a voice channel and joins that one
             await channel.connect()
             await ctx.send("```ini\n[Successfully joined the Voice Channel! What a cozy place you got here! 😊]```")
         except:
@@ -19,19 +20,25 @@ class VOICE(commands.Cog):
     @commands.command(aliases=["go_naughty_step", "leave"], pass_context=True)
     async def disconnect(self, ctx):
         server = ctx.message.guild.voice_client
+        # Simply checks if the VC is in the guild before disconnecting
         await server.disconnect()
         await ctx.send("```ini\n[Successfully disconnected from the Voice Channel... Sad that it is time to go... 😔]```")
 
 
-    @commands.command(aliases=["espacito", "Despacito"])
+    @commands.command(aliases=["espacito", "Despacito"], pass_context=True)
     async def despacito(self, ctx):
-        for vc in self.dottie.voice_clients:
-            if vc.guild == ctx.guild:
-                vc.play(discord.FFmpegOpusAudio(
-                    "assets/music/Normal_Despacito.ogg"))
-                await ctx.send("***```css\n🥁 Embrace my [DESPACITO!]```***")
-                return
-        await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one and use `d.connect` first!")
+        try:
+            channel = ctx.message.author.channel
+            await channel.connect()
+            for vc in self.dottie.voice_clients:
+                if vc.guild == ctx.guild:
+                    # Checks to make sure the vc and the guild are the same
+                    vc.play(discord.FFmpegOpusAudio("assets/music/Normal_Despacito.ogg"))
+                    # Pulls the Despacito file straight from the directory
+                    await ctx.send("***```css\n🥁 Embrace my [DESPACITO!]```***")
+                    return
+        except:
+            await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one and use `d.connect` first!")
 
 
 def setup(dottie):

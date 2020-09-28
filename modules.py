@@ -1,5 +1,6 @@
 import contextlib, concurrent.futures
 
+# A context manager that enables concurrent imports.
 class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
 
     def __init__(self, glob=None):
@@ -46,27 +47,32 @@ with MultiThreadedImporter() as importer:
         "threading",
     )
 
+# The special imports still need to be added, though they're sped up by the files already having been imported
 from math import *
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 
 
+# eloop is just the asyncio event loop, what that means is just a queue of actions to be done, all coroutines (stuff with await) are put in this queue, and more than one can be awaited at a time
 eloop = asyncio.get_event_loop()
 def __setloop__(): return asyncio.set_event_loop(eloop)
 
 
+# this is a thread pool, which manages the almost fully concurrent operations, which has its own queue similar to the asyncio event loop, but you can put functions on it that aren't async
 athreads = concurrent.futures.ThreadPoolExecutor(
     max_workers=16,
     initializer=__setloop__,)
 __setloop__()
 
 
+# uh, don't know why this is here, maybe it was for the other threads trying to get the `eloop` variable?
 def get_event_loop():
     try:
         return asyncio.get_event_loop()
     except RuntimeError:
         return eloop
 
+# similar to the asyncio.wrap_future function except doesn't check that it's actually a future, which allows you to add some other classes with a `result()` method
 def wrap_future(fut, loop=None):
     if loop is None:
         try:
@@ -87,9 +93,11 @@ def wrap_future(fut, loop=None):
     return new_fut
 
 
+# checks if you can `await` the targeted object
 def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(obj), asyncio.Future) or issubclass(type(obj), asyncio.Task) or inspect.isawaitable(obj)
 
 
+# submits a function to the thread pool queue, returning the associated concurrent.futures Future object
 def create_future_ex(func, *args, timeout=None, **kwargs):
     fut = athreads.submit(func, *args, **kwargs)
     if timeout is not None:
@@ -97,6 +105,7 @@ def create_future_ex(func, *args, timeout=None, **kwargs):
     return fut
 
 
+# submits function to the thread pool queue, but waits asynchronously for the output, then makes sure the result is no longer an awaitable by repeatedly awaiting it
 async def _create_future(obj, *args, loop, timeout, **kwargs):
     if asyncio.iscoroutinefunction(obj):
         obj = obj(*args, **kwargs)
@@ -113,6 +122,7 @@ async def _create_future(obj, *args, loop, timeout, **kwargs):
     return obj
 
 
+# just a helper function for _create_future which is able to identify the event loop
 def create_future(obj, *args, loop=None, timeout=None, **kwargs):
     if loop is None:
         loop = get_event_loop()
@@ -120,9 +130,11 @@ def create_future(obj, *args, loop=None, timeout=None, **kwargs):
     return create_task(fut, loop=loop)
 
 
+# works like asyncio.create_task but falls back to using `eloop` if the asyncio loop isn't found for whatever reason
 def create_task(fut, *args, loop=None, **kwargs):
     if loop is None:
         loop = get_event_loop()
     return asyncio.ensure_future(fut, *args, loop=loop, **kwargs)
 
+# checks if the function is being called by the main thread
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
