@@ -1,10 +1,6 @@
 from modules import *
 
 
-def is_owner(ctx):
-    return ctx.message.author.id in [530781444742578188, 201548633244565504]
-
-
 class OWNER(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie

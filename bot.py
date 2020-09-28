@@ -19,10 +19,6 @@ dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
 dottie.remove_command("help")
 
 
-def is_owner(ctx):
-  return ctx.message.author.id in OWNERS
-
-
 # Defaults message count to always start at 0
 messages = 0
 
