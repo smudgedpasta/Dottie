@@ -184,13 +184,18 @@ class FUN(commands.Cog):
         with open("bot/http_cats.json", "r", encoding="utf-8") as f:
             # Encoding UTF-8 allows for unicode emojis to be parsed in json.load()
             http_cats = json.load(f)
+            for name in http_cats:
+                if name["name"] == 404:
+                    cat_response = name
             if code is None:
                 # If no argument is given, send a random image
                 cat_response = random.choice(http_cats)
             if code is not None:
                 # If a HTTP code number is given, search for that number and send the corresponding HTTP cat
                 code = int(code)
+                # The JSON values are ints, and so they should be decoded as such
                 for name in http_cats:
+                    # Runs a for loop through the JSON to find a matching name argument
                     if name["name"] == code:
                         cat_response = name
                         break
