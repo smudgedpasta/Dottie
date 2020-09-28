@@ -164,8 +164,8 @@ class FUN(commands.Cog):
             await ctx.send("Uh, okay, guess I'll go build elsewhere... :pensive:")
         else:
             for i in range(size):
-            await ctx.send(("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
-            # Sends a repeated amount of messages, adding on one "🟧" until the specified argument has been reached, including empty emojis to allow for a a triangular formation
+                await ctx.send(("\u200b" + ("<:empty" + ":760062353063936000>")) * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
+                # Sends a repeated amount of messages, adding on one "🟧" until the specified argument has been reached, including empty emojis to allow for a a triangular formation
 
 
     @commands.command(input=None)

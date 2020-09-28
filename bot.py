@@ -19,9 +19,6 @@ dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
 dottie.remove_command("help")
 
 
-# Assigning a list of bot owners to is_owner check
-OWNERS = [530781444742578188, 201548633244565504]
-
 def is_owner(ctx):
   return ctx.message.author.id in OWNERS
 

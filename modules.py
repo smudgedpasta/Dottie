@@ -1,5 +1,10 @@
 import contextlib, concurrent.futures
 
+
+# Assigning a list of bot owners to is_owner check
+OWNERS = [530781444742578188, 201548633244565504]
+
+
 # A context manager that enables concurrent imports.
 class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
 
