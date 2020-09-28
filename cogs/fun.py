@@ -178,14 +178,19 @@ class FUN(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    # Note to self: allow a lookup for certain http codes
     @commands.command(aliases=["cats", "http"])
     async def http_cats(self, ctx):
         http_cats = None
         with open("bot/http_cats.json", "r", encoding="utf-8") as f:
             # Encoding UTF-8 allows for unicode emojis to be parsed in json.load()
             http_cats = json.load(f)
-            cat_response = random.choice(http_cats)
+            name = (http_cats["name"])
+            if name is None:
+                # If no argument is given, send a random image
+                cat_response = random.choice(http_cats)
+            if name is not None:
+                # If a HTTP code number is given, search for that number and send the corresponding HTTP cat
+                cat_response = (http_cats["name"])
             embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
             embed = discord.Embed(colour=discord.Colour(embed_colours))
             embed.set_footer(text="Images are from https://http.cat/")
