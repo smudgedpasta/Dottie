@@ -1,9 +1,9 @@
 from modules import *
 
+
 # psutil.Process() is just Task Manager 2.0
 TaskManager2 = psutil.Process()
 
-# whoops this is a mess XD
 def get_cpu_percent():
     # Creates a list of concurrent.futures Future objects waiting on the cpu usage percentage of all child subprocesses
     futs = [create_future_ex(child.cpu_percent) for child in TaskManager2.children(True)]
@@ -58,7 +58,7 @@ class GENERAL(commands.Cog):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a random http status code with a funny cat picture and caption!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n
+***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and caption!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ``` ```\n
 """

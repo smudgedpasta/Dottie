@@ -74,7 +74,8 @@ refuse anything higher or lower.
 Dottie will take your input (from a sentence to a mentioned user) and give it a random, fixed rating.
 
 - http_cats (aliases: cats, http)
-Sends a random image from the https://http.cat/ website with a custom description.
+Sends a random image from the https://http.cat/ website with a custom description when no arguments are given. If a number status code is given,
+Dottie will send the corresponding http_cat, but if it doesn't exist it will default to 404 Not Found.
 
 - dog (aliases: og, doggo, puppo)
 Sends a random image from the https://dog.ceo/api/breeds/image/random website.
