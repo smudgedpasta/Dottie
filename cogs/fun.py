@@ -8,7 +8,7 @@ class FUN(commands.Cog):
 
     @commands.command(aliases=["hi", "HI", "Hi", "hI", "hemlo", "henlo", "hoi"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
     async def hello(self, ctx):
-        await ctx.send("Hello, {0.display_name}! :wave:".format(ctx.author))
+        await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
 
 
     @commands.command(aliases=["8ball", "ask"], question=None)
