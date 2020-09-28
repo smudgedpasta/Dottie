@@ -22,6 +22,7 @@ dottie.remove_command("help")
 # Defaults message count to always start at 0
 messages = 0
 
+
 LISTENER = None
 
 
