@@ -187,6 +187,7 @@ class FUN(commands.Cog):
             for name in http_cats:
                 if name["name"] == 404:
                     cat_response = name
+                # If requested name doesn't exist, default to 404 Not Found
             if code is None:
                 # If no argument is given, send a random image
                 cat_response = random.choice(http_cats)
