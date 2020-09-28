@@ -23,7 +23,7 @@ class OWNER(commands.Cog):
         await ctx.send(":muscle: Y'know what I'm in the mood for? Building a **big** pyramid! How tall should it be, my trusted owner?")
         message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
         size = (int(message.content))
-        if size >= 10:
+        if size >= 11:
             # Even bot owners can be a bit ambitious 🙃
             await ctx.send(f"OK, I trust you {ctx.author.display_name}, but that's a bit *too* much! :sweat_drops:")
         elif size <= -1:
