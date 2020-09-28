@@ -184,7 +184,6 @@ class FUN(commands.Cog):
         with open("bot/http_cats.json", "r", encoding="utf-8") as f:
             # Encoding UTF-8 allows for unicode emojis to be parsed in json.load()
             http_cats = json.load(f)
-            # code = ctx.message.content
             if code is None:
                 # If no argument is given, send a random image
                 cat_response = random.choice(http_cats)
@@ -192,8 +191,9 @@ class FUN(commands.Cog):
                 # If a HTTP code number is given, search for that number and send the corresponding HTTP cat
                 for name in http_cats:
                     if name["name"] == code:
-                        cat_response = name["name"]
-                        break
+                        cat_response = name(["name"])
+                        return
+                cat_response = str(code)
             embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
             embed = discord.Embed(colour=discord.Colour(embed_colours))
             embed.set_footer(text="Images are from https://http.cat/")
