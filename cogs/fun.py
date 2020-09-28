@@ -136,14 +136,14 @@ class FUN(commands.Cog):
     @commands.command(aliases=["say"], speach=None)
     async def speak(self, ctx, *, speach):
         await ctx.message.delete()
-        if "@everyone" in message.content:
-            if "`" not in message.content:
+        if "@everyone" in ctx.message.content:
+            if "`" not in ctx.message.content:
                 speach = speach.replace("@everyone", "@- `Oh no you don't!`")
             else:
                 speach = speach.replace("@everyone", "@- Oh no you don't!")
         # As Dottie generally requires admin perms, this eliminates users from being able to use @everyone or @here
-        if "@here" in message.content:
-            if "`" not in message.content:
+        if "@here" in ctx.message.content:
+            if "`" not in ctx.message.content:
                  speach = speach.replace("@here", "@- `Nope!`")
             else:
                 speach = speach.replace("@here", "@- Nope!")
@@ -164,7 +164,7 @@ class FUN(commands.Cog):
             await ctx.send("Uh, okay, guess I'll go build elsewhere... :pensive:")
         else:
             for i in range(size):
-                await ctx.send(("\u200b" + ("<:empty" + ":760062353063936000>")) * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
+                await ctx.send("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
                 # Sends a repeated amount of messages, adding on one "🟧" until the specified argument has been reached, including empty emojis to allow for a a triangular formation
 
 
