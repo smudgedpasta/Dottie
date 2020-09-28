@@ -105,5 +105,8 @@ Disables a previously enabled cog/category.
 - reload
 Resfreshes specified cog/category.
 
+- big_pyramid
+Just a fun command making the pyramid bigger for the bot owners to mess about with.
+
 - shutdown
 Shuts the bot down.
