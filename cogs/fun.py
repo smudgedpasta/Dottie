@@ -147,7 +147,15 @@ class FUN(commands.Cog):
                  speach = speach.replace("@here", "@- `Nope!`")
             else:
                 speach = speach.replace("@here", "@- Nope!")
-        await ctx.send(f"{speach}")
+
+        speach = speach.replace("<@&", "<@&\u200b")
+        # Prevents roles from being able to be @'d
+
+        if ctx.author.id in OWNERS:
+            await ctx.send(f"{speach}")
+        else:
+            # Places an invisible character to prevent the bot from triggering other bot prefixes
+            await ctx.send(f"\u200b {speach}")
 
 
     @commands.command()
