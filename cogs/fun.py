@@ -191,9 +191,8 @@ class FUN(commands.Cog):
                 # If a HTTP code number is given, search for that number and send the corresponding HTTP cat
                 for name in http_cats:
                     if name["name"] == code:
-                        cat_response = name(["name"])
+                        cat_response = name(http_cats["name"])
                         return
-                cat_response = str(code)
             embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
             embed = discord.Embed(colour=discord.Colour(embed_colours))
             embed.set_footer(text="Images are from https://http.cat/")
