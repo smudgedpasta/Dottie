@@ -1,3 +1,5 @@
+# Dottie
+
 Dottie is a Discord bot I make for purely experimental and practise purposes.
 
 # Credits
