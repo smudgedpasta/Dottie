@@ -1,5 +1,10 @@
-I do not intend to do anything big with Dottie at this current time.
+Dottie is a Discord bot I make for purely experimental and practise purposes.
 
-The purpose of the bot is to raise my own python know-how, and thus no public invite link will be shared.
+# Credits
 
-I might end up making a proper bot in the future if I get attached to making this, but for now, it is out of pure exploration and practice.
+@thomas-xin
+Writing code for some higher-level features, hosting the bot and helping with debugging
+(honestly, Dottie is more of a collaboration between us)
+
+@jozsefsallai
+Lending suggestions and helping with debugging
