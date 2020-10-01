@@ -120,6 +120,11 @@ async def status_update_loop():
 
 @dottie.event
 async def on_message(message):
+    ctx = await dottie.get_context(message)
+    # Checks the message for mentions, and if Dottie is mentioned, respond
+    if dottie.user in message.mentions:
+        await ctx.send(f"Hi, {message.author.display_name}! My prefix is `d.` so if you're looking for my commands, use `d.help`!")
+
     # Gets each message sent that Dottie can see and adds on 1 each time.
     global messages
     messages += 1
@@ -143,12 +148,14 @@ async def on_message(message):
         else:
             cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
+
         # Causes a temporary status change to indicate that a command has been used
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
         if LAST_COMMAND_TIMESTAMP > time.time():
             await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="whoever summoned me! 👀"))
             LAST_COMMAND_TIMESTAMP = time.time()
+
     # Creates a DM relay to send all incoming DM's to the same channel(s) where the terminal is active
     elif getattr(message.channel, "guild", None) is None and message.author != dottie.user:
         if ctx.command is None:
@@ -160,6 +167,7 @@ async def on_message(message):
             embed.set_footer(text=f"User ID: {ctx.author.id}")
             await dottie.get_channel(727087981285998593).send(embed=embed)
             await dottie.get_channel(751518107922858075).send(embed=embed)
+            
     # Creates the in-Discord python terminal
     else:
         channel = message.channel
