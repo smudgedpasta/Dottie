@@ -13,7 +13,7 @@ with open("config.json", "r") as f:
 
 
 # Sets the default command prefix to either "d." or @'ing the bot
-dottie = commands.Bot(command_prefix=commands.when_mentioned_or("d."))
+dottie = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 
 # Removes the default help command from discord.ext
 dottie.remove_command("help")
@@ -123,7 +123,7 @@ async def on_message(message):
     ctx = await dottie.get_context(message)
     # Checks the message for mentions, and if Dottie is mentioned, respond
     if dottie.user in message.mentions:
-        await ctx.send(f"Hi, {message.author.display_name}! My prefix is `d.` so if you're looking for my commands, use `d.help`!")
+        await ctx.send(f"Hi, {message.author.display_name}! My prefix is " + PREFIX + " so if you're looking for my commands, use `" + PREFIX + "help`!")
 
     # Gets each message sent that Dottie can see and adds on 1 each time.
     global messages

@@ -1,6 +1,10 @@
 import contextlib, concurrent.futures
 
 
+# Assigning the prefix to a variable
+PREFIX = "d."
+
+
 # Assigning a list of bot owners to is_owner check
 OWNERS = [530781444742578188, 201548633244565504]
 
