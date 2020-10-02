@@ -13,7 +13,7 @@ with open("config.json", "r") as f:
 
 
 # Sets the default command prefix to either "d." or @'ing the bot
-dottie = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
+dottie = commands.Bot(command_prefix=(PREFIX))
 
 # Removes the default help command from discord.ext
 dottie.remove_command("help")
