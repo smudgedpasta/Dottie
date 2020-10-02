@@ -240,12 +240,12 @@ async def on_command_error(ctx, error):
         # ~~Aka me making fun of my friend's typos~~
         if str(error).split("\"")[1] in ["hepl", "hepk", "hlep", "hekp", "pleh"]:
             await ctx.send("Did you mean \"help\"?")
-        elif str(error).split("\"")[1] in ["cars"]:
+        elif str(error).split("\"")[1] in ["cars", "cat"]:
             await ctx.send("Did you mean \"cats\"?")
         elif str(error).split("\"")[1] in ["pign"]:
             await ctx.send("Did you mean \"ping\"? ~~I hate to break it to you but I'm not a Minecraft Piglin...~~")
         else:
-            await ctx.send("Uh, that doesn't exist! Use `d.help` if you're confused!")
+            await ctx.send("Uh, that doesn't exist! Use `" + PREFIX + "help` if you're confused!")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     if isinstance(error, commands.CommandInvokeError):
@@ -272,7 +272,7 @@ async def on_guild_join(guild):
 
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = """Hi! I'm Dottie, a test project by <@530781444742578188>- with the help of <@201548633244565504> and <@245890903133257730> of course! :white_heart:\n
-For a list of my commands, use the classic command of `d.help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/blob/master/CommandsList. You can find my source code over there too if you're interested!\n
+For a list of my commands, use the classic command of `""" + PREFIX + """help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/blob/master/CommandsList. You can find my source code over there too if you're interested!\n
 Thanks for inviting me! 😊"""
     embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_image(url="https://cdn.discordapp.com/attachments/703579929840844891/740522679697932349/Dottie.gif")
