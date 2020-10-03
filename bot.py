@@ -138,10 +138,8 @@ async def on_message(message):
     if ctx.command is not None:
         # Logs the usage of a command.
         if getattr(message.author, "guild", None) is None:
-            cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]```")
         else:
-            cmd = cmd.replace("`", "")
             print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]```")
 
         # Causes a temporary status change to indicate that a command has been used
