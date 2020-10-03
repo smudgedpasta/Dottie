@@ -40,7 +40,7 @@ class FUN(commands.Cog):
         for i in ("~~", "***", "**", "*", "||", "__", "```", "'"):
             if question.startswith(i) and question.endswith(i):
                 await ctx.send(f"{i}So you asked... {random.choice(responses)}{i}")
-                break
+            break
 
 
     @commands.command(aliases=["dab"])
