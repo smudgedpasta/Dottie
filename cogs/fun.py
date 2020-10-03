@@ -36,25 +36,11 @@ class FUN(commands.Cog):
         question = question.replace("you", "I")
         question = question.replace("are", "am")
 
-        # ~~YandereDev moment~~ I mean, copies the authors text formatting | this would actually be a fun challenge to optimize XD
-        if question.startswith("~~") or question.endswith("~~"):
-            await ctx.send(f"~~So you asked... {question[2:-2]}? {random.choice(responses)}~~")
-        elif question.startswith("***") or question.endswith("***"):
-            await ctx.send(f"***So you asked... {question[3:-3]}? {random.choice(responses)}***")
-        elif question.startswith("**") or question.endswith("**"):
-            await ctx.send(f"**So you asked... {question[2:-2]}? {random.choice(responses)}**")
-        elif question.startswith("*") or question.endswith("*"):
-            await ctx.send(f"*So you asked... {question[1:-1]}? {random.choice(responses)}*")
-        elif question.startswith("||") or question.endswith("||"):
-            await ctx.send(f"||So you asked... {question[2:-2]}? {random.choice(responses)}||")
-        elif question.startswith("__") or question.endswith("__"):
-            await ctx.send(f"__So you asked... {question[2:-2]}? {random.choice(responses)}__")
-        elif question.startswith("```") or question.endswith("```"):
-            await ctx.send(f"```So you asked... {question[3:-3]}? {random.choice(responses)}```")
-        elif question.startswith("`") or question.endswith("`"):
-            await ctx.send(f"`So you asked... {question[1:-1]}? {random.choice(responses)}`")
-        else:
-            await ctx.send(f"So you asked... {question}? {random.choice(responses)}")
+        # Copies the authors text formatting
+        for i in ("~~", "***", "**", "*", "||", "__", "```", "'"):
+            if question.startswith(i) and question.endswith(i):
+                await ctx.send(f"{i}So you asked... {random.choice(responses)}{i}")
+                break
 
 
     @commands.command(aliases=["dab"])
