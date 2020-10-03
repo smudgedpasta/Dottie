@@ -37,6 +37,32 @@ class OWNER(commands.Cog):
 
 
     @commands.command()
+    async def big_heart(self, ctx, arg1, arg2):
+        heart = [
+            "00111011100",
+            "01222122210",
+            "12222222221",
+            "12222222221",
+            "12222222221",
+            "01222222210",
+            "00122222100",
+            "00012221000",
+            "00001210000",
+            "00000100000"
+            ]
+
+        emoji = {
+                "0": "<:_" + ":760062353063936000>",
+                "1": f"{arg1}",
+                "2": f"{arg2}"
+                }
+
+        trans = "".maketrans(emoji)
+        for line in heart:
+            await ctx.send(line.translate(trans)) 
+
+
+    @commands.command()
     @commands.check(is_owner)
     async def restart(self, ctx):
         await ctx.send("```css\n[❗ Restarting...]```")
