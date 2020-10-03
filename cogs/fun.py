@@ -240,7 +240,31 @@ class FUN(commands.Cog):
 
         trans = "".maketrans(emoji)
         for line in heart:
-            await ctx.send("\u200b" + line.translate(trans))        
+            await ctx.send("\u200b" + line.translate(trans))     
+
+
+    @commands.command(aliases=["ship", "love"])
+    async def matchmaking(self, ctx):
+        heart_list = [
+            "❤️",
+            "🧡",
+            "💛",
+            "💚",
+            "💙",
+            "💜",
+            "💗",
+            "💞",
+            "🤍",
+            "🖤",
+            "🤎"
+            "❣️",
+            "💕",
+            "💖"
+        ]
+
+        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed.description = "```" + random.choice(["ini", "asciidoc", "fix"]) + "\n[" + random.choice(heart_list) + " MATCHMAKING " + random.choice(heart_list) + "]```"
+        await ctx.send(embed=embed)
 
 
 def setup(dottie):
