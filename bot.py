@@ -129,6 +129,7 @@ async def on_message(message):
     global messages
     messages += 1
     ctx = await dottie.get_context(message)
+
     # Invokes command to a dispatch method (determining what method should be invoked)
     await dottie.invoke(ctx)
 
@@ -139,15 +140,13 @@ async def on_message(message):
 
     # Makes sure this part only runs if the message was a command
     if ctx.command is not None:
-        user = message.author.name
         cmd = message.content
         # Logs the usage of a command.
         if getattr(message.author, "guild", None) is None:
-            cmd = cmd.replace("`", "")
-            print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
+            print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]```")
         else:
             cmd = cmd.replace("`", "")
-            print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
+            print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]```")
 
         # Causes a temporary status change to indicate that a command has been used
         global LISTENER
@@ -159,9 +158,8 @@ async def on_message(message):
     # Creates a DM relay to send all incoming DM's to the same channel(s) where the terminal is active
     elif getattr(message.channel, "guild", None) is None and message.author != dottie.user:
         if ctx.command is None:
-            user_dm = message.author
             embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
-            embed.set_author(name=f"Incoming DM from {user_dm}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
+            embed.set_author(name=f"Incoming DM from {message.author}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
             embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
             embed.description = f"{message.content}"
             embed.set_footer(text=f"User ID: {ctx.author.id}")
