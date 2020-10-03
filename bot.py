@@ -13,7 +13,7 @@ with open("config.json", "r") as f:
 
 
 # Sets the default command prefix to either "d." or @'ing the bot
-dottie = commands.Bot(command_prefix=(PREFIX))
+dottie = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 
 # Removes the default help command from discord.ext
 dottie.remove_command("help")
@@ -44,10 +44,6 @@ def print(*args, sep=" ", end="\n"):
 
 
 dottie.eloop = eloop
-
-
-# Assigning a list of channels to act as a python terminal within Discord
-TERMINALS = [727087981285998593, 751518107922858075]
 
 
 # Copy of the global variables for use by the terminal
@@ -129,7 +125,6 @@ async def on_message(message):
     global messages
     messages += 1
     ctx = await dottie.get_context(message)
-
     # Invokes command to a dispatch method (determining what method should be invoked)
     await dottie.invoke(ctx)
 
@@ -140,13 +135,15 @@ async def on_message(message):
 
     # Makes sure this part only runs if the message was a command
     if ctx.command is not None:
+        user = message.author.name
         cmd = message.content
         # Logs the usage of a command.
         if getattr(message.author, "guild", None) is None:
-            print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]```")
+            cmd = cmd.replace("`", "")
+            print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [Direct Messages]```")
         else:
             cmd = cmd.replace("`", "")
-            print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]```")
+            print(f"```" + random.choice(["css", "ini"]) + f"\n[{user}] has run the following command: [{cmd}] in [{message.author.guild}]```")
 
         # Causes a temporary status change to indicate that a command has been used
         global LISTENER
@@ -158,8 +155,9 @@ async def on_message(message):
     # Creates a DM relay to send all incoming DM's to the same channel(s) where the terminal is active
     elif getattr(message.channel, "guild", None) is None and message.author != dottie.user:
         if ctx.command is None:
+            user_dm = message.author
             embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
-            embed.set_author(name=f"Incoming DM from {message.author}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
+            embed.set_author(name=f"Incoming DM from {user_dm}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
             embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
             embed.description = f"{message.content}"
             embed.set_footer(text=f"User ID: {ctx.author.id}")
@@ -296,13 +294,12 @@ Thanks for inviting me! 😊"""
 @commands.check(is_owner)
 async def load(ctx, extension=None):
     if extension is None:
-        dottie.load_extension("cogs.moderation")
-        dottie.load_extension("cogs.general")
-        dottie.load_extension("cogs.fun")
-        dottie.load_extension("cogs.voice")
-        dottie.load_extension("cogs.owner")
+
+        for cog in ["moderation", "general", "fun", "voice", "owner"]:
+            dottie.load_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully returned acces to all extensions.]```")
         return
+
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send(f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```")
 
@@ -312,13 +309,12 @@ async def load(ctx, extension=None):
 @commands.check(is_owner)
 async def unload(ctx, extension=None):
     if extension is None:
-        dottie.unload_extension("cogs.moderation")
-        dottie.unload_extension("cogs.general")
-        dottie.unload_extension("cogs.fun")
-        dottie.unload_extension("cogs.voice")
-        dottie.unload_extension("cogs.owner")
+
+        for cog in ["moderation", "general", "fun", "voice", "owner"]:
+            dottie.unload_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully removed all extensions until further notice.]```")
         return
+
     dottie.unload_extension(f"cogs.{extension}")
     await ctx.send(f"```asciidoc\n[Successfully removed category \"{extension.upper()}\" until further notice.]```")
 
@@ -328,18 +324,13 @@ async def unload(ctx, extension=None):
 @commands.check(is_owner)
 async def reload(ctx, extension=None):
     if extension is None:
-        dottie.unload_extension("cogs.moderation")
-        dottie.load_extension("cogs.moderation")
-        dottie.unload_extension("cogs.general")
-        dottie.load_extension("cogs.general")
-        dottie.unload_extension("cogs.fun")
-        dottie.load_extension("cogs.fun")
-        dottie.unload_extension("cogs.voice")
-        dottie.load_extension("cogs.voice")
-        dottie.unload_extension("cogs.owner")
-        dottie.load_extension("cogs.owner")
+
+        for cog in ["moderation", "general", "fun", "voice", "owner"]:
+            dottie.unload_extension(f"cogs.{cog}")
+            dottie.load_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully refreshed all extensions.]```")
         return
+
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
     await ctx.send(f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```")

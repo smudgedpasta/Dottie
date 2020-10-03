@@ -12,6 +12,10 @@ def is_owner(ctx):
   return ctx.message.author.id in OWNERS
 
 
+  # Assigning a list of channels to act as a python terminal within Discord
+TERMINALS = [727087981285998593, 751518107922858075]
+
+
 # A context manager that enables concurrent imports.
 class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
 
