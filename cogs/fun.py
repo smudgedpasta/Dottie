@@ -29,6 +29,14 @@ class FUN(commands.Cog):
             "Ay, ask me later, I'm busy with my 10 hour tunez! :headphones:"
         ]
 
+        answer = [
+            "So you asked...",
+            "You'd like to know...",
+            "Hi there, you asked me...",
+            "Hm...",
+            ""
+        ]
+
         # Replaces words of personal address to sound like a legitimate response, and replaces "?" with an empty string
         question = question.replace("?", "")
         question = question.replace("yourself", "myself")
@@ -39,8 +47,10 @@ class FUN(commands.Cog):
         # Copies the authors text formatting
         for i in ("~~", "***", "**", "*", "||", "__", "```", "'"):
             if question.startswith(i) and question.endswith(i):
-                await ctx.send(f"{i}So you asked... {random.choice(responses)}{i}")
-                break
+                await ctx.send(f"{i}{random.choice(answer)} {question[len(i):-len(i)]}? {random.choice(responses)}{i}")
+                return
+
+        await ctx.send(f"{random.choice(answer)} {question}? {random.choice(responses)}")
 
 
     @commands.command(aliases=["dab"])
