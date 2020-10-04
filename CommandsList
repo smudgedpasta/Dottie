@@ -80,6 +80,9 @@ Dottie will send the corresponding http_cat, but if it doesn't exist it will def
 - dog (aliases: og, doggo, puppo)
 Sends a random image from the https://dog.ceo/api/breeds/image/random website.
 
+- heart
+If you use this command while giving Dottie two emojis, she will make a heart out of them.
+
 
 
 _VOICE_
@@ -108,6 +111,9 @@ Resfreshes specified cog/category.
 
 - big_pyramid
 Just a fun command making the pyramid bigger for the bot owners to mess about with.
+
+- big_heart
+The same reasonings as the big_pyramid command, only with the heart command.
 
 - restart
 Reopens the program and closes the current one.
