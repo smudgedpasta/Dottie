@@ -277,5 +277,18 @@ class FUN(commands.Cog):
         await ctx.send(embed=embed)
 
 
+    @commands.command(aliases=["marble"])
+    async def marble_fox(self, ctx):
+        marble_foxes = None
+        with open("bot/marble_foxes.json", "r") as f:
+                dreamstime_imgs = json.load(f)
+                marble_foxes = random.choice(dreamstime_imgs)
+                embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
+                embed = discord.Embed(colour=discord.Colour(embed_colours))
+                embed.set_footer(text="Images are from https://www.dreamstime.com/photos-images/marble-fox.html")
+                embed.set_image(url=marble_foxes["image"])
+                await ctx.send(embed=embed)
+
+
 def setup(dottie):
     dottie.add_cog(FUN(dottie))
