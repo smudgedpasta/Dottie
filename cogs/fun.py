@@ -219,6 +219,7 @@ class FUN(commands.Cog):
         data = r.json()
         embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
         embed = discord.Embed(colour=discord.Colour(embed_colours))
+        embed.set_footer(text="Images are from https://dog.ceo/api/breeds/image/random")
         embed.set_image(url=data["message"])
         # If the HTTP request has succeeded, the JSON would create two parametres, the one in which we need is "message"
         embed.description = random.choice(["Bärk!", "Börk!", "🐶", "🐕"])
