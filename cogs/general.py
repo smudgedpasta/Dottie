@@ -58,7 +58,7 @@ class GENERAL(commands.Cog):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and caption!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n
+***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and caption!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ``` ```\n
 """
@@ -171,7 +171,7 @@ class GENERAL(commands.Cog):
         embed.set_image(url=member.avatar_url_as(format="png", size=4096))
         embed.set_footer(text=f"{member.display_name}'s wonderful icon picture! 👍")
         await ctx.send(embed=embed)
-
+        
 
 def setup(dottie):
     dottie.add_cog(GENERAL(dottie))
