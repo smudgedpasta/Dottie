@@ -83,6 +83,9 @@ Sends a random image from the https://dog.ceo/api/breeds/image/random website.
 - heart
 If you use this command while giving Dottie two emojis, she will make a heart out of them.
 
+- marble_fox (aliases: marble)
+Sends a random image from the https://www.dreamstime.com/photos-images/marble-fox.html website.
+
 
 
 _VOICE_
