@@ -288,6 +288,7 @@ class FUN(commands.Cog):
                 embed = discord.Embed(colour=discord.Colour(embed_colours))
                 embed.set_footer(text="Images are from https://www.dreamstime.com/photos-images/marble-fox.html")
                 embed.set_image(url=marble_foxes["image"])
+                embed.description = random.choice(["Yip!", "Yap!", "🦊", "<:sleepy_smudgy:762368404069023784>"])
                 await ctx.send(embed=embed)
 
 
