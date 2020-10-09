@@ -1,4 +1,4 @@
-from modules import *
+from imports import *
 
 
 class OWNER(commands.Cog):

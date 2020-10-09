@@ -1,4 +1,4 @@
-from modules import *
+from imports import *
 
 
 class FUN(commands.Cog):
@@ -79,7 +79,7 @@ class FUN(commands.Cog):
     @commands.command()
     async def photo(self, ctx):
         Image_Pool = None
-        with open("bot/Image_Pool.json", "r") as f:
+        with open("json/Image_Pool.json", "r") as f:
             Image_Pool = json.load(f)
             # Chooses a random segment of the image pool json
             random_image = random.choice(Image_Pool)
@@ -93,7 +93,7 @@ class FUN(commands.Cog):
     @commands.command()
     async def nsfw_photo(self, ctx):
         NSFW_Image_Pool = None
-        with open("bot/NSFW_Image_Pool.json", "r") as f:
+        with open("json/NSFW_Image_Pool.json", "r") as f:
             NSFW_Image_Pool = json.load(f)
             random_image = random.choice(NSFW_Image_Pool)
             embed = discord.Embed(colour=discord.Colour(15277667))
@@ -185,7 +185,7 @@ class FUN(commands.Cog):
     @commands.command(aliases=["cats", "http"])
     async def http_cats(self, ctx, code=None):
         http_cats = None
-        with open("bot/http_cats.json", "r", encoding="utf-8") as f:
+        with open("json/http_cats.json", "r", encoding="utf-8") as f:
             # Encoding UTF-8 allows for unicode emojis to be parsed in json.load()
             http_cats = json.load(f)
             for name in http_cats:
@@ -281,7 +281,7 @@ class FUN(commands.Cog):
     @commands.command(aliases=["marble"])
     async def marble_fox(self, ctx):
         marble_foxes = None
-        with open("bot/marble_foxes.json", "r") as f:
+        with open("json/marble_foxes.json", "r") as f:
                 dreamstime_imgs = json.load(f)
                 marble_foxes = random.choice(dreamstime_imgs)
                 embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])

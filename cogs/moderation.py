@@ -1,4 +1,4 @@
-from modules import *
+from imports import *
 
 
 class MODERATION(commands.Cog):

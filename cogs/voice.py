@@ -1,4 +1,4 @@
-from modules import *
+from imports import *
 
 
 class VOICE(commands.Cog):
@@ -33,7 +33,7 @@ class VOICE(commands.Cog):
             for vc in self.dottie.voice_clients:
                 if vc.guild == ctx.guild:
                     # Checks to make sure the vc and the guild are the same
-                    vc.play(discord.FFmpegOpusAudio("assets/music/Normal_Despacito.ogg"))
+                    vc.play(discord.FFmpegOpusAudio("misc/assets/music/Normal_Despacito.ogg"))
                     # Pulls the Despacito file straight from the directory
                     await ctx.send("***```css\n🥁 Embrace my [DESPACITO!]```***")
                     return

@@ -2,7 +2,7 @@
 
 
 # Imports all required modules... As a module 🙃
-from modules import *
+from imports import *
 
 
 # Hides the Discord Token behind an unseen json file
