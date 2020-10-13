@@ -255,7 +255,7 @@ class FUN(commands.Cog):
 
 
     @commands.command(aliases=["ship", "love"])
-    async def matchmaking(self, ctx):
+    async def matchmaking(self, ctx, arg, arg2):
         heart_list = [
             "❤️",
             "🧡",
@@ -273,9 +273,10 @@ class FUN(commands.Cog):
             "💖"
         ]
 
-        embed = discord.Embed(colour=discord.Colour(15277667))
-        embed.description = "```" + random.choice(["ini", "asciidoc", "fix"]) + "\n[" + random.choice(heart_list) + " MATCHMAKING " + random.choice(heart_list) + "]```"
-        await ctx.send(embed=embed)
+        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{random.randint(0, 100)}%!] " + random.choice(["✨", "🤍", "😏", "😊"]) + "```"
+        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
+        await ctx.send(f"{random.choice(heart_list)}" + " ***MATCHMAKING*** " + f"{random.choice(heart_list)}", embed=embed)
 
 
     @commands.command(aliases=["marble"])
