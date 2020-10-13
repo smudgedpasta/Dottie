@@ -86,6 +86,9 @@ If you use this command while giving Dottie two emojis, she will make a heart ou
 - marble_fox (aliases: marble)
 Sends a random image from the https://www.dreamstime.com/photos-images/marble-fox.html website.
 
+- matchmaking (aliases: ship, love)
+Ships two provided arguments.
+
 
 
 _VOICE_
