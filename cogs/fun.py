@@ -256,35 +256,66 @@ class FUN(commands.Cog):
 
     @commands.command(aliases=["ship", "love"])
     async def matchmaking(self, ctx, arg, arg2):
-        heart_list = [
-            "❤️",
-            "🧡",
-            "💛",
-            "💚",
-            "💙",
-            "💜",
-            "💗",
-            "💞",
-            "🤍",
-            "🖤",
-            "🤎"
-            "❣️",
-            "💕",
-            "💖"
-        ]
+        heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
         
         # Puts the random match from the list into a variable so they can be used various times and remain consistent
         heart = random.choice(heart_list)
 
         percentage = random.randint(0, 100)
 
+        # This block is to determine how full the bar is. I fully admit that I am bad at coding and am a Yanderedev clone. 😔
+        if percentage == 0:
+            bar = "🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(1, 5):
+            bar = "🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(6, 10):
+            bar = "🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(11, 15):
+            bar = "🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(16, 20):
+            bar = "🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(21, 25):
+            bar = "🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(26, 30):
+            bar = "🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(31, 35):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(36, 40):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(41, 45):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(46, 50):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(51, 55):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(56, 60):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(61, 65):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(66, 70):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(71, 75):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤"
+        elif percentage in range(76, 80):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤"
+        elif percentage in range(81, 85):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤"
+        elif percentage in range(86, 90):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤"
+        elif percentage in range(91, 95):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤"
+        elif percentage in range(96, 99):
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤"
+        else:
+            bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍"
+
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
         if arg in ["Smudge", "smudge", "smudgedpasta"] and arg2 in ["Txin", "txin"] or arg in ["Txin", "txin"] and arg2 in ["Smudge", "smudge", "smudgedpasta"]:
-            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ ❤️ 🧡 💛 💚 💙 💜```"
+            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 🤍```" + """
+❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛"""
         else:
             # I need to make this seeded
-            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```" + """
-🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"""
+            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```\n" + bar
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
