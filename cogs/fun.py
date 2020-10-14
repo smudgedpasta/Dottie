@@ -277,8 +277,11 @@ class FUN(commands.Cog):
         heart = random.choice(heart_list)
 
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-        # I need to make this seeded
-        embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{random.randint(0, 100)}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```"
+        if arg in ["Smudge", "smudge", "smudgedpasta"] and arg2 in ["Txin", "txin"] or arg in ["Txin", "txin"] and arg2 in ["Smudge", "smudge", "smudgedpasta"]:
+            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ ❤️ 🧡 💛 💚 💙 💜```"
+        else:
+            # I need to make this seeded
+            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{random.randint(0, 100)}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```"
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
