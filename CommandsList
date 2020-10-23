@@ -89,6 +89,9 @@ Sends a random image from the https://www.dreamstime.com/photos-images/marble-fo
 - matchmaking (aliases: ship, love)
 Ships two provided arguments.
 
+- fox
+Sends a random image of a fox from the https://randomfox.ca/ website.
+
 
 
 _VOICE_

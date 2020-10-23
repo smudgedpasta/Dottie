@@ -336,14 +336,14 @@ class FUN(commands.Cog):
 
     @commands.command()
     async def fox(self, ctx):
-        r = requests.get("https://randomfox.ca/")
+        r = requests.get("https://randomfox.ca/floof/")
         data = r.json()
         embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
         embed = discord.Embed(colour=discord.Colour(embed_colours))
         embed.set_footer(text="Images are from https://randomfox.ca/")
-        embed.set_image(url=data["message"])
-        embed.description = random.choice(["Yip!", "Yap!", "🦊", "<:sleepy_smudgy:762368404069023784>"])
-        await ctx.send(embed=embed)    
+        embed.set_image(url=data["image"])
+        embed.description = random.choice(["Squeak!", "Ring-ding-ding-ding-dingeringeding!", "🦊", "<:sleepy_fox:762367799150510164>"])
+        await ctx.send(embed=embed)
 
 
 def setup(dottie):
