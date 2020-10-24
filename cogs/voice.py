@@ -38,7 +38,7 @@ class VOICE(commands.Cog):
                     await ctx.send("***```css\n🥁 Embrace my [DESPACITO!]```***")
                     return
         except:
-            await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one and use `" + PREFIX + "connect` first!")
+            await ctx.send("How are you meant to hear my *100% normal Despacito* from outside of a Voice Channel? Hop in one first!")
 
 
 def setup(dottie):
