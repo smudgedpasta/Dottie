@@ -28,7 +28,7 @@ class VOICE(commands.Cog):
     @commands.command(aliases=["espacito", "Despacito"], pass_context=True)
     async def despacito(self, ctx):
         try:
-            channel = ctx.message.author.channel
+            channel = ctx.message.author.voice.channel
             await channel.connect()
             for vc in self.dottie.voice_clients:
                 if vc.guild == ctx.guild:
