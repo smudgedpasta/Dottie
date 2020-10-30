@@ -131,7 +131,10 @@ class FUN(commands.Cog):
 
     @commands.command(aliases=["say"], speach=None)
     async def speak(self, ctx, *, speach):
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            pass
         if "@everyone" in ctx.message.content:
             if "`" not in ctx.message.content:
                 speach = speach.replace("@everyone", "@- `Oh no you don't!`")
@@ -140,7 +143,7 @@ class FUN(commands.Cog):
         # As Dottie generally requires admin perms, this eliminates users from being able to use @everyone or @here
         if "@here" in ctx.message.content:
             if "`" not in ctx.message.content:
-                 speach = speach.replace("@here", "@- `Nope!`")
+                speach = speach.replace("@here", "@- `Nope!`")
             else:
                 speach = speach.replace("@here", "@- Nope!")
 
