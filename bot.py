@@ -264,7 +264,7 @@ async def on_guild_join(guild):
 
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = f"""Hi! I'm {dottie.user.name}, a test project by <@530781444742578188>- with the help of <@201548633244565504> and <@245890903133257730> of course! :white_heart:\n
-For a list of my commands, use the classic command of `""" + PREFIX + """help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/blob/master/CommandsList. You can find my source code over there too if you're interested!\n
+For a list of my commands, use the classic command of `""" + PREFIX + """help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/wiki. You can find my source code over there too if you're interested!\n
 Thanks for inviting me! 😊"""
     embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
     embed.set_image(url="https://cdn.discordapp.com/attachments/703579929840844891/740522679697932349/Dottie.gif")

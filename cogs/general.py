@@ -32,7 +32,7 @@ class GENERAL(commands.Cog):
     @commands.command()
     async def help(self, ctx):
         page1 = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-        page1.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        page1.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         page1.description = "*I think I need heeelp, I'm drowning in myseeelf* 🎵"
         page1.set_image(url="https://cdn.discordapp.com/attachments/683233571405561876/746281046231875594/image0.png")
         page1.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text="Click the reactions to scroll through the pages!")
@@ -48,7 +48,7 @@ class GENERAL(commands.Cog):
 **:headphones: __VOICE__ :headphones:**\n
 ***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*
  """
-        page2.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        page2.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         page2.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
         page3 = discord.Embed(colour=discord.Colour(15277667))
@@ -62,7 +62,7 @@ class GENERAL(commands.Cog):
 **:headphones: __VOICE__ :headphones:**\n
 ``` ```\n
 """
-        page3.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/blob/master/CommandsList", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        page3.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         page3.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
         # Creates a list of all pages of the help command
