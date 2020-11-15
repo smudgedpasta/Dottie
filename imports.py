@@ -56,7 +56,6 @@ with MultiThreadedImporter() as importer:
         "psutil",
         "traceback",
         "math",
-        "youtube_dl",
         "discord",
         "discord.ext",
         "json",
