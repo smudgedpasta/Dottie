@@ -40,13 +40,17 @@ class GENERAL(commands.Cog):
         page2 = discord.Embed(colour=discord.Colour(15277667))
         page2.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
-***purge***\n*```Clears inputted message count, not counting the command message.```*\n***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n
+***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***help***\n*```Legends say you've found this command already. 👀```*\n***ping***\n*```Returns my ping latency.```*\n***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a mentioned user!```*\n
+***help***\n*```Legends say you've found this command already. 👀```*\n***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a mentioned user!```*\n***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***hello***\n**```fix\nAliases: "hemlo", "henlo", "hoi", or any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n
+***hello***\n**```fix\nAliases: "hemlo", "henlo", "hoi", or any variant of "hello" or "hi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***rate***\n*```Give me anything and I'll give it a rating!```*\n
+**:frame_photo: __IMAGE__ :frame_photo:**\n
+***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*\n
 **:headphones: __VOICE__ :headphones:**\n
-***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*
+***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito, Despacito```**\n*```Plays a totally normal version of Despacito!```*\n
+**:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
+```json\n"No commands yet of this category!"```\n
  """
         page2.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         page2.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
@@ -54,19 +58,41 @@ class GENERAL(commands.Cog):
         page3 = discord.Embed(colour=discord.Colour(15277667))
         page3.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
-``` ```\n
+***purge***\n*```Clears inputted message count, not counting the command message.```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n
+***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***ping***\n*```Returns my ping latency.```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and caption!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***fox***\n*```Sends a random image of any kind of fox!```*\n
+***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
+**:frame_photo: __IMAGE__ :frame_photo:**\n
+***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n***fox***\n*```Sends a random image of any kind of fox!```*\n
 **:headphones: __VOICE__ :headphones:**\n
-``` ```\n
+```json\n"Whoops, no further commands yet!"```\n
+**:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
+```json\n"No commands yet of this category!"```\n
 """
         page3.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         page3.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
+        page4 = discord.Embed(colour=discord.Colour(15277667))
+        page4.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
+**:crossed_swords: __MODERATION__ :crossed_swords:**\n
+```json\n"Whoops, no further commands yet!"```\n
+**:white_heart: __GENERAL__ :white_heart:**\n
+```json\n"Whoops, no further commands yet!"```\n
+**:french_bread: __FUN__ :french_bread:**\n
+***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n
+**:frame_photo: __IMAGE__ :frame_photo:**\n
+```json\n"Whoops, no further commands yet!"```\n
+**:headphones: __VOICE__ :headphones:**\n
+```json\n"Whoops, no further commands yet!"```\n
+**:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
+```json\n"No commands yet of this category!"```\n
+"""
+        page4.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        page4.set_footer(text="For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
+
         # Creates a list of all pages of the help command
-        pages = [page1, page2, page3]
+        pages = [page1, page2, page3, page4]
 
         # Sends the first page when the command is run
         message = await ctx.send(embed=page1)
