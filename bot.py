@@ -291,7 +291,7 @@ Thanks for inviting me! 😊"""
 async def load(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "voice", "owner"]:
+        for cog in ["moderation", "general", "fun", "image" "voice", "owner"]:
             dottie.load_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully returned acces to all extensions.]```")
         return
@@ -306,7 +306,7 @@ async def load(ctx, extension=None):
 async def unload(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "voice", "owner"]:
+        for cog in ["moderation", "general", "fun", "image", "voice", "owner"]:
             dottie.unload_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully removed all extensions until further notice.]```")
         return
@@ -321,7 +321,7 @@ async def unload(ctx, extension=None):
 async def reload(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "voice", "owner"]:
+        for cog in ["moderation", "general", "fun", "image", "voice", "owner"]:
             dottie.unload_extension(f"cogs.{cog}")
             dottie.load_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully refreshed all extensions.]```")
