@@ -56,7 +56,7 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ``` ```\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
+***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***rate***\n*```Give me anything and I'll give it a rating!```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and caption!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***fox***\n*```Sends a random image of any kind of fox!```*\n
 **:headphones: __VOICE__ :headphones:**\n
@@ -171,6 +171,15 @@ class GENERAL(commands.Cog):
         embed.set_image(url=member.avatar_url_as(format="png", size=4096))
         embed.set_footer(text=f"{member.display_name}'s wonderful icon picture! 👍")
         await ctx.send(embed=embed)
+
+
+    @commands.command()
+    async def random(self, ctx, *args):
+        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")
+        embed.description = f"```ini\n🎉 [{random.choice(args)}] 🎉```"
+        args = args.replace("`", "")
+        await ctx.send("🥁 **Your random selection is...**", embed=embed)
         
 
 def setup(dottie):
