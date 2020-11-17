@@ -35,12 +35,17 @@ def input(*args, **kwargs):
         time.sleep(0.2)
     return LISTENER
 
-# Overwrites the python print mechanic to send terminal logs to a log channel
+# Overwrites the python print mechanic to send terminal logged embeds to a log channel
 _print = print
 def print(*args, sep=" ", end="\n"):
-    create_task(LOG_CHANNEL.send(str(sep).join(str(i) for i in args) + end))
-    create_task(LOG_CHANNEL_2.send(str(sep).join(str(i) for i in args) + end))
-    _print(*args)
+  embed = discord.Embed(colour=discord.Colour(15277667))
+  embed.set_author(name=dottie.user.name, icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+  embed.description = str(sep).join(str(i) for i in args) + end
+
+  create_task(LOG_CHANNEL.send(embed=embed))
+  create_task(LOG_CHANNEL_2.send(embed=embed))
+
+  return _print(*args)
 
 
 dottie.eloop = eloop
