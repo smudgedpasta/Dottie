@@ -102,7 +102,7 @@ class OWNER(commands.Cog):
 *```fix\n🔸 RULE ONE```*
 *What the <@&677928041183182890>'s say, goes.*
 
-The server admins may not have their roles displayed at the side, but there will always be indicators of who they are. The server admins currently are <@530781444742578188> and <201548633244565504>, who are marked by the roles <@&668062248907964417> and <@&723119556301815818>. 
+The server admins may not have their roles displayed at the side, but there will always be indicators of who they are. The server admins currently are <@530781444742578188> and <@201548633244565504>, who are marked by the roles <@&668062248907964417> and <@&723119556301815818>. 
 If you are asked to stop behaving a certain way, you are expected to listen.
 
 *```fix\n🔸 RULE TWO```*
@@ -132,10 +132,13 @@ If users have not requested or discussed critique (especially in <#6680716710637
 ```In a nutshell, the rules can be defined as being respectful to other users. I may come across as strict, but the server is open to everyone, so don't feel like you can't be yourself.```
 """
         
-        embed2.set_footer(text="Concerned or confused about anything? @ (in #questions-and-feedback) or DM a @Server Admin!")
-        embed2.set_image(url="https://cdn.discordapp.com/attachments/668061258007969802/723157201903943730/Untitled163.png")
+        embed2.set_footer(text="Concerned or confused about anything? @ in #questions-and-feedback or DM a Server Admin")
 
-        await self.dottie.get_channel(727087981285998593).send(embed=embed)
+        await self.dottie.get_channel(668061258007969802).send("https://cdn.discordapp.com/attachments/668061258007969802/723157201903943730/Untitled163.png")
+        await self.dottie.get_channel(668061258007969802).send(embed=embed)
+        await self.dottie.get_channel(668061258007969802).send(embed=embed2)
+
+        await ctx.send("Rules successfully added!")
     
 
 def setup(dottie):
