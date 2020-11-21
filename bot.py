@@ -39,8 +39,17 @@ def input(*args, **kwargs):
 _print = print
 def print(*args, sep=" ", end="\n"):
   embed = discord.Embed(colour=discord.Colour(15277667))
-  embed.set_author(name=dottie.user.name, icon_url=dottie.user.avatar_url_as(format="png", size=4096))
-  embed.description = str(sep).join(str(i) for i in args) + end
+  embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
+
+  create_task(LOG_CHANNEL.send(embed=embed))
+  create_task(LOG_CHANNEL_2.send(embed=embed))
+
+  return _print(*args)
+
+
+def print2(*args, sep=" ", end="\n"):
+  embed = discord.Embed(colour=discord.Colour(15277667))
+  embed.description = "```py\n" + str(sep).join(str(i) for i in args) + end + "```"
 
   create_task(LOG_CHANNEL.send(embed=embed))
   create_task(LOG_CHANNEL_2.send(embed=embed))
@@ -143,9 +152,9 @@ async def on_message(message):
     if ctx.command is not None:
         # Logs the usage of a command.
         if getattr(message.author, "guild", None) is None:
-            print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]```")
+            print(f"[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]```")
         else:
-            print(f"```" + random.choice(["css", "ini"]) + f"\n[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]```")
+            print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]```")
 
         # Causes a temporary status change to indicate that a command has been used
         global LISTENER
@@ -203,8 +212,8 @@ async def on_ready():
     globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
     globals()["eloop"] = asyncio.get_event_loop()
     # Sends a message to the log channel signifying that Dottie has logged in successfully
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[Logged in as user {dottie.user} (ID = {dottie.user.id})]```")
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Successfully loaded and ready to go!]```")
+    print(f"Logged in as user [{dottie.user}] [(ID = {dottie.user.id})]")
+    print("[Successfully loaded and ready to go!]")
     # The random markdown allows the log to send messages in multicolours
 
 
@@ -218,7 +227,7 @@ async def serverstats_update():
             globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
             globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
             globals()["eloop"] = asyncio.get_event_loop()
-            print(f"```" + random.choice(["css", "ini"]) + f"\nTime at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within 60m interval: [{messages}]```".format())
+            print(f"Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within [60m] interval: [{messages}]".format())
             # Defaults the message count back down to 0
             messages = 0
         except Exception as e:
@@ -250,17 +259,17 @@ async def on_command_error(ctx, error):
     try:
         raise error
     except:
-        print("```py\n" + traceback.format_exc() + "```")
+        print2(traceback.format_exc())
 
 
 # When a user joins or leaves a server Dottie is in, it logs to the log channel
 @dottie.event
 async def on_member_join(member):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member}] has joined [{member.guild}]```")
+    print(f"[{member}] has joined [{member.guild}]")
 
 @dottie.event
 async def on_member_remove(member):
-    print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + f"\n[{member}] has left [{member.guild}]```")
+    print(f"[{member}] has left [{member.guild}]")
 
 
 @dottie.event
