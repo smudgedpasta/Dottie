@@ -69,7 +69,7 @@ class OWNER(commands.Cog):
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
             # Forces Dottie to leave VC if they're currently in one
-        os.system("start cmd /k python bot.py")
+        os.system("start cmd /c python bot.py")
         psutil.Process().kill()
         # Mimics the .bat, opens the program again and closes the current one
 
@@ -84,12 +84,6 @@ class OWNER(commands.Cog):
         await asyncio.sleep(0.5)
         # Has the shutdown process sleep briefly so there's time for the message to send and log to the log channel
         await ctx.bot.logout()
-
-
-    @commands.command()
-    @commands.check(is_owner)
-    async def emoji(self, ctx):
-        await ctx.send("<a:MizaCoin_Ver2" + ":771432580545380394> <a:MizaCoin_Ver1" + ":771442939914223657>")
 
     
     # Just some code for my Discord Server's rules 🙃
