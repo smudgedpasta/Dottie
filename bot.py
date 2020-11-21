@@ -152,9 +152,9 @@ async def on_message(message):
     if ctx.command is not None:
         # Logs the usage of a command.
         if getattr(message.author, "guild", None) is None:
-            print(f"[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]```")
+            print(f"[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]")
         else:
-            print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]```")
+            print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]")
 
         # Causes a temporary status change to indicate that a command has been used
         global LISTENER
