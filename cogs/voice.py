@@ -25,7 +25,7 @@ class VOICE(commands.Cog):
         await ctx.send("```ini\n[Successfully disconnected from the Voice Channel... Sad that it is time to go... 😔]```")
 
 
-    @commands.command(aliases=["espacito", "Despacito"], pass_context=True)
+    @commands.command(aliases=["espacito"], pass_context=True)
     async def despacito(self, ctx):
         try:
             channel = ctx.message.author.voice.channel

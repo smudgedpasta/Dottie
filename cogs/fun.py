@@ -6,7 +6,7 @@ class FUN(commands.Cog):
         self.dottie = dottie
 
 
-    @commands.command(aliases=["hi", "HI", "Hi", "hI", "hemlo", "henlo", "hoi"] + ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("hello")) for z in range(1, 32)])
+    @commands.command(aliases=["hi", "hemlo", "hoi"])
     # Finds every possible case variation in "hello"
     async def hello(self, ctx):
         await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
