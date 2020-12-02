@@ -299,6 +299,14 @@ Thanks for inviting me! 😊"""
         await target_channel.send(embed=embed)
 
 
+@dottie.command()
+@commands.check(is_owner)
+async def exec_add(ctx):
+    f = open("terminals", "a")
+    f.write(str(ctx.message.channel.id) + "\n")
+    await ctx.send("```json\n\"Added channel ID to the list of terminals!\"```")
+
+
 # If a cog(s) is disabled, this re-enables it
 @dottie.command()
 @commands.check(is_owner)

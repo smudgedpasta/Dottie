@@ -2,7 +2,7 @@ import contextlib, concurrent.futures
 
 
 # Assigning the prefix to a variable
-PREFIX = "d."
+PREFIX = "d!"
 
 
 # Assigning a list of bot owners to is_owner check
@@ -12,8 +12,14 @@ def is_owner(ctx):
   return ctx.message.author.id in OWNERS
 
 
-  # Assigning a list of channels to act as a python terminal within Discord
-TERMINALS = [727087981285998593, 751518107922858075]
+# Assigning a list of channels to act as a python terminal within Discord
+# TERMINALS = [757848291181461574]
+
+
+# Assigning a list of channels to act as a python terminal within Discord
+with open("terminals", "r") as f:
+  s = f.read()
+TERMINALS = {int(i) for i in s.splitlines() if i}
 
 
 # A context manager that enables concurrent imports.
@@ -56,6 +62,7 @@ with MultiThreadedImporter() as importer:
         "psutil",
         "traceback",
         "math",
+        "youtube_dl",
         "discord",
         "discord.ext",
         "json",
