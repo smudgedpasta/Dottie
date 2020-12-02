@@ -315,7 +315,7 @@ async def exec_remove(ctx):
     TERMINALS.discard(ctx.message.channel.id)
     with open("terminals", "w") as f:
         f.write("\n".join(str(i) for i in TERMINALS))
-    await ctx.send("```json\n\"Removed channel ID to the list of terminals!\"```")
+    await ctx.send("```json\n\"Removed channel ID from the list of terminals!\"```")
 
 
 # If a cog(s) is disabled, this re-enables it
