@@ -302,9 +302,10 @@ Thanks for inviting me! 😊"""
 @dottie.command()
 @commands.check(is_owner)
 async def exec_add(ctx):
-    TERMINALS.add(ctx.message.channel.id)
-    with open("terminals", "w") as f:
-        f.write("\n".join(str(i) for i in TERMINALS))
+    if ctx.message.channel.id not in TERMINALS:
+        TERMINALS.add(ctx.message.channel.id)
+        with open("terminals", "a") as f:
+            f.write(str(ctx.message.channel.id) + "\n")
     await ctx.send("```json\n\"Added channel ID to the list of terminals!\"```")
 
 
