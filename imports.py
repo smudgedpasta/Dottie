@@ -2,7 +2,7 @@ import contextlib, concurrent.futures
 
 
 # Assigning the prefix to a variable
-PREFIX = "d!"
+PREFIX = "d."
 
 
 # Assigning a list of bot owners to is_owner check
