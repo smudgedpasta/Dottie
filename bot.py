@@ -302,9 +302,19 @@ Thanks for inviting me! 😊"""
 @dottie.command()
 @commands.check(is_owner)
 async def exec_add(ctx):
-    f = open("terminals", "a")
-    f.write(str(ctx.message.channel.id) + "\n")
+    TERMINALS.add(ctx.message.channel.id)
+    with open("terminals", "w") as f:
+        f.write("\n".join(str(i) for i in TERMINALS))
     await ctx.send("```json\n\"Added channel ID to the list of terminals!\"```")
+
+
+@dottie.command()
+@commands.check(is_owner)
+async def exec_remove(ctx):
+    TERMINALS.discard(ctx.message.channel.id)
+    with open("terminals", "w") as f:
+        f.write("\n".join(str(i) for i in TERMINALS))
+    await ctx.send("```json\n\"Removed channel ID to the list of terminals!\"```")
 
 
 # If a cog(s) is disabled, this re-enables it
