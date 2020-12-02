@@ -194,45 +194,45 @@ class FUN(commands.Cog):
         # This block is to determine how full the bar is. I fully admit that I am bad at coding and am a Yanderedev clone. 😔
         if percentage == 0:
             bar = "🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(1, 5):
+        elif percentage in range(1, 6):
             bar = "🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(6, 10):
+        elif percentage in range(6, 11):
             bar = "🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(11, 15):
+        elif percentage in range(11, 16):
             bar = "🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(16, 20):
+        elif percentage in range(16, 21):
             bar = "🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(21, 25):
+        elif percentage in range(21, 26):
             bar = "🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(26, 30):
+        elif percentage in range(26, 31):
             bar = "🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(31, 35):
+        elif percentage in range(31, 36):
             bar = "🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(36, 40):
+        elif percentage in range(36, 41):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(41, 45):
+        elif percentage in range(41, 46):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(46, 50):
+        elif percentage in range(46, 51):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(51, 55):
+        elif percentage in range(51, 56):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(56, 60):
+        elif percentage in range(56, 61):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(61, 65):
+        elif percentage in range(61, 66):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(66, 70):
+        elif percentage in range(66, 71):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(71, 75):
+        elif percentage in range(71, 76):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤"
-        elif percentage in range(76, 80):
+        elif percentage in range(76, 81):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤"
-        elif percentage in range(81, 85):
+        elif percentage in range(81, 86):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤"
-        elif percentage in range(86, 90):
+        elif percentage in range(86, 91):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤"
-        elif percentage in range(91, 95):
+        elif percentage in range(91, 96):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤"
-        elif percentage in range(96, 99):
+        elif percentage in range(96, 100):
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤"
         else:
             bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍"
