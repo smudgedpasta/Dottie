@@ -19,7 +19,7 @@ def is_owner(ctx):
 # Assigning a list of channels to act as a python terminal within Discord
 try:
     with open("terminals", "r") as f:
-    s = f.read()
+        s = f.read()
 except FileNotFoundError:
     s = ""
 TERMINALS = {int(i) for i in s.splitlines() if i}
