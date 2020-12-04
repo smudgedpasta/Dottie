@@ -115,7 +115,23 @@ async def status_update_loop():
 async def on_message(message):
     ctx = await dottie.get_context(message)
     if dottie.user in message.mentions:
-        await ctx.send(f"Hi, {message.author.display_name}! My prefix is " + PREFIX + " so if you're looking for my commands, use `" + PREFIX + "help`!")
+        responses = [
+            f"Hi, {message.author.display_name}! My prefix is `" + PREFIX + "` so if you're looking for my commands, use `" + PREFIX + "help`!",
+            f"What's up, {message.author.display_name}, aka... {message.author.name} :smirk:. If you need help, use `" + PREFIX + "help`!",
+            f"Aaah I've been @! How could you do this to me, {message.author.mention()}?!",
+            f"Hello, {message.author.display_name}! I appreciate you wanting to speak to me! Use `" + PREFIX + "help` if you're interested!",
+            f"Here, decode this, {message.author.display_name}... `64 51 77 34 77 39 57 67 58 63 51` :smirk:",
+            f"WOAH YES HI I'M UP, need me for something, {message.author.display_name}? :eyes:",
+            f"{message.author.display_name}, you are a wonderful person, and I hope you are having a good day. :blush:",
+            f"You are loved and worth it, {message.author.display_name}... Never forget that. :white_heart:",
+            f"Hiya, {message.author.display_name}! Need me for something? My prefix is `" + PREFIX + "`, so to see my commands, use `" + PREFIX + "help`!",
+            f"Heheh, I can do that too! {message.author.mention()} :smiling_imp:",
+            f"My creator is questioning why she is spending time writing this feature... UH, I MEAN, I HAVE MY OWN INTELLIGENCE, WHAT'S UP {message.author.display_name}?!",
+            f"Hey, {message.author.display_name}, you should talk to my best friend <@668999031359537205>, she's great! :blush:",
+            "Hi there! I'm an experimental Discord bot created by ||~~the cuddly bugs~~|| <@530781444742578188> and <@201548633244565504>! My mission is to be something positive. :white_heart:",
+        ]
+
+        await ctx.send(random.choice(responses))
 
     global messages
     messages += 1
