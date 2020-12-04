@@ -3,3 +3,4 @@ __dottie_env__
 config.json
 ffmpeg.exe
 terminals
+log

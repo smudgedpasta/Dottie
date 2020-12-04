@@ -5,13 +5,6 @@ class OWNER(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
 
-    
-    # This was just a debug command, its fairly useless now
-    @commands.command(aliases=["check", "cogs"])
-    @commands.check(is_owner)
-    async def cogs_check(self, ctx):
-        await ctx.send("```json\n\"🎉 COGS ARE OPERATIONAL. 🎉\"```")
-
 
     @commands.command()
     @commands.check(is_owner)
@@ -20,7 +13,6 @@ class OWNER(commands.Cog):
         message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
         size = (int(message.content))
         if size >= 11:
-            # Even bot owners can be a bit ambitious 🙃
             await ctx.send(f"OK, I trust you {ctx.author.display_name}, but that's a bit *too* much! :sweat_drops:")
         elif size <= -1:
             await ctx.send(f"C'mon {ctx.author.display_name}, even you know Discord has no shovels. :upside_down:")
@@ -29,11 +21,9 @@ class OWNER(commands.Cog):
                 await ctx.send("Haha very funny, I would be sad if you weren't the one to code this monstrosity. <:smudgedead:712902348984549437>")
             if message.author.id == 201548633244565504:
                 await ctx.send("Haha very funny, I would be sad if you weren't the one to code this monstrosity. <:txindead:712902347512217610>")
-            # Simply checks if its either Smudge or Txin running the command and uses the appropriate emoji
         else:
             for i in range(size):
                 await ctx.send(("<:empty" + ":760062353063936000>") * (size-i-1) + ":orange_square:" + (":blue_square::orange_square:") * i)
-                # Sends a bigger variant of the pyramid in an alternating pattern
 
 
     @commands.command()
@@ -59,7 +49,7 @@ class OWNER(commands.Cog):
 
         trans = "".maketrans(emoji)
         for line in heart:
-            await ctx.send(line.translate(trans)) 
+            await ctx.send(line.translate(trans))
 
 
     @commands.command()
@@ -68,10 +58,8 @@ class OWNER(commands.Cog):
         await ctx.send("```css\n[❗ Restarting...]```")
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
-            # Forces Dottie to leave VC if they're currently in one
         os.system("start cmd /c python bot.py")
         psutil.Process().kill()
-        # Mimics the .bat, opens the program again and closes the current one
 
 
     @commands.command()
@@ -82,11 +70,9 @@ class OWNER(commands.Cog):
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
         await asyncio.sleep(0.5)
-        # Has the shutdown process sleep briefly so there's time for the message to send and log to the log channel
         await ctx.bot.logout()
 
     
-    # Just some code for my Discord Server's rules 🙃
     @commands.command()
     @commands.check(is_owner)
     async def rules(self, ctx):

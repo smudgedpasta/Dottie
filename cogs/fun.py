@@ -7,7 +7,6 @@ class FUN(commands.Cog):
 
 
     @commands.command(aliases=["hi", "hemlo", "hoi"])
-    # Finds every possible case variation in "hello"
     async def hello(self, ctx):
         await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
 
@@ -37,14 +36,12 @@ class FUN(commands.Cog):
             ""
         ]
 
-        # Replaces words of personal address to sound like a legitimate response, and replaces "?" with an empty string
         question = question.replace("?", "")
         question = question.replace("yourself", "myself")
         question = question.replace("your", "my")
         question = question.replace("you", "I")
         question = question.replace("are", "am")
 
-        # Copies the authors text formatting
         for i in ("~~", "***", "**", "*", "||", "__", "```", "'"):
             if question.startswith(i) and question.endswith(i):
                 await ctx.send(f"{i}{random.choice(answer)} {question[len(i):-len(i)]}? {random.choice(responses)}{i}")
@@ -62,7 +59,6 @@ class FUN(commands.Cog):
     async def faker(self, ctx):
         member = ctx.author
         for role in member.roles:
-            # "dottie" is 6 characters long, so since you have upper/lower case, there are 2 possibilities for each, making 2^6 total outcomes (64)
             if role.name in ["".join(c.upper() if 1 << i & z else c.lower() for i, c in enumerate("dottie")) for z in range(64)]:
                 await ctx.send("What, you think I wouldn't notice you have a **role** of my name? *There can only be one!* :crossed_swords:")
                 break
@@ -81,10 +77,8 @@ class FUN(commands.Cog):
         await ctx.send("I am thinking of a number between 1 and 100... Can you guess what it is?")
         answer = random.randint(1, 100)
         attempts = 10
-        # Assigns 10 chances
         for i in range(attempts):
             response = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
-            # Waits for the next message sent by the author of the command, and repeats until they get it correct
             number = int(response.content)
             if number == answer:
                 await ctx.send(f"Bingo! This took you {i + 1} attempts! You now get a cheesecake. 🧀🍰")
@@ -109,7 +103,6 @@ class FUN(commands.Cog):
                 speach = speach.replace("@everyone", "@- `Oh no you don't!`")
             else:
                 speach = speach.replace("@everyone", "@- Oh no you don't!")
-        # As Dottie generally requires admin perms, this eliminates users from being able to use @everyone or @here
         if "@here" in ctx.message.content:
             if "`" not in ctx.message.content:
                 speach = speach.replace("@here", "@- `Nope!`")
@@ -117,12 +110,10 @@ class FUN(commands.Cog):
                 speach = speach.replace("@here", "@- Nope!")
 
         speach = speach.replace("<@&", "<@&\u200b")
-        # Prevents roles from being able to be @'d
 
         if ctx.author.id in OWNERS:
             await ctx.send(f"{speach}")
         else:
-            # Places an invisible character to prevent the bot from triggering other bot prefixes
             await ctx.send(f"\u200b {speach}")
 
 
@@ -132,7 +123,6 @@ class FUN(commands.Cog):
         message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
         size = (int(message.content))
         if size >= 26:
-            # This checks if the argument is greater than or equal to 26, setting the highest limit as 25
             await ctx.send("Yeah no, let's not go *too* spammy! :sweat_drops:")
         elif size <= -1:
             await ctx.send("Oi, quit try'na break the universe, I can't exactly dig underground on Discord! :upside_down:")
@@ -141,7 +131,6 @@ class FUN(commands.Cog):
         else:
             for i in range(size):
                 await ctx.send("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
-                # Sends a repeated amount of messages, adding on one "🟧" until the specified argument has been reached, including empty emojis to allow for a a triangular formation
 
 
     @commands.command(input=None)
@@ -156,7 +145,6 @@ class FUN(commands.Cog):
 
     @commands.command()
     async def heart(self, ctx, arg1, arg2):
-        # Sets positional values
         heart = [
             "00111011100",
             "01222122210",
@@ -170,7 +158,6 @@ class FUN(commands.Cog):
             "00000100000"
             ]
 
-        # Collects arguments to take the positional values
         emoji = {
                 "0": "<:_" + ":760062353063936000>",
                 "1": f"{arg1}",
@@ -186,12 +173,10 @@ class FUN(commands.Cog):
     async def matchmaking(self, ctx, arg, arg2):
         heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
         
-        # Puts the random match from the list into a variable so they can be used various times and remain consistent
         heart = random.choice(heart_list)
 
         percentage = random.randint(0, 100)
 
-        # This block is to determine how full the bar is. I fully admit that I am bad at coding and am a Yanderedev clone. 😔
         if percentage == 0:
             bar = "🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
         elif percentage in range(1, 6):

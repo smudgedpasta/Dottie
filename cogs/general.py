@@ -5,22 +5,17 @@ from imports import *
 TaskManager2 = psutil.Process()
 
 def get_cpu_percent():
-    # Creates a list of concurrent.futures Future objects waiting on the cpu usage percentage of all child subprocesses
     futs = [create_future_ex(child.cpu_percent) for child in TaskManager2.children(True)]
-    # Gets cpu percentage of the main process
     cpu = TaskManager2.cpu_percent()
-    # Adds all the cpu usage percentages together
     cpu += sum(fut.result() for fut in futs)
     return cpu
 
 def get_memory_percent():
-    # Works similarly to get_cpu_percent()
     futs = [create_future_ex(child.memory_percent) for child in TaskManager2.children(True)]
     cpu = TaskManager2.memory_percent()
     cpu += sum(fut.result() for fut in futs)
     return cpu
 
-# cpu_percent() of the psutil.Process object needs to be run once before it actually starts working
 get_cpu_percent()
 
 
@@ -91,22 +86,17 @@ class GENERAL(commands.Cog):
         page4.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         page4.set_footer(text="Commands are NOT case sensitive. For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
-        # Creates a list of all pages of the help command
         pages = [page1, page2, page3, page4]
 
-        # Sends the first page when the command is run
         message = await ctx.send(embed=page1)
 
-        # Adds reactions to the message
         await message.add_reaction("🔺")
         await message.add_reaction("🔻")
 
-        # If the author of the command or a bot owner was the one to hit a reaction, it returns True
         def user_check(reaction, user):
             if reaction.message.id == message.id:
                 if user.id == ctx.author.id or user.id in OWNERS:
                     return True
-                # If the reaction was hit by a server administrator, it also returns True
                 guild = reaction.message.guild
                 if guild is not None:
                     member = guild.get_member(user.id)
@@ -114,12 +104,10 @@ class GENERAL(commands.Cog):
                         if member.guild_permissions.administrator:
                             return True
     
-        # Function for editing the message to cycle between the help pages
         async def page_reaction_listener(page, event_type="add"):
             while True:
                 react = await self.dottie.wait_for(f"reaction_{event_type}", check=user_check)
                 emoji = str(react[0])
-                # Depending which reaction was hit, the pages will go next or backwards in the list
                 if emoji == "🔺" and page[0] > 0:
                     page[0] -= 1
                     await message.edit(embed=pages[page[0]])
@@ -127,7 +115,6 @@ class GENERAL(commands.Cog):
                     page[0] += 1
                     await message.edit(embed=pages[page[0]])
         page = [0]
-        # Places two tasks on the asyncio event loop queue, one to check reaction adds, and one to check removals
         create_task(page_reaction_listener(page, "add"))
         create_task(page_reaction_listener(page, "remove"))
 
@@ -136,7 +123,6 @@ class GENERAL(commands.Cog):
     async def ping(self, ctx):
         cpu = await create_future(get_cpu_percent)
         memory = await create_future(get_memory_percent)
-        # A dictionary of technical statistics
         TechyInfo = {
             "CPU": f"[{cpu / psutil.cpu_count()}%]",
             "Memory": f"[{round(memory, 2)}%]",
@@ -157,11 +143,9 @@ class GENERAL(commands.Cog):
     async def profile(self, ctx, *, member: discord.Member = None):
         member = ctx.author if not member else member
         Roles = member.roles[1:]
-        # Strips the first role in a members roles, which is "@@everyone"
 
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
         if member.id in OWNERS:
-            # Creates a special embed author if the member is a bot owner
             embed.set_author(name=f"Hey there my owner, {member.name}! Let's see your info! 🤍")
         else:
             embed.set_author(name=f"Snap! Let's see your info, {member.name}! 👀")
@@ -178,12 +162,10 @@ class GENERAL(commands.Cog):
             embed.add_field(name="CAPTCHA TEST, are you a robot?", value="False! I'll let this one slide, mortal. <:squint:760051294668193832>")
         embed.add_field(name="You stumbled into this server on:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p UTC"))
         if len(Roles) == 0:
-            # If the member has no roles, this replaces the values with an empty space
             embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute...", value="\u200b")
             embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value="\u200b")
         else:
             embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles! ⚔️", value=" ".join([role.mention for role in Roles]))
-            # Top role is the role with the highest level permissions
             embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
 
         await ctx.send(embed=embed)
@@ -192,7 +174,6 @@ class GENERAL(commands.Cog):
     @commands.command(aliases=["icon"])
     async def avatar(self, ctx, member: discord.Member = None):
         member = ctx.author if not member else member
-        # If no member is specified it sends the authors
         embed = discord.Embed(colour=discord.Colour(15277667))
         embed.set_image(url=member.avatar_url_as(format="png", size=4096))
         embed.set_footer(text=f"{member.display_name}'s wonderful icon picture! 👍")
