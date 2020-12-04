@@ -128,7 +128,7 @@ async def on_message(message):
             f"Heheh, I can do that too! {message.author.mention} :smiling_imp:",
             f"My creator is questioning why she is spending time writing this feature... UH, I MEAN, I HAVE MY OWN INTELLIGENCE, WHAT'S UP {message.author.display_name}?!",
             f"Hey, {message.author.display_name}, you should talk to my best friend <@668999031359537205>, she's great! :blush:",
-            "Hi there! I'm an experimental Discord bot created by ||~~the cuddly bugs~~|| <@530781444742578188> and <@201548633244565504>! My mission is to be something positive. :white_heart:",
+            "Hi there! I'm an experimental Discord bot created by ||~~the cuddly bugs~~|| <@530781444742578188> and <@201548633244565504>! My mission is to be something positive. :white_heart:"
         ]
 
         await ctx.send(random.choice(responses))
