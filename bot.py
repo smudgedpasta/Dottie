@@ -33,23 +33,26 @@ def input(*args, **kwargs):
 
 _print = print
 def print(*args, sep=" ", end="\n"):
-  embed = discord.Embed(colour=discord.Colour(15277667))
-  embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
+    with open("log", "a") as f:
+        f.write(str(sep).join(str(i) for i in args) + end)
+        
+    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
 
-  create_task(LOG_CHANNEL.send(embed=embed))
-  create_task(LOG_CHANNEL_2.send(embed=embed))
+    create_task(LOG_CHANNEL.send(embed=embed))
+    create_task(LOG_CHANNEL_2.send(embed=embed))
 
-  return _print(*args)
+    return _print(*args)
 
 
 def print2(*args, sep=" ", end="\n"):
-  embed = discord.Embed(colour=discord.Colour(15277667))
-  embed.description = "```py\n" + str(sep).join(str(i) for i in args) + end + "```"
+    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed.description = "```py\n" + str(sep).join(str(i) for i in args) + end + "```"
 
-  create_task(LOG_CHANNEL.send(embed=embed))
-  create_task(LOG_CHANNEL_2.send(embed=embed))
+    create_task(LOG_CHANNEL.send(embed=embed))
+    create_task(LOG_CHANNEL_2.send(embed=embed))
 
-  return _print(*args)
+    return _print(*args)
 
 
 dottie.eloop = eloop
