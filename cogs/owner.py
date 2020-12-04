@@ -69,7 +69,12 @@ class OWNER(commands.Cog):
         await ctx.send("```css\n[❗ Shutting down...]```")
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
+        with open("log", "w") as f:
+            f.write(""[:-82])
+            f.close()
         await asyncio.sleep(0.5)
+        with open("log", "w") as f:
+            f.write("File refreshed...")
         await ctx.bot.logout()
 
     
