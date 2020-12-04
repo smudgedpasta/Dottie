@@ -65,16 +65,13 @@ class OWNER(commands.Cog):
     @commands.command()
     @commands.check(is_owner)
     async def shutdown(self, ctx):
+        with open("log", "w") as f:
+            f.write("Refreshed log...\n\n")
         print("```" + random.choice(["css", "ini", "asciidoc", "fix"]) + "\n[Cancelling all scheduled events and logging out...]```")
         await ctx.send("```css\n[❗ Shutting down...]```")
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
-        with open("log", "w") as f:
-            f.write(""[:-82])
-            f.close()
         await asyncio.sleep(0.5)
-        with open("log", "w") as f:
-            f.write("File refreshed...")
         await ctx.bot.logout()
 
     

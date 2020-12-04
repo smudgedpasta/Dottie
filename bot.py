@@ -35,7 +35,7 @@ _print = print
 def print(*args, sep=" ", end="\n"):
     with open("log", "a") as f:
         f.write(str(sep).join(str(i) for i in args) + end)
-        
+
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
 
