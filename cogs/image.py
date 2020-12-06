@@ -34,6 +34,18 @@ class IMAGE(commands.Cog):
             else:
                 await ctx.send("Woah, be careful, this command pulls graphic imagery! Try again in an **nsfw channel**!")
 
+
+    @commands.command()
+    async def art(self, ctx):
+        async for message in ctx.channel.history(limit=None):
+            if message.attachments:
+                embed = discord.Embed(colour=discord.Colour(15277667))
+                embed.description = "𝒴𝑜𝓊 𝓌𝒶𝓃𝓃𝒶 𝓈𝑒𝑒 𝑔𝓇𝑒𝒶𝓉 𝒶𝓇𝓉?\n𝒮𝓊𝓇𝑒, 𝓉𝒽𝑒𝓇𝑒'𝓈 𝓈𝑜𝓂𝑒 𝓪𝓶𝓪𝔃𝓲𝓷𝓰 𝒶𝓇𝓉 𝓇𝒾𝑔𝒽𝓉 𝒽𝑒𝓇𝑒! :blush:"
+                embed.set_footer(text=f"Art by {message.author.name}")
+                embed.set_image(url=message.attachments[0].proxy_url)
+                await ctx.send(embed=embed)
+                break
+
         
     @commands.command(aliases=["cats", "http"])
     async def http_cats(self, ctx, code=None):
