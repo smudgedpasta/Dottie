@@ -41,7 +41,7 @@ class GENERAL(commands.Cog):
 **:french_bread: __FUN__ :french_bread:**\n
 ***hello***\n**```fix\nAliases: "hemlo", "hoi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***rate***\n*```Give me anything and I'll give it a rating!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
-***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*\n
+***photo***\n*```Pulls a random image of me!```*\n***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*\n***art***\n*```Takes the most recent image in a channel and only states the truth!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*\n***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*\n***despacito***\n**```fix\nAliases: espacito```**\n*```Plays a totally normal version of Despacito!```*\n
 **:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
@@ -59,7 +59,7 @@ class GENERAL(commands.Cog):
 **:french_bread: __FUN__ :french_bread:**\n
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
-***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n***fox***\n*```Sends a random image of any kind of fox!```*\n
+***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*\n***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ```json\n"Whoops, no further commands yet!"```\n
 **:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
@@ -77,7 +77,7 @@ class GENERAL(commands.Cog):
 **:french_bread: __FUN__ :french_bread:**\n
 ***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
-```json\n"Whoops, no further commands yet!"```\n
+***fox***\n*```Sends a random image of any kind of fox!```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ```json\n"Whoops, no further commands yet!"```\n
 **:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
