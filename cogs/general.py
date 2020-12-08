@@ -51,11 +51,11 @@ class GENERAL(commands.Cog):
         page2.set_footer(text="Commands are NOT case sensitive. For a more detailed command list, view the link hidden in the \"🐾 Help List 🌨️\" title! If you find any bugs or have any enquires, be sure to let my creator, smudgedpasta, know!")
 
         page3 = discord.Embed(colour=discord.Colour(15277667))
-        page3.description = """*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
+        page3.description = f"""*I think I need heeelp, I'm drowning in myseeelf* 🎵\n
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***purge***\n*```Clears inputted message count, not counting the command message.```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***ping***\n*```Returns my ping latency.```*\n
+***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*\n***ping***\n*```Returns my ping latency.```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
