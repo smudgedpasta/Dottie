@@ -51,6 +51,7 @@ with MultiThreadedImporter() as importer:
         "time",
         "datetime",
         "random",
+        "copy",
         "requests",
         "asyncio",
         "os",
@@ -61,6 +62,7 @@ with MultiThreadedImporter() as importer:
         "discord.ext",
         "json",
         "threading",
+        "sys"
     )
 
 from math import *

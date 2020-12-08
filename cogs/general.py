@@ -120,6 +120,18 @@ class GENERAL(commands.Cog):
 
 
     @commands.command()
+    async def loop(self, ctx):
+        message = ctx.message
+        content = message.content
+        _, count, command = content.split(None, 2)
+        fake_message = copy.copy(message)
+        fake_message.content = command
+        new_ctx = await self.dottie.get_context(fake_message)
+        for i in range(int(count)):
+            await self.dottie.invoke(new_ctx)
+
+
+    @commands.command()
     async def ping(self, ctx):
         cpu = await create_future(get_cpu_percent)
         memory = await create_future(get_memory_percent)
