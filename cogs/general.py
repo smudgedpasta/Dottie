@@ -126,8 +126,8 @@ class GENERAL(commands.Cog):
         _, count, command = content.split(None, 2)
         fake_message = copy.copy(message)
         fake_message.content = command
-        new_ctx = await self.dottie.get_context(fake_message)
         for i in range(int(count)):
+            new_ctx = await self.dottie.get_context(fake_message)
             await self.dottie.invoke(new_ctx)
 
 
