@@ -4,13 +4,12 @@ from imports import *
 class LEVELS(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
-
-
-    self.dottie.loop.create_task(self.save_userbase())
-
-
-    with open("json/leveldata.json", "r") as f:
-        self.users = json.load(f)
+        dottie.loop.create_task(self.update_userbase())
+        if not os.path.exists("json/leveldata.json"):
+            self.users = {}
+        else:
+            with open("json/leveldata.json", "r") as f:
+                self.users = json.load(f)
 
     async def update_userbase(self):
         await self.dottie.wait_until_ready()
@@ -20,12 +19,19 @@ class LEVELS(commands.Cog):
             await asyncio.sleep(10)
 
 
+    give_exp = lambda self, author_id, exp=1: self.users.setdefault(author_id, dict(lvl=5, exp=0))["exp"].__iadd__(exp)
+
+
     def lvl_up(self, author_id):
+        if author_id not in self.users:
+            self.users[author_id] = dict(lvl=5, exp=0)
         exp_amount = self.users[author_id]["exp"]
         lvl_amount = self.users[author_id]["lvl"]
 
-        if exp_amount >= round((4 * (exp_amount ** 3)) / 5):
+        requirement = round((4 * (lvl_amount ** 3)) / 5)
+        if exp_amount >= requirement:
             self.users[author_id]["lvl"] += 1
+            self.users[author_id]["exp"] -= requirement
             return True
         else:
             return False
@@ -42,7 +48,7 @@ class LEVELS(commands.Cog):
             self.users[author_id]["lvl"] = 5
             self.users[author_id]["exp"] = 0
 
-        self.users[author_id]["exp"] += 1
+        self.give_exp(author_id, 1)
 
         if self.lvl_up(author_id):
             embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
@@ -54,7 +60,7 @@ class LEVELS(commands.Cog):
     @commands.command()
     async def level(self, ctx, member: discord.Member = None, aliases=["pokemon, pokémon"]):
         member = ctx.author if not member else member
-        author_id = str(member.id)
+        member_id = str(member.id)
 
         if not member_id in self.users:
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
