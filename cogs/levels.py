@@ -76,13 +76,12 @@ class LEVELS(commands.Cog):
         if not member_id in self.users:
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=self.dottie.user.name, icon_url=member.avatar_url_as(format="png", size=4096))
-            embed.description = "They are still a starter Pokémon, awaiting the start of their journey..."
+            embed.description = f"{member.display_name} still a starter Pokémon, awaiting the start of their journey..."
             embed.set_image(url="https://cdn.discordapp.com/attachments/751513839169831083/788571007757713448/Dragonite.jpg")
             await ctx.send(embed=embed)
         else:
-            # await ctx.send(self.users[member_id]["lvl"], self.users[member_id]["exp"])
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
-            embed.set_author(name=f"{member.name}'s Pokédex entry! ... I mean level.", icon_url=member.avatar_url_as(format="png", size=4096))
+            embed.set_author(name=f"{member.name}'s Pokédex entry- I mean level!", icon_url=member.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
             embed.add_field(name="Total experience points:", value=self.users[member_id]["exp"])
             embed.set_image(url="https://cdn.discordapp.com/attachments/751513839169831083/788571644104671252/latest.png")
