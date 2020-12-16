@@ -55,7 +55,7 @@ class LEVELS(commands.Cog):
 
         if self.lvl_up(author_id):
             embed = discord.Embed(colour=message.author.colour, timestamp=message.created_at)
-            embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
+            embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
             embed.description = f"What? {message.author.display_name.upper()} is evolving!\nCongratulations! Your local {message.author.display_name.upper()} is now level {self.users[author_id]['lvl']}" + random.choice(["✨", "🤍", "😏", "😊"])
             await message.channel.send(embed=embed)
 
