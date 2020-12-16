@@ -20,7 +20,10 @@ class LEVELS(commands.Cog):
             await asyncio.sleep(10)
 
 
-    give_exp = lambda self, author_id, exp=1: self.users.setdefault(author_id, dict(lvl=5, exp=0))["exp"].__iadd__(exp)
+    def give_exp(self, author_id, exp=1):
+        data = self.users.setdefault(author_id, dict(lvl=5, exp=0))
+        data["exp"] += 1
+        return data["exp"]
 
 
     def lvl_up(self, author_id):
