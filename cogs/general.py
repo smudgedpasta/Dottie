@@ -180,7 +180,7 @@ class GENERAL(commands.Cog):
             embed.add_field(name="CAPTCHA TEST, are you a robot?", value="True! You failed the test, you robot! 🤖")
         else:
             embed.add_field(name="CAPTCHA TEST, are you a robot?", value="False! I'll let this one slide, mortal. <:squint:760051294668193832>")
-        if getattr(member, "joined_at"):
+        if getattr(member, "joined_at", None):
             embed.add_field(name="You stumbled into this server on:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p UTC"))
         if Roles is not None:
             if len(Roles) == 0:
