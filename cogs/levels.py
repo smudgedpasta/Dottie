@@ -17,6 +17,7 @@ class LEVELS(commands.Cog):
         while not self.dottie.is_closed():
             with open("json/leveldata.json", "w") as f:
                 json.dump(self.users, f, indent=4)
+            await asyncio.sleep(10)
 
 
     def lvl_up(self, author_id):
@@ -31,6 +32,8 @@ class LEVELS(commands.Cog):
 
     
     async def on_message(self, message):
+        ctx = await dottie.get_context(message)
+        
         if message.author == self.dottie.user:
             return
         author_id = str(message.author.id)
@@ -55,14 +58,18 @@ class LEVELS(commands.Cog):
 
         if not member_id in self.users:
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
+            embed.set_author(name=self.dottie.user.name, icon_url=member.avatar_url_as(format="png", size=4096))
             embed.description = "They are still a starter Pokémon, awaiting the start of their journey..."
             embed.set_image(url="https://cdn.discordapp.com/attachments/751513839169831083/788571007757713448/Dragonite.jpg")
             await ctx.send(embed=embed)
         else:
             # await ctx.send(self.users[member_id]["lvl"], self.users[member_id]["exp"])
             embed = discord.Embed(colour=member.colour(15277667), timestamp=ctx.message.created_at)
-
+            embed.set_author(name=f"{member.name}'s Pokédex entry! ... I mean level.", icon_url=member.avatar_url_as(format="png", size=4096))
+            embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
+            embed.add_field(name="Total experience points:", value=self.users[member_id]["exp"])
             embed.set_image(url="https://cdn.discordapp.com/attachments/751513839169831083/788571644104671252/latest.png")
+            await ctx.send(embed=embed)
 
 
 def setup(dottie):
