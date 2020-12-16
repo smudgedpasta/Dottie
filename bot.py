@@ -125,8 +125,12 @@ async def status_update_loop():
 async def on_message(message):
     LEVELS = getattr(dottie, "LEVELS", None)
     if LEVELS:
-        await LEVELS.on_message(message)
+        try:
+            await LEVELS.on_message(message)
+        except:
+            print2(traceback.format_exc(), end="")
     ctx = await dottie.get_context(message)
+    
     if dottie.user in message.mentions:
         responses = [
             f"Hi, {message.author.display_name}! My prefix is `" + PREFIX + "` so if you're looking for my commands, use `" + PREFIX + "help`!",
