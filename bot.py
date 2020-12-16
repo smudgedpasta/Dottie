@@ -33,7 +33,7 @@ def input(*args, **kwargs):
 
 _print = print
 def print(*args, sep=" ", end="\n"):
-    with open("log", "a") as f:
+    with open("log", "a", encoding="utf-8") as f:
         f.write(str(sep).join(str(i) for i in args) + end)
 
     embed = discord.Embed(colour=discord.Colour(15277667))
@@ -303,7 +303,7 @@ async def exec_remove(ctx):
 async def load(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "image" "voice", "owner"]:
+        for cog in ["moderation", "general", "fun", "levels", "image" "voice", "owner"]:
             dottie.load_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully returned acces to all extensions.]```")
         return
@@ -317,7 +317,7 @@ async def load(ctx, extension=None):
 async def unload(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "image", "voice", "owner"]:
+        for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner"]:
             dottie.unload_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully removed all extensions until further notice.]```")
         return
@@ -331,7 +331,7 @@ async def unload(ctx, extension=None):
 async def reload(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "image", "voice", "owner"]:
+        for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner"]:
             dottie.unload_extension(f"cogs.{cog}")
             dottie.load_extension(f"cogs.{cog}")
         await ctx.send("```fix\n[Successfully refreshed all extensions.]```")
@@ -342,9 +342,50 @@ async def reload(ctx, extension=None):
     await ctx.send(f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```")
 
 
+async def find_user(self, guild, query):
+    # parse user identifiers first, <@{id}> or <@!{id}>
+    if query.startswith("<@") and query.endswith(">"):
+        q = query[2:-1].lstrip("!")
+        if q.isnumeric():
+            query = q
+    # if the input was a pure number, attempt to fetch from user ID first
+    if query.isnumeric():
+        u_id = int(query)
+        for user in (guild.get_member(u_id), self.get_user(u_id)):
+            if user is not None:
+                return user
+        try:
+            return await self.fetch_user(u_id)
+        except (discord.NotFound, discord.Forbidden):
+            pass
+    # if the query is a valid handle with a discriminator, search through entire user database for a match
+    if "#" in query and query.rsplit("#", 1)[-1].isnumeric():
+        for user in self._connection._users.values():
+            if str(user) == query:
+                member = guild.get_member(user.id)
+                if member is not None:
+                    return member
+                return user
+    # otherwise try and find the member by username/nickname in current guild
+    for user in guild.members:
+        if user.name == query or user.nick == query:
+            return user
+    # as a last resort, find the user with shortest name, starting with the query
+    lower_query = query.casefold()
+    found = set()
+    for user in guild.members:
+        if user.name.casefold().startswith(lower_query):
+            found.add(len(user.name), user)
+        if user.nick and user.nick.casefold().startswith(lower_query):
+            found.add(len(user.nick), user)
+    if found:
+        return sorted(found, key=lambda t: t[0])[0][1]
+    raise LookupError(f"No results for {query}.")
+
+
 for filename in os.listdir("./cogs"):
-        if filename.endswith(".py"):
-            dottie.load_extension(f"cogs.{filename[:-3]}")
+    if filename.endswith(".py"):
+        dottie.load_extension(f"cogs.{filename[:-3]}")
 
 
 dottie.run(discord_token)

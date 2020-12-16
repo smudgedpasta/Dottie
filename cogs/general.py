@@ -97,12 +97,13 @@ class GENERAL(commands.Cog):
             if reaction.message.id == message.id:
                 if user.id == ctx.author.id or user.id in OWNERS:
                     return True
-                guild = reaction.message.guild
-                if guild is not None:
-                    member = guild.get_member(user.id)
-                    if member is not None:
-                        if member.guild_permissions.administrator:
-                            return True
+                if user.id != self.dottie.id:
+                    guild = reaction.message.guild
+                    if guild is not None:
+                        member = guild.get_member(user.id)
+                        if member is not None:
+                            if member.guild_permissions.administrator:
+                                return True
     
         async def page_reaction_listener(page, event_type="add"):
             while True:
@@ -152,9 +153,15 @@ class GENERAL(commands.Cog):
     
 
     @commands.command(aliases=["userinfo", "info", "stats", "userstats"])
-    async def profile(self, ctx, *, member: discord.Member = None):
-        member = ctx.author if not member else member
-        Roles = member.roles[1:]
+    async def profile(self, ctx):
+        if ctx.message.content:
+            member = await self.dottie.find_user(ctx.message.content)
+        else:
+            member = ctx.author
+        try:
+            Roles = member.roles[1:]
+        except AttributeError:
+            Roles = None
 
         embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
         if member.id in OWNERS:
@@ -172,20 +179,25 @@ class GENERAL(commands.Cog):
             embed.add_field(name="CAPTCHA TEST, are you a robot?", value="True! You failed the test, you robot! 🤖")
         else:
             embed.add_field(name="CAPTCHA TEST, are you a robot?", value="False! I'll let this one slide, mortal. <:squint:760051294668193832>")
-        embed.add_field(name="You stumbled into this server on:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p UTC"))
-        if len(Roles) == 0:
-            embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute...", value="\u200b")
-            embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value="\u200b")
-        else:
-            embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles! ⚔️", value=" ".join([role.mention for role in Roles]))
-            embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
+        if getattr(member, "joined_at"):
+            embed.add_field(name="You stumbled into this server on:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M, %p UTC"))
+        if Roles is not None:
+            if len(Roles) == 0:
+                embed.add_field(name="Here you have earnt these ranks in 0 roles- wait a minute...", value="\u200b")
+                embed.add_field(name="... Your highest rank being nothing, obviously. 😔", value="\u200b")
+            else:
+                embed.add_field(name=f"Here you have earnt these ranks in {len(Roles)} roles! ⚔️", value=" ".join([role.mention for role in Roles]))
+                embed.add_field(name="... With your highest rank being:", value=member.top_role.mention)
 
         await ctx.send(embed=embed)
 
 
     @commands.command(aliases=["icon"])
-    async def avatar(self, ctx, member: discord.Member = None):
-        member = ctx.author if not member else member
+    async def avatar(self, ctx):
+        if ctx.message.content:
+            member = await self.dottie.find_user(ctx.message.content)
+        else:
+            member = ctx.author
         embed = discord.Embed(colour=member.colour)
         embed.set_image(url=member.avatar_url_as(format="png", size=4096))
         embed.set_footer(text=f"{member.display_name}'s wonderful icon picture! 👍")
