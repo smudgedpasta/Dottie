@@ -116,6 +116,9 @@ async def status_update_loop():
 
 @dottie.event
 async def on_message(message):
+    LEVELS = getattr(dottie, "LEVELS", None)
+    if LEVELS:
+        await LEVELS.on_message(message)
     ctx = await dottie.get_context(message)
     if dottie.user in message.mentions:
         responses = [
@@ -381,6 +384,9 @@ async def find_user(self, guild, query):
     if found:
         return sorted(found, key=lambda t: t[0])[0][1]
     raise LookupError(f"No results for {query}.")
+
+
+dottie.find_user = find_user
 
 
 for filename in os.listdir("./cogs"):

@@ -4,6 +4,7 @@ from imports import *
 class LEVELS(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
+        dottie.LEVELS = self
         dottie.loop.create_task(self.update_userbase())
         if not os.path.exists("json/leveldata.json"):
             self.users = {}
@@ -38,8 +39,6 @@ class LEVELS(commands.Cog):
 
     
     async def on_message(self, message):
-        ctx = await dottie.get_context(message)
-        
         if message.author == self.dottie.user:
             return
         author_id = str(message.author.id)
@@ -51,10 +50,10 @@ class LEVELS(commands.Cog):
         self.give_exp(author_id, 1)
 
         if self.lvl_up(author_id):
-            embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+            embed = discord.Embed(colour=discord.Colour(15277667), timestamp=message.created_at)
             embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
             embed.description = f"What? {message.author.display_name.upper()} is evolving!\nCongratulations! Your local {message.author.display_name.upper()} is now level {self.users[author_id]['lvl']}" + random.choice(["✨", "🤍", "😏", "😊"])
-            await ctx.send(embed=embed)
+            await message.channel.send(embed=embed)
 
 
     @commands.command()
