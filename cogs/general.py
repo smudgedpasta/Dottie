@@ -186,7 +186,7 @@ class GENERAL(commands.Cog):
     @commands.command(aliases=["icon"])
     async def avatar(self, ctx, member: discord.Member = None):
         member = ctx.author if not member else member
-        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed = discord.Embed(colour=member.colour)
         embed.set_image(url=member.avatar_url_as(format="png", size=4096))
         embed.set_footer(text=f"{member.display_name}'s wonderful icon picture! 👍")
         await ctx.send(embed=embed)

@@ -54,14 +54,14 @@ class LEVELS(commands.Cog):
         author_id = str(member.id)
 
         if not member_id in self.users:
-            embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+            embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.description = "They are still a starter Pokémon, awaiting the start of their journey..."
             embed.set_image(url="https://cdn.discordapp.com/attachments/751513839169831083/788571007757713448/Dragonite.jpg")
             await ctx.send(embed=embed)
         else:
             # await ctx.send(self.users[member_id]["lvl"], self.users[member_id]["exp"])
-            embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-            
+            embed = discord.Embed(colour=member.colour(15277667), timestamp=ctx.message.created_at)
+
             embed.set_image(url="https://cdn.discordapp.com/attachments/751513839169831083/788571644104671252/latest.png")
 
 
