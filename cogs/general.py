@@ -1,4 +1,5 @@
 from imports import *
+from bot import print2
 
 
 # psutil.Process() is just Task Manager 2.0
@@ -159,6 +160,7 @@ class GENERAL(commands.Cog):
             try:
                 member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
             except:
+                print(traceback.format_exc(), end="")
                 return await ctx.send(f"I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
         else:
             member = ctx.author
@@ -203,6 +205,7 @@ class GENERAL(commands.Cog):
             try:
                 member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
             except:
+                print2(traceback.format_exc(), end="")
                 return await ctx.send(f"I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
         else:
             member = ctx.author

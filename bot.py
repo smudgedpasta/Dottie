@@ -252,7 +252,7 @@ async def on_command_error(ctx, error):
     try:
         raise error
     except:
-        print2(traceback.format_exc())
+        print2(traceback.format_exc(), end="")
 
 
 @dottie.event
@@ -408,9 +408,8 @@ async def find_user(query, guild=None):
 dottie.find_user = find_user
 
 
-for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        dottie.load_extension(f"cogs.{filename[:-3]}")
-
-
-dottie.run(discord_token)
+if __name__ == "__main__":
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            dottie.load_extension(f"cogs.{filename[:-3]}")
+    dottie.run(discord_token)
