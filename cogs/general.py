@@ -156,7 +156,10 @@ class GENERAL(commands.Cog):
     async def profile(self, ctx):
         spl = ctx.message.content.split(None, 1)
         if len(spl) > 1:
-            member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
+            try:
+                member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
+            except LookupError:
+                await ctx.send("I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
         else:
             member = ctx.author
         try:
@@ -197,7 +200,10 @@ class GENERAL(commands.Cog):
     async def avatar(self, ctx):
         spl = ctx.message.content.split(None, 1)
         if len(spl) > 1:
-            member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
+            try:
+                member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
+            except LookupError:
+                await ctx.send("I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
         else:
             member = ctx.author
         embed = discord.Embed(colour=member.colour)

@@ -10,7 +10,14 @@ with open("config.json", "r") as f:
     discord_token = data["token"]
 
 
-dottie = commands.Bot(command_prefix=(PREFIX), case_insensitive=True)
+intents = discord.Intents.default()
+intents.members = True
+
+dottie = commands.Bot(
+    command_prefix=PREFIX,
+    case_insensitive=True,
+    intents=intents,
+)
 
 dottie.remove_command("help")
 
@@ -358,18 +365,18 @@ async def find_user(query, guild=None):
             user = guild.get_member(u_id)
             if user is not None:
                 return user
-        user = self.get_user(u_id)
+        user = dottie.get_user(u_id)
         if user is not None:
             return user
         try:
-            user = await self.fetch_user(u_id)
+            user = await dottie.fetch_user(u_id)
         except (discord.NotFound, discord.Forbidden):
             pass
         if user is not None:
             self._connection._users[user.id] = user
     # if the query is a valid handle with a discriminator, search through entire user database for a match
     if "#" in query and query.rsplit("#", 1)[-1].isnumeric():
-        for user in self._connection._users.values():
+        for user in dottie._connection._users.values():
             if str(user) == query:
                 if guild:
                     member = guild.get_member(user.id)
@@ -383,6 +390,9 @@ async def find_user(query, guild=None):
                 return user
     # as a last resort, find the user with shortest name, starting with the query
     if guild:
+        if not guild.members:
+            member = await guild.query_members(query, limit=1)
+            return member[0]
         lower_query = query.casefold()
         found = set()
         for user in guild.members:
