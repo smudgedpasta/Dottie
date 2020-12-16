@@ -154,9 +154,9 @@ class GENERAL(commands.Cog):
 
     @commands.command(aliases=["userinfo", "info", "stats", "userstats"])
     async def profile(self, ctx):
-        query = ctx.message.content.split(None, 1)[-1]
-        if query:
-            member = await self.dottie.find_user(query, guild=ctx.guild)
+        spl = ctx.message.content.split(None, 1)
+        if len(spl) > 1:
+            member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
         else:
             member = ctx.author
         try:
@@ -195,9 +195,9 @@ class GENERAL(commands.Cog):
 
     @commands.command(aliases=["icon"])
     async def avatar(self, ctx):
-        query = ctx.message.content.split(None, 1)[-1]
-        if query:
-            member = await self.dottie.find_user(query, guild=ctx.guild)
+        spl = ctx.message.content.split(None, 1)
+        if len(spl) > 1:
+            member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
         else:
             member = ctx.author
         embed = discord.Embed(colour=member.colour)
