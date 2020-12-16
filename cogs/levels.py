@@ -81,7 +81,7 @@ class LEVELS(commands.Cog):
             await ctx.send(embed=embed)
         else:
             # await ctx.send(self.users[member_id]["lvl"], self.users[member_id]["exp"])
-            embed = discord.Embed(colour=member, timestamp=ctx.message.created_at)
+            embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=f"{member.name}'s Pokédex entry! ... I mean level.", icon_url=member.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
             embed.add_field(name="Total experience points:", value=self.users[member_id]["exp"])
