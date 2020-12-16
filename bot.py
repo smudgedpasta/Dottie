@@ -345,7 +345,7 @@ async def reload(ctx, extension=None):
     await ctx.send(f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```")
 
 
-async def find_user(self, query, guild=None):
+async def find_user(query, guild=None):
     # parse user identifiers first, <@{id}> or <@!{id}>
     if query.startswith("<@") and query.endswith(">"):
         q = query[2:-1].lstrip("!")
