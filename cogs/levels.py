@@ -60,8 +60,8 @@ class LEVELS(commands.Cog):
             await message.channel.send(embed=embed)
 
 
-    @commands.command()
-    async def level(self, ctx, aliases=["pokemon, pokémon"]):
+    @commands.command(aliases=["pokemon, pokémon"])
+    async def level(self, ctx):
         spl = ctx.message.content.split(None, 1)
         if len(spl) > 1:
             try:
