@@ -156,7 +156,7 @@ class GENERAL(commands.Cog):
         member = ctx.author if not member else member
         Roles = member.roles[1:]
 
-        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
         if member.id in OWNERS:
             embed.set_author(name=f"Hey there my owner, {member.name}! Let's see your info! 🤍")
         else:
