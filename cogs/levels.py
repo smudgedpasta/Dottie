@@ -1,4 +1,5 @@
 from imports import *
+from bot import print2
 
 
 class LEVELS(commands.Cog):
@@ -53,15 +54,23 @@ class LEVELS(commands.Cog):
         self.give_exp(author_id, 1)
 
         if self.lvl_up(author_id):
-            embed = discord.Embed(colour=discord.Colour(15277667), timestamp=message.created_at)
+            embed = discord.Embed(colour=message.author.colour, timestamp=message.created_at)
             embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
             embed.description = f"What? {message.author.display_name.upper()} is evolving!\nCongratulations! Your local {message.author.display_name.upper()} is now level {self.users[author_id]['lvl']}" + random.choice(["✨", "🤍", "😏", "😊"])
             await message.channel.send(embed=embed)
 
 
     @commands.command()
-    async def level(self, ctx, member: discord.Member = None, aliases=["pokemon, pokémon"]):
-        member = ctx.author if not member else member
+    async def level(self, ctx, aliases=["pokemon, pokémon"]):
+        spl = ctx.message.content.split(None, 1)
+        if len(spl) > 1:
+            try:
+                member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
+            except:
+                print2(traceback.format_exc(), end="")
+                return await ctx.send(f"I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
+        else:
+            member = ctx.author
         member_id = str(member.id)
 
         if not member_id in self.users:
@@ -72,7 +81,7 @@ class LEVELS(commands.Cog):
             await ctx.send(embed=embed)
         else:
             # await ctx.send(self.users[member_id]["lvl"], self.users[member_id]["exp"])
-            embed = discord.Embed(colour=member.colour(15277667), timestamp=ctx.message.created_at)
+            embed = discord.Embed(colour=member, timestamp=ctx.message.created_at)
             embed.set_author(name=f"{member.name}'s Pokédex entry! ... I mean level.", icon_url=member.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
             embed.add_field(name="Total experience points:", value=self.users[member_id]["exp"])
