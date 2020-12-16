@@ -345,7 +345,7 @@ async def reload(ctx, extension=None):
     await ctx.send(f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```")
 
 
-async def find_user(self, guild, query):
+async def find_user(self, query, guild=None):
     # parse user identifiers first, <@{id}> or <@!{id}>
     if query.startswith("<@") and query.endswith(">"):
         q = query[2:-1].lstrip("!")
@@ -354,35 +354,44 @@ async def find_user(self, guild, query):
     # if the input was a pure number, attempt to fetch from user ID first
     if query.isnumeric():
         u_id = int(query)
-        for user in (guild.get_member(u_id), self.get_user(u_id)):
+        if guild:
+            user = guild.get_member(u_id)
             if user is not None:
                 return user
+        user = self.get_user(u_id)
+        if user is not None:
+            return user
         try:
-            return await self.fetch_user(u_id)
+            user = await self.fetch_user(u_id)
         except (discord.NotFound, discord.Forbidden):
             pass
+        if user is not None:
+            self._connection._users[user.id] = user
     # if the query is a valid handle with a discriminator, search through entire user database for a match
     if "#" in query and query.rsplit("#", 1)[-1].isnumeric():
         for user in self._connection._users.values():
             if str(user) == query:
-                member = guild.get_member(user.id)
-                if member is not None:
-                    return member
+                if guild:
+                    member = guild.get_member(user.id)
+                    if member is not None:
+                        return member
                 return user
     # otherwise try and find the member by username/nickname in current guild
-    for user in guild.members:
-        if user.name == query or user.nick == query:
-            return user
+    if guild:
+        for user in guild.members:
+            if user.name == query or user.nick == query:
+                return user
     # as a last resort, find the user with shortest name, starting with the query
-    lower_query = query.casefold()
-    found = set()
-    for user in guild.members:
-        if user.name.casefold().startswith(lower_query):
-            found.add(len(user.name), user)
-        if user.nick and user.nick.casefold().startswith(lower_query):
-            found.add(len(user.nick), user)
-    if found:
-        return sorted(found, key=lambda t: t[0])[0][1]
+    if guild:
+        lower_query = query.casefold()
+        found = set()
+        for user in guild.members:
+            if user.name.casefold().startswith(lower_query):
+                found.add(len(user.name), user)
+            if user.nick and user.nick.casefold().startswith(lower_query):
+                found.add(len(user.nick), user)
+        if found:
+            return sorted(found, key=lambda t: t[0])[0][1]
     raise LookupError(f"No results for {query}.")
 
 
