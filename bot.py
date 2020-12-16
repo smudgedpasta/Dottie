@@ -130,7 +130,7 @@ async def on_message(message):
         except:
             print2(traceback.format_exc(), end="")
     ctx = await dottie.get_context(message)
-    
+
     if dottie.user in message.mentions:
         responses = [
             f"Hi, {message.author.display_name}! My prefix is `" + PREFIX + "` so if you're looking for my commands, use `" + PREFIX + "help`!",
@@ -245,6 +245,8 @@ async def on_command_error(ctx, error):
             await ctx.send("Did you mean \"help\"?")
         elif str(error).split("\"")[1] in ["cars", "cat"]:
             await ctx.send("Did you mean \"cats\"?")
+        elif str(error).split("\"")[1] in ["levels"]:
+            await ctx.send("Did you mean \"level\"?")
         elif str(error).split("\"")[1] in ["pign"]:
             await ctx.send("Did you mean \"ping\"? ~~I hate to break it to you but I'm not a Minecraft Piglin...~~")
         else:
