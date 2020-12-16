@@ -22,21 +22,20 @@ class LEVELS(commands.Cog):
 
 
     def give_exp(self, author_id, exp=1):
-        data = self.users.setdefault(author_id, dict(lvl=5, exp=0))
+        data = self.users.setdefault(author_id, dict(lvl=1, exp=0))
         data["exp"] += 1
         return data["exp"]
 
 
     def lvl_up(self, author_id):
         if author_id not in self.users:
-            self.users[author_id] = dict(lvl=5, exp=0)
+            self.users[author_id] = dict(lvl=1, exp=0)
         exp_amount = self.users[author_id]["exp"]
         lvl_amount = self.users[author_id]["lvl"]
 
-        requirement = round((4 * (lvl_amount ** 3)) / 5)
+        requirement = lvl_amount * (lvl_amount + 1) / 2 * 100
         if exp_amount >= requirement:
-            self.users[author_id]["lvl"] += 1
-            self.users[author_id]["exp"] -= requirement
+            self.users[author_id]["lvl"] = int(((2 * exp_amount + 25) ** 0.5 - 5) / 10)
             return True
         else:
             return False
@@ -53,11 +52,11 @@ class LEVELS(commands.Cog):
 
         self.give_exp(author_id, 1)
 
-        if self.lvl_up(author_id):
+        if self.lvl_up(author_id) and not message.author.bot:
             embed = discord.Embed(colour=message.author.colour, timestamp=message.created_at)
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/727087981285998593/788705037584564234/Dragonite_Evolution.gif")
             embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-            embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now level **{self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
+            embed.description = f"What? {message.author.display_name.upper()} is evolving!\nCongratulations! Your local {message.author.display_name.upper()} is now level **{self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
             embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
             await message.channel.send(embed=embed)
 
@@ -78,7 +77,7 @@ class LEVELS(commands.Cog):
         if not member_id in self.users:
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-            embed.description = f"**{member.display_name}** still a starter Pokémon, awaiting the start of their journey..."
+            embed.description = f"{member.display_name}'s still a starter Pokémon, awaiting the start of their journey..."
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/788571007757713448/Dragonite.jpg")
             embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
             await ctx.send(embed=embed)
