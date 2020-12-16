@@ -390,16 +390,16 @@ async def find_user(query, guild=None):
                 return user
     # as a last resort, find the user with shortest name, starting with the query
     if guild:
-        if not guild.members:
+        if len(guild.members) < 2:
             member = await guild.query_members(query, limit=1)
             return member[0]
         lower_query = query.casefold()
         found = set()
         for user in guild.members:
             if user.name.casefold().startswith(lower_query):
-                found.add(len(user.name), user)
+                found.add((len(user.name), user))
             if user.nick and user.nick.casefold().startswith(lower_query):
-                found.add(len(user.nick), user)
+                found.add((len(user.nick), user))
         if found:
             return sorted(found, key=lambda t: t[0])[0][1]
     raise LookupError(f"No results for {query}.")
