@@ -372,7 +372,7 @@ async def find_user(query, guild=None):
             user = await dottie.fetch_user(u_id)
         except (discord.NotFound, discord.Forbidden):
             pass
-        if user is not None:
+        else:
             dottie._connection._users[user.id] = user
     # if the query is a valid handle with a discriminator, search through entire user database for a match
     if "#" in query and query.rsplit("#", 1)[-1].isnumeric():

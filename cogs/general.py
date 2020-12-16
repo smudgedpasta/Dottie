@@ -158,8 +158,8 @@ class GENERAL(commands.Cog):
         if len(spl) > 1:
             try:
                 member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
-            except LookupError:
-                await ctx.send("I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
+            except:
+                return await ctx.send(f"I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
         else:
             member = ctx.author
         try:
@@ -202,8 +202,8 @@ class GENERAL(commands.Cog):
         if len(spl) > 1:
             try:
                 member = await self.dottie.find_user(spl[-1], guild=ctx.guild)
-            except LookupError:
-                await ctx.send("I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
+            except:
+                return await ctx.send(f"I can't find the user \"{spl[-1]}\"! Please specify a more specific identifier such a username#discriminator, or a user ID.")
         else:
             member = ctx.author
         embed = discord.Embed(colour=member.colour)
