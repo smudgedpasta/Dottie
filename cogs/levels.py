@@ -48,7 +48,7 @@ class LEVELS(commands.Cog):
         author_id = str(message.author.id)
         if not author_id in self.users:
             self.users[author_id] = {}
-            self.users[author_id]["lvl"] = 5
+            self.users[author_id]["lvl"] = 1
             self.users[author_id]["exp"] = 0
 
         self.give_exp(author_id, 1)
@@ -60,7 +60,7 @@ class LEVELS(commands.Cog):
             await message.channel.send(embed=embed)
 
 
-    @commands.command(aliases=["pokemon, pokémon"])
+    @commands.command(aliases=["pokemon", "pokémon"])
     async def level(self, ctx):
         spl = ctx.message.content.split(None, 1)
         if len(spl) > 1:
