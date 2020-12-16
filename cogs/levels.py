@@ -7,16 +7,16 @@ class LEVELS(commands.Cog):
         self.dottie = dottie
         dottie.LEVELS = self
         dottie.loop.create_task(self.update_userbase())
-        if not os.path.exists("json/leveldata.json"):
+        if not os.path.exists("json/levelsdata.json"):
             self.users = {}
         else:
-            with open("json/leveldata.json", "r") as f:
+            with open("json/levelsdata.json", "r") as f:
                 self.users = json.load(f)
 
     async def update_userbase(self):
         await self.dottie.wait_until_ready()
         while not self.dottie.is_closed():
-            with open("json/leveldata.json", "w") as f:
+            with open("json/levelsdata.json", "w") as f:
                 json.dump(self.users, f, indent=4)
             await asyncio.sleep(10)
 
