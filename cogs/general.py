@@ -38,7 +38,7 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***help***\n*```Legends say you've found this command already. 👀```*\n***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a mentioned user!```*\n***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
+***help***\n*```Legends say you've found this command already. 👀```*\n***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a provided user!```*\n***level***\n**```fix\nAliases: pokémon, pokemon```**\n*```Shows the current level and experience of a provided user!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***hello***\n**```fix\nAliases: "hemlo", "hoi"```**\n*```I will greet you back!```*\n***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*\n***rate***\n*```Give me anything and I'll give it a rating!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
@@ -56,7 +56,7 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***purge***\n*```Clears inputted message count, not counting the command message.```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*\n***ping***\n*```Returns my ping latency.```*\n
+***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
@@ -74,7 +74,7 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ```json\n"Whoops, no further commands yet!"```\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-```json\n"Whoops, no further commands yet!"```\n
+***ping***\n*```Returns some technical information.```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
