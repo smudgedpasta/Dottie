@@ -16,7 +16,7 @@ intents.members = True
 dottie = commands.Bot(
     command_prefix=PREFIX,
     case_insensitive=True,
-    intents=intents,
+    intents=intents
 )
 
 dottie.remove_command("help")
