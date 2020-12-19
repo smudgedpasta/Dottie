@@ -13,7 +13,7 @@ class IMAGE(commands.Cog):
             Image_Pool = json.load(f)
             random_image = random.choice(Image_Pool)
             embed = discord.Embed(colour=discord.Colour(15277667))
-            embed.description = "Art by " + random_image["desc"]
+            embed.description = random_image["desc"]
             embed.set_image(url=random_image["img"])
             embed.set_footer(text=random_image["artist"])
             await ctx.send(embed=embed)
@@ -26,7 +26,7 @@ class IMAGE(commands.Cog):
             NSFW_Image_Pool = json.load(f)
             random_image = random.choice(NSFW_Image_Pool)
             embed = discord.Embed(colour=discord.Colour(15277667))
-            embed.description = "Art by " + random_image["desc"]
+            embed.description = random_image["desc"]
             embed.set_image(url=random_image["img"])
             embed.set_footer(text=random_image["artist"])
             if ctx.channel.is_nsfw():
