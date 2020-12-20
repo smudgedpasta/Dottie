@@ -15,7 +15,7 @@ class IMAGE(commands.Cog):
             embed = discord.Embed(colour=discord.Colour(15277667))
             embed.description = random_image["desc"]
             embed.set_image(url=random_image["img"])
-            embed.set_footer(text=random_image["artist"])
+            embed.set_footer(text="Art by " + random_image["artist"])
             await ctx.send(embed=embed)
 
 
@@ -28,7 +28,7 @@ class IMAGE(commands.Cog):
             embed = discord.Embed(colour=discord.Colour(15277667))
             embed.description = random_image["desc"]
             embed.set_image(url=random_image["img"])
-            embed.set_footer(text=random_image["artist"])
+            embed.set_footer(text="Art by " + random_image["artist"])
             if ctx.channel.is_nsfw():
                 await ctx.send(embed=embed)
             else:
