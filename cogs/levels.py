@@ -40,6 +40,14 @@ class LEVELS(commands.Cog):
         else:
             return False
 
+
+    @commands.command()
+    @has_permissions(administrator=True)
+    async def remove_levels(self, ctx):
+        with open("level_disables", "a") as "f":
+            f.write(str(ctx.message.channel.id) + "\n")
+            await ctx.send(f"```css\nDisabled [{ctx.message.guild}] from recieving level-up embeds!```")
+
     
     async def on_message(self, message):
         if message.author == self.dottie.user:
