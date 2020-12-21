@@ -2,6 +2,14 @@ from imports import *
 from bot import print2
 
 
+try:
+    with open("level_disables", "r") as f:
+        s = f.read()
+except FileNotFoundError:
+    s = ""
+DISABLED = {int(i) for i in s.splitlines() if i}
+
+
 class LEVELS(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
@@ -41,12 +49,23 @@ class LEVELS(commands.Cog):
             return False
 
 
-    @commands.command()
+    @commands.command(aliases=["levels_d"])
     @has_permissions(administrator=True)
     async def remove_levels(self, ctx):
-        with open("level_disables", "a") as "f":
-            f.write(str(ctx.message.channel.id) + "\n")
-            await ctx.send(f"```css\nDisabled [{ctx.message.guild}] from recieving level-up embeds!```")
+        if ctx.guild.id not in DISABLED:
+            DISABLED.add(ctx.guild.id)
+        with open("level_disables", "a") as f:
+            f.write(str(ctx.guild.id) + "\n")
+            await ctx.send(f"```css\nDisabled [{ctx.guild}] from recieving level-up embeds!```")
+
+
+    @commands.command(aliases=["levels_e"])
+    @has_permissions(administrator=True)
+    async def enable_levels(self, ctx):
+        DISABLED.discard(ctx.guild.id)
+        with open("level_disables", "w") as f:
+            f.write("\n".join(str(i) for i in DISABLED))
+            await ctx.send(f"```css\nRe-enabled [{ctx.guild}] into recieving level-up embeds!```")
 
     
     async def on_message(self, message):
@@ -61,12 +80,13 @@ class LEVELS(commands.Cog):
         self.give_exp(author_id, 1)
 
         if self.lvl_up(author_id) and not message.author.bot:
-            embed = discord.Embed(colour=message.author.colour, timestamp=message.created_at)
-            embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/727087981285998593/788705037584564234/Dragonite_Evolution.gif")
-            embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-            embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now **level {self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
-            embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
-            await message.channel.send(embed=embed)
+            if message.guild.id not in DISABLED:
+                embed = discord.Embed(colour=message.author.colour, timestamp=message.created_at)
+                embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/727087981285998593/788705037584564234/Dragonite_Evolution.gif")
+                embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+                embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now **level {self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
+                embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
+                await message.channel.send(embed=embed)
 
 
     @commands.command(aliases=["pokemon", "pokémon"])
