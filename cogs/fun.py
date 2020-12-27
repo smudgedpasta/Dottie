@@ -138,7 +138,7 @@ class FUN(commands.Cog):
         random.seed(input)
         rate = random.randint(0, 10)
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-        embed.description = f"**{input}**, hmm? I rate that a **{rate}/10**! " + random.choice(["✨", "🤍", "😏", "😊"])
+        embed.description = f"**{input.capitalize()}**, hmm? I rate that a **{rate}/10**! " + random.choice(["✨", "🤍", "😏", "😊"])
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Requested by {ctx.author.display_name}")
         await ctx.send(embed=embed)
 
