@@ -98,7 +98,7 @@ class GENERAL(commands.Cog):
             if reaction.message.id == message.id:
                 if user.id == ctx.author.id or user.id in OWNERS:
                     return True
-                if user.id != self.dottie.id:
+                if user.id != self.dottie.user.id:
                     guild = reaction.message.guild
                     if guild is not None:
                         member = guild.get_member(user.id)
