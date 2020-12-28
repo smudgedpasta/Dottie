@@ -359,12 +359,10 @@ async def reload(ctx, extension=None):
 
 
 async def find_user(query, guild=None):
-    # parse user identifiers first, <@{id}> or <@!{id}>
     if query.startswith("<@") and query.endswith(">"):
         q = query[2:-1].lstrip("!")
         if q.isnumeric():
             query = q
-    # if the input was a pure number, attempt to fetch from user ID first
     if query.isnumeric():
         u_id = int(query)
         if guild:
@@ -381,7 +379,6 @@ async def find_user(query, guild=None):
         else:
             dottie._connection._users[user.id] = user
             return user
-    # if the query is a valid handle with a discriminator, search through entire user database for a match
     if "#" in query and query.rsplit("#", 1)[-1].isnumeric():
         for user in dottie._connection._users.values():
             if str(user) == query:
@@ -390,12 +387,10 @@ async def find_user(query, guild=None):
                     if member is not None:
                         return member
                 return user
-    # otherwise try and find the member by username/nickname in current guild
     if guild:
         for user in guild.members:
             if user.name == query or user.nick == query:
                 return user
-    # as a last resort, find the user with shortest name, starting with the query
     if guild:
         if len(guild.members) < 2:
             member = await guild.query_members(query, limit=1)
@@ -415,8 +410,6 @@ async def find_user(query, guild=None):
 dottie.find_user = find_user
 
 
-# This is a python-specific if statement that will only be true if the current file is being run directly,
-# which means that dottie won't try to run a second time when this file is being imported from `general.py`.
 if __name__ == "__main__":
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
