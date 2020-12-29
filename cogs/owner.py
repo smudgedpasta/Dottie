@@ -73,54 +73,6 @@ class OWNER(commands.Cog):
             await vc.disconnect(force=True)
         await asyncio.sleep(0.5)
         await ctx.bot.logout()
-
-    
-    @commands.command()
-    @commands.check(is_owner)
-    async def rules(self, ctx):
-        embed = discord.Embed(colour=discord.Colour(15277667))
-        embed.set_author(name=self.dottie.get_user(530781444742578188).name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.get_user(530781444742578188).avatar_url_as(format="png", size=4096))
-        embed.description = """***```ini\n🗒️ [SERVER RULES!] 🗒️```***
-*```fix\n🔸 RULE ONE```*
-*What the <@&677928041183182890>'s say, goes.*
-
-The server admins may not have their roles displayed at the side, but there will always be indicators of who they are. The server admins currently are <@530781444742578188> and <@201548633244565504>, who are marked by the roles <@&668062248907964417> and <@&723119556301815818>. 
-If you are asked to stop behaving a certain way, you are expected to listen.
-
-*```fix\n🔸 RULE TWO```*
-*Do not hate on other people's interests.*
-
-This can range from music taste to opinions on "ships" regarding a fandom. You can have friendly debates on why you disagree, this server is not built to silence your opinion. But when it gets into the territory of discriminating against users/insulting them of their interests, the line is drawn.
-People should be allowed to feel safe to express their opinion, and I don't want anyone feeling like they're walking on eggshells. 
-
-*```fix\n🔸 RULE THREE```*
-*Absolutely no discrimination towards sexuality, religion and culture/background.*
-
-Similarly to rule two, users should be free to express themselves, only this is taken more seriously. If you have  negative opinions on certain sexualities, cultures, countries, backgrounds, and more of the like, kindly keep it to yourself. Discrimination or insults to others based on these factors will absolutely not be tolerated, `it does not define them.`
-"""
-        embed2 = discord.Embed(colour=discord.Colour(15277667))
-        embed2.description = """*```fix\n🔸 RULE FOUR```*
-*No ||pornographic/heavily suggestive|| imagery, artwork or music.*
-
-The odd occasional sexual reference is fine, but full blown conversation, imagery or other forms of media regarding sex/nudity/porn is strictly forbidden. Not only is it inconsiderate to the minor members of the server, `it is against Discord TOS.`
-There is no NSFW channel as I myself am currently a minor and wouldn't be able to view it.
-
-*```fix\n🔸 RULE FIVE```*
-*Do not critique other users unless they ask for it.*
-
-If users have not requested or discussed critique (especially in <#668071671063773204>, <#734115770488848414>, <#668072914284707880>, <#668072832525271050> and <#668072372833878026>) then do not give them critique, as sometimes it is not appreciated or could play with a users insecurities.
-<#668097481468280832> plays as the channel for asking critique on any creative subject. If you critique a user, make sure you're constructive and offer real helpful criticism, and aren't just being blunt and unkind.
-
-```In a nutshell, the rules can be defined as being respectful to other users. I may come across as strict, but the server is open to everyone, so don't feel like you can't be yourself.```
-"""
-        
-        embed2.set_footer(text="Concerned or confused about anything? @ in #questions-and-feedback or DM a Server Admin")
-
-        await self.dottie.get_channel(668061258007969802).send("https://cdn.discordapp.com/attachments/668061258007969802/723157201903943730/Untitled163.png")
-        await self.dottie.get_channel(668061258007969802).send(embed=embed)
-        await self.dottie.get_channel(668061258007969802).send(embed=embed2)
-
-        await ctx.send("Rules successfully added!")
     
 
 def setup(dottie):
