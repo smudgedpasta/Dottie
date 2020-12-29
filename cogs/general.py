@@ -136,7 +136,7 @@ class GENERAL(commands.Cog):
     @commands.command(aliases=["link", "invite"])
     async def source(self, ctx):
         embed = discord.Embed(colour=discord.Colour(15277667))
-        embed.description = f"""[My GitHub](https://github.com/smudgedpasta/Dottie)\n[My Invite](https://discord.com/api/oauth2/authorize?client_id=737992099449929728&permissions=8&scope=bot)"""
+        embed.description = """[My GitHub](https://github.com/smudgedpasta/Dottie)\n[My Invite](https://discord.com/api/oauth2/authorize?client_id=737992099449929728&permissions=8&scope=bot)"""
         embed.set_author(name=self.dottie.user.name, icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/793587710391746590/768px-Python-logo-notext.png")
         await ctx.send(embed=embed)
