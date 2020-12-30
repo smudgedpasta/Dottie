@@ -76,9 +76,9 @@ class GENERAL(commands.Cog):
 **:white_heart: __GENERAL__ :white_heart:**\n
 ***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*\n***ping***\n*```Returns some technical information.```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n
+***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
-***fox***\n*```Sends a random image of any kind of fox!```*\n
+***fox***\n*```Sends a random image of any kind of fox!```*\n***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out d.ab with my prefix, so I'll dab!```*\n***how***\n*```How.gif, that is all.```*\n
 **:headphones: __VOICE__ :headphones:**\n
 ```json\n"Whoops, no further commands yet!"```\n
 **:people_hugging: __MENTAL HEALTH__ :people_hugging:**\n
