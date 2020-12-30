@@ -56,7 +56,7 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*\n***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n
+***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***wordcount***\n**```fix\nAliases: charcount, charactercount, wc, cc```**\n*```I will ask for some text. Post it afterwards and I'll tell you the word and character count!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
@@ -74,7 +74,7 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ```json\n"Whoops, no further commands yet!"```\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*\n***ping***\n*```Returns some technical information.```*\n
+***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*\n***ping***\n*```Returns some technical information.```*\n***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
 ***heart***\n*```Use this with two emojis, and I'll make them a heart!```*\n***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*\n***faker***\n*```Think you can imitate me? I will call you out!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
