@@ -223,7 +223,10 @@ class FUN(commands.Cog):
 ❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛"""
         else:
             # I need to make this seeded
-            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```\n" + bar
+            if arg == arg2:
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg.capitalize()}] ♡ [{arg2.capitalize()}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```\n" + bar
+            else:
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg.capitalize()}] ♡ [{arg2.capitalize()}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```\n" + bar
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
