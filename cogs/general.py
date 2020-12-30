@@ -230,6 +230,18 @@ class GENERAL(commands.Cog):
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")
         embed.description = f"```ini\n🎉 [{random.choice(args)}] 🎉```"
         await ctx.send("🥁 ***Your random selection is...***", embed=embed)
+
+
+    @commands.command(aliases=["charcount", "charactercount", "wc", "cc"])
+    async def wordcount(self, ctx):
+        await ctx.send("Please post the text you would like the word and character count for! :pen_fountain:")
+        message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        wc = message.content.split()
+        cc = message.content.strip()
+        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed.description = "```" + random.choice(["ini", "css"]) + f"\n𝒲𝑜𝓇𝒹 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(wc)}]❕\n𝒞𝒽𝒶𝓇𝒶𝒸𝓉𝑒𝓇 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(cc)}]❕```"
+        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
+        await ctx.send(embed=embed)
         
 
 def setup(dottie):
