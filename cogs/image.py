@@ -108,6 +108,16 @@ class IMAGE(commands.Cog):
         embed.description = random.choice(["Squeak!", "Ring-ding-ding-ding-dingeringeding!", "🦊", "<:sleepy_fox:762367799150510164>"])
         await ctx.send(embed=embed)
 
+    
+    @commands.command(aliases=["dab"])
+    async def ab(self, ctx):
+        await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
+
+
+    @commands.command()
+    async def how(self, ctx):
+        await ctx.send("https://imgur.com/gallery/8cfRt")
+
 
 def setup(dottie):
     dottie.add_cog(IMAGE(dottie))

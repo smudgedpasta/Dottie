@@ -50,11 +50,6 @@ class FUN(commands.Cog):
         await ctx.send(f"{random.choice(answer)} {question}? {random.choice(responses)}")
 
 
-    @commands.command(aliases=["dab"])
-    async def ab(self, ctx):
-        await ctx.send("https://cdn.discordapp.com/attachments/688253918890688521/739424083556696104/unknown.gif")
-
-
     @commands.command()
     async def faker(self, ctx):
         member = ctx.author
