@@ -254,7 +254,9 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     if isinstance(error, commands.CommandInvokeError):
-        await ctx.send("```fix\n⚠️ Unexpected error! Either use this command with a required argument, or report this as a bug to smudgedpasta.```")
+        embed = discord.Embed(colour=discord.Colour(16776960))
+        embed.description = "```fix\n⚠️ Unexpected error! Either use this command with a required argument, or report this as a bug to smudgedpasta. ⚠️```"
+        await ctx.send(embed=embed)
     try:
         raise error
     except:
