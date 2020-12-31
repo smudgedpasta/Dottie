@@ -167,9 +167,12 @@ class FUN(commands.Cog):
     @commands.command(aliases=["ship", "love"])
     async def matchmaking(self, ctx, arg, arg2):
         heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
-        
-        heart = random.choice(heart_list)
 
+        arg = arg.capitalize()
+        arg2 = arg2.capitalize()
+
+        heart = random.choice(heart_list)
+        random.seed(tuple(sorted((arg, arg2))))
         percentage = random.randint(0, 100)
 
         if percentage == 0:
@@ -222,11 +225,10 @@ class FUN(commands.Cog):
             embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 🤍```" + """
 ❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛"""
         else:
-            # I need to make this seeded
             if arg == arg2:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg.capitalize()}] ♡ [{arg2.capitalize()}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```\n" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```\n" + bar
             else:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg.capitalize()}] ♡ [{arg2.capitalize()}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```\n" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```\n" + bar
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
