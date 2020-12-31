@@ -171,9 +171,10 @@ class FUN(commands.Cog):
         arg = arg.capitalize()
         arg2 = arg2.capitalize()
 
-        heart = random.choice(heart_list)
         random.seed(tuple(sorted((arg, arg2))))
         percentage = random.randint(0, 100)
+        random.seed(time.time())
+        heart = random.choice(heart_list)
 
         if percentage == 0:
             bar = "🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
