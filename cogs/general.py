@@ -56,9 +56,9 @@ class GENERAL(commands.Cog):
 **:crossed_swords: __MODERATION__ :crossed_swords:**\n
 ***ban***\n*```Bans a user the same way as kick.```*\n***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*\n***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*\n
 **:white_heart: __GENERAL__ :white_heart:**\n
-***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random!```*\n***wordcount***\n**```fix\nAliases: charcount, charactercount, wc, cc```**\n*```I will ask for some text. Post it afterwards and I'll tell you the word and character count!```*\n
+***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*\n***random***\n*```Takes all arguments you've provided and chooses one at random! To have a sentence, put quotes around it!```*\n***wordcount***\n**```fix\nAliases: charcount, charactercount, wc, cc```**\n*```I will ask for some text. Post it afterwards and I'll tell you the word and character count!```*\n
 **:french_bread: __FUN__ :french_bread:**\n
-***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
+***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing! For multiple words in one, quotes work here too!```*\n***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*\n***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*\n
 **:frame_photo: __IMAGE__ :frame_photo:**\n
 ***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*\n***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*\n***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*\n
 **:headphones: __VOICE__ :headphones:**\n
