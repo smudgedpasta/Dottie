@@ -297,7 +297,7 @@ Thanks for inviting me! 😊"""
         await target_channel.send(embed=embed)
 
 
-@dottie.command()
+@dottie.command(aliases=["exec_e"])
 @commands.check(is_owner)
 async def exec_add(ctx):
     if ctx.message.channel.id not in TERMINALS:
@@ -309,7 +309,7 @@ async def exec_add(ctx):
     await ctx.send(embed=embed)
 
 
-@dottie.command()
+@dottie.command(aliases=["exec_d"])
 @commands.check(is_owner)
 async def exec_remove(ctx):
     TERMINALS.discard(ctx.message.channel.id)
