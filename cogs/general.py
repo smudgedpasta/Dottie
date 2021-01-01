@@ -122,6 +122,123 @@ class GENERAL(commands.Cog):
 
 
     @commands.command()
+    async def newhelp(self, ctx):
+        home = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        home.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        home.description = "*I think I need heeelp, I'm drowning in myseeelf* 🎵"
+        home.set_image(url="https://cdn.discordapp.com/attachments/683233571405561876/746281046231875594/image0.png")
+        home.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text="Click the reactions to scroll through the pages!")
+
+        info = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        info.set_author(name="🐾 First, a few things... 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        info.description = f"""```🔸 What permissions does Dottie, need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{PREFIX}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
+```🔸 Does {PREFIX.upper()} work?```\nTo put it shortly, nope! And this is a common mistake I see.\n
+```🔸 Do I need to @ myself?```\nLets say you are using {PREFIX}info. If you want to see your own, just send it by itself!\n
+```🔸 Are commands case sensitive?```\nNope! Using `{PREFIX}hElLo` would work just the same as `{PREFIX}hello`.\n
+```🔸 What permissions are required for moderation?```\nAt the moment, you have to be an admin!\n
+```🔸 How do I seperate my sentences?```\nLet's suppose you're using {PREFIX}ship. Normally, I would work like this: `{PREFIX}ship Smudge Txin`. If you want me to read the whole sentence, put quotes around it! For example: `{PREFIX}ship \"My sleeping routine\" School`. These all go for any command!\n
+```🔸 How do I search for users?```\nYou don't have to @ them! Lets say you are using {PREFIX}info, you can write the command like this: `{PREFIX}info smudge` and it'll still work to finding `smudgedpasta`, etc! If they are not in the server, you can use their user ID to still find them! If they are not in *this* server but *do* share another server with me, you can supply their full Discord tag! For example: `{PREFIX}info smudgedpasta#6605`\n
+```🔸 Do commands work in DM's?```\nSome do! Some may error, however.
+```🔸 What's up with the changing statuses?```\nWhenever anyone uses my commands, I will change from idle to online for a few seconds!\n
+```🔸 What do I do if I get an error?```\nFirstly, make sure you are using the command correctly. My lead programmer is <@530781444742578188>, and <@201548633244565504> wrote my more complicated features, so if you're having any issues, let either of them know and they'll get on it!
+"""
+        info.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text="Click 🔻 to see my commands!")
+        
+        moderation = discord.Embed(colour=discord.Colour(15277667))
+        moderation.set_author(name="⚔️ MODERATION ⚔️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        moderation.set_footer(text="Click 🔺 to go back to info, click 🔻 to see GENERAL commands!")
+        moderation.description = """***remove_levels***\n**```fix\nAliases: levels_d```**\n*```Prevents level-up embeds from posting in the server.```*
+***enable_levels***\n**```fix\nAliases: levels_e```**\n*```If level-up embeds were disabled, this re-enables them.```*
+***purge***\n*```Clears inputted message count, not counting the command message.```*
+***ban***\n*```Bans a user the same way as kick.```*
+***unban***\n*```Unbans a user by typing their username and discriminator. (Example: Dottie#7157)```*
+***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*
+"""
+
+        general = discord.Embed(colour=discord.Colour(15277667))
+        general.set_author(name="🤍 GENERAL 🤍", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        general.set_footer(text="Click 🔺 to go back to MODERATION, click 🔻 to see FUN commands!")
+        general.description = f"""***help***\n*```Legends say you've found this command already. 👀```*
+***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a provided user!```*
+***level***\n**```fix\nAliases: pokémon, pokemon```**\n*```Shows the current level and experience of a provided user!```*
+***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*
+***random***\n*```Takes all arguments you've provided and chooses one at random!```*
+***wordcount***\n**```fix\nAliases: charcount, charactercount, wc, cc```**\n*```I will ask for some text. Post it afterwards and I'll tell you the word and character count!```*
+***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX}loop 5 {PREFIX}hello```*
+***ping***\n*```Returns some technical information.```*
+***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*
+"""
+
+        fun = discord.Embed(colour=discord.Colour(15277667))
+        fun.set_author(name="🥖 FUN 🥖", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        fun.set_footer(text="Click 🔺 to go back to GENERAL, click 🔻 to see IMAGE commands!")
+        fun.description = """***hello***\n**```fix\nAliases: "hemlo", "hoi"```**\n*```I will greet you back!```*
+***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*
+***rate***\n*```Give me anything and I'll give it a rating!```*
+***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*
+***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*
+***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*
+***heart***\n*```Use this with two emojis, and I'll make them a heart!```*
+***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*
+***faker***\n*```Think you can imitate me? I will call you out!```*
+"""
+        image = discord.Embed(colour=discord.Colour(15277667))
+        image.set_author(name="🖼️ IMAGE 🖼️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        image.set_footer(text="Click 🔺 to go back to FUN, click 🔻 to see VOICE commands!")
+        image.description = f"""***photo***\n*```Pulls a random image of me!```*
+***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*
+***art***\n*```Takes the most recent image in a channel and only states the truth!```*
+***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*
+***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*
+***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
+***fox***\n*```Sends a random image of any kind of fox!```*
+***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out {PREFIX}ab with my prefix, so I'll dab!```*
+***how***\n*```How.gif, that is all.```*
+"""
+
+        voice = discord.Embed(colour=discord.Colour(15277667))
+        voice.set_author(name="🎧 VOICE 🎧", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        voice.set_footer(text="Click 🔺 to go back to IMAGE")
+        voice.description = """***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*
+***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*
+***despacito***\n**```fix\nAliases: espacito```**\n*```Plays a totally normal version of Despacito!```*
+"""
+
+        pages = [home, info, moderation, general, fun, image, voice]
+
+        message = await ctx.send(embed=home)
+
+        await message.add_reaction("🔺")
+        await message.add_reaction("🔻")
+
+        def user_check(reaction, user):
+            if reaction.message.id == message.id:
+                if user.id == ctx.author.id or user.id in OWNERS:
+                    return True
+                if user.id != self.dottie.user.id:
+                    guild = reaction.message.guild
+                    if guild is not None:
+                        member = guild.get_member(user.id)
+                        if member is not None:
+                            if member.guild_permissions.administrator:
+                                return True
+    
+        async def page_reaction_listener(page, event_type="add"):
+            while True:
+                react = await self.dottie.wait_for(f"reaction_{event_type}", check=user_check)
+                emoji = str(react[0])
+                if emoji == "🔺" and page[0] > 0:
+                    page[0] -= 1
+                    await message.edit(embed=pages[page[0]])
+                if emoji == "🔻" and page[0] < len(pages) - 1:
+                    page[0] += 1
+                    await message.edit(embed=pages[page[0]])
+        page = [0]
+        create_task(page_reaction_listener(page, "add"))
+        create_task(page_reaction_listener(page, "remove"))
+
+
+    @commands.command()
     async def loop(self, ctx):
         message = ctx.message
         content = message.content
