@@ -321,13 +321,17 @@ async def exec_remove(ctx):
 async def load(ctx, extension=None):
     if extension is None:
 
-        for cog in ["moderation", "general", "fun", "levels", "image" "voice", "owner", "CTE"]:
+        for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.load_extension(f"cogs.{cog}")
-        await ctx.send("```fix\n[Successfully returned acces to all extensions.]```")
+        embed = discord.Embed(colour=discord.Colour(255))
+        embed.description = "```fix\n[Successfully returned acces to all extensions.]```"
+        await ctx.send(embed=embed)
         return
 
     dottie.load_extension(f"cogs.{extension}")
-    await ctx.send(f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```")
+    embed = discord.Embed(colour=discord.Colour(255))
+    embed.description = f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```"
+    await ctx.send(embed=embed)
 
 
 @dottie.command()
@@ -337,11 +341,15 @@ async def unload(ctx, extension=None):
 
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.unload_extension(f"cogs.{cog}")
-        await ctx.send("```fix\n[Successfully removed all extensions until further notice.]```")
+        embed = discord.Embed(colour=discord.Colour(16711680))
+        embed.description = "```asciidoc\n[Successfully removed all extensions until further notice.]```"
+        await ctx.send(embed=embed)
         return
 
     dottie.unload_extension(f"cogs.{extension}")
-    await ctx.send(f"```asciidoc\n[Successfully removed category \"{extension.upper()}\" until further notice.]```")
+    embed = discord.Embed(colour=discord.Colour(16711680))
+    embed.description = f"```asciidoc\n[Successfully removed category \"{extension.upper()}\" until further notice.]```"
+    await ctx.send(embed=embed)
 
 
 @dottie.command()
@@ -352,12 +360,16 @@ async def reload(ctx, extension=None):
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.unload_extension(f"cogs.{cog}")
             dottie.load_extension(f"cogs.{cog}")
-        await ctx.send("```fix\n[Successfully refreshed all extensions.]```")
+        embed = discord.Embed(colour=discord.Colour(16776960))
+        embed.description = "```fix\n[Successfully refreshed all extensions.]```"
+        await ctx.send(embed=embed)
         return
 
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
-    await ctx.send(f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```")
+    embed = discord.Embed(colour=discord.Colour(16776960))
+    embed.description = f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```"
+    await ctx.send(embed=embed)
 
 
 async def find_user(query, guild=None):
