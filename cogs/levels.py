@@ -3,7 +3,7 @@ from bot import print2
 
 
 try:
-    with open("level_disables", "r") as f:
+    with open("database/level_disables", "r") as f:
         s = f.read()
 except FileNotFoundError:
     s = ""
@@ -15,16 +15,16 @@ class LEVELS(commands.Cog):
         self.dottie = dottie
         dottie.LEVELS = self
         dottie.loop.create_task(self.update_userbase())
-        if not os.path.exists("json/levelsdata.json"):
+        if not os.path.exists("database/levelsdata.json"):
             self.users = {}
         else:
-            with open("json/levelsdata.json", "r") as f:
+            with open("database/levelsdata.json", "r") as f:
                 self.users = json.load(f)
 
     async def update_userbase(self):
         await self.dottie.wait_until_ready()
         while not self.dottie.is_closed():
-            with open("json/levelsdata.json", "w") as f:
+            with open("database/levelsdata.json", "w") as f:
                 json.dump(self.users, f, indent=4)
             await asyncio.sleep(10)
 
@@ -54,7 +54,7 @@ class LEVELS(commands.Cog):
     async def remove_levels(self, ctx):
         if ctx.guild.id not in DISABLED:
             DISABLED.add(ctx.guild.id)
-        with open("level_disables", "a") as f:
+        with open("database/level_disables", "a") as f:
             f.write(str(ctx.guild.id) + "\n")
             await ctx.send(f"```css\nDisabled [{ctx.guild}] from recieving level-up embeds!```")
 
@@ -63,7 +63,7 @@ class LEVELS(commands.Cog):
     @has_permissions(administrator=True)
     async def enable_levels(self, ctx):
         DISABLED.discard(ctx.guild.id)
-        with open("level_disables", "w") as f:
+        with open("database/level_disables", "w") as f:
             f.write("\n".join(str(i) for i in DISABLED))
             await ctx.send(f"```css\nRe-enabled [{ctx.guild}] into recieving level-up embeds!```")
 

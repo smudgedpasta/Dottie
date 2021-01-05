@@ -181,7 +181,7 @@ async def on_message(message):
                 embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
                 embed.description = f"{message.content}"
                 embed.set_footer(text=f"User ID: {ctx.author.id}")
-                create_task(DM_CHANNEL.send(embed=embed))
+                await dottie.get_channel(DM_channel).send(embed=embed)
             
     else:
         channel = message.channel
@@ -303,7 +303,7 @@ Thanks for inviting me! 😊"""
 async def exec_add(ctx):
     if ctx.message.channel.id not in TERMINALS:
         TERMINALS.add(ctx.message.channel.id)
-        with open("terminals", "a") as f:
+        with open("database/terminals", "a") as f:
             f.write(str(ctx.message.channel.id) + "\n")
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\nAdded [#{ctx.message.channel}] to the list of terminals!```"
@@ -314,7 +314,7 @@ async def exec_add(ctx):
 @commands.check(is_owner)
 async def exec_remove(ctx):
     TERMINALS.discard(ctx.message.channel.id)
-    with open("terminals", "w") as f:
+    with open("databaseterminals", "w") as f:
         f.write("\n".join(str(i) for i in TERMINALS))
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\nRemoved [#{ctx.message.channel}] from the list of terminals!```"
@@ -326,7 +326,7 @@ async def exec_remove(ctx):
 async def dm_add(ctx):
     if ctx.message.channel.id not in DM_CHANNEL:
         DM_CHANNEL.add(ctx.message.channel.id)
-        with open("DM_channels", "a") as f:
+        with open("database/DM_channels", "a") as f:
             f.write(str(ctx.message.channel.id) + "\n")
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\n[#{ctx.message.channel}] will now log DM's!```"
@@ -337,7 +337,7 @@ async def dm_add(ctx):
 @commands.check(is_owner)
 async def dm_remove(ctx):
     DM_CHANNEL.discard(ctx.message.channel.id)
-    with open("DM_channels", "w") as f:
+    with open("database/DM_channels", "w") as f:
         f.write("\n".join(str(i) for i in DM_CHANNEL))
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\n[#{ctx.message.channel}] will no longer log DM's!```"
