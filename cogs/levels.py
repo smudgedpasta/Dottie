@@ -56,7 +56,9 @@ class LEVELS(commands.Cog):
             DISABLED.add(ctx.guild.id)
         with open("database/level_disables", "a") as f:
             f.write(str(ctx.guild.id) + "\n")
-            await ctx.send(f"```css\nDisabled [{ctx.guild}] from recieving level-up embeds!```")
+            embed = discord.Embed(colour=discord.Colour(65280))
+            embed.description = f"```css\nDisabled [{ctx.guild}] from recieving level-up embeds!```"
+            await ctx.send(embed=embed)
 
 
     @commands.command(aliases=["levels_e"])
@@ -65,7 +67,9 @@ class LEVELS(commands.Cog):
         DISABLED.discard(ctx.guild.id)
         with open("database/level_disables", "w") as f:
             f.write("\n".join(str(i) for i in DISABLED))
-            await ctx.send(f"```css\nRe-enabled [{ctx.guild}] into recieving level-up embeds!```")
+            embed = discord.Embed(colour=discord.Colour(65280))
+            embed.description = f"```css\nRe-enabled [{ctx.guild}] into recieving level-up embeds!```"
+            await ctx.send(embed=embed)
 
     
     async def on_message(self, message):
