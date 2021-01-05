@@ -19,6 +19,14 @@ except FileNotFoundError:
 TERMINALS = {int(i) for i in s.splitlines() if i}
 
 
+try:
+    with open("DM_channels", "r") as f:
+        s = f.read()
+except FileNotFoundError:
+    s = ""
+DM_CHANNEL = {int(i) for i in s.splitlines() if i}
+
+
 class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.ContextDecorator):
 
     def __init__(self, glob=None):

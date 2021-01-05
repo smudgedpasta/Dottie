@@ -3,6 +3,7 @@ __dottie_env__
 config.json
 ffmpeg.exe
 terminals
+DM_channels
 log
 levelsdata.json
 level_disables

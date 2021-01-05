@@ -173,14 +173,15 @@ async def on_message(message):
             LAST_COMMAND_TIMESTAMP = time.time()
 
     elif getattr(message.channel, "guild", None) is None and message.author != dottie.user:
-        if ctx.command is None:
-            embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
-            embed.set_author(name=f"Incoming DM from {message.author}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
-            embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
-            embed.description = f"{message.content}"
-            embed.set_footer(text=f"User ID: {ctx.author.id}")
-            await dottie.get_channel(727087981285998593).send(embed=embed)
-            await dottie.get_channel(751518107922858075).send(embed=embed)
+        channel = message.channel
+        if channel.id in DM_CHANNEL:
+            if ctx.command is None:
+                embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
+                embed.set_author(name=f"Incoming DM from {message.author}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
+                embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
+                embed.description = f"{message.content}"
+                embed.set_footer(text=f"User ID: {ctx.author.id}")
+                create_task(DM_CHANNEL.send(embed=embed))
             
     else:
         channel = message.channel
@@ -317,6 +318,29 @@ async def exec_remove(ctx):
         f.write("\n".join(str(i) for i in TERMINALS))
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\nRemoved [#{ctx.message.channel}] from the list of terminals!```"
+    await ctx.send(embed=embed)
+
+
+@dottie.command(aliases=["dm_e"])
+@commands.check(is_owner)
+async def dm_add(ctx):
+    if ctx.message.channel.id not in DM_CHANNEL:
+        DM_CHANNEL.add(ctx.message.channel.id)
+        with open("DM_channels", "a") as f:
+            f.write(str(ctx.message.channel.id) + "\n")
+    embed = discord.Embed(colour=discord.Colour(65280))
+    embed.description = f"```css\n[#{ctx.message.channel}] will now log DM's!```"
+    await ctx.send(embed=embed)
+
+
+@dottie.command(aliases=["dm_d"])
+@commands.check(is_owner)
+async def dm_remove(ctx):
+    DM_CHANNEL.discard(ctx.message.channel.id)
+    with open("DM_channels", "w") as f:
+        f.write("\n".join(str(i) for i in DM_CHANNEL))
+    embed = discord.Embed(colour=discord.Colour(65280))
+    embed.description = f"```css\n[#{ctx.message.channel}] will no longer log DM's!```"
     await ctx.send(embed=embed)
 
 
