@@ -174,14 +174,15 @@ async def on_message(message):
 
     elif getattr(message.channel, "guild", None) is None and message.author != dottie.user:
         channel = message.channel
-        if channel.id in DM_CHANNEL:
-            if ctx.command is None:
-                embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
-                embed.set_author(name=f"Incoming DM from {message.author}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
-                embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
-                embed.description = f"{message.content}"
-                embed.set_footer(text=f"User ID: {ctx.author.id}")
-                await dottie.get_channel(DM_channel).send(embed=embed)
+        if ctx.command is None:
+            embed = discord.Embed(colour=discord.Colour(197379), timestamp=ctx.message.created_at)
+            embed.set_author(name=f"Incoming DM from {message.author}!", icon_url="https://cdn.discordapp.com/attachments/751513839169831083/757326045450862754/DM_Thumbnail.png")
+            embed.set_thumbnail(url=ctx.author.avatar_url_as(format="png", size=4096))
+            embed.description = f"{message.content}"
+            embed.set_footer(text=f"User ID: {ctx.author.id}")
+            for ID in DM_CHANNEL:
+                if channel.id in ID:
+                    create_task(DM_CHANNEL.send(embed=embed))
             
     else:
         channel = message.channel
