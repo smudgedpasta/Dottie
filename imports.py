@@ -1,7 +1,8 @@
 import contextlib, concurrent.futures
 
 
-PREFIX = "d."
+PREFIX = ["d.", "D."]
+EXAMPLE_PREFIX = "d."
 
 
 OWNERS = [530781444742578188, 201548633244565504]
