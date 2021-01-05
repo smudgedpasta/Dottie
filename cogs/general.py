@@ -132,9 +132,9 @@ class GENERAL(commands.Cog):
         info = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
         info.set_author(name="🐾 First, a few things... 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         info.description = f"""```🔸 What permissions does Dottie need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{EXAMPLE_PREFIX}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
-```🔸 Does {EXAMPLE_PREFIX.upper()} work?```\nTo put it shortly, nope! And this is a common mistake I see.\n
 ```🔸 Do I need to @ myself?```\nLets say you are using `{EXAMPLE_PREFIX}info`. If you want to see your own, just send it by itself!\n
 ```🔸 Are commands case sensitive?```\nNope! Using `{EXAMPLE_PREFIX}hElLo` would work just the same as `{EXAMPLE_PREFIX}hello`.\n
+```🔸 Does {EXAMPLE_PREFIX.upper()} work?```\nYep! Just like commands, the prefix is case sensitive!\n
 ```🔸 What permissions are required for moderation?```\nAt the moment, you have to be an admin!\n
 ```🔸 How do I seperate my sentences?```\nLet's suppose you're using {EXAMPLE_PREFIX}ship. Normally, I would work like this: `{EXAMPLE_PREFIX}ship Smudge Txin`. If you want me to read the whole sentence, put quotes around it! For example: `{EXAMPLE_PREFIX}ship \"My sleeping routine\" School`. These all go for any command!\n
 ```🔸 How do I search for users?```\nYou don't have to @ them! Lets say you are using {EXAMPLE_PREFIX}info, you can write the command like this: `{EXAMPLE_PREFIX}info smudge` and it'll still work to finding `smudgedpasta`, etc! If they are not in the server, you can use their user ID to still find them! If they are not in *this* server but *do* share another server with me, you can supply their full Discord tag! For example: `{EXAMPLE_PREFIX}info smudgedpasta#6605`\n
