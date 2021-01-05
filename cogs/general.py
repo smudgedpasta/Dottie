@@ -138,7 +138,7 @@ class GENERAL(commands.Cog):
 ```🔸 What permissions are required for moderation?```\nAt the moment, you have to be an admin!\n
 ```🔸 How do I seperate my sentences?```\nLet's suppose you're using {PREFIX}ship. Normally, I would work like this: `{PREFIX}ship Smudge Txin`. If you want me to read the whole sentence, put quotes around it! For example: `{PREFIX}ship \"My sleeping routine\" School`. These all go for any command!\n
 ```🔸 How do I search for users?```\nYou don't have to @ them! Lets say you are using {PREFIX}info, you can write the command like this: `{PREFIX}info smudge` and it'll still work to finding `smudgedpasta`, etc! If they are not in the server, you can use their user ID to still find them! If they are not in *this* server but *do* share another server with me, you can supply their full Discord tag! For example: `{PREFIX}info smudgedpasta#6605`\n
-```🔸 Do commands work in DM's?```\nSome do! Some may error, however.
+```🔸 Do commands work in DM's?```\nSome do! Some may error, however.\n
 ```🔸 What's up with the changing statuses?```\nWhenever anyone uses my commands, I will change from idle to online for a few seconds!\n
 ```🔸 What do I do if I get an error?```\nFirstly, make sure you are using the command correctly. My lead programmer is <@530781444742578188>, and <@201548633244565504> wrote my more complicated features, so if you're having any issues, let either of them know and they'll get on it!
 """
