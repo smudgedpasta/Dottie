@@ -131,7 +131,7 @@ class GENERAL(commands.Cog):
 
         info = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
         info.set_author(name="🐾 First, a few things... 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-        info.description = f"""```🔸 What permissions does Dottie, need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{PREFIX}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
+        info.description = f"""```🔸 What permissions does Dottie need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{PREFIX}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
 ```🔸 Does {PREFIX.upper()} work?```\nTo put it shortly, nope! And this is a common mistake I see.\n
 ```🔸 Do I need to @ myself?```\nLets say you are using {PREFIX}info. If you want to see your own, just send it by itself!\n
 ```🔸 Are commands case sensitive?```\nNope! Using `{PREFIX}hElLo` would work just the same as `{PREFIX}hello`.\n
