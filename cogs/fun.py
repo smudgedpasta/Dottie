@@ -6,7 +6,7 @@ class FUN(commands.Cog):
         self.dottie = dottie
 
 
-    @commands.command(aliases=["hi", "hemlo", "hoi"])
+    @commands.command(aliases=["hi", "hemlo", "henlo", "hoi"])
     async def hello(self, ctx):
         await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
 
