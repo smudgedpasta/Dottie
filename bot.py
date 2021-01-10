@@ -26,15 +26,6 @@ for name, command in miza_commands["VOICE"].items():
     miza_voice.extend((name.lower(),) + tuple(alias.lower() for alias in command["aliases"]))
 
 
-def start_miza():
-    if "MIZA" in globals():
-        globals()["MIZA"].kill()
-    globals()["MIZA"] = psutil.Popen(["python", "main.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
-
-def stop_miza():
-    globals()["MIZA"].kill()
-
-
 LISTENER = None
 
 

@@ -163,3 +163,12 @@ def create_task(fut, *args, loop=None, **kwargs):
     return asyncio.ensure_future(fut, *args, loop=loop, **kwargs)
 
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
+
+
+def start_miza():
+    if "MIZA" in globals():
+        globals()["MIZA"].kill()
+    globals()["MIZA"] = psutil.Popen(["python", "main.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
+
+def stop_miza():
+    globals()["MIZA"].kill()
