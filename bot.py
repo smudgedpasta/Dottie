@@ -214,7 +214,7 @@ async def on_message(message):
                         await channel.send("```\n" + str(output)[:1993] + "```")
                     except:
                         error = await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
-                        await error.add_reaction(":negative_squared_cross_mark:")
+                        await error.add_reaction("❎")
       
 eloop.create_task(status_update_loop())
 
