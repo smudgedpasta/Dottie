@@ -29,12 +29,11 @@ for name, command in miza_commands["VOICE"].items():
 def start_miza():
     if "MIZA" in globals():
         globals()["MIZA"].kill()
-    globals()["MIZA"] = psutil.Popen(["python", "../../Miza-VOICE/main.py"], cwd="../../Miza-VOICE", stdout=subprocess.DEVNULL)
+    globals()["MIZA"] = psutil.Popen(["python", "main.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
 
 def stop_miza():
     globals()["MIZA"].kill()
-
-
+    
 start_miza()
 
 
