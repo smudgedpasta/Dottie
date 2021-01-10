@@ -146,7 +146,7 @@ async def on_message(message):
     if dottie.user in message.mentions:
         responses = [
             f"Hi, {message.author.display_name}! My prefix is `" + EXAMPLE_PREFIX + "` so if you're looking for my commands, use `" + EXAMPLE_PREFIX + "help`!",
-            f"What's up, {message.author.display_name}, aka... \"{message.author.name}\"? :smirk: If you need help, use `" + example_PREFIX + "help`!",
+            f"What's up, {message.author.display_name}, aka... \"{message.author.name}\"? :smirk: If you need help, use `" + EXAMPLE_PREFIX + "help`!",
             f"Aaah I've been pinged! How could you do this to me, {message.author.mention}?!",
             f"Hello, {message.author.display_name}! I appreciate you wanting to speak to me! Use `" + EXAMPLE_PREFIX + "help` if you're interested!",
             f"Here, decode this, {message.author.display_name}... `64 51 77 34 77 39 57 67 58 63 51` :smirk:",
