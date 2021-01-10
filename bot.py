@@ -249,6 +249,8 @@ async def on_command_error(ctx, error):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
         if str(error).split("\"", 2)[1].lower() in miza_voice:
+            command = PREFIX[0] + str(error).split("\"", 2)[1].lower()
+            print(f"[{ctx.author.name}] has run the following command: [{command}] in [{ctx.guild}]")
             return
         if str(error).split("\"")[1] in ["hepl", "hepk", "hlep", "hekp", "pleh"]:
             await ctx.send("Did you mean \"help\"?")
