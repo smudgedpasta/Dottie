@@ -213,7 +213,8 @@ async def on_message(message):
                         output = await procFunc(proc)
                         await channel.send("```\n" + str(output)[:1993] + "```")
                     except:
-                        await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
+                        error = await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
+                        await error.add_reaction(":negative_squared_cross_mark:")
       
 eloop.create_task(status_update_loop())
 
