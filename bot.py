@@ -19,6 +19,13 @@ dottie = commands.Bot(
     intents=intents
 )
 
+
+miza_commands = requests.get("http://27.33.133.250:9801/static/help.json").json()
+miza_voice = []
+for name, command in miza_commands["VOICE"].items():
+    miza_voice.extend((name.lower(),) + tuple(alias.lower() for alias in command["aliases"]))
+
+
 dottie.remove_command("help")
 
 
@@ -243,6 +250,8 @@ async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
+        if str(error).split("\"", 2)[1].lower() in miza_voice:
+            return
         if str(error).split("\"")[1] in ["hepl", "hepk", "hlep", "hekp", "pleh"]:
             await ctx.send("Did you mean \"help\"?")
         elif str(error).split("\"")[1] in ["cars", "cat"]:
