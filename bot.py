@@ -33,7 +33,7 @@ def start_miza():
 
 def stop_miza():
     globals()["MIZA"].kill()
-    
+
 start_miza()
 
 
@@ -390,6 +390,7 @@ async def log_remove(ctx):
 async def load(ctx, extension=None):
     if extension is None:
 
+        start_miza()
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.load_extension(f"cogs.{cog}")
         embed = discord.Embed(colour=discord.Colour(255))
@@ -398,6 +399,8 @@ async def load(ctx, extension=None):
         return
 
     dottie.load_extension(f"cogs.{extension}")
+    if extension == "voice":
+        start_miza()
     embed = discord.Embed(colour=discord.Colour(255))
     embed.description = f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```"
     await ctx.send(embed=embed)
@@ -408,6 +411,7 @@ async def load(ctx, extension=None):
 async def unload(ctx, extension=None):
     if extension is None:
 
+        stop_miza()
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.unload_extension(f"cogs.{cog}")
         embed = discord.Embed(colour=discord.Colour(16711680))
@@ -416,6 +420,8 @@ async def unload(ctx, extension=None):
         return
 
     dottie.unload_extension(f"cogs.{extension}")
+    if extension == "voice":
+        stop_miza()
     embed = discord.Embed(colour=discord.Colour(16711680))
     embed.description = f"```asciidoc\n[Successfully removed category \"{extension.upper()}\" until further notice.]```"
     await ctx.send(embed=embed)
@@ -425,7 +431,9 @@ async def unload(ctx, extension=None):
 @commands.check(is_owner)
 async def reload(ctx, extension=None):
     if extension is None:
-
+        
+        stop_miza()
+        start_miza()
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.unload_extension(f"cogs.{cog}")
             dottie.load_extension(f"cogs.{cog}")
@@ -436,6 +444,9 @@ async def reload(ctx, extension=None):
 
     dottie.unload_extension(f"cogs.{extension}")
     dottie.load_extension(f"cogs.{extension}")
+    if extension == "voice":
+        stop_miza()
+        start_miza()
     embed = discord.Embed(colour=discord.Colour(16776960))
     embed.description = f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```"
     await ctx.send(embed=embed)
