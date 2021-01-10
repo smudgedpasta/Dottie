@@ -34,8 +34,6 @@ def start_miza():
 def stop_miza():
     globals()["MIZA"].kill()
 
-start_miza()
-
 
 LISTENER = None
 
@@ -400,7 +398,7 @@ async def load(ctx, extension=None):
 
     dottie.load_extension(f"cogs.{extension}")
     # if extension == "voice":
-        # start_miza()
+    #     start_miza()
     embed = discord.Embed(colour=discord.Colour(255))
     embed.description = f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```"
     await ctx.send(embed=embed)
@@ -508,4 +506,5 @@ if __name__ == "__main__":
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             dottie.load_extension(f"cogs.{filename[:-3]}")
+    start_miza()
     dottie.run(discord_token)
