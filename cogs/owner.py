@@ -74,7 +74,7 @@ class OWNER(commands.Cog):
         await ctx.send(embed=embed)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
-        await ctx.bot.logout()
+        psutil.Process().kill()
     
 
 def setup(dottie):
