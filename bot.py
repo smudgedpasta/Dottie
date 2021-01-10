@@ -188,8 +188,7 @@ async def on_message(message):
             embed.description = f"{message.content}"
             embed.set_footer(text=f"User ID: {ctx.author.id}")
             for ID in DM_CHANNEL:
-                if channel.id in ID:
-                    create_task(DM_CHANNEL.send(embed=embed))
+                create_task(dottie.get_channel(ID).send(embed=embed))
             
     else:
         channel = message.channel
@@ -325,7 +324,7 @@ async def exec_add(ctx):
 @commands.check(is_owner)
 async def exec_remove(ctx):
     TERMINALS.discard(ctx.message.channel.id)
-    with open("databaseterminals", "w") as f:
+    with open("database/terminals", "w") as f:
         f.write("\n".join(str(i) for i in TERMINALS))
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\nRemoved [#{ctx.message.channel}] from the list of terminals!```"
