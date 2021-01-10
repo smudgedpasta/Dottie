@@ -53,8 +53,8 @@ def print(*args, sep=" ", end="\n"):
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
 
-    create_task(LOG_CHANNEL.send(embed=embed))
-    create_task(LOG_CHANNEL_2.send(embed=embed))
+    for c_id in LOG_CHANNELS:
+        create_task(dottie.get_channel(c_id).send(embed=embed))
 
     return _print(*args)
 
@@ -63,8 +63,8 @@ def print2(*args, sep=" ", end="\n"):
     embed = discord.Embed(colour=discord.Colour(15277667))
     embed.description = "```py\n" + str(sep).join(str(i) for i in args) + end + "```"
 
-    create_task(LOG_CHANNEL.send(embed=embed))
-    create_task(LOG_CHANNEL_2.send(embed=embed))
+    for c_id in LOG_CHANNELS:
+        create_task(dottie.get_channel(c_id).send(embed=embed))
 
     return _print(*args)
 
@@ -221,8 +221,6 @@ eloop.create_task(status_update_loop())
 @dottie.event
 async def on_ready():
     await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
-    globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
-    globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
     globals()["eloop"] = asyncio.get_event_loop()
     print(f"Logged in as user [{dottie.user}] [(ID = {dottie.user.id})]")
     print("[Successfully loaded and ready to go!]")
@@ -351,6 +349,29 @@ async def dm_remove(ctx):
         f.write("\n".join(str(i) for i in DM_CHANNEL))
     embed = discord.Embed(colour=discord.Colour(65280))
     embed.description = f"```css\n[#{ctx.message.channel}] will no longer log DM's!```"
+    await ctx.send(embed=embed)
+
+
+@dottie.command(aliases=["log_e"])
+@commands.check(is_owner)
+async def log_add(ctx):
+    if ctx.message.channel.id not in LOG_CHANNELS:
+        LOG_CHANNELS.add(ctx.message.channel.id)
+        with open("database/logs", "a") as f:
+            f.write(str(ctx.message.channel.id) + "\n")
+    embed = discord.Embed(colour=discord.Colour(65280))
+    embed.description = f"```css\n[#{ctx.message.channel}] will now recieve developer logs!```"
+    await ctx.send(embed=embed)
+
+
+@dottie.command(aliases=["log_d"])
+@commands.check(is_owner)
+async def log_remove(ctx):
+    LOG_CHANNELS.discard(ctx.message.channel.id)
+    with open("database/logs", "w") as f:
+        f.write("\n".join(str(i) for i in LOG_CHANNELS))
+    embed = discord.Embed(colour=discord.Colour(65280))
+    embed.description = f"```css\n[#{ctx.message.channel}] will no longer recieve developer logs!```"
     await ctx.send(embed=embed)
 
 
