@@ -26,10 +26,16 @@ for name, command in miza_commands["VOICE"].items():
     miza_voice.extend((name.lower(),) + tuple(alias.lower() for alias in command["aliases"]))
 
 
-dottie.remove_command("help")
+def start_miza():
+    if "MIZA" in globals():
+        globals()["MIZA"].kill()
+    globals()["MIZA"] = psutil.Popen(["python", "../../Miza-VOICE/main.py"], cwd="../../Miza-VOICE", stdout=subprocess.DEVNULL)
+
+def stop_miza():
+    globals()["MIZA"].kill()
 
 
-messages = 0
+start_miza()
 
 
 LISTENER = None
@@ -127,7 +133,7 @@ async def status_update_loop():
             LAST_COMMAND_TIMESTAMP = inf
         await asyncio.sleep(0.5)
 
-
+messages = 0
 @dottie.event
 async def on_message(message):
     LEVELS = getattr(dottie, "LEVELS", None)
@@ -306,6 +312,9 @@ Thanks for inviting me! 😊"""
                 break
     if target_channel:
         await target_channel.send(embed=embed)
+
+
+dottie.remove_command("help")
 
 
 @dottie.command(aliases=["exec_e"])

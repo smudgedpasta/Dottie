@@ -1,6 +1,8 @@
 __pycache__
 __dottie_env__
+dottie_env
 config.json
+auth.json
 ffmpeg.exe
 log
 CTE.py

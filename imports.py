@@ -64,6 +64,7 @@ class MultiThreadedImporter(contextlib.AbstractContextManager, contextlib.Contex
 
 with MultiThreadedImporter() as importer:
     importer.__import__(
+        "subprocess",
         "inspect",
         "time",
         "datetime",
