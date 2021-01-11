@@ -61,6 +61,7 @@ class OWNER(commands.Cog):
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
         os.system("start cmd /c python bot.py")
+        stop_miza()
         psutil.Process().kill()
 
 
@@ -74,6 +75,7 @@ class OWNER(commands.Cog):
         await ctx.send(embed=embed)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
+        stop_miza()
         psutil.Process().kill()
     
 
