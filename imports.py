@@ -176,4 +176,7 @@ def start_miza():
     GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
 
 def stop_miza():
-    GLOBALS["MIZA"].kill()
+    try:
+        GLOBALS["MIZA"].kill()
+    except psutil.NoSuchProcess:
+        pass
