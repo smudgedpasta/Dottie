@@ -101,14 +101,40 @@ class GENERAL(commands.Cog):
 """
 
         voice = discord.Embed(colour=discord.Colour(15277667))
-        voice.set_author(name="🎧 VOICE 🎧", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-        voice.set_footer(text="Click 🔺 to go back to IMAGE")
-        voice.description = """***connect***\n**```fix\nAliases: get_your_butt_in_here, join```**\n*```Connects me to the voice channel you're in!```*
-***disconnect***\n**```fix\nAliases: go_naughty_step, leave```**\n*```Disconnects me from the voice channel I was in!```*
+        try:
+            voice.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.get_user(668999031359537205).avatar_url_as(format="png", size=4096))
+        except:
+            voice.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        voice.set_footer(text="Click 🔺 to go back to IMAGE, click 🔻 to see more VOICE commands!")
+        voice.description = """***queue***\n**```fix\nAliases: ▶️, p, q, play, enqueue```**\n*```Shows the music queue, or plays a song in voice.```*
+***playlist***\n**```fix\nAliases: defaultplaylist, pl, playlist```**\n*```Shows, appends, or removes from the default playlist.```*
+***connect***\n**```fix\nAliases: 📲, 🎤, 🎵, 🎶, 📴, 📛, summon, join, dc, disconnect, leave, move, reconnect```**\n*```Summons the bot into a voice channel.```*
+***skip***\n**```fix\nAliases: ⏭, 🚫, s, sk, cq, remove, rem, clearqueue, clear```**\n*```Removes an entry or range of entries from the voice channel queue.```*
+***pause***\n**```fix\nAliases: ⏸️, ⏯️, resume, unpause, stop```**\n*```Pauses, stops, or resumes audio playing.```*
+***seek***\n**```fix\nAliases: ↔️, replay```**\n*```Seeks to a position in the current audio file.```*
+***dump***\n**```fix\nAliases: save```**\n*```Saves or loads the currently playing audio queue state.```*
+***audiosettings***\n**```fix\nAliases: volume, speed, pitch, pan, bassboost, reverb, compressor, chorus, nightcore, resample, bitrate, loopqueue, repeat, shufflequeue, quiet, stay, reset```**\n*```Changes the current audio settings for this server.```*
+***rotate***\n**```fix\nAliases: 🔄, jump```**\n*```Rotates the queue to the left by a certain amount of steps.```*
+"""
+
+        voice2 = discord.Embed(colour=discord.Colour(15277667))
+        try:
+            voice2.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.get_user(668999031359537205).avatar_url_as(format="png", size=4096))
+        except:
+            voice2.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        voice2.set_footer(text="Click 🔺 to go back to previous VOICE commands!")
+        voice2.description = f"""***shuffle***\n**```fix\nAliases: 🔀```**\n*```Shuffles the audio queue.```*
+***reverse***\n*```Reverses the audio queue direction.```*
+***unmuteall***\n*```Disables server mute/deafen for all members.```*
+***voicenuke***\n**```fix\nAliases: ☢️```**\n*```Removes all users from voice channels in the current server.```*
+***radio***\n**```fix\nAliases: fm```**\n*```Searches for a radio station livestream on http://worldradiomap.com that can be played on {self.dottie.user.name}.```*
+***player***\n**```fix\nAliases: np, nowplaying, playing```**\n*```Creates an auto-updating virtual audio player for the current server.```*
+***lyrics***\n**```fix\nAliases: songlyrics```**\n*```Searches genius.com for lyrics of a song.```*
+***download***\n**```fix\nAliases: 📥, search, ytdl, youtube_dl, af, audiofilter, trim, convertorg, org2xm, convert```**\n*```Searches and/or downloads a song from a YouTube/SoundCloud query or audio file link.```*
 ***despacito***\n**```fix\nAliases: espacito```**\n*```Plays a totally normal version of Despacito!```*
 """
 
-        pages = [home, info, moderation, general, fun, image, voice]
+        pages = [home, info, moderation, general, fun, image, voice, voice2]
 
         message = await ctx.send(embed=home)
 
