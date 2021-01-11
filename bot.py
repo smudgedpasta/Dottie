@@ -66,8 +66,6 @@ def print2(*args, sep=" ", end="\n"):
 dottie.eloop = eloop
 
 
-GLOBALS = globals()
-glob = dict(GLOBALS)
 MESSAGES = {}
 
 
@@ -215,7 +213,7 @@ eloop.create_task(status_update_loop())
 @dottie.event
 async def on_ready():
     await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
-    globals()["eloop"] = asyncio.get_event_loop()
+    GLOBALS["eloop"] = asyncio.get_event_loop()
     print(f"Logged in as user [{dottie.user}] [(ID = {dottie.user.id})]")
     print("[Successfully loaded and ready to go!]")
 
@@ -225,9 +223,9 @@ async def serverstats_update():
     global messages
     while not dottie.is_closed():
         try:
-            globals()["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
-            globals()["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
-            globals()["eloop"] = asyncio.get_event_loop()
+            GLOBALS["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
+            GLOBALS["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
+            GLOBALS["eloop"] = asyncio.get_event_loop()
             print(f"Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within [60m] interval: [{messages}]".format())
             messages = 0
         except Exception as e:
@@ -491,6 +489,9 @@ async def find_user(query, guild=None):
 
 
 dottie.find_user = find_user
+
+glob = dict(GLOBALS)
+glob.update(globals())
 
 
 if __name__ == "__main__":
