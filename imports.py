@@ -169,8 +169,11 @@ is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 def start_miza():
     if "MIZA" in GLOBALS:
-        GLOBALS["MIZA"].kill()
-    GLOBALS["MIZA"] = psutil.Popen(["python", "main.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
+        try:
+            GLOBALS["MIZA"].kill()
+        except psutil.NoSuchProcess:
+            pass
+    GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
 
 def stop_miza():
     GLOBALS["MIZA"].kill()
