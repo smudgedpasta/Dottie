@@ -108,6 +108,23 @@ class IMAGE(commands.Cog):
         embed.description = random.choice(["Squeak!", "Ring-ding-ding-ding-dingeringeding!", "🦊", "<:sleepy_fox:762367799150510164>"])
         await ctx.send(embed=embed)
 
+
+    @commands.command()
+    async def muffin(self, ctx):
+        def get_random_page():
+            html = requests.get(f"https://www.gettyimages.co.uk/photos/muffin?page={random.randint(1, 100)}").text
+            url = "https://media.gettyimages.com/photos/"
+            spl = html.split(url)[1:]
+            imageset = {url + i.split('"', 1)[0].split("?", 1)[0] for i in spl}
+            images = list(imageset)
+            return images
+        images = get_random_page()
+        embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
+        embed = discord.Embed(colour=discord.Colour(embed_colours))
+        embed.set_footer(text="Images are from https://www.gettyimages.co.uk/photos/")
+        embed.set_image(url=random.choice(images))
+        await ctx.send(embed=embed)
+
     
     @commands.command(aliases=["dab"])
     async def ab(self, ctx):
