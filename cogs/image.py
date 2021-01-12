@@ -123,8 +123,9 @@ class IMAGE(commands.Cog):
         embed = discord.Embed(colour=discord.Colour(embed_colours))
         embed.set_footer(text="Images are from https://www.gettyimages.co.uk/photos/")
         embed.set_image(url=random.choice(images))
+        embed.description = random.choice(["Its muffin time!", "Muffin!!! 🤗", "🧁", "🧁🧁🧁"])
         await ctx.send(embed=embed)
-
+ 
     
     @commands.command(aliases=["dab"])
     async def ab(self, ctx):
