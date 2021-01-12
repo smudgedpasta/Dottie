@@ -96,6 +96,7 @@ class GENERAL(commands.Cog):
 ***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*
 ***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
 ***fox***\n*```Sends a random image of any kind of fox!```*
+***muffin***\n**```fix\nAliases: muffins```**\n*```Sends a random image of a muffin!```*
 ***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out {EXAMPLE_PREFIX}ab with my prefix, so I'll dab!```*
 ***how***\n*```How.gif, that is all.```*
 """

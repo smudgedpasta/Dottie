@@ -109,7 +109,7 @@ class IMAGE(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    @commands.command()
+    @commands.command(aliases=["muffins"])
     async def muffin(self, ctx):
         def get_random_page():
             html = requests.get(f"https://www.gettyimages.co.uk/photos/muffin?page={random.randint(1, 100)}").text
