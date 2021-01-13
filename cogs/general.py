@@ -35,13 +35,13 @@ class GENERAL(commands.Cog):
 
         info = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
         info.set_author(name="🐾 First, a few things... 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-        info.description = f"""```🔸 What permissions does Dottie need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{EXAMPLE_PREFIX}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
-```🔸 Do I need to @ myself?```\nLets say you are using `{EXAMPLE_PREFIX}info`. If you want to see your own, just send it by itself!\n
-```🔸 Are commands case sensitive?```\nNope! Using `{EXAMPLE_PREFIX}hElLo` would work just the same as `{EXAMPLE_PREFIX}hello`.\n
-```🔸 Does {EXAMPLE_PREFIX.upper()} work?```\nYep! Just like commands, the prefix is case sensitive!\n
+        info.description = f"""```🔸 What permissions does Dottie need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{PREFIX[0]}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
+```🔸 Do I need to @ myself?```\nLets say you are using `{PREFIX[0]}info`. If you want to see your own, just send it by itself!\n
+```🔸 Are commands case sensitive?```\nNope! Using `{PREFIX[0]}hElLo` would work just the same as `{PREFIX[0]}hello`.\n
+```🔸 Does {PREFIX[0].upper()} work?```\nYep! Just like commands, the prefix is case sensitive!\n
 ```🔸 What permissions are required for moderation?```\nAt the moment, you have to be an admin!\n
-```🔸 How do I seperate my sentences?```\nLet's suppose you're using {EXAMPLE_PREFIX}ship. Normally, I would work like this: `{EXAMPLE_PREFIX}ship Smudge Txin`. If you want me to read the whole sentence, put quotes around it! For example: `{EXAMPLE_PREFIX}ship \"My sleeping routine\" School`. These all go for any command!\n
-```🔸 How do I search for users?```\nYou don't have to @ them! Lets say you are using {EXAMPLE_PREFIX}info, you can write the command like this: `{EXAMPLE_PREFIX}info smudge` and it'll still work to finding `smudgedpasta`, etc! If they are not in the server, you can use their user ID to still find them! If they are not in *this* server but *do* share another server with me, you can supply their full Discord tag! For example: `{EXAMPLE_PREFIX}info smudgedpasta#6605`\n
+```🔸 How do I seperate my sentences?```\nLet's suppose you're using {PREFIX[0]}ship. Normally, I would work like this: `{PREFIX[0]}ship Smudge Txin`. If you want me to read the whole sentence, put quotes around it! For example: `{PREFIX[0]}ship \"My sleeping routine\" School`. These all go for any command!\n
+```🔸 How do I search for users?```\nYou don't have to @ them! Lets say you are using {PREFIX[0]}info, you can write the command like this: `{PREFIX[0]}info smudge` and it'll still work to finding `smudgedpasta`, etc! If they are not in the server, you can use their user ID to still find them! If they are not in *this* server but *do* share another server with me, you can supply their full Discord tag! For example: `{PREFIX[0]}info smudgedpasta#6605`\n
 ```🔸 Do commands work in DM's?```\nSome do! Some may error, however.\n
 ```🔸 What's up with the changing statuses?```\nWhenever anyone uses my commands, I will change from idle to online for a few seconds!\n
 ```🔸 What do I do if I get an error?```\nFirstly, make sure you are using the command correctly. My lead programmer is <@530781444742578188>, and <@201548633244565504> wrote my more complicated features, so if you're having any issues, let either of them know and they'll get on it!
@@ -68,7 +68,7 @@ class GENERAL(commands.Cog):
 ***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*
 ***random***\n*```Takes all arguments you've provided and chooses one at random!```*
 ***wordcount***\n**```fix\nAliases: charcount, charactercount, wc, cc```**\n*```I will ask for some text. Post it afterwards and I'll tell you the word and character count!```*
-***loop***\n*```Repeats an inputted command a specified amount of times! Example: {EXAMPLE_PREFIX}loop 5 {EXAMPLE_PREFIX}hello```*
+***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX[0]}loop 5 {PREFIX[0]}hello```*
 ***ping***\n*```Returns some technical information.```*
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*
 """
@@ -97,7 +97,7 @@ class GENERAL(commands.Cog):
 ***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
 ***fox***\n*```Sends a random image of any kind of fox!```*
 ***muffin***\n**```fix\nAliases: muffins```**\n*```Sends a random image of a muffin!```*
-***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out {EXAMPLE_PREFIX}ab with my prefix, so I'll dab!```*
+***ab***\n**```fix\nAliases: dab```**\n*```ab will spell out {PREFIX[0]}ab with my prefix, so I'll dab!```*
 ***how***\n*```How.gif, that is all.```*
 """
 

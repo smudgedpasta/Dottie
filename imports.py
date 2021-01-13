@@ -4,7 +4,6 @@ GLOBALS = globals()
 
 
 PREFIX = ["d.", "D."]
-EXAMPLE_PREFIX = "d."
 
 
 OWNERS = [530781444742578188, 201548633244565504]
@@ -170,7 +169,7 @@ is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 def start_miza():
     if "MIZA" in GLOBALS:
         stop_miza()
-    GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
+    GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE-ALT", stdout=subprocess.DEVNULL)
 
 def stop_miza():
     try:
