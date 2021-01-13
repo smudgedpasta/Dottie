@@ -223,8 +223,6 @@ async def serverstats_update():
     global messages
     while not dottie.is_closed():
         try:
-            GLOBALS["LOG_CHANNEL"] = dottie.get_channel(738320254375165962)
-            GLOBALS["LOG_CHANNEL_2"] = dottie.get_channel(751517870009352192)
             GLOBALS["eloop"] = asyncio.get_event_loop()
             print(f"Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within [60m] interval: [{messages}]".format())
             messages = 0
