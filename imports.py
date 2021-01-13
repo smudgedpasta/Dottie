@@ -169,7 +169,7 @@ is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 def start_miza():
     if "MIZA" in GLOBALS:
         stop_miza()
-    GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE-ALT", stdout=subprocess.DEVNULL)
+    GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
 
 def stop_miza():
     try:

@@ -1,1 +1,1 @@
-start cmd /c python bot.py
+start cmd /k python bot.py
