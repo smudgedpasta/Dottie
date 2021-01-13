@@ -119,7 +119,10 @@ async def status_update_loop():
             LAST_COMMAND_TIMESTAMP = inf
         await asyncio.sleep(0.5)
 
+
 messages = 0
+
+
 @dottie.event
 async def on_message(message):
     LEVELS = getattr(dottie, "LEVELS", None)
@@ -218,19 +221,30 @@ async def on_ready():
     print("[Successfully loaded and ready to go!]")
 
 
-async def serverstats_update():
+async def log_update():
     await dottie.wait_until_ready()
     global messages
+    start_time = time.time()
+    interval_time = time.time()
     while not dottie.is_closed():
         try:
             GLOBALS["eloop"] = asyncio.get_event_loop()
-            print(f"Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT] | Messages sent within [60m] interval: [{messages}]".format())
-            messages = 0
+            current_day = str(datetime.datetime.utcnow().date())
+            uptime = datetime.timedelta(time.time() - start_time)
+            interval = time.time() - interval_time
+            current_day = str(datetime.datetime.utcnow().date())
+            new_day = str(datetime.datetime.utcnow().date())
+            if new_day != current_day:
+                current_day = new_day
+                if new_day == True:
+                    print(f"🔸 Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT]\n🔹 Current uptime: [{str(uptime).rsplit(".", 1)[0]}]\n🔸 Messages sent within [[{interval // 3600}]] hour interval: [{messages}]".format())
+                    messages = 0
+                    interval_time = time.time()
         except Exception as e:
             print(e)
-        await asyncio.sleep(3600)
+        await asyncio.sleep(1)
 
-dottie.loop.create_task(serverstats_update())
+dottie.loop.create_task(log_update())
 
 
 @dottie.event
