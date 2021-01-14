@@ -226,13 +226,12 @@ async def log_update():
     global messages
     start_time = time.time()
     interval_time = time.time()
+    current_day = str(datetime.datetime.utcnow().date())
     while not dottie.is_closed():
         try:
             GLOBALS["eloop"] = asyncio.get_event_loop()
-            current_day = str(datetime.datetime.utcnow().date())
             uptime = datetime.timedelta(time.time() - start_time)
             interval = time.time() - interval_time
-            current_day = str(datetime.datetime.utcnow().date())
             new_day = str(datetime.datetime.utcnow().date())
             if new_day != current_day:
                 current_day = new_day
