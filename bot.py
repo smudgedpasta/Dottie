@@ -235,7 +235,7 @@ async def log_update():
             new_day = str(datetime.datetime.utcnow().date())
             if new_day != current_day:
                 current_day = new_day
-                print(f"🔸 Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B %Y, %I:%M %p')}, GMT]\n🔹 Current uptime: [{str(uptime).rsplit('.', 1)[0]}]\n🔸 Messages sent within [[{interval // 3600}]] hour interval: [{messages}]".format())
+                print(f"🔸 Time at log interval: [{datetime.datetime.utcnow().strftime('%a, %#d %B, %I:%M %p')}]\n🔹 Current uptime: [{str(uptime).rsplit('.', 1)[0]}]\n🔸 Messages sent within [{interval // 3600}] hour interval: [{messages}]".format())
                 messages = 0
                 interval_time = time.time()
         except Exception as e:
