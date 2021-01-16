@@ -13,7 +13,7 @@ def is_owner(ctx):
 
 
 try:
-    with open("database/terminals", "r") as f:
+    with open("database/terminal_channels", "r") as f:
         s = f.read()
 except FileNotFoundError:
     s = ""
@@ -29,7 +29,7 @@ DM_CHANNEL = {int(i) for i in s.splitlines() if i}
 
 
 try:
-    with open("database/logs", "r") as f:
+    with open("database/log_channels", "r") as f:
         s = f.read()
 except FileNotFoundError:
     s = ""
