@@ -125,6 +125,8 @@ messages = 0
 
 @dottie.event
 async def on_message(message):
+    if message.author.id == 244652405944221699:
+        return
     LEVELS = getattr(dottie, "LEVELS", None)
     if LEVELS:
         try:
