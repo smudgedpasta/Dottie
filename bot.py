@@ -125,8 +125,6 @@ messages = 0
 
 @dottie.event
 async def on_message(message):
-    if message.author.id == 244652405944221699:
-        return
     LEVELS = getattr(dottie, "LEVELS", None)
     if LEVELS:
         try:
@@ -252,7 +250,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
     if isinstance(error, commands.CommandNotFound):
-        if str(error).split("\"", 2)[1].lower() in miza_voice:
+        if str(error).split("\"", 2)[1].lower() in list(miza_voice) + ["np"]:
             global LAST_COMMAND_TIMESTAMP
             command = PREFIX[0] + str(error).split("\"", 2)[1].lower()
             print(f"[{ctx.author.name}] has run the following command: [{command}] in [{ctx.guild}]")
