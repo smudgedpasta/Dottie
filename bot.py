@@ -162,11 +162,13 @@ async def on_message(message):
 
     Smudge = [530781444742578188, 668064931345596439]
     if message.author.id in Smudge and message.content.endswith("#"):
-        hashtag = set{message.content}
-        for i in hashtag:
-            if i == "#"
-                return
-        await ctx.send("Smudge Keyboard Moment <a:moment" + ":750685242553139321>")
+        def split(MESSAGE):
+            return [char for char in MESSAGE]
+        MESSAGE = message.content.split()
+        if MESSAGE == "#":
+            return
+        else:
+            await ctx.send("Smudge Keyboard Moment <a:moment" + ":750685242553139321>")
 
     if ctx.command is not None:
         if getattr(message.author, "guild", None) is None:
