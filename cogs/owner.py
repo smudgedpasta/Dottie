@@ -75,6 +75,7 @@ class OWNER(commands.Cog):
         await ctx.send(embed=embed)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
+        await asyncio.sleep(5)
         stop_miza()
         psutil.Process().kill()
     
