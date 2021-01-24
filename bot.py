@@ -235,7 +235,7 @@ async def on_ready():
     await dottie.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="over " + str(len(dottie.guilds)) + " servers! 🐾"))
     GLOBALS["eloop"] = asyncio.get_event_loop()
     print(f"Logged in as user [{dottie.user}] [(ID = {dottie.user.id})]")
-    print("[Successfully loaded and ready to go!]")
+    print("[Successfully loaded and ready to go!]\n")
 
 
 async def log_update():
