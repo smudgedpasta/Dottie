@@ -162,6 +162,10 @@ async def on_message(message):
 
     Smudge = [530781444742578188, 668064931345596439]
     if message.author.id in Smudge and message.content.endswith("#"):
+        hashtag = set{message.content}
+        for i in hashtag:
+            if i == "#"
+                return
         await ctx.send("Smudge Keyboard Moment <a:moment" + ":750685242553139321>")
 
     if ctx.command is not None:
