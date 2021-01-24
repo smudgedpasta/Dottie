@@ -173,7 +173,7 @@ async def on_message(message):
 
     Smudge = [530781444742578188, 668064931345596439]
     if message.author.id in Smudge and message.content.endswith("#"):
-        MESSAGE = list(message.content)
+        MESSAGE = list(message.content.split())
         if MESSAGE == "#":
             return
         else:
