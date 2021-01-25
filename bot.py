@@ -173,8 +173,7 @@ async def on_message(message):
 
     Smudge = [530781444742578188, 668064931345596439]
     if message.author.id in Smudge and message.content.endswith("#"):
-        MESSAGE = list(message.content.split())
-        if MESSAGE == "#":
+        if set(message.content) == {"#"}:
             return
         else:
             await ctx.send("Smudge Keyboard Moment <a:moment:750685242553139321>")
@@ -182,8 +181,6 @@ async def on_message(message):
     if ctx.command is not None:
         if getattr(message.author, "guild", None) is None:
             print(f"[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]")
-        elif "shutdown" in message.content:
-                await self.dottie.change_presence(status=discord.Status.invisible)
         else:
             print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]")
 
