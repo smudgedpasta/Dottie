@@ -154,9 +154,9 @@ async def on_message(message):
 
         await ctx.send(random.choice(responses))
         try:
-            print(f"{message.author.name} mentioned me in {message.guild}.")
+            print(f"[{message.author.name}] mentioned me in [{message.guild}]")
         except:
-            print(f"{message.author.name} mentioned me in DM's.")
+            print(f"[{message.author.name}] mentioned me in [DM's]")
 
     global messages
     messages += 1
@@ -175,7 +175,7 @@ async def on_message(message):
         if getattr(message.author, "guild", None) is None:
             print(f"[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]")
         else:
-            print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.author.guild}]")
+            print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.guild}]")
 
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
