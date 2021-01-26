@@ -168,15 +168,15 @@ class FUN(commands.Cog):
     async def matchmaking(self, ctx, arg, arg2):
         heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
 
+        arg = arg.capitalize()
+        arg2 = arg2.capitalize()
+        arg, arg2 = sorted((arg, arg2))
+
         start = len(arg) / 2
         end = len(arg2) / 2
         ship_start = arg[:-int(start)]
         ship_end = arg2[:-int(end)]
         shipname = f"{ship_start}{ship_end}"
-
-        arg = arg.capitalize()
-        arg2 = arg2.capitalize()
-        arg, arg2 = sorted((arg, arg2))
 
         random.seed((arg, arg2))
         percentage = random.randint(0, 100)
@@ -213,7 +213,7 @@ class FUN(commands.Cog):
             if arg == arg2:
                 embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```" + bar
             else:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname.capitalize()})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```" + bar
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
