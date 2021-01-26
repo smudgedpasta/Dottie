@@ -151,13 +151,13 @@ class FUN(commands.Cog):
             "00012221000",
             "00001210000",
             "00000100000"
-            ]
+        ]
 
         emoji = {
-                "0": "<:_" + ":760062353063936000>",
-                "1": f"{arg1}",
-                "2": f"{arg2}"
-                }
+            "0": "<:_:760062353063936000>",
+            "1": arg1,
+            "2": arg2
+        }
 
         trans = "".maketrans(emoji)
         for line in heart:
@@ -170,68 +170,46 @@ class FUN(commands.Cog):
 
         arg = arg.capitalize()
         arg2 = arg2.capitalize()
+        arg, arg2 = sorted((arg, arg2))
 
-        random.seed(tuple(sorted((arg, arg2))))
+        random.seed(tuple(arg, arg2))
         percentage = random.randint(0, 100)
         random.seed(time.time())
         heart = random.choice(heart_list)
 
-        # if percentage == 0:
-        #     bar = "🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(1, 6):
-        #     bar = "🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(6, 11):
-        #     bar = "🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(11, 16):
-        #     bar = "🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(16, 21):
-        #     bar = "🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(21, 26):
-        #     bar = "🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(26, 31):
-        #     bar = "🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(31, 36):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(36, 41):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(41, 46):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(46, 51):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(51, 56):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(56, 61):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(61, 66):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(66, 71):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(71, 76):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤🖤"
-        # elif percentage in range(76, 81):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤🖤"
-        # elif percentage in range(81, 86):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤🖤"
-        # elif percentage in range(86, 91):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤🖤"
-        # elif percentage in range(91, 96):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤🖤"
-        # elif percentage in range(96, 100):
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🖤"
-        # else:
-        #     bar = "🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍"
-
         bar = create_progress_bar(21, percentage / 100)
 
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-        if arg in ["Smudge", "smudge", "smudgedpasta"] and arg2 in ["Txin", "txin"] or arg in ["Txin", "txin"] and arg2 in ["Smudge", "smudge", "smudgedpasta"]:
-            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 🤍```" + """
-❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛💚💙💜❤️🧡💛"""
+        if arg in ["Smudge", "Smudgedpasta"] and arg2 == "Txin":
+            inwards_heart = [
+                "00111011100",
+                "01222122210",
+                "12233233221",
+                "12344344321",
+                "12334543321",
+                "01233433210",
+                "00123332100",
+                "00012321000",
+                "00001210000",
+                "00000100000"
+            ]
+            emoji = {
+                "0": "<:_:760062353063936000>",
+                "1": "<a:_:797359273914138625>",
+                "2": "<a:_:797359309121519626>",
+                "3": "<a:_:797359328826490921>",
+                "4": "<a:_:797359351509549056>",
+                "5": "<:_:722354192995450912>"
+            }
+
+            trans = trans = "".maketrans(emoji)
+            rainbow_heart = "\n".join(inwards_heart).translate(trans)
+            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 🤍```" + rainbow_heart
         else:
             if arg == arg2:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```\n" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```" + bar
             else:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```\n" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```" + bar
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
