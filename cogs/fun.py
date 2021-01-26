@@ -72,19 +72,22 @@ class FUN(commands.Cog):
         await ctx.send("I am thinking of a number between 1 and 100... Can you guess what it is?")
         answer = random.randint(1, 100)
         attempts = 10
-        for i in range(attempts):
-            response = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
-            number = int(response.content)
-            if number == answer:
-                await ctx.send(f"Bingo! This took you **{i + 1} attempts**! You now get a cheesecake. 🧀🍰")
-                return
-            elif i >= attempts - 1:
-                await ctx.send("🛑 Sorry, you ran out of chances! Try again any time!")
-                return
-            elif number > answer:
-                await ctx.send("Your guess was **too high**! Try again!")
-            elif number < answer:
-                await ctx.send("Your guess was **too low**! Try again!")
+        try:
+            for i in range(attempts):
+                response = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+                number = int(response.content)
+                if number == answer:
+                    await ctx.send(f"Bingo! This took you **{i + 1} attempts**! You now get a cheesecake. 🧀🍰")
+                    return
+                elif i >= attempts - 1:
+                    await ctx.send("🛑 Sorry, you ran out of chances! Try again any time!")
+                    return
+                elif number > answer:
+                    await ctx.send("Your guess was **too high**! Try again!")
+                elif number < answer:
+                    await ctx.send("Your guess was **too low**! Try again!")
+        except:
+            await ctx.send("Yo, I ain't that smart! Please use **integers** written in **numbers**!")
 
 
     @commands.command(aliases=["say"], speach=None)
