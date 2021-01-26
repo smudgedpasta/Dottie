@@ -154,9 +154,9 @@ async def on_message(message):
 
         await ctx.send(random.choice(responses))
         try:
-            print(f"{message.author} mentioned me in {message.guild}.")
+            print(f"{message.author.name} mentioned me in {message.guild}.")
         except:
-            print(f"{message.author} mentioned me in DM's.")
+            print(f"{message.author.name} mentioned me in DM's.")
 
     global messages
     messages += 1
