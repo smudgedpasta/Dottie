@@ -183,7 +183,7 @@ class FUN(commands.Cog):
         if arg in ["Smudge", "Smudgedpasta"] and arg2 == "Txin":
             inwards_heart = [
                 "00111011100",
-                "01122322110",
+                "01122122110",
                 "01223232210",
                 "01234543210",
                 "00123432100",
