@@ -172,7 +172,7 @@ class FUN(commands.Cog):
         arg2 = arg2.capitalize()
         arg, arg2 = sorted((arg, arg2))
 
-        random.seed(tuple(arg, arg2))
+        random.seed((arg, arg2))
         percentage = random.randint(0, 100)
         random.seed(time.time())
         heart = random.choice(heart_list)
