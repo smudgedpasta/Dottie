@@ -166,6 +166,45 @@ def create_task(fut, *args, loop=None, **kwargs):
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 
+def create_progress_bar(length, ratio):
+	start_bar = [
+		"<:_:777028747383013376>",
+		"<a:_:777028749970636833>",
+		"<a:_:777028752660103179>",
+		"<a:_:777028754983485462>",
+		"<a:_:777028758895853589>",
+	]
+	mid_bar = [
+		"<:_:777028760477892668>",
+		"<a:_:777028763149271061>",
+		"<a:_:777028767125995520>",
+		"<a:_:777028769839054878>",
+		"<a:_:777028773320589375>",
+	]
+	end_bar = [
+		"<:_:777028775451820032>",
+		"<a:_:777028777909551144>",
+		"<a:_:777028780640305202>",
+		"<a:_:777028782766555137>",
+		"<a:_:777028787971424288>",
+	]
+	high = length * 4
+	position = min(high, round(ratio * high))
+	items = []
+	new = min(4, position)
+	items.append(start_bar[new])
+	position -= new
+	for i in range(length - 1):
+		new = min(4, position)
+		if i >= length - 2:
+			bar = end_bar
+		else:
+			bar = mid_bar
+		items.append(bar[new])
+		position -= new
+	return "".join(items)
+
+
 def start_miza():
     if "MIZA" in GLOBALS:
         stop_miza()
