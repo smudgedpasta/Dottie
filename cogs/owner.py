@@ -58,6 +58,7 @@ class OWNER(commands.Cog):
         embed = discord.Embed(colour=discord.Colour(16711680))
         embed.description = "```css\n[❗ Restarting...]```"
         await ctx.send(embed=embed)
+        await self.dottie.change_presence(status=discord.Status.invisible)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
         os.system("start cmd /c python bot.py")
@@ -73,6 +74,7 @@ class OWNER(commands.Cog):
         embed = discord.Embed(colour=discord.Colour(16711680))
         embed.description = "```css\n[❗ Shutting down...]```"
         await ctx.send(embed=embed)
+        await self.dottie.change_presence(status=discord.Status.invisible)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
         await asyncio.sleep(5)
