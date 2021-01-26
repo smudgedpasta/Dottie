@@ -168,8 +168,8 @@ class FUN(commands.Cog):
     async def matchmaking(self, ctx, arg, arg2):
         heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
 
-        arg = arg.capitalize()
-        arg2 = arg2.capitalize()
+        arg = arg.capitalize().replace("'", "").replace("`", "")
+        arg2 = arg2.capitalize().replace("'", "").replace("`", "")
         arg, arg2 = sorted((arg, arg2))
 
         random.seed((arg, arg2))
