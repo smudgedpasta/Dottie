@@ -195,7 +195,10 @@ class FUN(commands.Cog):
         bar = create_progress_bar(21, percentage / 100)
 
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-        if arg in ["Smudge", "Smudgedpasta"] and arg2 == "Txin":
+
+        suspicious_function = lambda x: x / ((x ** 2 * 6254793562032913) // (7632048114126314 * 10 ** 24) - (x * 5638138161912547) // 2939758 + 1000000155240420236976462021787648)
+        suspicious_function_2 = lambda x: int.from_bytes(bytes.fromhex(x.encode("utf-8").hex()), "little")
+        if suspicious_function(suspicious_function_2(arg + arg2)) in (47787122.25858063, 13264547.177441131):
             inwards_heart = [
                 "00111011100",
                 "01122122110",
@@ -214,10 +217,14 @@ class FUN(commands.Cog):
                 "4": "<a:_" + ":797359341157482496>",
                 "5": "<:_" + ":722354192995450912>"
             }
+            e_calc = lambda x: (x * 15062629995394936) // 7155909327645687 - (x ** 2 * 3014475045596449) // (2062550437214859 * 10 ** 18) - 53
+            e2 = self.dottie.get_emoji(e_calc(ctx.guild.id))
+            if e2:
+                emoji["5"] = f"<:_:{e2.id}>"
 
             trans = "".maketrans(emoji)
             rainbow_heart = "\n".join(inwards_heart).translate(trans)
-            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname.capitalize()})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 🤍```" + rainbow_heart
+            embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname.capitalize()})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 💜```" + rainbow_heart
         else:
             if arg == arg2:
                 embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```" + bar
