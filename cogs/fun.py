@@ -177,8 +177,6 @@ class FUN(commands.Cog):
 
         random.seed((arg, arg2))
         percentage = random.randint(0, 100)
-        random.seed(time.time())
-        heart = random.choice(heart_list)
 
         start = len(arg) / 2
         end = len(arg2) / 2
@@ -190,6 +188,9 @@ class FUN(commands.Cog):
         ship_end = random.choice([ship_beg2, ship_tail2])
         random.seed((ship_start, ship_end))
         shipname = ship_start + ship_end
+
+        random.seed(time.time())
+        heart = random.choice(heart_list)
 
         bar = create_progress_bar(21, percentage / 100)
 
