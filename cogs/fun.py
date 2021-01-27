@@ -196,9 +196,9 @@ class FUN(commands.Cog):
 
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
 
-        suspicious_function = lambda x: x / ((x ** 2 * 6254793562032913) // (7632048114126314 * 10 ** 24) - (x * 5638138161912547) // 2939758 + 1000000155240420236976462021787648)
+        suspicious_function = lambda x: round(x / ((x ** 2 * 6254793562032913) // (7632048114126314 * 10 ** 24) - (x * 5638138161912547) // 2939758 + 1000000155240420236976462021787648))
         suspicious_function_2 = lambda x: int.from_bytes(bytes.fromhex(x.encode("utf-8").hex()), "little")
-        if suspicious_function(suspicious_function_2(arg + arg2)) in (47787122.25858063, 13264547.177441131):
+        if suspicious_function(suspicious_function_2(arg + arg2)) in (47787122, 13264547):
             inwards_heart = [
                 "00111011100",
                 "01122122110",
