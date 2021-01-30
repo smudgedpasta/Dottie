@@ -95,7 +95,7 @@ Right foot let's stomp
 Left foot let's stomp
 Cha cha real smooth
 Yeah, yeah, do that stuff, do it!
-Ah yeah, I'm outta here y'all
+Ah yeah, I'm outta here y'all.
 Peace!
 """.splitlines()
 
