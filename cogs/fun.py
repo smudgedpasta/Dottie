@@ -90,6 +90,32 @@ class FUN(commands.Cog):
             await ctx.send("Yo, I ain't that smart! Please use **integers** written in **numbers**!")
 
 
+    @commands.command(Aliases=["rockpaperscissors", "rock_paper_scissors"])
+    async def rps(self, ctx):
+        try:
+            await ctx.send("Lets play Rock, Paper, Scissors! Post your choice!")
+            response = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+
+            matches = {"rock": "scissors", "scissors": "paper", "paper": "rock"}
+            decision = random.choice(list(matches.keys()))
+            await ctx.send(f"I'll go with {decision}!")
+
+            if response.content.lower() not in matches.keys():
+                await ctx.send("We- Hold on a minute, you didn't even respond with an answer! <:colondead:751543407494823956>")
+            if matches[decision] == response.content.lower():
+                await ctx.send("I win! Mwahaha! :grin:")
+            if matches[response.content.lower()] == decision:
+                await ctx.send("Aw, I lost... Wanna' rematch? :pensive:")
+                response2 = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+                if "no" in response2.content.lower() or "nope" in response2.content.lower() or "nah" in response2.content.lower():
+                    await ctx.send(":cry:")
+                    return
+            if response.content.lower() == decision:
+                await ctx.send("Wow, we tied! Great minds thing alike. :smirk:")
+        except:
+            return
+
+
     @commands.command(aliases=["say"], speach=None)
     async def speak(self, ctx, *, speach):
         try:
@@ -195,7 +221,6 @@ class FUN(commands.Cog):
         bar = create_progress_bar(21, percentage / 100)
 
         embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
-
         suspicious_function = lambda x: x / ((x ** 2 * 6254793562032913) // (7632048114126314 * 10 ** 24) - (x * 5638138161912547) // 2939758 + 1000000155240420236976462021787648)
         suspicious_function_2 = lambda x: int.from_bytes(bytes.fromhex(x.encode("utf-8").hex()), "little")
         if round(suspicious_function(suspicious_function_2(arg + arg2))) in (13264547, 47787122) and suspicious_function(suspicious_function_2(arg2 + arg)) in (5.869437322867208e-09, 1.0000614609767725e-08):

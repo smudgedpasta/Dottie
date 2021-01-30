@@ -81,6 +81,7 @@ class GENERAL(commands.Cog):
 ***rate***\n*```Give me anything and I'll give it a rating!```*
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*
 ***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*
+***rpc***\n**```fix\nAliases: rockpaperscissors, rock_paper_scissors```**\n*```Plays the game "Rock Paper Scissors"!```*
 ***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*
 ***heart***\n*```Use this with two emojis, and I'll make them a heart!```*
 ***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*
