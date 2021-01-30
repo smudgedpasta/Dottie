@@ -63,6 +63,7 @@ class GENERAL(commands.Cog):
         general.set_author(name="🤍 GENERAL 🤍", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         general.set_footer(text="Click 🔺 to go back to MODERATION, click 🔻 to see FUN commands!")
         general.description = f"""***help***\n*```Legends say you've found this command already. 👀```*
+***hello***\n**```fix\nAliases: "hemlo", "hoi"```**\n*```I will greet you back!```*
 ***profile***\n**```fix\nAliases: userinfo, info, stats, userstats```**\n*```Views the profile of a provided user!```*
 ***level***\n**```fix\nAliases: pokémon, pokemon```**\n*```Shows the current level and experience of a provided user!```*
 ***source***\n**```fix\nAliases: link, invite```**\n*```Sends a link to my source code and Discord invite!```*
@@ -76,8 +77,7 @@ class GENERAL(commands.Cog):
         fun = discord.Embed(colour=discord.Colour(15277667))
         fun.set_author(name="🥖 FUN 🥖", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         fun.set_footer(text="Click 🔺 to go back to GENERAL, click 🔻 to see IMAGE commands!")
-        fun.description = """***hello***\n**```fix\nAliases: "hemlo", "hoi"```**\n*```I will greet you back!```*
-***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*
+        fun.description = """***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*
 ***rate***\n*```Give me anything and I'll give it a rating!```*
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*
 ***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*
@@ -180,6 +180,11 @@ class GENERAL(commands.Cog):
         for i in range(int(count)):
             new_ctx = await self.dottie.get_context(fake_message)
             await self.dottie.invoke(new_ctx)
+
+
+    @commands.command(aliases=["hi", "hemlo", "henlo", "hoi"])
+    async def hello(self, ctx):
+        await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
 
 
     @commands.command(aliases=["link", "invite"])

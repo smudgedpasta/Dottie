@@ -6,11 +6,6 @@ class FUN(commands.Cog):
         self.dottie = dottie
 
 
-    @commands.command(aliases=["hi", "hemlo", "henlo", "hoi"])
-    async def hello(self, ctx):
-        await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
-
-
     @commands.command(aliases=["8ball", "ask"], question=None)
     async def AskDottie(self, ctx, *, question):
         responses = [
