@@ -85,6 +85,50 @@ class FUN(commands.Cog):
             await ctx.send("Yo, I ain't that smart! Please use **integers** written in **numbers**!")
 
 
+    @commands.command(aliases=["chachaslide", "ccs"])
+    async def cha_cha_slide(self, ctx):
+        lyrics = """We're going to get funky...
+To the left!
+Take it back now y'all
+One hop this time!
+Right foot let's stomp
+Left foot let's stomp
+Cha cha real smooth
+Yeah, yeah, do that stuff, do it!
+Ah yeah, I'm outta here y'all
+Peace!
+""".splitlines()
+
+        await ctx.send(lyrics[0])
+        time.sleep(1)
+        error_message = "Boo, that's not how the lyrics go!"
+
+        await ctx.send(f"Sing it with me now. {lyrics[1]}")
+        next1 = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        next1.content = next1.content.capitalize().replace("!", "").replace("?", "").replace(".", "")
+        if next1.content.replace("yall", "y'all") == lyrics[2]:
+            await ctx.send(lyrics[3])
+        else:
+            await ctx.send(error_message)
+            return
+        next2 = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        next2.content = next2.content.capitalize().replace("!", "").replace("?", "").replace(".", "")
+        if next2.content.replace("lets", "let's") == lyrics[4]:
+            await ctx.send(lyrics[5])
+        else:
+            await ctx.send(error_message)
+            return
+        next3 = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        if next3.content.capitalize().replace("!", "").replace("?", "").replace(".", "") == lyrics[6]:
+            await ctx.send(lyrics[7])
+            time.sleep(1)
+            await ctx.send(lyrics[8])
+            time.sleep(1)
+            await ctx.send(lyrics[9])
+        else:
+            await ctx.send("C'mon, we were so close!")
+         
+
     @commands.command(Aliases=["rockpaperscissors", "rock_paper_scissors"])
     async def rps(self, ctx):
         try:
