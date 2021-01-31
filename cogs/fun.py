@@ -106,7 +106,7 @@ Peace!
         await ctx.send(f"Sing it with me now. {lyrics[1]}")
         next1 = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
         next1.content = next1.content.capitalize().replace("!", "").replace("?", "").replace(".", "")
-        if next1.content.replace("yall", "y'all") == lyrics[2]:
+        if next1.content.replace("yall", "y'all").replace("ya'll", "y'all") == lyrics[2]:
             await ctx.send(lyrics[3])
         else:
             await ctx.send(error_message)
