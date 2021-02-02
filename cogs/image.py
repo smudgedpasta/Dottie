@@ -70,6 +70,16 @@ class IMAGE(commands.Cog):
             embed.set_image(url=cat_response["image"])
             await ctx.send(embed=embed)
 
+        
+    @commands.command(aliases=["inspirobot", "inspiration"])
+    async def inspiro(self, ctx):
+        embed_colours = random.choice([1146986, 2067276, 2123412, 7419530, 11342935, 12745742, 11027200, 10038562, 9936031, 5533306])
+        embed = discord.Embed(colour=discord.Colour(embed_colours))
+        embed.set_footer(text="Images are from https://inspirobot.me/")
+        quote = inspirobot.generate()
+        embed.set_image(url=quote.url)
+        await ctx.send(embed=embed)
+
 
     @commands.command(aliases=["og", "doggo", "puppo"])
     async def dog(self, ctx):

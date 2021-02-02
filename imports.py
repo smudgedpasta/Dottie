@@ -81,7 +81,8 @@ with MultiThreadedImporter() as importer:
         "discord.ext",
         "json",
         "threading",
-        "sys"
+        "sys",
+        "inspirobot"
     )
 
 from math import *
