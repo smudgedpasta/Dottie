@@ -22,7 +22,7 @@ rainbow_embeds = [
     "#00f1ff",
     "#0019ff",
     "#7f00ff",
-    "#ff00b5""
+    "#ff00b5"
 ]
 
 
