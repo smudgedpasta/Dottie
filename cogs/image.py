@@ -63,7 +63,7 @@ class IMAGE(commands.Cog):
                     if name["name"] == code:
                         cat_response = name
                         break
-            embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds))
+            embed = discord.Embed(colour=discord.Colour(random.choice([rainbow_embeds]))
             embed.set_footer(text="Images are from https://http.cat/")
             embed.description = cat_response["description"]
             embed.set_image(url=cat_response["image"])
@@ -72,7 +72,7 @@ class IMAGE(commands.Cog):
         
     @commands.command(aliases=["inspirobot", "inspiration"])
     async def inspiro(self, ctx):
-        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds))
+        embed = discord.Embed(colour=discord.Colour(random.choice([rainbow_embeds]))
         embed.set_footer(text="Images are from https://inspirobot.me/")
         quote = inspirobot.generate()
         embed.set_image(url=quote.url)
@@ -83,7 +83,7 @@ class IMAGE(commands.Cog):
     async def dog(self, ctx):
         r = requests.get("https://dog.ceo/api/breeds/image/random")
         data = r.json()
-        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds))
+        embed = discord.Embed(colour=discord.Colour(random.choice([rainbow_embeds]))
         embed.set_footer(text="Images are from https://dog.ceo/api/breeds/image/random")
         embed.set_image(url=data["message"])
         embed.description = random.choice(["Bärk!", "Börk!", "🐶", "🐕", "<:sleepydottie:799210814841421835>"])
@@ -96,7 +96,7 @@ class IMAGE(commands.Cog):
         with open("json/marble_foxes.json", "r") as f:
                 dreamstime_imgs = json.load(f)
                 marble_foxes = random.choice(dreamstime_imgs)
-                embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds))
+                embed = discord.Embed(colour=discord.Colour(random.choice([rainbow_embeds]))
                 embed.set_footer(text="Images are from https://www.dreamstime.com/photos-images/marble-fox.html")
                 embed.set_image(url=marble_foxes["image"])
                 embed.description = random.choice(["Yip!", "Yap!", "🦊", "<:sleepysmudgy:799210361692749824>"])
@@ -107,7 +107,7 @@ class IMAGE(commands.Cog):
     async def fox(self, ctx):
         r = requests.get("https://randomfox.ca/floof/")
         data = r.json()
-        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds))
+        embed = discord.Embed(colour=discord.Colour(random.choice([rainbow_embeds]))
         embed.set_footer(text="Images are from https://randomfox.ca/")
         embed.set_image(url=data["image"])
         embed.description = random.choice(["Squeak!", "Ring-ding-ding-ding-dingeringeding!", "🦊", "<:sleepy_fox:762367799150510164>"])
@@ -124,7 +124,7 @@ class IMAGE(commands.Cog):
             images = list(imageset)
             return images
         images = get_random_page()
-        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds))
+        embed = discord.Embed(colour=discord.Colour(random.choice([rainbow_embeds]))
         embed.set_footer(text="Images are from https://www.gettyimages.co.uk/photos/")
         embed.set_image(url=random.choice(images))
         embed.description = random.choice(["Its muffin time!", "Muffin!!! 🤗", "🧁", "🧁🧁🧁"])
