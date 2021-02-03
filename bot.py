@@ -20,7 +20,7 @@ dottie = commands.Bot(
 )
 
 
-miza_commands = requests.get("14.203.62.149:9801/static/help.json").json()
+miza_commands = requests.get("https://mizabot.xyz/static/help.json").json()
 miza_voice = []
 for name, command in miza_commands["VOICE"].items():
     miza_voice.extend((name.lower(),) + tuple(alias.lower() for alias in command["aliases"]))
