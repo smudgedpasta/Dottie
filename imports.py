@@ -180,7 +180,7 @@ rainbow_embed = [
     16711861
 ]
 
-rainbow_embeds = random.choice([rainbow_embed])
+rainbow_embeds = random.choice(rainbow_embed)
 
 
 def create_progress_bar(length, ratio):
