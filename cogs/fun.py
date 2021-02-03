@@ -183,17 +183,20 @@ Peace!
     @commands.command()
     async def pyramid(self, ctx):
         await ctx.send(":desert: Y'know what I'm in the mood for? Building a pyramid! How tall should it be?")
-        message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
-        size = (int(message.content))
-        if size >= 26:
-            await ctx.send("Yeah no, let's not go *too* spammy! :sweat_drops:")
-        elif size <= -1:
-            await ctx.send("Oi, quit try'na break the universe, I can't exactly dig underground on Discord! :upside_down:")
-        elif size == 0:
-            await ctx.send("Uh, okay, guess I'll go build elsewhere... :pensive:")
-        else:
-            for i in range(size):
-                await ctx.send("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
+        try:
+            message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+            size = (int(message.content))
+            if size >= 26:
+                await ctx.send("Yeah no, let's not go *too* spammy! :sweat_drops:")
+            elif size <= -1:
+                await ctx.send("Oi, quit try'na break the universe, I can't exactly dig underground on Discord! :upside_down:")
+            elif size == 0:
+                await ctx.send("Uh, okay, guess I'll go build elsewhere... :pensive:")
+            else:
+                for i in range(size):
+                    await ctx.send("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
+        except:
+            await ctx.send("Yo, I ain't that smart! Please use **integers** written in **numbers**!")
 
 
     @commands.command(input=None)
