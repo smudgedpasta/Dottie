@@ -280,7 +280,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     elif isinstance(error, commands.CommandInvokeError):
-        await ctx.send(f"```py\n⚠️ Unexpected error: {repr(error)} ⚠️```")
+        await ctx.send(f"`⚠️ Unexpected error: {repr(error)} ⚠️`")
     try:
         raise error
     except:
