@@ -259,30 +259,28 @@ dottie.loop.create_task(log_update())
 async def on_command_error(ctx, error):
     if isinstance(error, CheckFailure):
         await ctx.send("You don't have permissions to use that command, you lil' delinquent!")
-    if isinstance(error, commands.CommandNotFound):
-        if str(error).split("\"", 2)[1].lower() in list(miza_voice) + ["np"]:
+    elif isinstance(error, commands.CommandNotFound):
+        command = str(error).split('"', 2)[1].lower()
+        if command in list(miza_voice) + ["np"]:
             global LAST_COMMAND_TIMESTAMP
             command = PREFIX[0] + str(error).split("\"", 2)[1].lower()
             print(f"[{ctx.author.name}] has run the following command: [{command}] in [{ctx.guild}]")
             await dottie.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name="whoever summoned me! 👀"))
             LAST_COMMAND_TIMESTAMP = time.time()
-            return
-        if str(error).split("\"")[1] in ["hepl", "hepk", "hlep", "hekp", "pleh"]:
+        elif command in ["hepl", "hepk", "hlep", "hekp", "pleh"]:
             await ctx.send("Did you mean \"help\"?")
-        elif str(error).split("\"")[1] in ["cars", "cat"]:
+        elif command in ["cars", "cat"]:
             await ctx.send("Did you mean \"cats\"?")
-        elif str(error).split("\"")[1] in ["levels"]:
+        elif command in ["levels"]:
             await ctx.send("Did you mean \"level\"?")
-        elif str(error).split("\"")[1] in ["pign"]:
+        elif command in ["pign"]:
             await ctx.send("Did you mean \"ping\"? ~~I hate to break it to you but I'm not a Minecraft Piglin...~~")
         else:
-            await ctx.send("Uh, that doesn't exist! Use `" + PREFIX[0] + "help` if you're confused!")
-    if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send(f"Uh, that doesn't exist! Use `{PREFIX[0]}help` if you're confused!")
+    elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
-    if isinstance(error, commands.CommandInvokeError):
-        embed = discord.Embed(colour=discord.Colour(16776960))
-        embed.description = "```fix\n⚠️ Unexpected error! Either use this command with a required argument, or report this as a bug to smudgedpasta. ⚠️```"
-        await ctx.send(embed=embed)
+    elif isinstance(error, commands.CommandInvokeError):
+        await ctx.send(f"```py\n⚠️ Unexpected error: {repr(error)} ⚠️```")
     try:
         raise error
     except:
