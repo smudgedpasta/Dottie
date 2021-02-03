@@ -14,7 +14,7 @@ def is_owner(ctx):
 
 pink_embed = "#E91E6300"
 
-rainbow_embeds = [
+rainbow_embed = [
     "#ff0000",
     "#ff6800",
     "#fff300",
