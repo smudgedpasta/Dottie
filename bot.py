@@ -149,7 +149,7 @@ async def on_message(message):
             f"Heheh, I can do that too! {message.author.mention} :smiling_imp:",
             f"My creator is questioning why she is spending time writing this feature... UH, I MEAN, I HAVE MY OWN INTELLIGENCE, WHAT'S UP {message.author.display_name.upper()}?!",
             f"Hey, {message.author.display_name}, you should talk to my best friend <@668999031359537205>, she's great! :blush:",
-            "Hi there! I'm an experimental Discord bot created by ||~~the cuddly bugs~~|| <@530781444742578188> and <@201548633244565504>! My mission is to be something positive. :white_heart:"
+            f"Hi there! I'm an experimental Discord bot created by ||the cuddly bugs|| {', '.join(dottie.get_user(u).name for u OWNERS[:-1])} and {dottie.get_user(OWNERS[-1])}! My mission is to be something positive. :white_heart:"
         ]
 
         await ctx.send(random.choice(responses))
@@ -301,7 +301,7 @@ async def on_guild_join(guild):
     target_channel = None
 
     embed = discord.Embed(colour=discord.Colour(pink_embed))
-    embed.description = f"""Hi! I'm {dottie.user.name}, a test project by <@530781444742578188>- with the help of <@201548633244565504> and <@245890903133257730> of course! :white_heart:\n
+    embed.description = f"""Hi! I'm {dottie.user.name}, a test project by {', '.join(dottie.get_user(u).name for u OWNERS[:-1])}- with the help of {dottie.get_user(OWNERS[-1])} of course! :white_heart:\n
 For a list of my commands, use the classic command of `""" + PREFIX[0] + """help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/wiki. You can find my source code over there too if you're interested!\n
 Thanks for inviting me! 😊"""
     embed.set_author(name=dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=dottie.user.avatar_url_as(format="png", size=4096))
