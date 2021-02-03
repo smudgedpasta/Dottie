@@ -169,7 +169,7 @@ is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 pink_embed = 15277667
 
-rainbow_embed = [
+rainbow_embeds = [
     16711680,
     16738304,
     16773888,
@@ -179,8 +179,6 @@ rainbow_embed = [
     8323327,
     16711861
 ]
-
-rainbow_embeds = random.choice(rainbow_embed)
 
 
 def create_progress_bar(length, ratio):
