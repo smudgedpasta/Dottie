@@ -25,6 +25,8 @@ rainbow_embeds = [
     "#ff00b5"
 ]
 
+rainbow_embeds = random.choice([rainbow_embed])
+
 
 try:
     with open("database/terminal_channels", "r") as f:
