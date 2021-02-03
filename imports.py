@@ -12,22 +12,6 @@ def is_owner(ctx):
   return ctx.message.author.id in OWNERS
 
 
-pink_embed = "#E91E6300"
-
-rainbow_embed = [
-    "#ff0000",
-    "#ff6800",
-    "#fff300",
-    "#2cff00",
-    "#00f1ff",
-    "#0019ff",
-    "#7f00ff",
-    "#ff00b5"
-]
-
-rainbow_embeds = random.choice([rainbow_embed])
-
-
 try:
     with open("database/terminal_channels", "r") as f:
         s = f.read()
@@ -181,6 +165,22 @@ def create_task(fut, *args, loop=None, **kwargs):
     return asyncio.ensure_future(fut, *args, loop=loop, **kwargs)
 
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
+
+
+pink_embed = 3911082752
+
+rainbow_embed = [
+    16711680,
+    16738304,
+    16773888,
+    2948864,
+    61951,
+    6655,
+    8323327,
+    16711861
+]
+
+rainbow_embeds = random.choice([rainbow_embed])
 
 
 def create_progress_bar(length, ratio):
