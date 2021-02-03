@@ -167,7 +167,7 @@ def create_task(fut, *args, loop=None, **kwargs):
 is_main_thread = lambda: threading.current_thread() is threading.main_thread()
 
 
-pink_embed = 3911082752
+pink_embed = 15277667
 
 rainbow_embed = [
     16711680,
