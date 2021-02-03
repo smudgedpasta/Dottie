@@ -95,6 +95,7 @@ class GENERAL(commands.Cog):
 ***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*
 ***art***\n*```Takes the most recent image in a channel and only states the truth!```*
 ***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*
+***inspiro***\n**```fix\nAliases: inspirobot, inspiration```**\n*```Pulls a random "inspirational" quote from https://inspirobot.me/```*
 ***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*
 ***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
 ***fox***\n*```Sends a random image of any kind of fox!```*
