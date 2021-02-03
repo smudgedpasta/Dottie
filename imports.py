@@ -12,6 +12,20 @@ def is_owner(ctx):
   return ctx.message.author.id in OWNERS
 
 
+pink_embed = "#E91E6300"
+
+rainbow_embeds = [
+    "#ff0000",
+    "#ff6800",
+    "#fff300",
+    "#2cff00",
+    "#00f1ff",
+    "#0019ff",
+    "#7f00ff",
+    "#ff00b5""
+]
+
+
 try:
     with open("database/terminal_channels", "r") as f:
         s = f.read()

@@ -44,7 +44,7 @@ def print(*args, sep=" ", end="\n"):
     with open("log", "a", encoding="utf-8") as f:
         f.write(str(sep).join(str(i) for i in args) + end)
 
-    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed = discord.Embed(colour=discord.Colour(pink_embed))
     embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
 
     for c_id in LOG_CHANNELS:
@@ -54,7 +54,7 @@ def print(*args, sep=" ", end="\n"):
 
 
 def print2(*args, sep=" ", end="\n"):
-    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed = discord.Embed(colour=discord.Colour(pink_embed))
     embed.description = "```py\n" + str(sep).join(str(i) for i in args) + end + "```"
 
     for c_id in LOG_CHANNELS:
@@ -302,7 +302,7 @@ async def on_member_remove(member):
 async def on_guild_join(guild):
     target_channel = None
 
-    embed = discord.Embed(colour=discord.Colour(15277667))
+    embed = discord.Embed(colour=discord.Colour(pink_embed))
     embed.description = f"""Hi! I'm {dottie.user.name}, a test project by <@530781444742578188>- with the help of <@201548633244565504> and <@245890903133257730> of course! :white_heart:\n
 For a list of my commands, use the classic command of `""" + PREFIX[0] + """help`. For a more detailed list of what I can do, visit https://github.com/smudgedpasta/Dottie/wiki. You can find my source code over there too if you're interested!\n
 Thanks for inviting me! 😊"""

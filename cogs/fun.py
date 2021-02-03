@@ -200,7 +200,7 @@ Peace!
     async def rate(self, ctx, *, input):
         random.seed(input)
         rate = random.randint(0, 10)
-        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         embed.description = f"**{input.capitalize()}**, hmm? I rate that a **{rate}/10**! " + random.choice(["✨", "🤍", "😏", "😊"])
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Requested by {ctx.author.display_name}")
         await ctx.send(embed=embed)
@@ -259,7 +259,7 @@ Peace!
 
         bar = create_progress_bar(21, percentage / 100)
 
-        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         suspicious_function = lambda x: x / ((x ** 2 * 6254793562032913) // (7632048114126314 * 10 ** 24) - (x * 5638138161912547) // 2939758 + 1000000155240420236976462021787648)
         suspicious_function_2 = lambda x: int.from_bytes(bytes.fromhex(x.encode("utf-8").hex()), "little")
         if round(suspicious_function(suspicious_function_2(arg + arg2))) in (13264547, 47787122) and suspicious_function(suspicious_function_2(arg2 + arg)) in (5.869437322867208e-09, 1.0000614609767725e-08):

@@ -27,13 +27,13 @@ class GENERAL(commands.Cog):
 
     @commands.command()
     async def help(self, ctx):
-        home = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        home = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         home.set_author(name="🐾 Help List 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         home.description = "*I think I need heeelp, I'm drowning in myseeelf* 🎵"
         home.set_image(url="https://cdn.discordapp.com/attachments/683233571405561876/746281046231875594/image0.png")
         home.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text="Click the reactions to scroll through the pages!")
 
-        info = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        info = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         info.set_author(name="🐾 First, a few things... 🌨️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         info.description = f"""```🔸 What permissions does Dottie need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{PREFIX[0]}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
 ```🔸 Do I need to @ myself?```\nLets say you are using `{PREFIX[0]}info`. If you want to see your own, just send it by itself!\n
@@ -48,7 +48,7 @@ class GENERAL(commands.Cog):
 """
         info.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text="Click 🔻 to see my commands!")
         
-        moderation = discord.Embed(colour=discord.Colour(15277667))
+        moderation = discord.Embed(colour=discord.Colour(pink_embed))
         moderation.set_author(name="⚔️ MODERATION ⚔️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         moderation.set_footer(text="Click 🔺 to go back to info, click 🔻 to see GENERAL commands!")
         moderation.description = """***remove_levels***\n**```fix\nAliases: levels_d```**\n*```Prevents level-up embeds from posting in the server.```*
@@ -59,7 +59,7 @@ class GENERAL(commands.Cog):
 ***kick***\n*```Kicks a user from the server, either by mentioning or stating their username.```*
 """
 
-        general = discord.Embed(colour=discord.Colour(15277667))
+        general = discord.Embed(colour=discord.Colour(pink_embed))
         general.set_author(name="🤍 GENERAL 🤍", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         general.set_footer(text="Click 🔺 to go back to MODERATION, click 🔻 to see FUN commands!")
         general.description = f"""***help***\n*```Legends say you've found this command already. 👀```*
@@ -74,7 +74,7 @@ class GENERAL(commands.Cog):
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*
 """
 
-        fun = discord.Embed(colour=discord.Colour(15277667))
+        fun = discord.Embed(colour=discord.Colour(pink_embed))
         fun.set_author(name="🥖 FUN 🥖", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         fun.set_footer(text="Click 🔺 to go back to GENERAL, click 🔻 to see IMAGE commands!")
         fun.description = """***AskDottie***\n**```fix\nAliases: ask, 8ball```**\n*```Ask me anything, I'll give a random answer!```*
@@ -88,14 +88,13 @@ class GENERAL(commands.Cog):
 ***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*
 ***faker***\n*```Think you can imitate me? I will call you out!```*
 """
-        image = discord.Embed(colour=discord.Colour(15277667))
+        image = discord.Embed(colour=discord.Colour(pink_embed))
         image.set_author(name="🖼️ IMAGE 🖼️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         image.set_footer(text="Click 🔺 to go back to FUN, click 🔻 to see VOICE commands!")
         image.description = f"""***photo***\n*```Pulls a random image of me!```*
 ***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*
 ***art***\n*```Takes the most recent image in a channel and only states the truth!```*
 ***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*
-***inspiro***\n**```fix\nAliases: inspirobot, inspiration```**\n*```Pulls a random "inspirational" quote from https://inspirobot.me/```*
 ***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*
 ***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
 ***fox***\n*```Sends a random image of any kind of fox!```*
@@ -104,7 +103,7 @@ class GENERAL(commands.Cog):
 ***how***\n*```How.gif, that is all.```*
 """
 
-        voice = discord.Embed(colour=discord.Colour(15277667))
+        voice = discord.Embed(colour=discord.Colour(pink_embed))
         try:
             voice.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.get_user(668999031359537205).avatar_url_as(format="png", size=4096))
         except:
@@ -121,7 +120,7 @@ class GENERAL(commands.Cog):
 ***rotate***\n**```fix\nAliases: 🔄, jump```**\n*```Rotates the queue to the left by a certain amount of steps.```*
 """
 
-        voice2 = discord.Embed(colour=discord.Colour(15277667))
+        voice2 = discord.Embed(colour=discord.Colour(pink_embed))
         try:
             voice2.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.get_user(668999031359537205).avatar_url_as(format="png", size=4096))
         except:
@@ -191,7 +190,7 @@ class GENERAL(commands.Cog):
 
     @commands.command(aliases=["link", "invite"])
     async def source(self, ctx):
-        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed = discord.Embed(colour=discord.Colour(pink_embed))
         embed.description = """[My GitHub](https://github.com/smudgedpasta/Dottie)\n[My Invite](https://discord.com/api/oauth2/authorize?client_id=737992099449929728&permissions=8&scope=bot)"""
         embed.set_author(name=self.dottie.user.name, icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/793587710391746590/768px-Python-logo-notext.png")
@@ -208,7 +207,7 @@ class GENERAL(commands.Cog):
             "Ping": f"[{round(self.dottie.latency * 1000)}ms]"
         }
         
-        embed = discord.Embed(colour=discord.Colour(15277667))
+        embed = discord.Embed(colour=discord.Colour(pink_embed))
         embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         embed.description = "*```asciidoc\n[Ping! I pong back all this nice techy info. 🍺]```*"
         embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
@@ -282,7 +281,7 @@ class GENERAL(commands.Cog):
 
     @commands.command()
     async def random(self, ctx, *args):
-        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")
         embed.description = f"```ini\n🎉 [{random.choice(args)}] 🎉```"
         await ctx.send("🥁 ***Your random selection is...***", embed=embed)
@@ -294,7 +293,7 @@ class GENERAL(commands.Cog):
         message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
         wc = message.content.split()
         cc = message.content.strip()
-        embed = discord.Embed(colour=discord.Colour(15277667), timestamp=ctx.message.created_at)
+        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         embed.description = "```" + random.choice(["ini", "css"]) + f"\n𝒲𝑜𝓇𝒹 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(wc)}]❕\n𝒞𝒽𝒶𝓇𝒶𝒸𝓉𝑒𝓇 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(cc)}]❕```"
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
         await ctx.send(embed=embed)
