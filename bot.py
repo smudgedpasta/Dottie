@@ -48,7 +48,10 @@ def print(*args, sep=" ", end="\n"):
     embed.description = "```" + random.choice(["css", "ini"]) + "\n" + str(sep).join(str(i) for i in args) + end + "```"
 
     for c_id in LOG_CHANNELS:
-        create_task(dottie.get_channel(c_id).send(embed=embed))
+        try:
+            create_task(dottie.get_channel(c_id).send(embed=embed))
+        except:
+            return
 
     return _print(*args)
 
