@@ -72,6 +72,7 @@ class GENERAL(commands.Cog):
 ***loop***\n*```Repeats an inputted command a specified amount of times! Example: {PREFIX[0]}loop 5 {PREFIX[0]}hello```*
 ***ping***\n*```Returns some technical information.```*
 ***avatar***\n**```fix\nAliases: icon```**\n*```Sends an image of yours or someone else's Discord avatar!```*
+***quote***\n*```Pulls a platonic-friendly quote regarding long-distance relationships with people.```*
 """
 
         fun = discord.Embed(colour=discord.Colour(pink_embed))
