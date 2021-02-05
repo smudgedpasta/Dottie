@@ -241,17 +241,17 @@ Peace!
 
         if arg.startswith("<@" or "<@!"):
             numbers = []
-            for i in split(arg):
+            for i in list(arg):
                 if i.isdigit():
                     numbers.append(int(i))
-                    arg = dottie.get_user("".join(map(str, numbers)).name)
+                    arg = self.dottie.user("".join(map(str, numbers)).name)
 
         if arg2.startswith("<@" or "<@!"):
             numbers2 = []
             for i in split(arg2):
                 if i.isdigit():
                     numbers2.append(int(i))
-                    arg2 = dottie.get_user("".join(map(str, numbers2)).name)
+                    arg2 = self.dottie.user("".join(map(str, numbers2)).name)
 
         arg = arg.capitalize().replace("'", "").replace("`", "")
         arg2 = arg2.capitalize().replace("'", "").replace("`", "")
