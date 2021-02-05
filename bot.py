@@ -283,7 +283,8 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     elif isinstance(error, commands.CommandInvokeError):
-        await ctx.send(f"`⚠️ Unexpected error: {repr(error)} ⚠️`")
+        embed.description = f"```fix\n⚠️ {error}. To be reported to {', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])} ⚠️```"
+        await ctx.send(embed=embed)
     try:
         raise error
     except:

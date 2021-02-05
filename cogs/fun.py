@@ -239,6 +239,20 @@ Peace!
     async def matchmaking(self, ctx, arg, arg2):
         heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
 
+        if arg.startswith("<@" or "<@!"):
+            numbers = []
+            for i in split(arg):
+                if i.isdigit():
+                    numbers.append(int(i))
+                    arg = dottie.get_user("".join(map(str, numbers)).name)
+
+        if arg2.startswith("<@" or "<@!"):
+            numbers2 = []
+            for i in split(arg2):
+                if i.isdigit():
+                    numbers2.append(int(i))
+                    arg2 = dottie.get_user("".join(map(str, numbers2)).name)
+
         arg = arg.capitalize().replace("'", "").replace("`", "")
         arg2 = arg2.capitalize().replace("'", "").replace("`", "")
         arg, arg2 = sorted((arg, arg2))
