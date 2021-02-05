@@ -283,7 +283,7 @@ class GENERAL(commands.Cog):
     @commands.command()
     async def quote(self, ctx):
         quote_pool = None
-        with open("json/quotes.json", "r") as f:
+        with open("json/quotes.json", "r", encoding="utf-8") as f:
             quote_pool = json.load(f)
             random_quote = random.choice(quote_pool)
             embed = discord.Embed(colour=discord.Colour(pink_embed))
