@@ -51,7 +51,7 @@ def print(*args, sep=" ", end="\n"):
         try:
             create_task(dottie.get_channel(c_id).send(embed=embed))
         except:
-            return
+            continue
 
     return _print(*args)
 
