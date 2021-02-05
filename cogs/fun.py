@@ -248,7 +248,7 @@ Peace!
 
         if arg2.startswith("<@" or "<@!"):
             numbers2 = []
-            for i in split(arg2):
+            for i in list(arg2):
                 if i.isdigit():
                     numbers2.append(int(i))
                     arg2 = self.dottie.user("".join(map(str, numbers2)).name)
