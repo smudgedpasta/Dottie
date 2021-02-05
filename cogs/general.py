@@ -280,6 +280,18 @@ class GENERAL(commands.Cog):
 
 
     @commands.command()
+    async def quote(self, ctx):
+        quote_pool = None
+        with open("json/quotes.json", "r") as f:
+            quote_pool = json.load(f)
+            random_quote = random.choice(quote_pool)
+            embed = discord.Embed(colour=discord.Colour(pink_embed))
+            embed.description = random_quote["quote"]
+            embed.set_footer(text="Quote by " + random_quote["credit"])
+            await ctx.send(embed=embed)
+
+
+    @commands.command()
     async def random(self, ctx, *args):
         embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")

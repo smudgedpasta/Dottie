@@ -283,7 +283,8 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     elif isinstance(error, commands.CommandInvokeError):
-        embed.description = f"```fix\n⚠️ {error}. To be reported to {', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])} ⚠️```"
+        embed = discord.Embed(colour=discord.Colour(16711680))
+        embed.description = f"```py\n⚠️ {error}. To be reported to \'{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}\' ⚠️```"
         await ctx.send(embed=embed)
     try:
         raise error
@@ -406,7 +407,7 @@ async def load(ctx, extension=None):
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.load_extension(f"cogs.{cog}")
         embed = discord.Embed(colour=discord.Colour(255))
-        embed.description = "```fix\n[Successfully returned acces to all extensions.]```"
+        embed.description = "```ini\n[Successfully returned acces to all extensions.]```"
         await ctx.send(embed=embed)
         return
 
