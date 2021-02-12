@@ -78,8 +78,8 @@ class IMAGE(commands.Cog):
         embed.set_image(url=quote.url)
         if ctx.channel.is_nsfw():
                 await ctx.send(embed=embed)
-            else:
-                await ctx.send("Woah, be careful, this command pulls **sexual references**! Try again in an **NSFW channel**!")
+        else:
+            await ctx.send("Woah, be careful, this command pulls **sexual references**! Try again in an **NSFW channel**!")
 
 
     @commands.command(aliases=["marble"])
