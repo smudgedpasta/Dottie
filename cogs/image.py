@@ -32,7 +32,7 @@ class IMAGE(commands.Cog):
             if ctx.channel.is_nsfw():
                 await ctx.send(embed=embed)
             else:
-                await ctx.send("Woah, be careful, this command pulls graphic imagery! Try again in an **nsfw channel**!")
+                await ctx.send("Woah, be careful, this command pulls **graphic imagery**! Try again in an **NSFW channel**!")
 
 
     @commands.command()
@@ -69,27 +69,19 @@ class IMAGE(commands.Cog):
             embed.set_image(url=cat_response["image"])
             await ctx.send(embed=embed)
 
-        
+    
     @commands.command(aliases=["inspirobot", "inspiration"])
     async def inspiro(self, ctx):
         embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds)))
         embed.set_footer(text="Images are from https://inspirobot.me/")
         quote = inspirobot.generate()
         embed.set_image(url=quote.url)
-        await ctx.send(embed=embed)
+        if ctx.channel.is_nsfw():
+                await ctx.send(embed=embed)
+            else:
+                await ctx.send("Woah, be careful, this command pulls **sexual references**! Try again in an **NSFW channel**!")
 
 
-    @commands.command(aliases=["og", "doggo", "puppo"])
-    async def dog(self, ctx):
-        r = requests.get("https://dog.ceo/api/breeds/image/random")
-        data = r.json()
-        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds)))
-        embed.set_footer(text="Images are from https://dog.ceo/api/breeds/image/random")
-        embed.set_image(url=data["message"])
-        embed.description = random.choice(["Bärk!", "Börk!", "🐶", "🐕", "<:sleepydottie:799210814841421835>"])
-        await ctx.send(embed=embed)
-
-    
     @commands.command(aliases=["marble"])
     async def marble_fox(self, ctx):
         marble_foxes = None
@@ -101,6 +93,17 @@ class IMAGE(commands.Cog):
                 embed.set_image(url=marble_foxes["image"])
                 embed.description = random.choice(["Yip!", "Yap!", "🦊", "<:sleepysmudgy:799210361692749824>"])
                 await ctx.send(embed=embed)
+
+
+    @commands.command(aliases=["og", "doggo", "puppo"])
+    async def dog(self, ctx):
+        r = requests.get("https://dog.ceo/api/breeds/image/random")
+        data = r.json()
+        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds)))
+        embed.set_footer(text="Images are from https://dog.ceo/api/breeds/image/random")
+        embed.set_image(url=data["message"])
+        embed.description = random.choice(["Bärk!", "Börk!", "🐶", "🐕", "<:sleepydottie:799210814841421835>"])
+        await ctx.send(embed=embed)
 
 
     @commands.command()

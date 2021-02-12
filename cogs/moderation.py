@@ -19,13 +19,6 @@ class MODERATION(commands.Cog):
             await ctx.send(f"How am I meant to purge **{amount}** messages, silly?".format(amount))
 
 
-    @commands.command(pass_context=True)
-    @has_permissions(administrator=True)
-    async def kick(self, ctx, member: discord.Member, *, reasons=None):
-        await member.kick(reason=reasons)
-        await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
-
-
     @commands.command()
     @has_permissions(administrator=True)
     async def ban(self, ctx, member: discord.Member, *, reasons=None):
@@ -44,6 +37,13 @@ class MODERATION(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f"Granted access back to the server for {user.name}#{user.discriminator}. :unlock:")
                 return
+
+    
+    @commands.command(pass_context=True)
+    @has_permissions(administrator=True)
+    async def kick(self, ctx, member: discord.Member, *, reasons=None):
+        await member.kick(reason=reasons)
+        await ctx.send(f"{member.name}#{member.discriminator} has been *yeet* right out the server! :lock:")
 
 
 def setup(dottie):

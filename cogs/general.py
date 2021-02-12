@@ -83,7 +83,7 @@ class GENERAL(commands.Cog):
 ***matchmaking***\n**```fix\nAliases: ship, love```**\n*```Ship two people/characters of your choosing!```*
 ***numberguess***\n**```fix\nAliases: quiz```**\n*```A "guess-the-number" guessing game!```*
 ***cha_cha_slide***\n**```fix\nAliases: chachaslide, ccs```**\n*```This is something new, the Casper Slide part 2!```*
-***rpc***\n**```fix\nAliases: rockpaperscissors, rock_paper_scissors```**\n*```Plays the game "Rock Paper Scissors"!```*
+***rps***\n**```fix\nAliases: rockpaperscissors, rock_paper_scissors```**\n*```Plays the game "Rock Paper Scissors"!```*
 ***speak***\n**```fix\nAliases: say```**\n*```Make me say something, anything, and I'll repeat! Nobody will know it was you!```*
 ***heart***\n*```Use this with two emojis, and I'll make them a heart!```*
 ***pyramid***\n*```Tell me to build a pyramid with a height of your choosing!```*
@@ -96,6 +96,7 @@ class GENERAL(commands.Cog):
 ***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*
 ***art***\n*```Takes the most recent image in a channel and only states the truth!```*
 ***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*
+***inspiro***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Some quotes contain references to sex; pulls a random funny quote from https://inspirobot.me/```*
 ***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*
 ***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
 ***fox***\n*```Sends a random image of any kind of fox!```*
@@ -172,51 +173,10 @@ class GENERAL(commands.Cog):
         create_task(page_reaction_listener(page, "remove"))
 
 
-    @commands.command()
-    async def loop(self, ctx):
-        message = ctx.message
-        content = message.content
-        _, count, command = content.split(None, 2)
-        fake_message = copy.copy(message)
-        fake_message.content = command
-        for i in range(int(count)):
-            new_ctx = await self.dottie.get_context(fake_message)
-            await self.dottie.invoke(new_ctx)
-
-
     @commands.command(aliases=["hi", "hemlo", "henlo", "hoi"])
     async def hello(self, ctx):
         await ctx.send(f"Hello, {ctx.author.display_name}! :wave:")
 
-
-    @commands.command(aliases=["link", "invite"])
-    async def source(self, ctx):
-        embed = discord.Embed(colour=discord.Colour(pink_embed))
-        embed.description = """[My GitHub](https://github.com/smudgedpasta/Dottie)\n[My Invite](https://discord.com/api/oauth2/authorize?client_id=737992099449929728&permissions=8&scope=bot)"""
-        embed.set_author(name=self.dottie.user.name, icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/793587710391746590/768px-Python-logo-notext.png")
-        await ctx.send(embed=embed)
-
-
-    @commands.command()
-    async def ping(self, ctx):
-        cpu = await create_future(get_cpu_percent)
-        memory = await create_future(get_memory_percent)
-        TechyInfo = {
-            "CPU": f"[{cpu / psutil.cpu_count()}%]",
-            "Memory": f"[{round(memory, 2)}%]",
-            "Ping": f"[{round(self.dottie.latency * 1000)}ms]"
-        }
-        
-        embed = discord.Embed(colour=discord.Colour(pink_embed))
-        embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
-        embed.description = "*```asciidoc\n[Ping! I pong back all this nice techy info. 🍺]```*"
-        embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
-        embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
-        embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
-
-        await ctx.send(embed=embed)
-    
 
     @commands.command(aliases=["userinfo", "info", "stats", "userstats"])
     async def profile(self, ctx):
@@ -263,6 +223,67 @@ class GENERAL(commands.Cog):
         await ctx.send(embed=embed)
 
 
+    @commands.command(aliases=["link", "invite"])
+    async def source(self, ctx):
+        embed = discord.Embed(colour=discord.Colour(pink_embed))
+        embed.description = """[My GitHub](https://github.com/smudgedpasta/Dottie)\n[My Invite](https://discord.com/api/oauth2/authorize?client_id=737992099449929728&permissions=8&scope=bot)"""
+        embed.set_author(name=self.dottie.user.name, icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/793587710391746590/768px-Python-logo-notext.png")
+        await ctx.send(embed=embed)
+
+
+    @commands.command()
+    async def random(self, ctx, *args):
+        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
+        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")
+        embed.description = f"```ini\n🎉 [{random.choice(args)}] 🎉```"
+        await ctx.send("🥁 ***Your random selection is...***", embed=embed)
+
+
+    @commands.command(aliases=["charcount", "charactercount", "wc", "cc"])
+    async def wordcount(self, ctx):
+        await ctx.send("Please post the text you would like the word and character count for! :pen_fountain:")
+        message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
+        wc = message.content.split()
+        cc = message.content.strip()
+        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
+        embed.description = "```" + random.choice(["ini", "css"]) + f"\n𝒲𝑜𝓇𝒹 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(wc)}]❕\n𝒞𝒽𝒶𝓇𝒶𝒸𝓉𝑒𝓇 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(cc)}]❕```"
+        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
+        await ctx.send(embed=embed)
+
+
+    @commands.command()
+    async def loop(self, ctx):
+        message = ctx.message
+        content = message.content
+        _, count, command = content.split(None, 2)
+        fake_message = copy.copy(message)
+        fake_message.content = command
+        for i in range(int(count)):
+            new_ctx = await self.dottie.get_context(fake_message)
+            await self.dottie.invoke(new_ctx)
+
+
+    @commands.command()
+    async def ping(self, ctx):
+        cpu = await create_future(get_cpu_percent)
+        memory = await create_future(get_memory_percent)
+        TechyInfo = {
+            "CPU": f"[{cpu / psutil.cpu_count()}%]",
+            "Memory": f"[{round(memory, 2)}%]",
+            "Ping": f"[{round(self.dottie.latency * 1000)}ms]"
+        }
+        
+        embed = discord.Embed(colour=discord.Colour(pink_embed))
+        embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        embed.description = "*```asciidoc\n[Ping! I pong back all this nice techy info. 🍺]```*"
+        embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
+        embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
+        embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
+
+        await ctx.send(embed=embed)
+
+
     @commands.command(aliases=["icon"])
     async def avatar(self, ctx):
         spl = ctx.message.content.split(None, 1)
@@ -290,26 +311,6 @@ class GENERAL(commands.Cog):
             embed.description = random_quote["quote"]
             embed.set_footer(text="Quote by " + random_quote["credit"])
             await ctx.send(embed=embed)
-
-
-    @commands.command()
-    async def random(self, ctx, *args):
-        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
-        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")
-        embed.description = f"```ini\n🎉 [{random.choice(args)}] 🎉```"
-        await ctx.send("🥁 ***Your random selection is...***", embed=embed)
-
-
-    @commands.command(aliases=["charcount", "charactercount", "wc", "cc"])
-    async def wordcount(self, ctx):
-        await ctx.send("Please post the text you would like the word and character count for! :pen_fountain:")
-        message = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
-        wc = message.content.split()
-        cc = message.content.strip()
-        embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
-        embed.description = "```" + random.choice(["ini", "css"]) + f"\n𝒲𝑜𝓇𝒹 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(wc)}]❕\n𝒞𝒽𝒶𝓇𝒶𝒸𝓉𝑒𝓇 𝒸𝑜𝓊𝓃𝓉 𝒾𝓈: [{len(cc)}]❕```"
-        embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
-        await ctx.send(embed=embed)
         
 
 def setup(dottie):
