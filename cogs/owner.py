@@ -52,6 +52,75 @@ class OWNER(commands.Cog):
             await ctx.send(line.translate(trans))
 
 
+    @commands.command(aliases=["exec_e"])
+    @commands.check(is_owner)
+    async def exec_add(self, ctx):
+        if ctx.message.channel.id not in TERMINALS:
+            TERMINALS.add(ctx.message.channel.id)
+            with open("database/terminal_channels", "a") as f:
+                f.write("\n" + str(ctx.message.channel.id))
+        embed = discord.Embed(colour=discord.Colour(65280))
+        embed.description = f"```css\nAdded [#{ctx.message.channel}] to the list of terminals!```"
+        await ctx.send(embed=embed)
+
+
+    @commands.command(aliases=["exec_d"])
+    @commands.check(is_owner)
+    async def exec_remove(self, ctx):
+        TERMINALS.discard(ctx.message.channel.id)
+        with open("database/terminal_channels", "w") as f:
+            f.write("\n".join(str(i) for i in TERMINALS))
+        embed = discord.Embed(colour=discord.Colour(65280))
+        embed.description = f"```css\nRemoved [#{ctx.message.channel}] from the list of terminals!```"
+        await ctx.send(embed=embed)
+
+
+    @commands.command(aliases=["dm_e"])
+    @commands.check(is_owner)
+    async def dm_add(self, ctx):
+        if ctx.message.channel.id not in DM_CHANNEL:
+            DM_CHANNEL.add(ctx.message.channel.id)
+            with open("database/DM_channels", "a") as f:
+                f.write("\n" + str(ctx.message.channel.id))
+        embed = discord.Embed(colour=discord.Colour(65280))
+        embed.description = f"```css\n[#{ctx.message.channel}] will now log DM's!```"
+        await ctx.send(embed=embed)
+
+
+    @commands.command(aliases=["dm_d"])
+    @commands.check(is_owner)
+    async def dm_remove(self, ctx):
+        DM_CHANNEL.discard(ctx.message.channel.id)
+        with open("database/DM_channels", "w") as f:
+            f.write("\n".join(str(i) for i in DM_CHANNEL))
+        embed = discord.Embed(colour=discord.Colour(65280))
+        embed.description = f"```css\n[#{ctx.message.channel}] will no longer log DM's!```"
+        await ctx.send(embed=embed)
+
+
+    @commands.command(aliases=["log_e"])
+    @commands.check(is_owner)
+    async def log_add(self, ctx):
+        if ctx.message.channel.id not in LOG_CHANNELS:
+            LOG_CHANNELS.add(ctx.message.channel.id)
+            with open("database/log_channels", "a") as f:
+                f.write("\n" + str(ctx.message.channel.id))
+        embed = discord.Embed(colour=discord.Colour(65280))
+        embed.description = f"```css\n[#{ctx.message.channel}] will now recieve developer logs!```"
+        await ctx.send(embed=embed)
+
+
+    @commands.command(aliases=["log_d"])
+    @commands.check(is_owner)
+    async def log_remove(self, ctx):
+        LOG_CHANNELS.discard(ctx.message.channel.id)
+        with open("database/log_channels", "w") as f:
+            f.write("\n".join(str(i) for i in LOG_CHANNELS))
+        embed = discord.Embed(colour=discord.Colour(65280))
+        embed.description = f"```css\n[#{ctx.message.channel}] will no longer recieve developer logs!```"
+        await ctx.send(embed=embed)
+
+
     @commands.command()
     @commands.check(is_owner)
     async def restart(self, ctx):
