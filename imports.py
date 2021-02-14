@@ -222,11 +222,11 @@ def create_progress_bar(length, ratio):
 
 if not os.path.exists("../database"):
     try:
-        print("Checking for database files, folder will be created if missing...\n\n")
+        print("Checking for database files, folder will be created if missing...")
         database_folder = os.path.join("../Dottie", "database")
         os.mkdir(database_folder)
     except Exception as e:
-        print(repr(e))
+        print()
 
 if not os.path.exists("config.json") or not os.path.getsize("config.json"):
     print("No token found, generating config.json file... Please include Discord token when complete.\n\n")
