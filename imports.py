@@ -220,6 +220,24 @@ def create_progress_bar(length, ratio):
 	return "".join(items)
 
 
+if not os.path.exists("../database") or not os.path.getsize("../database"):
+    try:
+        print("Database files missing, creating empty folder...\nFiles will be created upon Discord usage.\n\n")
+        database_folder = os.path.join("../Dottie", "database")
+        os.mkdir(database_folder)
+    except:
+        print("Database folder verified.")
+
+if not os.path.exists("config.json") or not os.path.getsize("config.json"):
+    print("No token found, generating config.json file...\nPlease include Discord token when complete.\n\n")
+    with open("config.json", "w") as f:
+        template = {
+            "token": ""
+        }
+        json.dump(template, f, indent=4)
+        raise SystemExit
+
+
 def start_miza():
     if "MIZA" in GLOBALS:
         stop_miza()
