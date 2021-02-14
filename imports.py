@@ -74,6 +74,7 @@ with MultiThreadedImporter() as importer:
         "requests",
         "asyncio",
         "os",
+        "pathlib",
         "psutil",
         "traceback",
         "math",
@@ -88,6 +89,7 @@ with MultiThreadedImporter() as importer:
 from math import *
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
+from os import path
 
 
 eloop = asyncio.get_event_loop()
@@ -220,16 +222,16 @@ def create_progress_bar(length, ratio):
 	return "".join(items)
 
 
-if not os.path.exists("../database") or not os.path.getsize("../database"):
+if not str(pathlib.Path.exists("../database")):
     try:
-        print("Database files missing, creating empty folder...\nFiles will be created upon Discord usage.\n\n")
+        print("Database files missing, creating empty folder... Files will be created upon Discord usage.\n")
         database_folder = os.path.join("../Dottie", "database")
         os.mkdir(database_folder)
     except:
-        print("Database folder verified.")
+        print("Database folder verified.\n\n")
 
 if not os.path.exists("config.json") or not os.path.getsize("config.json"):
-    print("No token found, generating config.json file...\nPlease include Discord token when complete.\n\n")
+    print("No token found, generating config.json file... Please include Discord token when complete.\n\n")
     with open("config.json", "w") as f:
         template = {
             "token": ""
