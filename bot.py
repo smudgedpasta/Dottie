@@ -4,6 +4,16 @@
 from imports import *
 
 
+if not os.path.exists("config.json") or not os.path.getsize("config.json"):
+    print("No token found, generating config.json file...\nPlease include Discord token when complete.")
+    with open("config.json", "w") as f:
+        template = {
+            "token": ""
+        }
+        json.dump(template, f, indent=4)
+        raise SystemExit
+
+
 discord_token = None
 with open("config.json", "r") as f:
     data = json.load(f)
