@@ -57,7 +57,7 @@ class OWNER(commands.Cog):
     async def exec_add(self, ctx):
         if ctx.message.channel.id not in TERMINALS:
             TERMINALS.add(ctx.message.channel.id)
-            with open("database/terminal_channels", "a") as f:
+            with open("database/terminal_channels.txt", "a") as f:
                 f.write("\n" + str(ctx.message.channel.id))
         embed = discord.Embed(colour=discord.Colour(65280))
         embed.description = f"```css\nAdded [#{ctx.message.channel}] to the list of terminals!```"
@@ -68,7 +68,7 @@ class OWNER(commands.Cog):
     @commands.check(is_owner)
     async def exec_remove(self, ctx):
         TERMINALS.discard(ctx.message.channel.id)
-        with open("database/terminal_channels", "w") as f:
+        with open("database/terminal_channels.txt", "w") as f:
             f.write("\n".join(str(i) for i in TERMINALS))
         embed = discord.Embed(colour=discord.Colour(65280))
         embed.description = f"```css\nRemoved [#{ctx.message.channel}] from the list of terminals!```"
@@ -80,7 +80,7 @@ class OWNER(commands.Cog):
     async def dm_add(self, ctx):
         if ctx.message.channel.id not in DM_CHANNEL:
             DM_CHANNEL.add(ctx.message.channel.id)
-            with open("database/DM_channels", "a") as f:
+            with open("database/DM_channels.txt", "a") as f:
                 f.write("\n" + str(ctx.message.channel.id))
         embed = discord.Embed(colour=discord.Colour(65280))
         embed.description = f"```css\n[#{ctx.message.channel}] will now log DM's!```"
@@ -91,7 +91,7 @@ class OWNER(commands.Cog):
     @commands.check(is_owner)
     async def dm_remove(self, ctx):
         DM_CHANNEL.discard(ctx.message.channel.id)
-        with open("database/DM_channels", "w") as f:
+        with open("database/DM_channels.txt", "w") as f:
             f.write("\n".join(str(i) for i in DM_CHANNEL))
         embed = discord.Embed(colour=discord.Colour(65280))
         embed.description = f"```css\n[#{ctx.message.channel}] will no longer log DM's!```"
@@ -103,7 +103,7 @@ class OWNER(commands.Cog):
     async def log_add(self, ctx):
         if ctx.message.channel.id not in LOG_CHANNELS:
             LOG_CHANNELS.add(ctx.message.channel.id)
-            with open("database/log_channels", "a") as f:
+            with open("database/log_channels.txt", "a") as f:
                 f.write("\n" + str(ctx.message.channel.id))
         embed = discord.Embed(colour=discord.Colour(65280))
         embed.description = f"```css\n[#{ctx.message.channel}] will now recieve developer logs!```"
@@ -114,7 +114,7 @@ class OWNER(commands.Cog):
     @commands.check(is_owner)
     async def log_remove(self, ctx):
         LOG_CHANNELS.discard(ctx.message.channel.id)
-        with open("database/log_channels", "w") as f:
+        with open("database/log_channels.txt", "w") as f:
             f.write("\n".join(str(i) for i in LOG_CHANNELS))
         embed = discord.Embed(colour=discord.Colour(65280))
         embed.description = f"```css\n[#{ctx.message.channel}] will no longer recieve developer logs!```"
