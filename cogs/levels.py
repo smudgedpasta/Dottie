@@ -3,7 +3,7 @@ from bot import print2
 
 
 try:
-    with open("database/level_disables", "r") as f:
+    with open("database/level_disables.txt", "r") as f:
         s = f.read()
 except FileNotFoundError:
     s = ""
@@ -54,7 +54,7 @@ class LEVELS(commands.Cog):
     async def remove_levels(self, ctx):
         if ctx.guild.id not in DISABLED:
             DISABLED.add(ctx.guild.id)
-        with open("database/level_disables", "a") as f:
+        with open("database/level_disables.txt", "a") as f:
             f.write(str(ctx.guild.id) + "\n")
             embed = discord.Embed(colour=discord.Colour(65280))
             embed.description = f"```css\nDisabled [{ctx.guild}] from recieving level-up embeds!```"
@@ -65,7 +65,7 @@ class LEVELS(commands.Cog):
     @has_permissions(administrator=True)
     async def enable_levels(self, ctx):
         DISABLED.discard(ctx.guild.id)
-        with open("database/level_disables", "w") as f:
+        with open("database/level_disables.txt", "w") as f:
             f.write("\n".join(str(i) for i in DISABLED))
             embed = discord.Embed(colour=discord.Colour(65280))
             embed.description = f"```css\nRe-enabled [{ctx.guild}] into recieving level-up embeds!```"
