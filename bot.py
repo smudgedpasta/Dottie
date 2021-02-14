@@ -13,7 +13,6 @@ if not os.path.exists("config.json") or not os.path.getsize("config.json"):
         json.dump(template, f, indent=4)
         raise SystemExit
 
-
 discord_token = None
 with open("config.json", "r") as f:
     data = json.load(f)
