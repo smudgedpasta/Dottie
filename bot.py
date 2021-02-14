@@ -4,6 +4,11 @@
 from imports import *
 
 
+if not os.path.exists("database") or not os.path.getsize("database"):
+    print("Database files missing, creating empty folder... Files will be created upon Discord usage.")
+    path = os.path.join("../Dottie", "database")
+    os.mkdir(path) 
+
 if not os.path.exists("config.json") or not os.path.getsize("config.json"):
     print("No token found, generating config.json file...\nPlease include Discord token when complete.")
     with open("config.json", "w") as f:
