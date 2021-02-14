@@ -44,7 +44,7 @@ def input(*args, **kwargs):
 
 _print = print
 def print(*args, sep=" ", end="\n"):
-    with open("log", "a", encoding="utf-8") as f:
+    with open("log.txt", "a", encoding="utf-8") as f:
         f.write(str(sep).join(str(i) for i in args) + end)
 
     embed = discord.Embed(colour=discord.Colour(pink_embed))
