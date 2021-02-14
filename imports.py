@@ -222,7 +222,7 @@ def create_progress_bar(length, ratio):
 
 if not os.path.exists("../database"):
     try:
-        print("Database files missing, creating empty folder... Files will be created upon Discord usage.\n")
+        print("Database files missing, creating empty folder... Files will be created upon Discord usage.\n\n")
         database_folder = os.path.join("../Dottie", "database")
         os.mkdir(database_folder)
     except:
