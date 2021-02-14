@@ -74,7 +74,6 @@ with MultiThreadedImporter() as importer:
         "requests",
         "asyncio",
         "os",
-        "pathlib",
         "psutil",
         "traceback",
         "math",
@@ -89,7 +88,6 @@ with MultiThreadedImporter() as importer:
 from math import *
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
-from os import path
 
 
 eloop = asyncio.get_event_loop()
@@ -222,7 +220,7 @@ def create_progress_bar(length, ratio):
 	return "".join(items)
 
 
-if not str(pathlib.Path.exists("../database")):
+if not os.path.exists("../database"):
     try:
         print("Database files missing, creating empty folder... Files will be created upon Discord usage.\n")
         database_folder = os.path.join("../Dottie", "database")
