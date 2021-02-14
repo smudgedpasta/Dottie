@@ -38,7 +38,7 @@ class GENERAL(commands.Cog):
         info.description = f"""```🔸 What permissions does Dottie need?```\nI will ask for admin when you invite me to a server, but really the only permissions I need are `Manage Messages` if you don't wish to use moderation commands. This is because commands such as `{PREFIX[0]}say` can delete the original message afterwards! You can deny my admin permissions and give me custom ones afterwards if desired.\n
 ```🔸 Do I need to @ myself?```\nLets say you are using `{PREFIX[0]}info`. If you want to see your own, just send it by itself!\n
 ```🔸 Are commands case sensitive?```\nNope! Using `{PREFIX[0]}hElLo` would work just the same as `{PREFIX[0]}hello`.\n
-```🔸 Does {PREFIX[0].upper()} work?```\nYep! Just like commands, the prefix is case sensitive!\n
+```🔸 Does {PREFIX[0].upper()} work?```\nYep! Just like commands, the prefix is case insensitive!\n
 ```🔸 What permissions are required for moderation?```\nAt the moment, you have to be an admin!\n
 ```🔸 How do I seperate my sentences?```\nLet's suppose you're using {PREFIX[0]}ship. Normally, I would work like this: `{PREFIX[0]}ship Smudge Txin`. If you want me to read the whole sentence, put quotes around it! For example: `{PREFIX[0]}ship \"My sleeping routine\" School`. These all go for any command!\n
 ```🔸 How do I search for users?```\nYou don't have to @ them! Lets say you are using {PREFIX[0]}info, you can write the command like this: `{PREFIX[0]}info smudge` and it'll still work to finding `smudgedpasta`, etc! If they are not in the server, you can use their user ID to still find them! If they are not in *this* server but *do* share another server with me, you can supply their full Discord tag! For example: `{PREFIX[0]}info smudgedpasta#6605`\n
