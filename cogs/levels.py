@@ -107,7 +107,8 @@ class LEVELS(commands.Cog):
 
         if member_id == str(self.dottie.user.id):
             embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
-            embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+            embed.set_author(name=f"{member.display_name}'s Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
+            embed.description = f"What, {ctx.author.display_name}? Of course I'd be the Arceus of {PREFIX[0]}level!"
             embed.add_field(name="Current level:", value="♾")
             embed.add_field(name="Total experience:", value="♾")
             embed.add_field(name="Next level at:", value="♾")
