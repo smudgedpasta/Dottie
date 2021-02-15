@@ -1,6 +1,5 @@
 from imports import *
-from bot import print2
-from bot import on_message
+from bot import print2, on_message
 
 
 try:
