@@ -36,6 +36,12 @@ def get_code_length():
                 total += f.read().count("\n") + 1
         return total
 
+def get_command_count():
+    dottie_commands = len(set(dottie.all_commands.values()))
+    miza_commands = requests.get("https://mizabot.xyz/static/help.json").json()
+    miza_voice = len(miza_commands["VOICE"])
+    return dottie_commands + miza_voice
+
 
 class GENERAL(commands.Cog):
     def __init__(self, dottie):
@@ -289,8 +295,9 @@ class GENERAL(commands.Cog):
             "CPU": f"[{cpu / psutil.cpu_count()}%]",
             "Memory": f"[{round(memory, 2)}%]",
             "Ping": f"[{round(self.dottie.latency * 1000)}ms]",
+            "Uptime": f"[{self.dottie.uptime}]",
             "Code Length": f"[{get_code_length()} lines]",
-            "Uptime": f"[{self.dottie.uptime}]"
+            "Command Count": f"[{get_command_count()} commands]"
         }
         
         embed = discord.Embed(colour=discord.Colour(pink_embed))
@@ -301,6 +308,7 @@ class GENERAL(commands.Cog):
         embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
         embed.add_field(name="Current Uptime", value="```ini\n"+ str(TechyInfo["Uptime"]) + "```")
         embed.add_field(name="Code Length", value="```ini\n"+ str(TechyInfo["Code Length"]) + "```")
+        embed.add_field(name="Unique Command Count", value="```ini\n"+ str(TechyInfo["Command Count"]) + "```")
 
         await ctx.send(embed=embed)
 
