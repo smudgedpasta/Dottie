@@ -234,23 +234,15 @@ Peace!
             await ctx.message.delete()
         except:
             pass
-        if "@everyone" in ctx.message.content:
-            if "`" not in ctx.message.content:
-                speach = speach.replace("@everyone", "@- `Oh no you don't!`")
-            else:
-                speach = speach.replace("@everyone", "@- Oh no you don't!")
-        if "@here" in ctx.message.content:
-            if "`" not in ctx.message.content:
-                speach = speach.replace("@here", "@- `Nope!`")
-            else:
-                speach = speach.replace("@here", "@- Nope!")
 
+        speach = speach.replace("@everyone", "@\u200b")
+        speach = speach.replace("@here", "@\u200b")
         speach = speach.replace("<@&", "<@&\u200b")
 
         if ctx.author.id in OWNERS:
-            await ctx.send(f"{speach}")
+            await ctx.send(f"{speach[:1999]}")
         else:
-            await ctx.send(f"\u200b {speach}")
+            await ctx.send(f"\u200b {speach[:1999]}")
 
 
     @commands.command()
