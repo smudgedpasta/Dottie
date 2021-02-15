@@ -127,7 +127,7 @@ async def status_update_loop():
 
 
 messages = 0
-
+dogpiles = {}
 
 @dottie.event
 async def on_message(message):
@@ -202,29 +202,51 @@ async def on_message(message):
             
     else:
         channel = message.channel
-        if channel.id in TERMINALS:
-            if message.author.id in OWNERS:
-                proc = message.content.strip()
-                if proc:
-                    if proc.startswith("//") or proc.startswith("||") or proc.startswith("\\") or proc.startswith("#"):
-                        return
-                    if proc.startswith("`") and proc.endswith("`"):
-                        proc = proc.strip("`")
-                    if not proc:
-                        return
-                    if LISTENER is dottie:
-                        LISTENER = proc
-                        return
-                    if not proc:
-                        return
-                    output = None
-                    try:
-                        output = await procFunc(proc)
-                        await channel.send("```\n" + str(output)[:1993] + "```")
-                    except:
-                        error = await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
-                        await error.add_reaction("❎")
-      
+        if channel.id in TERMINALS and message.author.id in OWNERS:
+            proc = message.content.strip()
+            if proc:
+                if proc.startswith("//") or proc.startswith("||") or proc.startswith("\\") or proc.startswith("#"):
+                    return
+                if proc.startswith("`") and proc.endswith("`"):
+                    proc = proc.strip("`")
+                if not proc:
+                    return
+                if LISTENER is dottie:
+                    LISTENER = proc
+                    return
+                if not proc:
+                    return
+                output = None
+                try:
+                    output = await procFunc(proc)
+                    await channel.send("```\n" + str(output)[:1993] + "```")
+                except:
+                    error = await channel.send("```py\n" + traceback.format_exc()[:1991] + "```")
+                    await error.add_reaction("❎")
+        elif message.guild and message.content:
+            if channel.id in dogpiles:
+                compare = dogpiles[channel.id]
+                if message.content == compare.content and message.author != compare.author:
+                    compare.author = message.author
+                    compare.count += 1
+                    if compare.count >= random.randint(3, 6):
+                        await ctx.send("\u200b" + message.content[:1999])
+                else:
+                    dogpiles[channel.id] = DogpileComparator(message.content, message.author)
+            else:
+                dogpiles[channel.id] = DogpileComparator(message.content, message.author)
+            compare = dogpiles[channel.id]
+            print((compare.content, compare.author, compare.count))
+
+
+class DogpileComparator: # Why do I hear Terminator music...
+
+    def __init__(self, content, author, count=1):
+        self.content = content
+        self.author = author
+        self.count = count
+
+
 eloop.create_task(status_update_loop())
 
 
