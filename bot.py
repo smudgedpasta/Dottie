@@ -236,10 +236,10 @@ async def on_message(message):
             else:
                 dogpiles[channel.id] = DogpileComparator(message.content, message.author)
             compare = dogpiles[channel.id]
-            print((compare.content, compare.author, compare.count))
 
 
-class DogpileComparator: # Why do I hear Terminator music...
+# Why do I hear Terminator music...
+class DogpileComparator:
 
     def __init__(self, content, author, count=1):
         self.content = content

@@ -19,6 +19,22 @@ def get_memory_percent():
 
 get_cpu_percent()
 
+def get_code_length():
+    total = 0
+    for filename in os.listdir():
+        if filename.endswith(".py"):
+            with open(filename, "r", encoding="utf-8") as f:
+                total += f.read().count("\n") + 1
+    for filename in os.listdir("json/"):
+        if filename.endswith(".json"):
+            with open("json/" + filename, "r", encoding="utf-8") as f:
+                total += f.read().count("\n") + 1
+    for filename in os.listdir("cogs/"):
+        if filename.endswith(".py"):
+            with open("cogs/" + filename, "r", encoding="utf-8") as f:
+                total += f.read().count("\n") + 1
+        return total
+
 
 class GENERAL(commands.Cog):
     def __init__(self, dottie):
@@ -271,7 +287,8 @@ class GENERAL(commands.Cog):
         TechyInfo = {
             "CPU": f"[{cpu / psutil.cpu_count()}%]",
             "Memory": f"[{round(memory, 2)}%]",
-            "Ping": f"[{round(self.dottie.latency * 1000)}ms]"
+            "Ping": f"[{round(self.dottie.latency * 1000)}ms]",
+            "Code Length": f"[{get_code_length()} lines]"
         }
         
         embed = discord.Embed(colour=discord.Colour(pink_embed))
@@ -280,6 +297,7 @@ class GENERAL(commands.Cog):
         embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
         embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
         embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
+        embed.add_field(name="Code Length", value="```ini\n"+ str(TechyInfo["Code Length"]) + "```")
 
         await ctx.send(embed=embed)
 
