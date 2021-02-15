@@ -59,9 +59,7 @@ class OWNER(commands.Cog):
             TERMINALS.add(ctx.message.channel.id)
             with open("database/terminal_channels.txt", "a") as f:
                 f.write("\n" + str(ctx.message.channel.id))
-        embed = discord.Embed(colour=discord.Colour(65280))
-        embed.description = f"```css\nAdded [#{ctx.message.channel}] to the list of terminals!```"
-        await ctx.send(embed=embed)
+        await ctx.send(f"`Added #{ctx.message.channel} to the list of terminals!`")
 
 
     @commands.command(aliases=["exec_d"])
@@ -70,9 +68,7 @@ class OWNER(commands.Cog):
         TERMINALS.discard(ctx.message.channel.id)
         with open("database/terminal_channels.txt", "w") as f:
             f.write("\n".join(str(i) for i in TERMINALS))
-        embed = discord.Embed(colour=discord.Colour(65280))
-        embed.description = f"```css\nRemoved [#{ctx.message.channel}] from the list of terminals!```"
-        await ctx.send(embed=embed)
+        await ctx.send(f"`Removed #{ctx.message.channel} from the list of terminals!`")
 
 
     @commands.command(aliases=["dm_e"])
@@ -82,9 +78,7 @@ class OWNER(commands.Cog):
             DM_CHANNEL.add(ctx.message.channel.id)
             with open("database/DM_channels.txt", "a") as f:
                 f.write("\n" + str(ctx.message.channel.id))
-        embed = discord.Embed(colour=discord.Colour(65280))
-        embed.description = f"```css\n[#{ctx.message.channel}] will now log DM's!```"
-        await ctx.send(embed=embed)
+        await ctx.send(f"`#{ctx.message.channel} will now log DM's!`")
 
 
     @commands.command(aliases=["dm_d"])
@@ -93,9 +87,7 @@ class OWNER(commands.Cog):
         DM_CHANNEL.discard(ctx.message.channel.id)
         with open("database/DM_channels.txt", "w") as f:
             f.write("\n".join(str(i) for i in DM_CHANNEL))
-        embed = discord.Embed(colour=discord.Colour(65280))
-        embed.description = f"```css\n[#{ctx.message.channel}] will no longer log DM's!```"
-        await ctx.send(embed=embed)
+        await ctx.send(f"`#{ctx.message.channel} will no longer log DM's!`")
 
 
     @commands.command(aliases=["log_e"])
@@ -105,9 +97,7 @@ class OWNER(commands.Cog):
             LOG_CHANNELS.add(ctx.message.channel.id)
             with open("database/log_channels.txt", "a") as f:
                 f.write("\n" + str(ctx.message.channel.id))
-        embed = discord.Embed(colour=discord.Colour(65280))
-        embed.description = f"```css\n[#{ctx.message.channel}] will now recieve developer logs!```"
-        await ctx.send(embed=embed)
+        await ctx.send(f"`#{ctx.message.channel} will now recieve developer logs!`")
 
 
     @commands.command(aliases=["log_d"])
@@ -116,16 +106,14 @@ class OWNER(commands.Cog):
         LOG_CHANNELS.discard(ctx.message.channel.id)
         with open("database/log_channels.txt", "w") as f:
             f.write("\n".join(str(i) for i in LOG_CHANNELS))
-        embed = discord.Embed(colour=discord.Colour(65280))
-        embed.description = f"```css\n[#{ctx.message.channel}] will no longer recieve developer logs!```"
-        await ctx.send(embed=embed)
+        await ctx.send(f"`#{ctx.message.channel} will no longer recieve developer logs!`")
 
 
     @commands.command()
     @commands.check(is_owner)
     async def restart(self, ctx):
         embed = discord.Embed(colour=discord.Colour(16711680))
-        embed.description = "```css\n[❗ Restarting...]```"
+        embed.description = "❗ `Restarting...`"
         await ctx.send(embed=embed)
         await self.dottie.change_presence(status=discord.Status.invisible)
         for vc in self.dottie.voice_clients:
@@ -141,7 +129,7 @@ class OWNER(commands.Cog):
         with open("log", "w") as f:
             f.write("Refreshed log...\n\n")
         embed = discord.Embed(colour=discord.Colour(16711680))
-        embed.description = "```css\n[❗ Shutting down...]```"
+        embed.description = "❗ `Shutting down...`"
         await ctx.send(embed=embed)
         await self.dottie.change_presence(status=discord.Status.invisible)
         for vc in self.dottie.voice_clients:

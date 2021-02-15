@@ -307,8 +307,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     elif isinstance(error, commands.CommandInvokeError):
-        embed = discord.Embed(colour=discord.Colour(16711680))
-        embed.description = f"```py\n⚠️ {error}. To be reported to \'{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}\' ⚠️```"
+        embed.description = f"⚠️ `{error}. To be reported to \'{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}\'` ⚠️"
         await ctx.send(embed=embed)
     try:
         raise error
@@ -361,17 +360,13 @@ async def load(ctx, extension=None):
         start_miza()
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.load_extension(f"cogs.{cog}")
-        embed = discord.Embed(colour=discord.Colour(255))
-        embed.description = "```ini\n[Successfully returned acces to all extensions.]```"
-        await ctx.send(embed=embed)
+        await ctx.send("`Successfully returned acces to all extensions.`")
         return
 
     dottie.load_extension(f"cogs.{extension}")
     if extension == "voice":
         start_miza()
-    embed = discord.Embed(colour=discord.Colour(255))
-    embed.description = f"```ini\n[Successfully returned access to category \"{extension.upper()}\".]```"
-    await ctx.send(embed=embed)
+    await ctx.send(f"`Successfully returned access to category \"{extension.upper()}\".`")
 
 
 @dottie.command()
@@ -382,17 +377,13 @@ async def unload(ctx, extension=None):
         stop_miza()
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.unload_extension(f"cogs.{cog}")
-        embed = discord.Embed(colour=discord.Colour(16711680))
-        embed.description = "```asciidoc\n[Successfully removed all extensions until further notice.]```"
-        await ctx.send(embed=embed)
+        await ctx.send("`Successfully removed all extensions until further notice.`")
         return
 
     dottie.unload_extension(f"cogs.{extension}")
     if extension == "voice":
         stop_miza()
-    embed = discord.Embed(colour=discord.Colour(16711680))
-    embed.description = f"```asciidoc\n[Successfully removed category \"{extension.upper()}\" until further notice.]```"
-    await ctx.send(embed=embed)
+    await ctx.send(f"`Successfully removed category \"{extension.upper()}\" until further notice.`")
 
 
 @dottie.command()
@@ -405,9 +396,7 @@ async def reload(ctx, extension=None):
         for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
             dottie.unload_extension(f"cogs.{cog}")
             dottie.load_extension(f"cogs.{cog}")
-        embed = discord.Embed(colour=discord.Colour(16776960))
-        embed.description = "```fix\n[Successfully refreshed all extensions.]```"
-        await ctx.send(embed=embed)
+        await ctx.send("`Successfully refreshed all extensions.`")
         return
 
     dottie.unload_extension(f"cogs.{extension}")
@@ -415,9 +404,7 @@ async def reload(ctx, extension=None):
     if extension == "voice":
         stop_miza()
         start_miza()
-    embed = discord.Embed(colour=discord.Colour(16776960))
-    embed.description = f"```fix\n[Successfully refreshed category \"{extension.upper()}\".]```"
-    await ctx.send(embed=embed)
+    await ctx.send(f"`Successfully refreshed category \"{extension.upper()}\".`")
 
 
 async def find_user(query, guild=None):
