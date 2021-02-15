@@ -107,7 +107,7 @@ class LEVELS(commands.Cog):
 
         if member_id == str(self.dottie.user.id):
             embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
-            embed.set_author(name=f"{member.display_name}'s Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
+            embed.set_author(name=f"My Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
             embed.description = f"What, {ctx.author.display_name}? Of course I'd be the Arceus of {PREFIX[0]}level!"
             embed.add_field(name="Current level:", value="♾")
             embed.add_field(name="Total experience:", value="♾")
@@ -123,7 +123,7 @@ class LEVELS(commands.Cog):
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/788571007757713448/Dragonite.jpg")
             embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
             await ctx.send(embed=embed)
-            
+
         else:
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=f"{member.display_name}'s Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
