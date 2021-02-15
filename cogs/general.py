@@ -295,7 +295,7 @@ class GENERAL(commands.Cog):
             "CPU": f"[{cpu / psutil.cpu_count()}%]",
             "Memory": f"[{round(memory, 2)}%]",
             "Ping": f"[{round(self.dottie.latency * 1000)}ms]",
-            "Uptime": f"[{self.dottie.uptime}]",
+            "Uptime": f"[{str(self.dottie.uptime)[:-7]}]",
             "Code Length": f"[{get_code_length()} lines]",
             "Command Count": f"[{get_command_count()} commands]"
         }
@@ -306,9 +306,9 @@ class GENERAL(commands.Cog):
         embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
         embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
         embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
-        embed.add_field(name="Current Uptime", value="```ini\n"+ str(TechyInfo["Uptime"]) + "```")
+        embed.add_field(name="Uptime", value="```ini\n"+ str(TechyInfo["Uptime"]) + "```")
         embed.add_field(name="Code Length", value="```ini\n"+ str(TechyInfo["Code Length"]) + "```")
-        embed.add_field(name="Unique Command Count", value="```ini\n"+ str(TechyInfo["Command Count"]) + "```")
+        embed.add_field(name="Unique Commands", value="```ini\n"+ str(TechyInfo["Command Count"]) + "```")
 
         await ctx.send(embed=embed)
 
@@ -343,4 +343,5 @@ class GENERAL(commands.Cog):
         
 
 def setup(dottie):
+    globals()["dottie"] = dottie
     dottie.add_cog(GENERAL(dottie))
