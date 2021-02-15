@@ -240,7 +240,6 @@ async def on_message(message):
 
 # Why do I hear Terminator music...
 class DogpileComparator:
-
     def __init__(self, content, author, count=1):
         self.content = content
         self.author = author

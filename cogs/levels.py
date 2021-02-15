@@ -1,5 +1,6 @@
 from imports import *
 from bot import print2
+from bot import on_message
 
 
 try:
@@ -91,6 +92,7 @@ class LEVELS(commands.Cog):
                 embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now **level {self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
                 embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
                 await message.channel.send(embed=embed)
+                await error.add_reaction("❎")
 
 
     @commands.command(aliases=["pokemon", "pokémon"])
@@ -117,6 +119,7 @@ class LEVELS(commands.Cog):
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=f"{member.display_name}'s Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
+            embed.add_field(name="Next level at:", value=round(self.users[member_id]["exp"] / self.users[member_id]["lvl"] + 1))
             embed.add_field(name="Total experience:", value=self.users[member_id]["exp"])
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/788571644104671252/latest.png")
             embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
