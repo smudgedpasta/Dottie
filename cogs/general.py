@@ -1,5 +1,6 @@
 from imports import *
 from bot import print2
+from bot import log_update
 
 
 # psutil.Process() is just Task Manager 2.0
@@ -288,7 +289,8 @@ class GENERAL(commands.Cog):
             "CPU": f"[{cpu / psutil.cpu_count()}%]",
             "Memory": f"[{round(memory, 2)}%]",
             "Ping": f"[{round(self.dottie.latency * 1000)}ms]",
-            "Code Length": f"[{get_code_length()} lines]"
+            "Code Length": f"[{get_code_length()} lines]",
+            "Uptime": f"[{self.dottie.uptime}]"
         }
         
         embed = discord.Embed(colour=discord.Colour(pink_embed))
@@ -297,6 +299,7 @@ class GENERAL(commands.Cog):
         embed.add_field(name="CPU Usage", value="```ini\n" + str(TechyInfo["CPU"]) + "```")
         embed.add_field(name="Memory Usage", value="```ini\n" + str(TechyInfo["Memory"]) + "```")
         embed.add_field(name="Ping Latency", value="```ini\n"+ str(TechyInfo["Ping"]) + "```")
+        embed.add_field(name="Current Uptime", value="```ini\n"+ str(TechyInfo["Uptime"]) + "```")
         embed.add_field(name="Code Length", value="```ini\n"+ str(TechyInfo["Code Length"]) + "```")
 
         await ctx.send(embed=embed)

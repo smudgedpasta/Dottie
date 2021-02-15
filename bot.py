@@ -268,7 +268,7 @@ async def log_update():
     while not dottie.is_closed():
         try:
             GLOBALS["eloop"] = asyncio.get_event_loop()
-            uptime = datetime.timedelta(seconds=time.time() - start_time)
+            dottie.uptime = uptime = datetime.timedelta(seconds=time.time() - start_time)
             interval = time.time() - interval_time
             new_day = str(datetime.datetime.utcnow().date())
             if new_day != current_day:
