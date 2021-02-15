@@ -257,7 +257,7 @@ class GENERAL(commands.Cog):
     async def random(self, ctx, *args):
         embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Randomized by {ctx.author.display_name}")
-        embed.description = f"```ini\n🎉 [{random.choice(args)}] 🎉```"
+        embed.description = "```" + random.choice(["ini", "css"]) + f"\n🎉 [{random.choice(args)}] 🎉```"
         await ctx.send("🥁 ***Your random selection is...***", embed=embed)
 
 
