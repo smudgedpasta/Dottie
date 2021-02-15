@@ -18,8 +18,6 @@ def get_memory_percent():
     cpu += sum(fut.result() for fut in futs)
     return cpu
 
-get_cpu_percent()
-
 def get_code_length():
     total = 0
     for filename in os.listdir():
@@ -41,6 +39,8 @@ def get_command_count():
     miza_commands = requests.get("https://mizabot.xyz/static/help.json").json()
     miza_voice = len(miza_commands["VOICE"])
     return dottie_commands + miza_voice
+
+get_cpu_percent()
 
 
 class GENERAL(commands.Cog):
