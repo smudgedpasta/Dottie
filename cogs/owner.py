@@ -112,9 +112,7 @@ class OWNER(commands.Cog):
     @commands.command()
     @commands.check(is_owner)
     async def restart(self, ctx):
-        embed = discord.Embed(colour=discord.Colour(16711680))
-        embed.description = "❗ `Restarting...`"
-        await ctx.send(embed=embed)
+        await ctx.send("❗ `Restarting...`")
         await self.dottie.change_presence(status=discord.Status.invisible)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
@@ -128,9 +126,7 @@ class OWNER(commands.Cog):
     async def shutdown(self, ctx):
         with open("log", "w") as f:
             f.write("Refreshed log...\n\n")
-        embed = discord.Embed(colour=discord.Colour(16711680))
-        embed.description = "❗ `Shutting down...`"
-        await ctx.send(embed=embed)
+        await ctx.send("❗ `Shutting down...`")
         await self.dottie.change_presence(status=discord.Status.invisible)
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
