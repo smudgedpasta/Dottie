@@ -107,7 +107,16 @@ class LEVELS(commands.Cog):
             member = ctx.author
         member_id = str(member.id)
 
-        if not member_id in self.users:
+        if self.dottie.user.id in self.users:
+            embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
+            embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+            embed.add_field(name="Current level:", value="♾")
+            embed.add_field(name="Total experience:", value="♾")
+            embed.add_field(name="Next level at:", value="♾")
+            embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/810925500649439302/EPYqEjlXkAA7ldD.png")
+            embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
+            await ctx.send(embed=embed)
+        elif not member_id in self.users:
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
             embed.description = f"{member.display_name}'s still a starter Pokémon, awaiting the start of their journey..."
