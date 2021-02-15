@@ -36,9 +36,7 @@ def get_code_length():
 
 def get_command_count():
     dottie_commands = len(set(dottie.all_commands.values()))
-    miza_commands = requests.get("https://mizabot.xyz/static/help.json").json()
-    miza_voice = len(miza_commands["VOICE"])
-    return dottie_commands + miza_voice
+    return dottie_commands + 16
 
 get_cpu_percent()
 
