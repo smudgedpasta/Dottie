@@ -236,7 +236,7 @@ Peace!
             pass
 
         speach = speach.replace("@", "@\u200b")
-        speach = speach.replace("<@", "<@\u200b")
+        speach = speach.replace("<@&", "<@&\u200b")
 
         if ctx.author.id in OWNERS:
             await ctx.send(f"{speach[:1999]}")
