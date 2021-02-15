@@ -73,8 +73,6 @@ class LEVELS(commands.Cog):
 
     
     async def on_message(self, message):
-        if message.author == self.dottie.user:
-            return
         author_id = str(message.author.id)
         if not author_id in self.users:
             self.users[author_id] = {}
@@ -107,7 +105,7 @@ class LEVELS(commands.Cog):
             member = ctx.author
         member_id = str(member.id)
 
-        if self.dottie.user.id in self.users:
+        if member_id == str(self.dottie.user.id):
             embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
             embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value="♾")
