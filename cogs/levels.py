@@ -1,5 +1,5 @@
 from imports import *
-from bot import print2, on_message
+from bot import print2
 
 
 try:
@@ -85,7 +85,6 @@ class LEVELS(commands.Cog):
                 embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now **level {self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
                 embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
                 await message.channel.send(embed=embed)
-                await error.add_reaction("❎")
 
 
     @commands.command(aliases=["pokemon", "pokémon"])
