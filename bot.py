@@ -60,6 +60,9 @@ def print(*args, sep=" ", end="\n"):
 
 
 def print2(*args, sep=" ", end="\n"):
+    with open("log.txt", "a", encoding="utf-8") as f:
+        f.write(str(sep).join(str(i) for i in args) + end)
+        
     embed = discord.Embed(colour=discord.Colour(pink_embed))
     embed.description = "```py\n" + str(sep).join(str(i) for i in args) + end + "```"
 
