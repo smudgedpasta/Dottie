@@ -59,19 +59,45 @@ class FUN(commands.Cog):
     async def matchmaking(self, ctx, arg, arg2):
         heart_list = ["❤️", "🧡", "💛", "💚", "💙", "💜", "💗", "💞", "🤍", "🖤", "🤎", "❣️", "💕", "💖"]
 
-        if arg.startswith("<@" or "<@!"):
-            numbers = []
-            for i in list(arg):
-                if i.isdigit():
-                    numbers.append(int(i))
-                    arg = self.dottie.user("".join(map(str, numbers)).name)
+        if re.fullmatch("<@[!&]?[0-9]+>", arg):
+            u_id = int(arg.strip("<@!&>"))
+            user = ctx.guild.get_member(u_id)
+            if user is None:
+                try:
+                    user = await self.dottie.fetch_user(u_id)
+                except discord.NotFound:
+                    pass
+                else:
+                    arg = user.name
+            else:
+                arg = user.display_name
+        elif re.fullmatch("<a?:[A-Za-z0-9\\-~_]+:[0-9]+>", arg):
+            _, name, e_id = arg[:-1].rsplit(":", 2)
+            e_id = int(e_id)
+            emoji = self.dottie._connection._emojis.get(e_id)
+            if emoji is not None:
+                name = emoji.name
+            arg = name
 
-        if arg2.startswith("<@" or "<@!"):
-            numbers2 = []
-            for i in list(arg2):
-                if i.isdigit():
-                    numbers2.append(int(i))
-                    arg2 = self.dottie.user("".join(map(str, numbers2)).name)
+        if re.fullmatch("<@[!&]?[0-9]+>", arg2):
+            u_id = int(arg2.strip("<@!&>"))
+            user = ctx.guild.get_member(u_id)
+            if user is None:
+                try:
+                    user = await self.dottie.fetch_user(u_id)
+                except discord.NotFound:
+                    pass
+                else:
+                    arg2 = user.name
+            else:
+                arg2 = user.display_name
+        elif re.fullmatch("<a?:[A-Za-z0-9\\-~_]+:[0-9]+>", arg2):
+            _, name, e_id = arg2[:-1].rsplit(":", 2)
+            e_id = int(e_id)
+            emoji = self.dottie._connection._emojis.get(e_id)
+            if emoji is not None:
+                name = emoji.name
+            arg2 = name
 
         arg = arg.capitalize().replace("'", "").replace("`", "")
         arg2 = arg2.capitalize().replace("'", "").replace("`", "")

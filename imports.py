@@ -82,7 +82,8 @@ with MultiThreadedImporter() as importer:
         "json",
         "threading",
         "sys",
-        "inspirobot"
+        "inspirobot",
+        "re",
     )
 
 from math import *
