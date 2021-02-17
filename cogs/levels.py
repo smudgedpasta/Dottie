@@ -36,8 +36,6 @@ class LEVELS(commands.Cog):
 
 
     def lvl_up(self, author_id):
-        if author_id == 789732970813849610:
-            return
         if author_id not in self.users:
             self.users[author_id] = dict(lvl=1, exp=0)
         exp_amount = self.users[author_id]["exp"]
