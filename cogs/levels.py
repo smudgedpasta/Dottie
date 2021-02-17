@@ -84,7 +84,8 @@ class LEVELS(commands.Cog):
                 embed.set_author(name=self.dottie.user.name, url="https://github.com/smudgedpasta/Dottie", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
                 embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now **level {self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
                 embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
-                await message.channel.send(embed=embed)
+                message = await message.channel.send(embed=embed)
+                message.add_reaction("❎")
 
 
     @commands.command(aliases=["pokemon", "pokémon"])

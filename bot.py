@@ -310,8 +310,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     elif isinstance(error, commands.CommandInvokeError):
-        embed.description = f"⚠️ `{error}. To be reported to \'{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}\'` ⚠️"
-        await ctx.send(embed=embed)
+        await ctx.send(f"⚠️ `{error}. To be reported to \'{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}\'` ⚠️")
     try:
         raise error
     except:
