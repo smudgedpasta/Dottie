@@ -120,11 +120,14 @@ class LEVELS(commands.Cog):
             await ctx.send(embed=embed)
 
         else:
+            exp_amount = self.users[member_id]["exp"]
+            lvl_amount = self.users[member_id]["lvl"]
+            requirement = lvl_amount * (lvl_amount + 1) / 2 * 100
             embed = discord.Embed(colour=member.colour, timestamp=ctx.message.created_at)
             embed.set_author(name=f"{member.display_name}'s Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
             embed.add_field(name="Total experience:", value=self.users[member_id]["exp"])
-            embed.add_field(name="Next level in:", value=round(self.users[member_id]["exp"] / self.users[member_id]["lvl"] + 1))
+            embed.add_field(name="Next level in:", value=round(requirement - self.users[member_id]["exp"]))
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/788571644104671252/latest.png")
             embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
             await ctx.send(embed=embed)
