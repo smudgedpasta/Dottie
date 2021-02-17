@@ -106,7 +106,7 @@ class LEVELS(commands.Cog):
             embed.description = f"What, {ctx.author.display_name}? Of course I'd be the Arceus of {PREFIX[0]}level!"
             embed.add_field(name="Current level:", value="♾")
             embed.add_field(name="Total experience:", value="♾")
-            embed.add_field(name="Next level at:", value="♾")
+            embed.add_field(name="Next level in:", value="♾")
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/810925500649439302/EPYqEjlXkAA7ldD.png")
             embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
             await ctx.send(embed=embed)
@@ -124,7 +124,7 @@ class LEVELS(commands.Cog):
             embed.set_author(name=f"{member.display_name}'s Pokédex entry- I mean level!", url=member.avatar_url_as(format="png", size=4096), icon_url=member.avatar_url_as(format="png", size=4096))
             embed.add_field(name="Current level:", value=self.users[member_id]["lvl"])
             embed.add_field(name="Total experience:", value=self.users[member_id]["exp"])
-            embed.add_field(name="Next level at:", value=round(self.users[member_id]["exp"] / self.users[member_id]["lvl"] + 1))
+            embed.add_field(name="Next level in:", value=round(self.users[member_id]["exp"] / self.users[member_id]["lvl"] + 1))
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/751513839169831083/788571644104671252/latest.png")
             embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Checked by {ctx.author.display_name}")
             await ctx.send(embed=embed)
