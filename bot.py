@@ -456,6 +456,16 @@ async def find_user(query, guild=None):
                 found.add((len(user.nick), user))
         if found:
             return sorted(found, key=lambda t: t[0])[0][1]
+    if guild:
+        lower_query = query.casefold()
+        found = set()
+        for user in guild.members:
+            if lower_query in user.name.casefold():
+                found.add((len(user.name), user))
+            if user.nick and lower_query in user.nick.casefold():
+                found.add((len(user.nick), user))
+        if found:
+            return sorted(found, key=lambda t: t[0])[0][1]
     raise LookupError(f"No results for {query}.")
 
 
