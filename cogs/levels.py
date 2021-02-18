@@ -85,7 +85,7 @@ class LEVELS(commands.Cog):
                 embed.description = f"What? **{message.author.display_name.upper()}** is evolving!\nCongratulations! Your local **{message.author.display_name.upper()}** is now **level {self.users[author_id]['lvl']}**! " + random.choice(["✨", "🤍", "😏", "😊"])
                 embed.set_footer(text="Gif from https://gifer.com/en/BnJ4")
                 message = await message.channel.send(embed=embed)
-                message.add_reaction("❎")
+                await message.add_reaction("❎")
 
 
     @commands.command(aliases=["pokemon", "pokémon"])
