@@ -1,6 +1,11 @@
 from imports import *
 
 
+def get_random_emoji():
+    random_emoji = chr(128512 + random.randint(0, 49))
+    return random_emoji
+
+
 class FUN(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
@@ -50,7 +55,7 @@ class FUN(commands.Cog):
         random.seed(input)
         rate = random.randint(0, 10)
         embed = discord.Embed(colour=discord.Colour(pink_embed), timestamp=ctx.message.created_at)
-        embed.description = f"**{input.capitalize()}**, hmm? I rate that a **{rate}/10**! " + random.choice(["✨", "🤍", "😏", "😊"])
+        embed.description = f"**{input.capitalize()}**, hmm? I rate that a **{rate}/10**! " + get_random_emoji()
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Requested by {ctx.author.display_name}")
         await ctx.send(embed=embed)
 
@@ -154,9 +159,9 @@ class FUN(commands.Cog):
             embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname.capitalize()})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪𝓷 [𝓲𝓷𝓯𝓲𝓷𝓲𝓽𝓮%]❕ 💜```" + rainbow_heart
         else:
             if arg == arg2:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + random.choice(["🙃", "🤍", "🥺", "🍿"]) + "```" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}]❔ 𝒯𝒽𝑒𝓎 [{percentage}%] 𝓁𝑜𝓋𝑒 𝓉𝒽𝑒𝓂𝓈𝑒𝓁𝓋𝑒𝓈❕ " + get_random_emoji() + bar
             else:
-                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname.capitalize()})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + random.choice(["✨", "🤍", "😏", "😊"]) + "```" + bar
+                embed.description = f"```" + random.choice(["css", "ini"]) + f"\n[{arg}] ♡ [{arg2}] ({shipname.capitalize()})❔ 𝓣𝓱𝓮𝔂 𝓼𝓬𝓸𝓻𝓮 𝓪 [{percentage}%]❕ " + get_random_emoji() + "```" + bar
         embed.set_footer(icon_url=ctx.author.avatar_url_as(format="png", size=4096), text=f"Shipped by {ctx.author.display_name} 🤍")
         await ctx.send(f"{heart}" + " ***MATCHMAKING*** " + f"{heart}", embed=embed)
 
