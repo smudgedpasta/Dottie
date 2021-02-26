@@ -84,8 +84,11 @@ with MultiThreadedImporter() as importer:
         "sys",
         "inspirobot",
         "re",
+        "io",
+        "PIL",
     )
 
+from PIL import Image
 from math import *
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
@@ -131,6 +134,10 @@ def awaitable(obj): return hasattr(obj, "__await__") or issubclass(type(obj), as
 
 
 def create_future_ex(func, *args, timeout=None, **kwargs):
+    try:
+        kwargs["timeout"] = kwargs.pop("_timeout_")
+    except KeyError:
+        pass
     fut = athreads.submit(func, *args, **kwargs)
     if timeout is not None:
         fut = athreads.submit(fut.result, timeout=timeout)
@@ -157,7 +164,9 @@ def create_future(obj, *args, loop=None, timeout=None, **kwargs):
     if loop is None:
         loop = get_event_loop()
     fut = _create_future(obj, *args, loop=loop, timeout=timeout, **kwargs)
-    return create_task(fut, loop=loop)
+    if not isinstance(fut, asyncio.Task):
+        fut = create_task(fut, loop=loop)
+    return fut
 
 
 def create_task(fut, *args, loop=None, **kwargs):

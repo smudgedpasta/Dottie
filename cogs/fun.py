@@ -337,5 +337,122 @@ Peace!
             await ctx.send("Hmm, you don't seem to be mimicking me... For now. I have my eye on you. :eye:")
 
 
+    hug_source = "https://media.tenor.com/images/0244cd88bd3ab775c8937db10e5d2a57/tenor.gif"
+    hug_frames = None
+    @commands.command(aliases=["nuzzle"])
+    async def hug(self, ctx, url=None):
+        # resize the hug gif to (440, 356) to provide more space to insert source image
+        output_size = (440, 356)
+        # centred position to paste image
+        pos = (180, 160)
+        if not url:
+            if ctx.message.attachments:
+                # if nothing in the message but there are attachments, take the first one as input
+                url = ctx.message.attachments[0].url
+            else:
+                # otherwise take original author's avatar as input
+                url = ctx.author.avatar_url
+        else:
+            # determine if a user ID was provided
+            if url.isnumeric():
+                u_ids = (url,)
+            else:
+                # determine if a user mention was provided
+                u_ids = re.findall("<@!?([0-9]+)>", url)
+            if u_ids:
+                u_id = int(u_ids[0])
+                # this should work if target user shares at least one server with dottie due to intents
+                user = self.dottie.get_user(u_id)
+                if user is None:
+                    # otherwise search discord for the user data
+                    user = await self.dottie.fetch_user(u_id)
+                # use avatar as url
+                url = user.avatar_url
+            # (in case the user search didn't find anything, assume input is a direct URL)
+        # use create_future instead of directly requests.get, because the latter is not async and while it's running dottie will not be able to do anything else
+        resp = await create_future(requests.get, url, _timeout_=12)
+        # raise an exception if the request errored
+        resp.raise_for_status()
+        # wrap the response's content in a simulated file to open
+        b = io.BytesIO(resp.content)
+        # open the data as an image file (many different formats supported)
+        img = Image.open(b)
+        if self.hug_frames is None:
+            # load hug gif if used for the first time, this should not run on subsequent uses of the command.
+            resp = await create_future(requests.get, self.hug_source, _timeout_=12)
+            resp.raise_for_status()
+            b = io.BytesIO(resp.content)
+            hug = Image.open(b)
+            # seek through every frame of the hug gif (I put 214743648 because it's what I did for miza, but any number equal to or higher than the total frame count will work)
+            self.hug_frames = []
+            for i in range(2147483648):
+                try:
+                    hug.seek(i)
+                except EOFError:
+                    break
+                # copy the current frame as an RGB image and add it to the hug frames list
+                frame = hug.convert("RGB").resize(output_size, resample=Image.LANCZOS)
+                self.hug_frames.append(frame)
+        # calculate appropriate width/height to resize image to in order to best fit the target size of (96, 96) 
+        aspect_ratio = img.height / img.width
+        if aspect_ratio < 1:
+            width = round(96 * aspect_ratio)
+            height = 96
+        else:
+            width = 96
+            height = round(96 / aspect_ratio)
+        size = (width, height)
+        # calculate target position of top left corner of rectangle to copy image into
+        target = tuple(pos[i] - size[i] // 2 for i in range(2))
+        # extract frames of source image (it may be a gif too)
+        source_frames = []
+        for i in range(2147483648):
+            try:
+                img.seek(i)
+            except EOFError:
+                break
+            # resize target image to the target size
+            frame = img.resize(size, resample=Image.LANCZOS)
+            # if image is a PNG/GIF with a palette, assume it can store alpha values
+            if frame.mode == "P":
+                frame = frame.convert("RGBA")
+            source_frames.append(frame)
+        # use the current time in the temporary filename, hopefully that won't conflict with any existing files
+        ts = time.time_ns() // 1000
+        fn = str(ts) + ".gif"
+        # copy every frame of the hug gif and paste a frame of the source image into it, use the ffmpeg process to concatenate the frames into a gif
+        args = [
+            "ffmpeg", "-threads", "2", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-framerate", "10", "-pix_fmt", "rgb24", "-video_size", "x".join(map(str, output_size)), "-i", "-",
+            "-gifflags", "-offsetting", "-an", "-vf", "split[s0][s1];[s0]palettegen=reserve_transparent=1:stats_mode=diff[p];[s1][p]paletteuse=diff_mode=rectangle:alpha_threshold=128", "-loop", "0", fn
+        ]
+        proc = psutil.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        dest_frames = []
+        for i, frame in enumerate(self.hug_frames):
+            frame = frame.copy()
+            source = source_frames[i % len(source_frames)]
+            # blend with alpha if applicable
+            if source.mode == "RGBA":
+                frame = frame.convert("RGBA")
+                frame.alpha_composite(source, target)
+            else:
+                frame.paste(source, target)
+            if frame.mode != "RGB":
+                frame = frame.convert("RGB")
+            # convert image to RGB raw bitmap format in bytes and pass to ffmpeg
+            b = frame.tobytes()
+            proc.stdin.write(b)
+        # inform ffmpeg that the input is complete, wait for ffmpeg to finish saving file
+        proc.stdin.close()
+        await create_future(proc.wait)
+        # prepare and send file
+        f = discord.File(fn, filename="huggies.gif")
+        await ctx.channel.send(file=f)
+        # remove temporary gif file if possible
+        try:
+            os.remove(fn)
+        except:
+            pass
+
+
 def setup(dottie):
     dottie.add_cog(FUN(dottie))
