@@ -6,7 +6,7 @@ class IMAGE(commands.Cog):
         self.dottie = dottie
 
 
-    hug_source = "https://media.tenor.com/images/0244cd88bd3ab775c8937db10e5d2a57/tenor.gif"
+    hug_source = "https://cdn.discordapp.com/attachments/687567100767633432/814812448678739968/unknown.gif"
     hug_frames = None
     @commands.command(aliases=["nuzzle"])
     async def hug(self, ctx, url=None):
@@ -28,7 +28,7 @@ class IMAGE(commands.Cog):
                 if user is None:
                     user = await self.dottie.fetch_user(u_id)
                 url = user.avatar_url
-        url = url.strip("<>")
+        url = str(url).strip("<>")
         resp = await create_future(requests.get, url, _timeout_=12)
         resp.raise_for_status()
         b = io.BytesIO(resp.content)
@@ -68,7 +68,7 @@ class IMAGE(commands.Cog):
         ts = time.time_ns() // 1000
         fn = str(ts) + ".gif"
         args = [
-            "ffmpeg", "-threads", "2", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-framerate", "10", "-pix_fmt", "rgb24", "-video_size", "x".join(map(str, output_size)), "-i", "-",
+            "ffmpeg", "-threads", "2", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-framerate", "1", "-pix_fmt", "rgb24", "-video_size", "x".join(map(str, output_size)), "-i", "-",
             "-gifflags", "-offsetting", "-an", "-vf", "split[s0][s1];[s0]palettegen=reserve_transparent=1:stats_mode=diff[p];[s1][p]paletteuse=diff_mode=rectangle:alpha_threshold=128", "-loop", "0", fn
         ]
         proc = psutil.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
