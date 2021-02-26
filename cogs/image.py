@@ -58,12 +58,9 @@ class IMAGE(commands.Cog):
             height = round(diameter / aspect_ratio)
         size = (width, height)
         if width != height:
-            crop = self.crop.crop((
-                (diameter - width) // 2,
-                (diameter - height) // 2,
-                width,
-                height,
-            ))
+            x = (diameter - width) // 2
+            y = (diameter - height) // 2
+            crop = self.crop.crop((x, y, x + width, y + height))
         else:
             crop = self.crop
         target = tuple(pos[i] - size[i] // 2 for i in range(2))
