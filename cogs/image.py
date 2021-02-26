@@ -8,16 +8,18 @@ class IMAGE(commands.Cog):
 
     hug_source = "https://cdn.discordapp.com/attachments/687567100767633432/814812448678739968/unknown.gif"
     hug_frames = []
-    @commands.command(aliases=["nuzzle"])
+    @commands.command(aliases=["nuzzle", "cuddle"])
     async def hug(self, ctx, url=None):
         output_size = (440, 356)
         pos = (183, 161)
         diameter = 103
+        caption = "Your image"
         if not url:
             if ctx.message.attachments:
                 url = ctx.message.attachments[0].url
             else:
                 url = ctx.author.avatar_url
+                caption = ctx.author.name
         else:
             if url.isnumeric():
                 u_ids = (url,)
@@ -29,6 +31,7 @@ class IMAGE(commands.Cog):
                 if user is None:
                     user = await self.dottie.fetch_user(u_id)
                 url = user.avatar_url
+                caption = user.display_name
         url = str(url).strip("<>")
         resp = await create_future(requests.get, url, _timeout_=12)
         resp.raise_for_status()
@@ -99,7 +102,7 @@ class IMAGE(commands.Cog):
             proc.stdin.close()
             await create_future(proc.wait)
             f = discord.File(fn, filename="huggies.gif")
-            await ctx.channel.send(file=f)
+            await ctx.channel.send(f"<:miza_dottie_hug:788165800448098324> ***{caption}*** *gets a hug!*", file=f)
         except:
             try:
                 os.remove(fn)
