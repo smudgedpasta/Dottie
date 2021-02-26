@@ -394,7 +394,7 @@ Peace!
                 frame = hug.convert("RGB").resize(output_size, resample=Image.LANCZOS)
                 self.hug_frames.append(frame)
         # calculate appropriate width/height to resize image to in order to best fit the target size of (96, 96) 
-        aspect_ratio = img.height / img.width
+        aspect_ratio = img.width / img.height
         if aspect_ratio < 1:
             width = round(96 * aspect_ratio)
             height = 96
