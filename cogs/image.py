@@ -6,6 +6,124 @@ class IMAGE(commands.Cog):
         self.dottie = dottie
 
 
+    hug_source = "https://media.tenor.com/images/0244cd88bd3ab775c8937db10e5d2a57/tenor.gif"
+    hug_frames = None
+    @commands.command(aliases=["nuzzle"])
+    async def hug(self, ctx, url=None):
+        output_size = (440, 356)
+        pos = (180, 160)
+        if not url:
+            if ctx.message.attachments:
+                url = ctx.message.attachments[0].url
+            else:
+                url = ctx.author.avatar_url
+        else:
+            if url.isnumeric():
+                u_ids = (url,)
+            else:
+                u_ids = re.findall("<@!?([0-9]+)>", url)
+            if u_ids:
+                u_id = int(u_ids[0])
+                user = self.dottie.get_user(u_id)
+                if user is None:
+                    user = await self.dottie.fetch_user(u_id)
+                url = user.avatar_url
+        resp = await create_future(requests.get, url, _timeout_=12)
+        resp.raise_for_status()
+        b = io.BytesIO(resp.content)
+        img = Image.open(b)
+        if self.hug_frames is None:
+            resp = await create_future(requests.get, self.hug_source, _timeout_=12)
+            resp.raise_for_status()
+            b = io.BytesIO(resp.content)
+            hug = Image.open(b)
+            self.hug_frames = []
+            for i in range(2147483648):
+                try:
+                    hug.seek(i)
+                except EOFError:
+                    break
+                frame = hug.convert("RGB").resize(output_size, resample=Image.LANCZOS)
+                self.hug_frames.append(frame)
+        aspect_ratio = img.width / img.height
+        if aspect_ratio < 1:
+            width = round(96 * aspect_ratio)
+            height = 96
+        else:
+            width = 96
+            height = round(96 / aspect_ratio)
+        size = (width, height)
+        target = tuple(pos[i] - size[i] // 2 for i in range(2))
+        source_frames = []
+        for i in range(2147483648):
+            try:
+                img.seek(i)
+            except EOFError:
+                break
+            frame = img.resize(size, resample=Image.LANCZOS)
+            if frame.mode == "P":
+                frame = frame.convert("RGBA")
+            source_frames.append(frame)
+        ts = time.time_ns() // 1000
+        fn = str(ts) + ".gif"
+        args = [
+            "ffmpeg", "-threads", "2", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-framerate", "10", "-pix_fmt", "rgb24", "-video_size", "x".join(map(str, output_size)), "-i", "-",
+            "-gifflags", "-offsetting", "-an", "-vf", "split[s0][s1];[s0]palettegen=reserve_transparent=1:stats_mode=diff[p];[s1][p]paletteuse=diff_mode=rectangle:alpha_threshold=128", "-loop", "0", fn
+        ]
+        proc = psutil.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        dest_frames = []
+        for i, frame in enumerate(self.hug_frames):
+            source = source_frames[i % len(source_frames)]
+            if source.mode == "RGBA":
+                frame = frame.convert("RGBA")
+                frame.alpha_composite(source, target)
+            else:
+                frame = frame.copy()
+                frame.paste(source, target)
+            if frame.mode != "RGB":
+                frame = frame.convert("RGB")
+            b = frame.tobytes()
+            proc.stdin.write(b)
+        proc.stdin.close()
+        await create_future(proc.wait)
+        f = discord.File(fn, filename="huggies.gif")
+        await ctx.channel.send(file=f)
+        try:
+            os.remove(fn)
+        except:
+            pass
+        
+    '''
+    Comments:
+
+    Resizes the hug GIF to (440, 356) to provide more space to insert source image.
+    "pos" centres position to paste image.
+    If nothing is in the message but there are attachments, take the first one as input, otherwise take original author's avatar as input.
+    Next determines if a user ID was provided, or determines if a user mention was provided.
+    get_user works if the target user shares at least one server with dottie due to intents, if not then fetch_user searches Discord.
+    Finally, uses user avatar as URL (in case the user search didn't find anything, assumes input is a direct URL).
+
+    Uses "create_future" from Miza instead of "requests.get", because requests are not async, and while it's running Dottie will not be able to do anything else.
+    "raise" refers to raising an exception if the request errored.
+    Then wraps the response's content in a simulated file to open; opening the data as an image file (with many different formats supported).
+    Loads hug image/GIF if used for the first time, this should not run on subsequent uses of the command.
+    Seeks through every frame of the hug image for if it's a GIF, "I put 214743648 because it's what I did for Miza, but any number equal to or higher than the total frame count will work" - Thomas Xin
+    Copies the current frame as an RGB image and adds it to the hug frames list, then calculates appropriate width/height to resize image in order to best fit the target size of (96, 96).
+    "target = tuple(pos[i] - size[i] // 2 for i in range(2))" - Calculates target position of top left corner of rectangle to copy image into.
+    Then extracts frames of source image (as it may be a GIF too).
+
+    Resizes the target image to the targeted size.
+    If the image is a PNG/GIF with a palette, assume it can store alpha values
+    Creates filenames using the current time, so hopefully that won't conflict with any existing files.
+    Copies every frame of the hug GIF and pastes a frame of the source image into it; uses the FFmpeg process to concatenate the frames into a GIF.
+    
+    Next blends with alpha if applicable.
+    Converts the image to RGB raw bitmap format in bytes and passes to FFmpeg (with "stdin") before informing FFmpeg that the input is complete, and waits for FFmpeg to finish saving the file.
+    Prepares the huggy cannon to send the huggies! :D
+    And lastly, removes the temporary GIF file from Dottie's repository if possible.
+    '''
+
+
     @commands.command()
     async def photo(self, ctx):
         Image_Pool = None
