@@ -310,7 +310,10 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Hm? Is there something you'd like to say, or am I meant to interpret space? Speak up, I don't bite!")
     elif isinstance(error, commands.CommandInvokeError):
-        await ctx.send(f"⚠️ `{error}. To be reported to \'{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}\'` ⚠️")
+        embed = discord.Embed(colour=discord.Colour(16744272))
+        embed.set_author(name="⚠️ Unexpected Error! ⚠️", url="https://github.com/smudgedpasta/Dottie", icon_url="https://i.gifer.com/VRwG.gif")
+        embed.description = f"```fix\n{error}```\nIf recieved this error, report to `{', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])}` or [`My GitHub`](https://github.com/smudgedpasta/Dottie/issues)"
+        await ctx.send(embed=embed)
     try:
         raise error
     except:
