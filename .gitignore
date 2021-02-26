@@ -4,6 +4,6 @@ dottie_env
 config.json
 auth.json
 ffmpeg.exe
-log
+log.txt
 CTE.py
 database
