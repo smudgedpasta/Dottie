@@ -114,36 +114,6 @@ class IMAGE(commands.Cog):
                 os.remove(fn)
             except:
                 pass
-        
-    '''
-    Comments:
-
-    Resizes the hug GIF to (440, 356) to provide more space to insert source image.
-    "pos" centres position to paste image.
-    If nothing is in the message but there are attachments, take the first one as input, otherwise take original author's avatar as input.
-    Next determines if a user ID was provided, or determines if a user mention was provided.
-    get_user works if the target user shares at least one server with dottie due to intents, if not then fetch_user searches Discord.
-    Finally, uses user avatar as URL (in case the user search didn't find anything, assumes input is a direct URL).
-
-    Uses "create_future" from Miza instead of "requests.get", because requests are not async, and while it's running Dottie will not be able to do anything else.
-    "raise" refers to raising an exception if the request errored.
-    Then wraps the response's content in a simulated file to open; opening the data as an image file (with many different formats supported).
-    Loads hug image/GIF if used for the first time, this should not run on subsequent uses of the command.
-    Seeks through every frame of the hug image for if it's a GIF, "I put 214743648 because it's what I did for Miza, but any number equal to or higher than the total frame count will work" - Thomas Xin
-    Copies the current frame as an RGB image and adds it to the hug frames list, then calculates appropriate width/height to resize image in order to best fit the target size of (96, 96).
-    "target = tuple(pos[i] - size[i] // 2 for i in range(2))" - Calculates target position of top left corner of rectangle to copy image into.
-    Then extracts frames of source image (as it may be a GIF too).
-
-    Resizes the target image to the targeted size.
-    If the image is a PNG/GIF with a palette, assume it can store alpha values
-    Creates filenames using the current time, so hopefully that won't conflict with any existing files.
-    Copies every frame of the hug GIF and pastes a frame of the source image into it; uses the FFmpeg process to concatenate the frames into a GIF.
-    
-    Next blends with alpha if applicable.
-    Converts the image to RGB raw bitmap format in bytes and passes to FFmpeg (with "stdin") before informing FFmpeg that the input is complete, and waits for FFmpeg to finish saving the file.
-    Prepares the huggy cannon to send the huggies! :D
-    And lastly, removes the temporary GIF file from Dottie's repository if possible.
-    '''
 
 
     @commands.command()
