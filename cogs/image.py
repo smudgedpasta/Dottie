@@ -7,11 +7,12 @@ class IMAGE(commands.Cog):
 
 
     hug_source = "https://cdn.discordapp.com/attachments/687567100767633432/814812448678739968/unknown.gif"
-    hug_frames = None
+    hug_frames = []
     @commands.command(aliases=["nuzzle"])
     async def hug(self, ctx, url=None):
         output_size = (440, 356)
-        pos = (180, 160)
+        pos = (183, 161)
+        diameter = 103
         if not url:
             if ctx.message.attachments:
                 url = ctx.message.attachments[0].url
@@ -33,12 +34,11 @@ class IMAGE(commands.Cog):
         resp.raise_for_status()
         b = io.BytesIO(resp.content)
         img = Image.open(b)
-        if self.hug_frames is None:
+        if not self.hug_frames:
             resp = await create_future(requests.get, self.hug_source, _timeout_=12)
             resp.raise_for_status()
             b = io.BytesIO(resp.content)
             hug = Image.open(b)
-            self.hug_frames = []
             for i in range(2147483648):
                 try:
                     hug.seek(i)
@@ -46,14 +46,26 @@ class IMAGE(commands.Cog):
                     break
                 frame = hug.convert("RGB").resize(output_size, resample=Image.LANCZOS)
                 self.hug_frames.append(frame)
+            self.crop = Image.new("L", (diameter,) * 2)
+            shape_tool = ImageDraw.Draw(self.crop)
+            shape_tool.ellipse((0, 0) + (diameter,) * 2, 255, 159, width=1)
         aspect_ratio = img.width / img.height
         if aspect_ratio < 1:
-            width = round(96 * aspect_ratio)
-            height = 96
+            width = round(diameter * aspect_ratio)
+            height = diameter
         else:
-            width = 96
-            height = round(96 / aspect_ratio)
+            width = diameter
+            height = round(diameter / aspect_ratio)
         size = (width, height)
+        if width != height:
+            crop = self.crop.crop((
+                (diameter - width) // 2,
+                (diameter - height) // 2,
+                width,
+                height,
+            ))
+        else:
+            crop = self.crop
         target = tuple(pos[i] - size[i] // 2 for i in range(2))
         source_frames = []
         for i in range(2147483648):
@@ -75,12 +87,13 @@ class IMAGE(commands.Cog):
         dest_frames = []
         for i, frame in enumerate(self.hug_frames):
             source = source_frames[i % len(source_frames)]
+            frame = frame.convert("RGBA")
             if source.mode == "RGBA":
-                frame = frame.convert("RGBA")
-                frame.alpha_composite(source, target)
+                alpha = ImageChops.multiply(source.getchannel("A"), crop)
             else:
-                frame = frame.copy()
-                frame.paste(source, target)
+                alpha = self.crop
+            source.putalpha(alpha)
+            frame.alpha_composite(source, target)
             if frame.mode != "RGB":
                 frame = frame.convert("RGB")
             b = frame.tobytes()
