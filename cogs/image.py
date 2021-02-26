@@ -61,6 +61,7 @@ class IMAGE(commands.Cog):
             x = (diameter - width) // 2
             y = (diameter - height) // 2
             crop = self.crop.crop((x, y, x + width, y + height))
+            print(crop.size, size)
         else:
             crop = self.crop
         target = tuple(pos[i] - size[i] // 2 for i in range(2))
