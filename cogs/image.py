@@ -61,7 +61,6 @@ class IMAGE(commands.Cog):
             x = (diameter - width) // 2
             y = (diameter - height) // 2
             crop = self.crop.crop((x, y, x + width, y + height))
-            print(crop.size, size)
         else:
             crop = self.crop
         target = tuple(pos[i] - size[i] // 2 for i in range(2))
@@ -82,28 +81,36 @@ class IMAGE(commands.Cog):
             "-gifflags", "-offsetting", "-an", "-vf", "split[s0][s1];[s0]palettegen=reserve_transparent=1:stats_mode=diff[p];[s1][p]paletteuse=diff_mode=rectangle:alpha_threshold=128", "-loop", "0", fn
         ]
         proc = psutil.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        dest_frames = []
-        for i, frame in enumerate(self.hug_frames):
-            source = source_frames[i % len(source_frames)]
-            frame = frame.convert("RGBA")
-            if source.mode == "RGBA":
-                alpha = ImageChops.multiply(source.getchannel("A"), crop)
-            else:
-                alpha = self.crop
-            source.putalpha(alpha)
-            frame.alpha_composite(source, target)
-            if frame.mode != "RGB":
-                frame = frame.convert("RGB")
-            b = frame.tobytes()
-            await create_future(proc.stdin.write, b)
-        proc.stdin.close()
-        await create_future(proc.wait)
-        f = discord.File(fn, filename="huggies.gif")
-        await ctx.channel.send(file=f)
         try:
-            os.remove(fn)
+            dest_frames = []
+            for i, frame in enumerate(self.hug_frames):
+                source = source_frames[i % len(source_frames)]
+                frame = frame.convert("RGBA")
+                if source.mode == "RGBA":
+                    alpha = ImageChops.multiply(source.getchannel("A"), crop)
+                else:
+                    alpha = crop
+                source.putalpha(alpha)
+                frame.alpha_composite(source, target)
+                if frame.mode != "RGB":
+                    frame = frame.convert("RGB")
+                b = frame.tobytes()
+                await create_future(proc.stdin.write, b)
+            proc.stdin.close()
+            await create_future(proc.wait)
+            f = discord.File(fn, filename="huggies.gif")
+            await ctx.channel.send(file=f)
         except:
-            pass
+            try:
+                os.remove(fn)
+            except:
+                pass
+            raise
+        else:
+            try:
+                os.remove(fn)
+            except:
+                pass
         
     '''
     Comments:
