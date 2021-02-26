@@ -428,13 +428,13 @@ Peace!
         proc = psutil.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         dest_frames = []
         for i, frame in enumerate(self.hug_frames):
-            frame = frame.copy()
             source = source_frames[i % len(source_frames)]
             # blend with alpha if applicable
             if source.mode == "RGBA":
                 frame = frame.convert("RGBA")
                 frame.alpha_composite(source, target)
             else:
+                frame = frame.copy()
                 frame.paste(source, target)
             if frame.mode != "RGB":
                 frame = frame.convert("RGB")
