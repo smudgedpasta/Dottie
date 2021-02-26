@@ -88,7 +88,7 @@ with MultiThreadedImporter() as importer:
         "PIL",
     )
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageChops
 from math import *
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
