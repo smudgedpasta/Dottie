@@ -28,6 +28,7 @@ class IMAGE(commands.Cog):
                 if user is None:
                     user = await self.dottie.fetch_user(u_id)
                 url = user.avatar_url
+        url = url.strip("<>")
         resp = await create_future(requests.get, url, _timeout_=12)
         resp.raise_for_status()
         b = io.BytesIO(resp.content)
@@ -83,7 +84,7 @@ class IMAGE(commands.Cog):
             if frame.mode != "RGB":
                 frame = frame.convert("RGB")
             b = frame.tobytes()
-            proc.stdin.write(b)
+            await create_future(proc.stdin.write, b)
         proc.stdin.close()
         await create_future(proc.wait)
         f = discord.File(fn, filename="huggies.gif")
