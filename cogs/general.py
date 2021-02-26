@@ -113,7 +113,8 @@ class GENERAL(commands.Cog):
         image = discord.Embed(colour=discord.Colour(pink_embed))
         image.set_author(name="🖼️ IMAGE 🖼️", url="https://github.com/smudgedpasta/Dottie/wiki", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
         image.set_footer(text="Click 🔺 to go back to FUN, click 🔻 to see VOICE commands!")
-        image.description = f"""***photo***\n*```Pulls a random image of me!```*
+        image.description = f"""***hug***\n**```fix\nAliases: nuzzle, cuddle```**\n*```Hugs you, another user, or a provided image!```*
+***photo***\n*```Pulls a random image of me!```*
 ***nsfw_photo***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Pulls a random image of me, but be warned, they are gore.```*
 ***art***\n*```Takes the most recent image in a channel and only states the truth!```*
 ***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*
