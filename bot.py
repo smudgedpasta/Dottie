@@ -346,10 +346,19 @@ Thanks for inviting me! 😊"""
             break
 
     if not target_channel:
-        for channel in guild.text_channels:
-            if channel.permissions_for(guild.me).send_messages:
-                target_channel = channel
-                break
+        member = guild.me
+        channel = guild.system_channel
+        if channel is None or not channel.permissions_for(member).send_messages:
+            channel = guild.rules_channel
+            if channel is None or not channel.permissions_for(member).send_messages:
+                for channel in sorted(guild.text_channels, key=lambda c: c.id):
+                    if channel.permissions_for(member).send_messages:
+                        target_channel = channel
+                        break
+                if not target_channel:
+                    return
+        target_channel = channel
+
     if target_channel:
         await target_channel.send(embed=embed)
 
