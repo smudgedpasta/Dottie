@@ -230,6 +230,11 @@ def create_progress_bar(length, ratio):
 	return "".join(items)
 
 
+def get_random_emoji():
+    random_emoji = chr(128512 + random.randint(0, 49))
+    return random_emoji
+
+
 if not os.path.exists("../database"):
     try:
         print("Checking for database files, folder will be created if missing...")

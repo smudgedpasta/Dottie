@@ -1,6 +1,5 @@
 from imports import *
 from bot import print2
-from fun import get_random_emoji
 
 
 try:

@@ -1,11 +1,6 @@
 from imports import *
 
 
-def get_random_emoji():
-    random_emoji = chr(128512 + random.randint(0, 49))
-    return random_emoji
-
-
 class FUN(commands.Cog):
     def __init__(self, dottie):
         self.dottie = dottie
