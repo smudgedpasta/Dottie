@@ -2,162 +2,162 @@
     {
         "name": 100,
         "image": "http://http.cat/100",
-        "description": "```css\nAh, you want to [100 continue]?```"
+        "description": "```ini\nAh, you want to [100 continue]?```"
     },
     {
         "name": 101,
         "image": "http://http.cat/101",
-        "description": "```css\nOi, haven't you heard? We're [101 switching protocols]! Get with the server, dummy.```"
+        "description": "```ini\nOi, haven't you heard? We're [101 switching protocols]! Get with the server, dummy.```"
     },
     {
         "name": 200,
         "image": "http://http.cat/200",
-        "description": "```css\nSaitama's voice echoes in the distance... This command is [200 OK].```"
+        "description": "```ini\nSaitama's voice echoes in the distance... This command is [200 OK].```"
     },
     {
         "name": 201,
         "image": "http://http.cat/201",
-        "description": "```css\nAh yes, this fine result has been [201 created]!```"
+        "description": "```ini\nAh yes, this fine result has been [201 created]!```"
     },
     {
         "name": 202,
         "image": "http://http.cat/202",
-        "description": "```css\nYour request for this command? [202 accepted]! But bare with me now I gotta process- Oh wait.```"
+        "description": "```ini\nYour request for this command? [202 accepted]! But bare with me now I gotta process- Oh wait.```"
     },
     {
         "name": 204,
         "image": "http://http.cat/204",
-        "description": "```css\nWould you look at that, the command was fulfilled successfully but sorry! [204 no content] to be found here folks.```"
+        "description": "```ini\nWould you look at that, the command was fulfilled successfully but sorry! [204 no content] to be found here folks.```"
     },
     {
         "name": 206,
         "image": "http://http.cat/206",
-        "description": "```css\nAh, see I have the data for this here command, so at least that's [206 partial content]...```"
+        "description": "```ini\nAh, see I have the data for this here command, so at least that's [206 partial content]...```"
     },
     {
         "name": 207,
         "image": "http://http.cat/207",
-        "description": "```css\nOh blimey, I have [207 multi-statuses], how much are ya' try'na do here?!```"
+        "description": "```ini\nOh blimey, I have [207 multi-statuses], how much are ya' try'na do here?!```"
     },
     {
         "name": 300,
         "image": "http://http.cat/300",
-        "description": "```css\nLooks like you got [300 multiple choices], you should chill out like a cat!```"
+        "description": "```ini\nLooks like you got [300 multiple choices], you should chill out like a cat!```"
     },
     {
         "name": 301,
         "image": "http://http.cat/301",
-        "description": "```css\nWhoops, sorry, looks like we've [301 moved permanently] from Discord to Trillian!```"
+        "description": "```ini\nWhoops, sorry, looks like we've [301 moved permanently] from Discord to Trillian!```"
     },
     {
         "name": 302,
         "image": "http://http.cat/302",
-        "description": "```css\nHave you [302 found] this response? Perhaps we've moved.```"
+        "description": "```ini\nHave you [302 found] this response? Perhaps we've moved.```"
     },
     {
         "name": 303,
         "image": "http://http.cat/303",
-        "description": "```css\nI think you was meant to [303 see other] cat images here!```"
+        "description": "```ini\nI think you was meant to [303 see other] cat images here!```"
     },
     {
         "name": 304,
         "image": "http://http.cat/304",
-        "description": "```css\nHey, hey, no need to retransit this response, it is [304 not modified]!```"
+        "description": "```ini\nHey, hey, no need to retransit this response, it is [304 not modified]!```"
     },
     {
         "name": 305,
         "image": "http://http.cat/305",
-        "description": "```css\nThis ain't available here, you gotta' [305 use proxy]!```"
+        "description": "```ini\nThis ain't available here, you gotta' [305 use proxy]!```"
     },
     {
         "name": 307,
         "image": "http://http.cat/307",
-        "description": "```css\nSorry, we've [307 temporarily moved] over to Trillian, because @everyone knows its better than Discord!```"
+        "description": "```ini\nSorry, we've [307 temporarily moved] over to Trillian, because @everyone knows its better than Discord!```"
     },
     {
         "name": 400,
         "image": "http://http.cat/400",
-        "description": "```css\nBad! How could you possibly [400 bad request] this command?!```"
+        "description": "```ini\nBad! How could you possibly [400 bad request] this command?!```"
     },
     {
         "name": 401,
         "image": "http://http.cat/401",
-        "description": "```css\nLook at you, try'na use this command with [401 unauthorized] access. Tsk!```"
+        "description": "```ini\nLook at you, try'na use this command with [401 unauthorized] access. Tsk!```"
     },
     {
         "name": 402,
         "image": "http://http.cat/402",
-        "description": "```css\nIts over fella's, this command is now [402 payment required], hand over all your Pokédollars!```"
+        "description": "```ini\nIts over fella's, this command is now [402 payment required], hand over all your Pokédollars!```"
     },
     {
         "name": 403,
         "image": "http://http.cat/403",
-        "description": "```css\nNope! This result is [403 forbidden]!```"
+        "description": "```ini\nNope! This result is [403 forbidden]!```"
     },
     {
         "name": 404,
         "image": "http://http.cat/404",
-        "description": "```css\n[404 not found], move along folks, nothing to see here.```"
+        "description": "```ini\n[404 not found], move along folks, nothing to see here.```"
     },
     {
         "name": 405,
         "image": "http://http.cat/405",
-        "description": "```css\nOkay, what are you trying to do here? Clearly that is [405 method not allowed]!```"
+        "description": "```ini\nOkay, what are you trying to do here? Clearly that is [405 method not allowed]!```"
     },
     {
         "name": 406,
         "image": "http://http.cat/406",
-        "description": "```css\nClearly that is [406 not acceptable] here, what are you try'na do by running this command-```"
+        "description": "```ini\nClearly that is [406 not acceptable] here, what are you try'na do by running this command-```"
     },
     {
         "name": 408,
         "image": "http://http.cat/408",
-        "description": "```css\nYou're exhausting me here, I need a [408 request timeout]...```"
+        "description": "```ini\nYou're exhausting me here, I need a [408 request timeout]...```"
     },
     {
         "name": 409,
         "image": "http://http.cat/409",
-        "description": "```css\nWhy you try'na cause [409 conflict] up in here, this command isn't what we expected from you!```"
+        "description": "```ini\nWhy you try'na cause [409 conflict] up in here, this command isn't what we expected from you!```"
     },
     {
         "name": 410,
         "image": "http://http.cat/410",
-        "description": "```css\n[410 gone]. Just gone.```"
+        "description": "```ini\n[410 gone]. Just gone.```"
     },
     {
         "name": 411,
         "image": "http://http.cat/411",
-        "description": "```css\nAh, [411 length requires], almost reminds me of a familar... \"Hm? Is tHeRe sOmEtHiNg yOu'd lIkE To sAy, Or aM I MeAnT To iNtErPrEt sPaCe? SpEaK Up, I DoN'T BiTe!\"```"
+        "description": "```ini\nAh, [411 length requires], almost reminds me of a familar... \"Hm? Is tHeRe sOmEtHiNg yOu'd lIkE To sAy, Or aM I MeAnT To iNtErPrEt sPaCe? SpEaK Up, I DoN'T BiTe!\"```"
     },
     {
         "name": 412,
         "image": "http://http.cat/412",
-        "description": "```css\nError [412 precondition failed], we deny your resources for a response!```"
+        "description": "```ini\nError [412 precondition failed], we deny your resources for a response!```"
     },
     {
         "name": 413,
         "image": "http://http.cat/413",
-        "description": "```css\nAh sorry, you was expecting a response but [413 request entity too large], you'll have to try later.```"
+        "description": "```ini\nAh sorry, you was expecting a response but [413 request entity too large], you'll have to try later.```"
     },
     {
         "name": 414,
         "image": "http://http.cat/414",
-        "description": "```css\nOkay, out of all the commads you could'a run, you chose to go for the one that's [414 request-URL too long]!```"
+        "description": "```ini\nOkay, out of all the commads you could'a run, you chose to go for the one that's [414 request-URL too long]!```"
     },
     {
         "name": 415,
         "image": "http://http.cat/415",
-        "description": "```css\nYou expected an image? That as a [415 unsupported image type], here we only do cats!```"
+        "description": "```ini\nYou expected an image? That as a [415 unsupported image type], here we only do cats!```"
     },
     {
         "name": 416,
         "image": "http://http.cat/416",
-        "description": "```css\nYou really do confuse me, y'know? This is [416 range not satisfiable], this command just doesn't make sense!```"
+        "description": "```ini\nYou really do confuse me, y'know? This is [416 range not satisfiable], this command just doesn't make sense!```"
     },
     {
         "name": 417,
         "image": "http://http.cat/417",
-        "description": "```css\nDottie.exe has left the chat, much like her creator's internet connection on a regular basis...```"
+        "description": "```ini\nDottie.exe has left the chat, much like her creator's internet connection on a regular basis...```"
     },
     {
         "name": 418,
@@ -167,126 +167,126 @@
     {
         "name": 420,
         "image": "http://http.cat/420",
-        "description": "```css\nTwitter says you've got to [enhance your calm] and relax with these commands! 🕊️```"
+        "description": "```ini\nTwitter says you've got to [enhance your calm] and relax with these commands! 🕊️```"
     },
     {
         "name": 421,
         "image": "http://http.cat/421",
-        "description": "```css\nI literally have no response to give you, was using this command a [421 misdirected request]?```"
+        "description": "```ini\nI literally have no response to give you, was using this command a [421 misdirected request]?```"
     },
     {
         "name": 422,
         "image": "http://http.cat/422",
-        "description": "```css\nOkay, I understand what you're saying with this command, but I'm afraid my response is a [422 unprocessable entity].```"
+        "description": "```ini\nOkay, I understand what you're saying with this command, but I'm afraid my response is a [422 unprocessable entity].```"
     },
     {
         "name": 423,
         "image": "http://http.cat/423",
-        "description": "```css\nAy, you're [423 locked] from using this command, get out'a here!```"
+        "description": "```ini\nAy, you're [423 locked] from using this command, get out'a here!```"
     },
     {
         "name": 424,
         "image": "http://http.cat/424",
-        "description": "```css\nThe last command you've run has failed you, because now we're at a [424 failed dependancy].```"
+        "description": "```ini\nThe last command you've run has failed you, because now we're at a [424 failed dependancy].```"
     },
     {
         "name": 425,
         "image": "http://http.cat/425",
-        "description": "```css\nHey hey, it's [425 too early] for this command, now look at this [425 unordered collection] you've made!```"
+        "description": "```ini\nHey hey, it's [425 too early] for this command, now look at this [425 unordered collection] you've made!```"
     },
     {
         "name": 426,
         "image": "http://http.cat/426",
-        "description": "```css\nYou poor outdated soul, it looks like a [426 upgrade required]. Why not take a look-see if Discord needs updating?```"
+        "description": "```ini\nYou poor outdated soul, it looks like a [426 upgrade required]. Why not take a look-see if Discord needs updating?```"
     },
     {
         "name": 429,
         "image": "http://http.cat/429",
-        "description": "```css\nOh gosh this command contains [429 too many requests], chill out with the variables, will ya'?```"
+        "description": "```ini\nOh gosh this command contains [429 too many requests], chill out with the variables, will ya'?```"
     },
     {
         "name": 431,
         "image": "http://http.cat/431",
-        "description": "```css\nTalk about being big-headed, the [431 request header fields too large] in this command!```"
+        "description": "```ini\nTalk about being big-headed, the [431 request header fields too large] in this command!```"
     },
     {
         "name": 444,
         "image": "http://http.cat/444",
-        "description": "```css\nHmm, looks like your [404 connection closed without response], you'll get a [444 no response] out of that!```"
+        "description": "```ini\nHmm, looks like your [404 connection closed without response], you'll get a [444 no response] out of that!```"
     },
     {
         "name": 450,
         "image": "http://http.cat/450",
-        "description": "```css\nJust what do you think you're doing?! This command is [450 blocked by Windows parental controls]! You're grounded!```"
+        "description": "```ini\nJust what do you think you're doing?! This command is [450 blocked by Windows parental controls]! You're grounded!```"
     },
     {
         "name": 451,
         "image": "http://http.cat/451",
-        "description": "```css\nWhat are you hoping for from running this command, an anime piracy website? W-Well your access is [451 unavailable for legal reasons]!```"
+        "description": "```ini\nWhat are you hoping for from running this command, an anime piracy website? W-Well your access is [451 unavailable for legal reasons]!```"
     },
     {
         "name": 499,
         "image": "http://http.cat/499",
-        "description": "```css\nOh client, have you forgotten already? [499 client closed request], you closed the request for this respose already!```"
+        "description": "```ini\nOh client, have you forgotten already? [499 client closed request], you closed the request for this respose already!```"
     },
     {
         "name": 500,
         "image": "http://http.cat/500",
-        "description": "```css\nWhoops, sorry! Your command didn't go through as there was a [500 internal server error], you can blame my creator for this.```"
+        "description": "```ini\nWhoops, sorry! Your command didn't go through as there was a [500 internal server error], you can blame my creator for this.```"
     },
     {
         "name": 501,
         "image": "http://http.cat/501",
-        "description": "```css\nYou're a bit ahead of your game! This command is [501 not implemented] yet!```"
+        "description": "```ini\nYou're a bit ahead of your game! This command is [501 not implemented] yet!```"
     },
     {
         "name": 502,
         "image": "http://http.cat/502",
-        "description": "```css\nOkay, why are you trying to reach the response to this command like this? [502 bad gateway]!```"
+        "description": "```ini\nOkay, why are you trying to reach the response to this command like this? [502 bad gateway]!```"
     },
     {
         "name": 503,
         "image": "http://http.cat/503",
-        "description": "```css\nSorry, [503 service unavailable], I'm not quite ready to handle this command yet!```"
+        "description": "```ini\nSorry, [503 service unavailable], I'm not quite ready to handle this command yet!```"
     },
     {
         "name": 504,
         "image": "http://http.cat/504",
-        "description": "```css\nYeah this command couldn't reach a response in time, still a bit buggy, we've landed with a [504 gateway timeout].```"
+        "description": "```ini\nYeah this command couldn't reach a response in time, still a bit buggy, we've landed with a [504 gateway timeout].```"
     },
     {
         "name": 506,
         "image": "http://http.cat/506",
-        "description": "```css\nWe only want you to have the best variant of all we have to offer, so therefore you can get a [506 variant also negotiates]!```"
+        "description": "```ini\nWe only want you to have the best variant of all we have to offer, so therefore you can get a [506 variant also negotiates]!```"
     },
     {
         "name": 507,
         "image": "http://http.cat/507",
-        "description": "```css\nWelp, looks like you have [507 insufficient storage] to get a response from us! Maybe free up some space first?```"
+        "description": "```ini\nWelp, looks like you have [507 insufficient storage] to get a response from us! Maybe free up some space first?```"
     },
     {
         "name": 508,
         "image": "http://http.cat/508",
-        "description": "```css\nWhat are you trying to do, run a while loop without any break? There's a [508 loop detected]!```"
+        "description": "```ini\nWhat are you trying to do, run a while loop without any break? There's a [508 loop detected]!```"
     },
     {
         "name": 509,
         "image": "http://http.cat/509",
-        "description": "```css\nThink you might need to check how far away from your WiFi router you are before trying to run this command!```"
+        "description": "```ini\nThink you might need to check how far away from your WiFi router you are before trying to run this command!```"
     },
     {
         "name": 510,
         "image": "http://http.cat/510",
-        "description": "```css\nHmm, are you trying to describe some sort of an extension with this command? Sorry, but that's a [510 not extended], we don't quite support that!```"
+        "description": "```ini\nHmm, are you trying to describe some sort of an extension with this command? Sorry, but that's a [510 not extended], we don't quite support that!```"
     },
     {
         "name": 511,
         "image": "http://http.cat/511",
-        "description": "```css\nHold it! You can't just run this command all willy-nilly, [511 network authentication required] first!```"
+        "description": "```ini\nHold it! You can't just run this command all willy-nilly, [511 network authentication required] first!```"
     },
     {
         "name": 599,
         "image": "http://http.cat/599",
-        "description": "```css\nOh crud, the WiFi died, now we're faced with a [599 network connection timeout error]! \"OsErRo: [WiNeRrOr 121] ThE SeMaPhOrE TiMeOuT PeRiOd hAs eXpIrEd.\"```"
+        "description": "```ini\nOh crud, the WiFi died, now we're faced with a [599 network connection timeout error]! \"OsErRo: [WiNeRrOr 121] ThE SeMaPhOrE TiMeOuT PeRiOd hAs eXpIrEd.\"```"
     }
 ] 

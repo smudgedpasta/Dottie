@@ -168,9 +168,8 @@ class IMAGE(commands.Cog):
             if code is None:
                 cat_response = random.choice(http_cats)
             if code is not None:
-                code = int(code)
                 for name in http_cats:
-                    if name["name"] == code:
+                    if str(name["name"]) == code or code.lower() in name["description"].lower():
                         cat_response = name
                         break
             embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds)))
