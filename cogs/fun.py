@@ -246,7 +246,9 @@ Peace!
                 await ctx.send("Aw, I lost... Wanna' rematch? :pensive:")
                 response2 = await self.dottie.wait_for("message", check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
                 if "no" in response2.content.lower() or "nope" in response2.content.lower() or "nah" in response2.content.lower():
-                    await ctx.send(":cry:")
+                    await ctx.send("<a:cries_gif:818530242971959337>")
+                elif "yes" in response2.content.lower() or "yep" in response2.content.lower() or "sure" in response2.content.lower():
+                    await ctx.send("<a:dummy_gif:818530180431741009>")
                     return
             if response.content.lower() == decision:
                 await ctx.send("Wow, we tied! Great minds thing alike. :smirk:")
