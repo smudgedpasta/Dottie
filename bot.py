@@ -183,9 +183,9 @@ async def on_message(message):
 
     if ctx.command is not None:
         if getattr(message.author, "guild", None) is None:
-            print(f"[{message.author.name}] has run the following command: [{message.content}] in [Direct Messages]")
+            print(f"[{message.author.name}] has run the command [{message.content}] in [Direct Messages]")
         else:
-            print(f"[{message.author.name}] has run the following command: [{message.content}] in [{message.guild}]")
+            print(f"[{message.author.name}] has run the command [{message.content}] in [{message.guild}]")
 
         global LISTENER
         global LAST_COMMAND_TIMESTAMP
