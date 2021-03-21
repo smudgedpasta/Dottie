@@ -120,6 +120,7 @@ class GENERAL(commands.Cog):
 ***http_cats***\n**```fix\nAliases: cats, http```**\n*```Pulls a http status code with a funny cat picture and command_related caption!```*
 ***inspiro***\n**```css\n[NSFW CHANNEL ONLY]```**\n*```Some quotes contain references to sex; pulls a random funny quote from https://inspirobot.me/```*
 ***marble_fox***\n**```fix\nAliases: marble```**\n*```Sends a random image of a marble fox!```*
+***seal***\n**```fix\nAliases: sea_doggo, seals```**\n*```Sends a random image of a seal!```*
 ***dog***\n**```fix\nAliases: og, doggo, puppo```**\n*```Sends a random image of a dog!```*
 ***fox***\n*```Sends a random image of any kind of fox!```*
 ***muffin***\n**```fix\nAliases: muffins```**\n*```Sends a random image of a muffin!```*
