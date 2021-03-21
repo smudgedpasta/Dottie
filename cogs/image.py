@@ -204,6 +204,19 @@ class IMAGE(commands.Cog):
                 await ctx.send(embed=embed)
 
 
+    @commands.command(aliases=["sea_doggo", "seals"])
+    async def seal(self, ctx):
+        seal_number = random.randint(1, 83)
+        if seal_number >= 10:
+            seal = f"https://raw.githubusercontent.com/FocaBot/random-seal/master/seals/00{seal_number}.jpg"
+        else:
+            seal = f"https://raw.githubusercontent.com/FocaBot/random-seal/master/seals/000{seal_number}.jpg"
+        embed = discord.Embed(colour=discord.Colour(random.choice(rainbow_embeds)))
+        embed.set_footer(text="Images are from https://github.com/FocaBot/random-seal")
+        embed.set_image(url=seal)
+        embed.description = random.choice(["Egg!", ":ocean: :dog:" ":seal:", "<a:curiouseal:748840270069760072>", "<:seal_ball:670143859149242369>"])
+        await ctx.send(embed=embed)
+
     @commands.command(aliases=["og", "doggo", "puppo"])
     async def dog(self, ctx):
         r = requests.get("https://dog.ceo/api/breeds/image/random")
