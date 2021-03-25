@@ -154,12 +154,12 @@ async def on_message(message):
             f"Here, decode this, {message.author.display_name}... `64 51 77 34 77 39 57 67 58 63 51` :smirk:",
             f"WOAH YES HI I'M UP, need me for something, {message.author.display_name}? :eyes:",
             f"{message.author.display_name}, you are a wonderful person, and I hope you are having a good day. :blush:",
-            f"You are loved and worth it, {message.author.display_name}... Never forget that. :white_heart:",
+            f"You are loved and worth it, {message.author.display_name}. Never forget that. :white_heart:",
             f"Hiya, {message.author.display_name}! Need me for something? My prefix is `" + PREFIX[0] + "` so to see my commands, use `" + PREFIX[0] + "help`!",
             f"Heheh, I can do that too! {message.author.mention} :smiling_imp:",
             f"My creator is questioning why she is spending time writing this feature... UH, I MEAN, I HAVE MY OWN INTELLIGENCE, WHAT'S UP {message.author.display_name.upper()}?!",
             f"Hey, {message.author.display_name}, you should talk to my best friend {dottie.get_user(668999031359537205).name}, she's great! :blush:",
-            f"Hi there! I'm an experimental Discord bot created by ||the cuddly bugs|| {', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])} and {dottie.get_user(OWNERS[-1])}! My mission is to be something positive. :white_heart:"
+            f"Hi there! I'm an experimental Discord bot created by {', '.join(str(dottie.get_user(u)) for u in OWNERS[:-1])} and {dottie.get_user(OWNERS[-1])}! My mission is to be something positive. :white_heart:"
         ]
 
         await ctx.send(random.choice(responses))
