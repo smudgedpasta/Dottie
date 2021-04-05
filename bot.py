@@ -376,8 +376,9 @@ async def load(ctx, extension=None):
     if extension is None:
 
         start_miza()
-        for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
-            dottie.load_extension(f"cogs.{cog}")
+        for cog in os.listdir("./cogs"):
+            if cog.endswith(".py"):
+                dottie.load_extension(f"cogs.{cog[:-3]}")
         await ctx.send("`Successfully returned acces to all extensions.`")
         return
 
@@ -393,8 +394,9 @@ async def unload(ctx, extension=None):
     if extension is None:
 
         stop_miza()
-        for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
-            dottie.unload_extension(f"cogs.{cog}")
+        for cog in os.listdir("./cogs"):
+            if cog.endswith(".py"):
+                dottie.unload_extension(f"cogs.{cog[:-3]}")
         await ctx.send("`Successfully removed all extensions until further notice.`")
         return
 
@@ -411,9 +413,10 @@ async def reload(ctx, extension=None):
         
         stop_miza()
         start_miza()
-        for cog in ["moderation", "general", "fun", "levels", "image", "voice", "owner", "CTE"]:
-            dottie.unload_extension(f"cogs.{cog}")
-            dottie.load_extension(f"cogs.{cog}")
+        for cog in os.listdir("./cogs"):
+            if cog.endswith(".py"):
+                dottie.unload_extension(f"cogs.{cog[:-3]}")
+                dottie.load_extension(f"cogs.{cog[:-3]}")
         await ctx.send("`Successfully refreshed all extensions.`")
         return
 
