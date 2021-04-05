@@ -379,7 +379,7 @@ async def load(ctx, extension=None):
         for cog in os.listdir("./cogs"):
             if cog.endswith(".py"):
                 dottie.load_extension(f"cogs.{cog[:-3]}")
-        await ctx.send("`Successfully returned acces to all extensions.`")
+        await ctx.send("`Successfully returned access to all extensions.`")
         return
 
     dottie.load_extension(f"cogs.{extension}")
