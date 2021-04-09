@@ -117,7 +117,10 @@ class OWNER(commands.Cog):
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
         os.system("start cmd /c python bot.py")
-        stop_miza()
+        try:
+            stop_miza()
+        except:
+            return
         psutil.Process().kill()
 
 
@@ -131,7 +134,10 @@ class OWNER(commands.Cog):
         for vc in self.dottie.voice_clients:
             await vc.disconnect(force=True)
         await asyncio.sleep(5)
-        stop_miza()
+        try:
+            stop_miza()
+        except:
+            return
         psutil.Process().kill()
     
 
