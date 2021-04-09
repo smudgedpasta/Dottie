@@ -159,12 +159,11 @@ class GENERAL(commands.Cog):
 ***despacito***\n**```fix\nAliases: espacito```**\n*```Plays a totally normal version of Despacito!```*
 """
         
-        pages = [home, info, moderation, general, fun, image]
-        if not os.path.exists("/../../Miza-VOICE"):
+        if "MIZA" not in GLOBALS:
             print("Help command issued, but voice commands are unavailable.")
+            pages = [home, info, moderation, general, fun, image]
         else:
-            pages.append("voice").append("voice2")
-
+            pages = [home, info, moderation, general, fun, image, voice, voice2]
         message = await ctx.send(embed=home)
 
         await message.add_reaction("🔺")
