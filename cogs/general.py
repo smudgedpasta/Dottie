@@ -146,10 +146,7 @@ class GENERAL(commands.Cog):
 """
 
         voice2 = discord.Embed(colour=discord.Colour(pink_embed))
-        try:
-            voice2.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.get_user(668999031359537205).avatar_url_as(format="png", size=4096))
-        except:
-            voice2.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.user.avatar_url_as(format="png", size=4096))
+        voice2.set_author(name="🎧 VOICE 🎧", url="https://github.com/thomas-xin/Miza/wiki/Commands", icon_url=self.dottie.get_user(668999031359537205).avatar_url_as(format="png", size=4096))
         voice2.set_footer(text="Click 🔺 to go back to previous VOICE commands!")
         voice2.description = f"""***shuffle***\n**```fix\nAliases: 🔀```**\n*```Shuffles the audio queue.```*
 ***reverse***\n*```Reverses the audio queue direction.```*
@@ -161,8 +158,12 @@ class GENERAL(commands.Cog):
 ***download***\n**```fix\nAliases: 📥, search, ytdl, youtube_dl, af, audiofilter, trim, convertorg, org2xm, convert```**\n*```Searches and/or downloads a song from a YouTube/SoundCloud query or audio file link.```*
 ***despacito***\n**```fix\nAliases: espacito```**\n*```Plays a totally normal version of Despacito!```*
 """
-
-        pages = [home, info, moderation, general, fun, image, voice, voice2]
+        
+        pages = [home, info, moderation, general, fun, image]
+        if not os.path.exists("/../../Miza-VOICE"):
+            print("Help command issued, but voice commands are unavailable.")
+        else:
+            pages.append("voice").append("voice2")
 
         message = await ctx.send(embed=home)
 
