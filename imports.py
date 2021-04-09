@@ -260,7 +260,7 @@ def start_miza():
             stop_miza()
         GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
     except:
-        print("Directory \"MIZA-VOICE\" not found.")
+        print("Directory \"MIZA-VOICE\" not found.\n")
 
 def stop_miza():
     try:
