@@ -22,7 +22,7 @@ dottie = commands.Bot(
 
 
 try:
-    print("Attempting twice to fetch json from https://mizabot.xyz/...")
+    print("Attempting to fetch json from https://mizabot.xyz/...")
     miza_commands = requests.get("https://mizabot.xyz/static/help.json").json()
     miza_voice = []
     for name, command in miza_commands["VOICE"].items():
