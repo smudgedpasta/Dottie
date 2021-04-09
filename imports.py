@@ -90,6 +90,7 @@ with MultiThreadedImporter() as importer:
 
 from PIL import Image, ImageDraw, ImageChops
 from math import *
+from requests.exceptions import ConnectionError
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 
