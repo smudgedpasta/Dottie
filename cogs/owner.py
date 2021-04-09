@@ -119,8 +119,8 @@ class OWNER(commands.Cog):
         os.system("start cmd /c python bot.py")
         try:
             stop_miza()
-        except:
-            return
+        except Exception as e:
+            repr(e)
         psutil.Process().kill()
 
 
@@ -136,8 +136,8 @@ class OWNER(commands.Cog):
         await asyncio.sleep(5)
         try:
             stop_miza()
-        except:
-            return
+        except Exception as e:
+            repr(e)
         psutil.Process().kill()
     
 
