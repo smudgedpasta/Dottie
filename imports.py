@@ -255,9 +255,12 @@ if not os.path.exists("config.json") or not os.path.getsize("config.json"):
 
 
 def start_miza():
-    if "MIZA" in GLOBALS:
-        stop_miza()
-    GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
+    try:
+        if "MIZA" in GLOBALS:
+            stop_miza()
+        GLOBALS["MIZA"] = psutil.Popen(["python", "bot.py"], cwd=os.getcwd() + "/../../Miza-VOICE", stdout=subprocess.DEVNULL)
+    except:
+        print("Directory \"MIZA-VOICE\" not found.")
 
 def stop_miza():
     try:
