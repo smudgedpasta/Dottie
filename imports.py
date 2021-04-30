@@ -285,6 +285,7 @@ newfut = concurrent.futures.Future()
 newfut.set_result(None)
 
 
+# Manages concurrency limits, similar to asyncio.Semaphore, but has a secondary threshold for enqueued tasks.
 class Semaphore(contextlib.AbstractContextManager, contextlib.AbstractAsyncContextManager, contextlib.ContextDecorator, collections.abc.Callable):
 
     __slots__ = ("limit", "buffer", "fut", "active", "passive", "rate_limit", "rate_bin", "last", "trace")
@@ -354,7 +355,7 @@ class Semaphore(contextlib.AbstractContextManager, contextlib.AbstractAsyncConte
     def __exit__(self, *args):
         self.active -= 1
         if self.rate_bin:
-            t = self.rate_bin[0 - self.trace] + self.rate_limit - time.time()
+            t = self.rate_bin[0 - self.last] + self.rate_limit - time.time()
             if t > 0:
                 create_future_ex(self._update_bin_after, t)
             else:
@@ -455,10 +456,10 @@ async def request(self, route, *, files=None, form=None, **kwargs):
 
     await lock.acquire()
     if rtype:
-        ctx = lock
+        maybe_lock = lock
     else:
-        ctx = discord.http.MaybeUnlock(lock)
-    with ctx as maybe_lock:
+        maybe_lock = discord.http.MaybeUnlock(lock)
+    with maybe_lock:
         for tries in range(5):
             if files:
                 for f in files:
@@ -521,7 +522,7 @@ async def request(self, route, *, files=None, form=None, **kwargs):
                         continue
 
                     # we've received a 500 or 502, unconditional retry
-                    if r.status in {500, 502}:
+                    if r.status >= 500 and tries < 3:
                         await asyncio.sleep(1 + tries * 2)
                         continue
 

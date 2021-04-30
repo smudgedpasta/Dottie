@@ -237,7 +237,7 @@ async def on_message(message):
                     compare.author = message.author
                     compare.count += 1
                     if compare.count >= random.randint(3, 6):
-                        if message.content[0].isascii():
+                        if message.content[0].isascii() and message.content[:2] != "<:":
                             await ctx.send("\u200b" + message.content[:1999])
                         else:
                             await ctx.send(message.content[:1999])
