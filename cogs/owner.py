@@ -24,7 +24,7 @@ class OWNER(commands.Cog):
         else:
             for i in range(size):
                 create_task(ctx.send(("<:empty" + ":760062353063936000>") * (size-i-1) + ":orange_square:" + (":blue_square::orange_square:") * i))
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(0.2)
 
 
     @commands.command()
