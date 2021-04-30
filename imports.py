@@ -86,6 +86,11 @@ with MultiThreadedImporter() as importer:
         "re",
         "io",
         "PIL",
+        "aiohttp",
+        "urllib",
+        "collections",
+        "contextlib",
+        "inspect",
     )
 
 from PIL import Image, ImageDraw, ImageChops
@@ -93,6 +98,8 @@ from math import *
 from requests.exceptions import ConnectionError
 from discord.ext import tasks, commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
+from discord import utils
+from collections import deque
 
 
 eloop = asyncio.get_event_loop()
@@ -270,3 +277,276 @@ def stop_miza():
         p.kill()
     except psutil.NoSuchProcess:
         pass
+
+
+emptyfut = fut_nop = asyncio.Future()
+fut_nop.set_result(None)
+newfut = concurrent.futures.Future()
+newfut.set_result(None)
+
+
+class Semaphore(contextlib.AbstractContextManager, contextlib.AbstractAsyncContextManager, contextlib.ContextDecorator, collections.abc.Callable):
+
+    __slots__ = ("limit", "buffer", "fut", "active", "passive", "rate_limit", "rate_bin", "last", "trace")
+
+    def __init__(self, limit=256, buffer=32, delay=0.05, rate_limit=None, randomize_ratio=2, last=False, trace=False):
+        self.limit = limit
+        self.buffer = buffer
+        self.active = 0
+        self.passive = 0
+        self.rate_limit = rate_limit
+        self.rate_bin = deque()
+        self.fut = concurrent.futures.Future()
+        self.fut.set_result(None)
+        self.last = last
+        self.trace = trace and inspect.stack()[1]
+
+    def __str__(self):
+        classname = str(self.__class__).replace("'>", "")
+        classname = classname[classname.index("'") + 1:]
+        return f"<{classname} object at {hex(id(self)).upper().replace('X', 'x')}>: {self.active}/{self.limit}, {self.passive}/{self.buffer}, {len(self.rate_bin)}/{self.rate_limit}"
+
+    def _update_bin_after(self, t):
+        time.sleep(t)
+        self._update_bin()
+
+    def _update_bin(self):
+        if self.rate_limit:
+            try:
+                if self.last:
+                    if self.rate_bin and time.time() - self.rate_bin[-1] >= self.rate_limit:
+                        self.rate_bin.clear()
+                else:
+                    while self.rate_bin and time.time() - self.rate_bin[0] >= self.rate_limit:
+                        self.rate_bin.popleft()
+            except IndexError:
+                pass
+            if len(self.rate_bin) < self.limit:
+                try:
+                    self.fut.set_result(None)
+                except concurrent.futures.InvalidStateError:
+                    pass
+        return self.rate_bin
+
+    def enter(self):
+        if self.trace:
+            self.trace = inspect.stack()[2]
+        self.active += 1
+        if self.rate_limit:
+            self._update_bin().append(time.time())
+        if self.fut.done() and (self.active >= self.limit or self.rate_limit and len(self.rate_bin) >= self.limit):
+            self.fut = concurrent.futures.Future()
+        return self
+
+    def check_overflow(self):
+        if self.passive >= self.buffer:
+            raise SemaphoreOverflowError(f"Semaphore object of limit {self.limit} overloaded by {self.passive}")
+
+    def __enter__(self):
+        if self.is_busy():
+            self.check_overflow()
+            self.passive += 1
+            while self.is_busy():
+                self.fut.result()
+            self.passive -= 1
+        return self.enter()
+
+    def __exit__(self, *args):
+        self.active -= 1
+        if self.rate_bin:
+            t = self.rate_bin[0 - self.trace] + self.rate_limit - time.time()
+            if t > 0:
+                create_future_ex(self._update_bin_after, t, priority=True)
+            else:
+                self._update_bin()
+        elif self.active < self.limit:
+            try:
+                self.fut.set_result(None)
+            except concurrent.futures.InvalidStateError:
+                pass
+
+    async def __aenter__(self):
+        if self.is_busy():
+            self.check_overflow()
+            self.passive += 1
+            while self.is_busy():
+                await wrap_future(self.fut)
+            self.passive -= 1
+        self.enter()
+        return self
+
+    def __aexit__(self, *args):
+        self.__exit__()
+        return emptyfut
+
+    def wait(self):
+        while self.is_busy():
+            self.fut.result()
+
+    async def __call__(self):
+        while self.is_busy():
+            await wrap_future(self.fut)
+    
+    acquire = __call__
+
+    def is_active(self):
+        return self.active or self.passive
+
+    def is_busy(self):
+        return self.active >= self.limit or self.rate_limit and len(self._update_bin()) >= self.limit
+
+    @property
+    def busy(self):
+        return self.is_busy()
+
+class SemaphoreOverflowError(RuntimeError):
+    __slots__ = ()
+
+
+async def request(self, route, *, files=None, form=None, **kwargs):
+    bucket = route.bucket
+    method = route.method
+    url = route.url
+
+    rtype = 0
+    if "/messages" in url:
+        rtype = 1
+
+    lock = self._locks.get(bucket)
+    if lock is None:
+        if rtype == 1:
+            lock = Semaphore(5, 256, rate_limit=5)
+        else:
+            lock = asyncio.Lock()
+        if bucket is not None:
+            self._locks[bucket] = lock
+
+    # header creation
+    headers = {
+        'User-Agent': self.user_agent,
+    }
+
+    if self.token is not None:
+        headers['Authorization'] = 'Bot ' + self.token
+    # some checking if it's a JSON request
+    if 'json' in kwargs:
+        headers['Content-Type'] = 'application/json'
+        kwargs['data'] = utils.to_json(kwargs.pop('json'))
+
+    try:
+        reason = kwargs.pop('reason')
+    except KeyError:
+        pass
+    else:
+        if reason:
+            headers['X-Audit-Log-Reason'] = urllib.parse.quote(reason, safe='/ ')
+
+    kwargs['headers'] = headers
+
+    # Proxy support
+    if self.proxy is not None:
+        kwargs['proxy'] = self.proxy
+    if self.proxy_auth is not None:
+        kwargs['proxy_auth'] = self.proxy_auth
+
+    if not self._global_over.is_set():
+        # wait until the global lock is complete
+        await self._global_over.wait()
+
+    await lock.acquire()
+    if rtype:
+        ctx = lock
+    else:
+        ctx = discord.http.MaybeUnlock(lock)
+    with ctx as maybe_lock:
+        for tries in range(5):
+            if files:
+                for f in files:
+                    f.reset(seek=tries)
+
+            if form:
+                form_data = aiohttp.FormData()
+                for params in form:
+                    form_data.add_field(**params)
+                kwargs['data'] = form_data
+
+            try:
+                async with self.__dict__["_HTTPClient__session"].request(method, url, **kwargs) as r:
+                    # log.debug('%s %s with %s has returned %s', method, url, kwargs.get('data'), r.status)
+
+                    # even errors have text involved in them so this is safe to call
+                    data = await discord.http.json_or_text(r)
+
+                    # check if we have rate limit header information
+                    remaining = r.headers.get('X-Ratelimit-Remaining')
+                    if not rtype and remaining == '0' and r.status != 429:
+                        # we've depleted our current bucket
+                        delta = utils._parse_ratelimit_header(r, use_clock=self.use_clock)
+                        # log.debug('A rate limit bucket has been exhausted (bucket: %s, retry: %s).', bucket, delta)
+                        maybe_lock.defer()
+                        self.loop.call_later(delta, lock.release)
+
+                    # the request was successful so just return the text/json
+                    if 300 > r.status >= 200:
+                        # log.debug('%s %s has received %s', method, url, data)
+                        return data
+
+                    # we are being rate limited
+                    if r.status == 429:
+                        if not r.headers.get('Via'):
+                            # Banned by Cloudflare more than likely.
+                            raise discord.HTTPException(r, data)
+
+                        # fmt = 'We are being rate limited. Retrying in %.2f seconds. Handled under the bucket "%s"'
+
+                        # sleep a bit
+                        retry_after: float = data['retry_after']  # type: ignore
+                        # log.warning(fmt, retry_after, bucket)
+
+                        # check if it's a global rate limit
+                        is_global = data.get('global', False)
+                        if is_global:
+                            # log.warning('Global rate limit has been hit. Retrying in %.2f seconds.', retry_after)
+                            self._global_over.clear()
+
+                        await asyncio.sleep(retry_after)
+                        # log.debug('Done sleeping for the rate limit. Retrying...')
+
+                        # release the global lock now that the
+                        # global rate limit has passed
+                        if is_global:
+                            self._global_over.set()
+                            # log.debug('Global rate limit is now over.')
+
+                        continue
+
+                    # we've received a 500 or 502, unconditional retry
+                    if r.status in {500, 502}:
+                        await asyncio.sleep(1 + tries * 2)
+                        continue
+
+                    # the usual error cases
+                    if r.status == 403:
+                        raise discord.Forbidden(r, data)
+                    elif r.status == 404:
+                        raise discord.NotFound(r, data)
+                    elif r.status == 503:
+                        raise discord.DiscordServerError(r, data)
+                    else:
+                        raise discord.HTTPException(r, data)
+
+            # This is handling exceptions from the request
+            except OSError as e:
+                # Connection reset by peer
+                if tries < 4 and e.errno in (54, 10054):
+                    await asyncio.sleep(1 + tries * 2)
+                    continue
+                raise
+
+        # We've run out of retries, raise.
+        if r.status >= 500:
+            raise discord.DiscordServerError(r, data)
+
+        raise discord.HTTPException(r, data)
+
+discord.http.HTTPClient.request = lambda self, *args, **kwargs: request(self, *args, **kwargs)

@@ -295,7 +295,8 @@ Peace!
 
         trans = "".maketrans(emoji)
         for line in heart:
-            await ctx.send("\u200b" + line.translate(trans))
+            create_task(ctx.send("\u200b" + line.translate(trans)))
+            await asyncio.sleep(0.1)
 
 
     @commands.command()
@@ -312,7 +313,8 @@ Peace!
                 await ctx.send("Uh, okay, guess I'll go build elsewhere... :pensive:")
             else:
                 for i in range(size):
-                    await ctx.send("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1))
+                    create_task(ctx.send("\u200b" + ("<:empty" + ":760062353063936000>") * (size-i-1) + ("<:empty" + ":760062353063936000>" + ":orange_square:") * (i+1)))
+                    await asyncio.sleep(0.1)
         except:
             await ctx.send("Yo, I ain't that smart! Please use **integers** written in **numbers**!")
 

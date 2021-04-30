@@ -23,7 +23,8 @@ class OWNER(commands.Cog):
                 await ctx.send("Haha very funny, I would be sad if you weren't the one to code this monstrosity. <:txindead:712902347512217610>")
         else:
             for i in range(size):
-                await ctx.send(("<:empty" + ":760062353063936000>") * (size-i-1) + ":orange_square:" + (":blue_square::orange_square:") * i)
+                create_task(ctx.send(("<:empty" + ":760062353063936000>") * (size-i-1) + ":orange_square:" + (":blue_square::orange_square:") * i))
+                await asyncio.sleep(0.1)
 
 
     @commands.command()
