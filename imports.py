@@ -107,7 +107,7 @@ def __setloop__(): return asyncio.set_event_loop(eloop)
 
 
 athreads = concurrent.futures.ThreadPoolExecutor(
-    max_workers=16,
+    max_workers=64,
     initializer=__setloop__,)
 __setloop__()
 
@@ -356,7 +356,7 @@ class Semaphore(contextlib.AbstractContextManager, contextlib.AbstractAsyncConte
         if self.rate_bin:
             t = self.rate_bin[0 - self.trace] + self.rate_limit - time.time()
             if t > 0:
-                create_future_ex(self._update_bin_after, t, priority=True)
+                create_future_ex(self._update_bin_after, t)
             else:
                 self._update_bin()
         elif self.active < self.limit:
