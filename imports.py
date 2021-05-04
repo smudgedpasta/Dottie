@@ -285,7 +285,6 @@ newfut = concurrent.futures.Future()
 newfut.set_result(None)
 
 
-# Manages concurrency limits, similar to asyncio.Semaphore, but has a secondary threshold for enqueued tasks.
 class Semaphore(contextlib.AbstractContextManager, contextlib.AbstractAsyncContextManager, contextlib.ContextDecorator, collections.abc.Callable):
 
     __slots__ = ("limit", "buffer", "fut", "active", "passive", "rate_limit", "rate_bin", "last", "trace")
@@ -422,14 +421,12 @@ async def request(self, route, *, files=None, form=None, **kwargs):
         if bucket is not None:
             self._locks[bucket] = lock
 
-    # header creation
     headers = {
         'User-Agent': self.user_agent,
     }
 
     if self.token is not None:
         headers['Authorization'] = 'Bot ' + self.token
-    # some checking if it's a JSON request
     if 'json' in kwargs:
         headers['Content-Type'] = 'application/json'
         kwargs['data'] = utils.to_json(kwargs.pop('json'))
@@ -444,14 +441,12 @@ async def request(self, route, *, files=None, form=None, **kwargs):
 
     kwargs['headers'] = headers
 
-    # Proxy support
     if self.proxy is not None:
         kwargs['proxy'] = self.proxy
     if self.proxy_auth is not None:
         kwargs['proxy_auth'] = self.proxy_auth
 
     if not self._global_over.is_set():
-        # wait until the global lock is complete
         await self._global_over.wait()
 
     if not rtype:
@@ -470,38 +465,28 @@ async def request(self, route, *, files=None, form=None, **kwargs):
 
                 try:
                     async with self.__dict__["_HTTPClient__session"].request(method, url, **kwargs) as r:
-                        # log.debug('%s %s with %s has returned %s', method, url, kwargs.get('data'), r.status)
 
-                        # even errors have text involved in them so this is safe to call
                         data = await discord.http.json_or_text(r)
-
-                        # check if we have rate limit header information
                         remaining = r.headers.get('X-Ratelimit-Remaining')
                         if remaining == '0' and r.status != 429:
-                            # we've depleted our current bucket
                             delta = utils._parse_ratelimit_header(r, use_clock=self.use_clock)
                             # log.debug('A rate limit bucket has been exhausted (bucket: %s, retry: %s).', bucket, delta)
                             maybe_lock.defer()
                             self.loop.call_later(delta, lock.release)
 
-                        # the request was successful so just return the text/json
                         if 300 > r.status >= 200:
                             # log.debug('%s %s has received %s', method, url, data)
                             return data
 
-                        # we are being rate limited
                         if r.status == 429:
                             if not r.headers.get('Via'):
-                                # Banned by Cloudflare more than likely.
                                 raise discord.HTTPException(r, data)
 
                             # fmt = 'We are being rate limited. Retrying in %.2f seconds. Handled under the bucket "%s"'
 
-                            # sleep a bit
                             retry_after: float = data['retry_after']  # type: ignore
                             # log.warning(fmt, retry_after, bucket)
 
-                            # check if it's a global rate limit
                             is_global = data.get('global', False)
                             if is_global:
                                 # log.warning('Global rate limit has been hit. Retrying in %.2f seconds.', retry_after)
@@ -510,20 +495,15 @@ async def request(self, route, *, files=None, form=None, **kwargs):
                             await asyncio.sleep(retry_after)
                             # log.debug('Done sleeping for the rate limit. Retrying...')
 
-                            # release the global lock now that the
-                            # global rate limit has passed
                             if is_global:
                                 self._global_over.set()
                                 # log.debug('Global rate limit is now over.')
-
                             continue
 
-                        # we've received a 500 or 502, unconditional retry
                         if r.status >= 500 and tries < 3:
                             await asyncio.sleep(1 + tries * 2)
                             continue
 
-                        # the usual error cases
                         if r.status == 403:
                             raise discord.Forbidden(r, data)
                         elif r.status == 404:
@@ -533,9 +513,7 @@ async def request(self, route, *, files=None, form=None, **kwargs):
                         else:
                             raise discord.HTTPException(r, data)
 
-                # This is handling exceptions from the request
                 except OSError as e:
-                    # Connection reset by peer
                     if tries < 4 and e.errno in (54, 10054):
                         await asyncio.sleep(1 + tries * 2)
                         continue
@@ -558,27 +536,21 @@ async def request(self, route, *, files=None, form=None, **kwargs):
                     async with self.__dict__["_HTTPClient__session"].request(method, url, **kwargs) as r:
                         # log.debug('%s %s with %s has returned %s', method, url, kwargs.get('data'), r.status)
 
-                        # even errors have text involved in them so this is safe to call
                         data = await discord.http.json_or_text(r)
 
-                        # the request was successful so just return the text/json
                         if 300 > r.status >= 200:
                             # log.debug('%s %s has received %s', method, url, data)
                             return data
 
-                        # we are being rate limited
                         if r.status == 429:
                             if not r.headers.get('Via'):
-                                # Banned by Cloudflare more than likely.
                                 raise discord.HTTPException(r, data)
 
                             # fmt = 'We are being rate limited. Retrying in %.2f seconds. Handled under the bucket "%s"'
 
-                            # sleep a bit
                             retry_after: float = data['retry_after']  # type: ignore
                             # log.warning(fmt, retry_after, bucket)
 
-                            # check if it's a global rate limit
                             is_global = data.get('global', False)
                             if is_global:
                                 # log.warning('Global rate limit has been hit. Retrying in %.2f seconds.', retry_after)
@@ -587,20 +559,15 @@ async def request(self, route, *, files=None, form=None, **kwargs):
                             await asyncio.sleep(retry_after)
                             # log.debug('Done sleeping for the rate limit. Retrying...')
 
-                            # release the global lock now that the
-                            # global rate limit has passed
                             if is_global:
                                 self._global_over.set()
                                 # log.debug('Global rate limit is now over.')
-
                             continue
 
-                        # we've received a 500 or 502, unconditional retry
                         if r.status >= 500 and tries < 3:
                             await asyncio.sleep(1 + tries * 2)
                             continue
 
-                        # the usual error cases
                         if r.status == 403:
                             raise discord.Forbidden(r, data)
                         elif r.status == 404:
@@ -610,15 +577,12 @@ async def request(self, route, *, files=None, form=None, **kwargs):
                         else:
                             raise discord.HTTPException(r, data)
 
-                # This is handling exceptions from the request
                 except OSError as e:
-                    # Connection reset by peer
                     if tries < 4 and e.errno in (54, 10054):
                         await asyncio.sleep(1 + tries * 2)
                         continue
                     raise
 
-    # We've run out of retries, raise.
     if r.status >= 500:
         raise discord.DiscordServerError(r, data)
 
